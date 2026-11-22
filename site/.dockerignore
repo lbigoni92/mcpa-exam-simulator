@@ -6,3 +6,6 @@
 !app.css
 !migrations
 !migrations/*.sql
+!entrypoint.py
+!local
+!local/**
