@@ -23,7 +23,8 @@ STOP=set("the a an of to and or in on for is are be with by as at it its this th
 def toks(s): return [w for w in re.findall(r"[a-z0-9/_\-]+", s.lower()) if w not in STOP and len(w)>2]
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lesson_points import POINTS as _LP
-LESSON_EN={en for v in _LP.values() for _,en in v}
+from course_gaps import POINTS as _CG
+LESSON_EN={en for v in list(_LP.values())+list(_CG.values()) for _,en in v}
 tvec={}
 for tid,t in topics.items():
     # i punti aggiunti dalle lezioni rohitg00 (lesson_points.py) non entrano nel matching, per non spostare i link già revisionati
@@ -54,6 +55,9 @@ ERRATA = {
  "ext-rg-quiz-30-06": ({"stem": "An official extension's maintainers need to remove a field, and the old and new behavior must keep working side by side under the same protocol revision. What should they do?",
                         "explanation": "Per the extensions overview, a breaking change normally keeps the extension's identifier (Experimental and Beta extensions add or increment a revision string in their settings). A new identifier, for example with a -v2 suffix, is used only when old and new behavior must coexist under one protocol revision, as in this scenario."},
    "Domanda riformulata: l'originale diceva che ogni modifica incompatibile richiede un nuovo identificatore, ma la pagina ufficiale sulle estensioni dice che l'identificatore resta lo stesso e ne serve uno nuovo solo se vecchio e nuovo comportamento devono coesistere. / Reworded: the original said every breaking change needs a new identifier; the official extensions page says the identifier is kept unless old and new behavior must coexist."),
+ "ext-rg-mcpa-f-m3-007": ({"options": {"B": "HTTP+SSE has been deprecated since 2025-03-26, and SEP-2596 gives it its own floor: three months after SEP-2596 reaches Final"},
+                           "explanation": "Each deprecated feature carries its own origin and removal floor rather than one shared date. Roots, sampling, logging and Dynamic Client Registration were deprecated in 2026-07-28 with an earliest removal on or after 2027-07-28. HTTP+SSE has been described as deprecated since 2025-03-26, before the lifecycle policy existed; SEP-2596 reclassified it as Deprecated under the transition provisions, with earliest removal three months after SEP-2596 reaches Final."},
+   "Opzione B e spiegazione corrette sulla tabella delle feature deprecate: HTTP+SSE è deprecato dalla 2025-03-26 e SEP-2596 lo riclassifica, con rimozione più precoce tre mesi dopo che SEP-2596 diventa Final. / Fixed per the deprecated-features table: HTTP+SSE deprecated since 2025-03-26, reclassified by SEP-2596, earliest removal three months after SEP-2596 reaches Final."),
  "ext-rg-quiz-00-03": ({}, "Domanda sul curriculum, non sull'esame. La discrepanza è risolta: le pagine LF attuali indicano 90 minuti. / About the curriculum, not the exam: current LF pages state 90 minutes."),
 }
 # Track rohitg00 (tracks/mcpa-f.json): mappa lezione -> domini e obiettivi per dominio (non ufficiali)

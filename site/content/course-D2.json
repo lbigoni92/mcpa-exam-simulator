@@ -92,7 +92,9 @@
      "Una connessione stdio aperta non è una sessione: ogni richiesta resta autocontenuta.",
      "Autorizzazione: non si usa OAuth; le credenziali arrivano dall'ambiente.",
      "Il client SHOULD NOT considerare l'output su stderr come segnale di errore.",
-     "Se il processo termina inaspettatamente le richieste in corso sono perse; dopo il riavvio il client reinvia subscriptions/listen."
+     "Se il processo termina inaspettatamente le richieste in corso sono perse; dopo il riavvio il client reinvia subscriptions/listen.",
+     "Probe dual-era: DiscoverResult → server modern; errore modern riconosciuto (es. UnsupportedProtocolVersionError) → server modern, si sceglie tra le versioni supportate senza tornare a initialize; qualsiasi altro errore o timeout → server legacy, fallback a initialize.",
+     "Il fallback a initialize MUST NOT dipendere da un codice d'errore specifico: i server legacy rispondono in modo diverso alle richieste sconosciute prima di initialize."
     ],
     "en": [
      "Newline-delimited messages, with no embedded newlines.",
@@ -102,7 +104,9 @@
      "An open stdio connection is not a session: every request stays self-contained.",
      "Authorization: no OAuth; credentials come from the environment.",
      "The client SHOULD NOT treat stderr output as an error signal.",
-     "If the process exits unexpectedly, in-flight requests are lost; after the restart the client resends subscriptions/listen."
+     "If the process exits unexpectedly, in-flight requests are lost; after the restart the client resends subscriptions/listen.",
+     "Dual-era probe: DiscoverResult → modern server; a recognized modern error (e.g. UnsupportedProtocolVersionError) → modern server, pick one of its supported versions without falling back to initialize; any other error or a timeout → legacy server, fall back to initialize.",
+     "The fallback to initialize MUST NOT be keyed to one specific error code: legacy servers answer unknown pre-initialize requests in implementation-defined ways."
     ]
    },
    "source": {
@@ -201,13 +205,15 @@
      "Nome: SHOULD 1-128 caratteri, case-sensitive, solo A-Z a-z 0-9 _ - . (es. getUser, admin.tools.list).",
      "Collisioni tra server (due search): client e proxy SHOULD disambiguare, ad esempio con un prefisso del server.",
      "serverInfo.name non è garantito univoco e SHOULD NOT essere usato per disambiguare.",
-     "Il nome visualizzato segue l'ordine title, poi annotations.title, poi name."
+     "Il nome visualizzato segue l'ordine title, poi annotations.title, poi name.",
+     "L'unicità dei nomi (SHOULD) vale solo all'interno di un singolo server: le collisioni tra server sono normali e le risolve chi aggrega."
     ],
     "en": [
      "Name: SHOULD be 1-128 characters, case-sensitive, only A-Z a-z 0-9 _ - . (e.g. getUser, admin.tools.list).",
      "Collisions across servers (two search tools): clients and proxies SHOULD disambiguate, e.g. with a server prefix.",
      "serverInfo.name is not guaranteed unique and SHOULD NOT be used to disambiguate.",
-     "The display name order is title, then annotations.title, then name."
+     "The display name order is title, then annotations.title, then name.",
+     "Name uniqueness (SHOULD) is scoped to a single server: collisions across servers are normal and the aggregator resolves them."
     ]
    },
    "source": {

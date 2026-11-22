@@ -178,7 +178,8 @@
      "offline_access: il client MAY chiederlo se l'AS lo supporta; il server SHOULD NOT pubblicizzarlo.",
      "Minimizzare gli scope: partire da pochi, elevare quando serve, evitare scope omnibus.",
      "Il client SHOULD limitare i tentativi di step-up e tracciarli, per evitare cicli infiniti.",
-     "Una lista di tool che dipende dagli scope del chiamante va in cache come private."
+     "Una lista di tool che dipende dagli scope del chiamante va in cache come private.",
+     "Il server MUST tenere conto delle gerarchie di scope (uno scope più ampio implica quelli più ristretti) quando decide se un token basta."
     ],
     "en": [
      "Priority: scopes from WWW-Authenticate, otherwise the PRM's scopes_supported.",
@@ -187,7 +188,8 @@
      "offline_access: the client MAY request it if the AS supports it; the server SHOULD NOT advertise it.",
      "Minimize scopes: start small, step up when needed, avoid catch-all scopes.",
      "The client SHOULD limit and track step-up attempts to avoid infinite loops.",
-     "A tool list that depends on the caller's scopes is cached as private."
+     "A tool list that depends on the caller's scopes is cached as private.",
+     "The server MUST account for scope hierarchies (a broader scope implies narrower ones) when deciding whether a token is sufficient."
     ]
    },
    "source": {
@@ -313,7 +315,8 @@
      "Token invalido o scaduto: 401.",
      "L'AS SHOULD emettere token di breve durata; per i client pubblici i refresh token vanno ruotati.",
      "Endpoint dell'AS su HTTPS; redirect URI localhost o HTTPS.",
-     "Un token valido e non scaduto ma emesso per un'altra audience va rifiutato con 401."
+     "Un token valido e non scaduto ma emesso per un'altra audience va rifiutato con 401.",
+     "Refresh token lato client: MUST tenerli riservati in transito e a riposo, SHOULD dichiarare refresh_token nei grant_types, MUST NOT dare per scontato che l'AS li emetta."
     ],
     "en": [
      "Authorization: Bearer <token> on every request, even within the same logical connection.",
@@ -321,7 +324,8 @@
      "Invalid or expired token: 401.",
      "The AS SHOULD issue short-lived tokens; for public clients refresh tokens must be rotated.",
      "AS endpoints over HTTPS; redirect URIs localhost or HTTPS.",
-     "A valid, unexpired token issued for another audience is rejected with 401."
+     "A valid, unexpired token issued for another audience is rejected with 401.",
+     "Client-side refresh tokens: MUST keep them confidential in transit and at rest, SHOULD declare refresh_token in grant_types, MUST NOT assume the AS will issue them."
     ]
    },
    "source": {
@@ -499,7 +503,8 @@
      "Il trace context correla, ma non sostituisce un record di audit durevole.",
      "traceparent (W3C): versione (2 hex) - trace id (32 hex) - parent id (16 hex) - flags (2 hex); id tutti a zero non validi.",
      "A ogni salto si mantiene il trace id e si genera un nuovo parent id: il trace id è il valore che collega i log di servizi diversi.",
-     "Un record di audit registra chi (principal autenticato), cosa (argomenti sensibili oscurati prima della scrittura), quando, esito (complete, isError o errore di protocollo) e correlazione."
+     "Un record di audit registra chi (principal autenticato), cosa (argomenti sensibili oscurati prima della scrittura), quando, esito (complete, isError o errore di protocollo) e correlazione.",
+     "Gli header Mcp-Method e Mcp-Name permettono a gateway e strumenti di osservabilità di misurare, filtrare e autorizzare le richieste senza leggere il corpo JSON."
     ],
     "en": [
      "traceparent, tracestate and baggage in _meta to correlate host, client, server and downstream systems.",
@@ -509,7 +514,8 @@
      "Trace context correlates, but does not replace a durable audit record.",
      "traceparent (W3C): version (2 hex) - trace id (32 hex) - parent id (16 hex) - flags (2 hex); all-zero ids are invalid.",
      "At every hop the trace id is kept and a new parent id is minted: the trace id is what joins logs across services.",
-     "An audit record captures who (authenticated principal), what (sensitive arguments redacted before writing), when, outcome (complete, isError or protocol error) and correlation."
+     "An audit record captures who (authenticated principal), what (sensitive arguments redacted before writing), when, outcome (complete, isError or protocol error) and correlation.",
+     "The Mcp-Method and Mcp-Name headers let gateways and observability tools meter, filter and authorize requests without parsing the JSON body."
     ]
    },
    "source": {

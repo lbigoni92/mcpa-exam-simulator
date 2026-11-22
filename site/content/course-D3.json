@@ -399,7 +399,8 @@
      "tools/call può rispondere con InputRequiredResult (MRTR).",
      "Cambi della lista: notifications/tools/list_changed (se il server dichiara listChanged).",
      "content è sempre presente (può essere vuoto). Le annotations di un content block (audience, priority, lastModified) stanno accanto ai campi del blocco, non dentro resource.",
-     "resource_link richiede uri e name; resource incorpora uri, mimeType e text o blob."
+     "resource_link richiede uri e name; resource incorpora uri, mimeType e text o blob.",
+     "Tool senza parametri: inputSchema {\"type\": \"object\", \"additionalProperties\": false} è la forma raccomandata (accetta solo oggetti vuoti)."
     ],
     "en": [
      "Definition: name, title, description, inputSchema, optional outputSchema, annotations, icons.",
@@ -408,7 +409,8 @@
      "tools/call may respond with an InputRequiredResult (MRTR).",
      "List changes: notifications/tools/list_changed (if the server declares listChanged).",
      "content is always present (may be empty). A content block's annotations (audience, priority, lastModified) sit beside the block's fields, not inside resource.",
-     "resource_link requires uri and name; resource embeds uri, mimeType and text or blob."
+     "resource_link requires uri and name; resource embeds uri, mimeType and text or blob.",
+     "Tool with no parameters: inputSchema {\"type\": \"object\", \"additionalProperties\": false} is the recommended form (it accepts only empty objects)."
     ]
    },
    "source": {

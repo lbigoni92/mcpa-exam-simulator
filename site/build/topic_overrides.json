@@ -2,7 +2,7 @@
  "ext-rg-mcpa-f-diag-004": "D1-10",
  "ext-rg-quiz-01-02": "D1-10",
  "ext-rg-mcpa-f-m2-010": "D3-09",
- "ext-rg-quiz-31-04": "D5-08",
+ "ext-rg-quiz-31-04": "D5-15",
  "ext-rg-quiz-27-05": "D4-13",
  "ext-rg-quiz-11-06": "D3-11",
  "ext-rg-mcpa-f-m2-050": "D4-15",
@@ -77,5 +77,8 @@
  "ext-hf-unit1-quiz2-q1": "D5-01",
  "ext-hf-unit1-quiz2-q2": "D5-04",
  "ext-hf-unit3_1-quiz2-q3": "D1-04",
- "ext-hf-unit3_1-quiz2-q6": "D4-13"
+ "ext-hf-unit3_1-quiz2-q6": "D4-13",
+ "ext-rg-mcpa-f-m2-024": "D3-04",
+ "ext-rg-mcpa-f-m3-019": "D3-04",
+ "ext-rg-mcpa-f-m3-006": "D3-19"
 }

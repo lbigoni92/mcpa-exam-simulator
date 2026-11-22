@@ -871,7 +871,9 @@
   function cardText(c, reveal) {
     var p = (c.tp.points[S.lang] || [])[c.i] || c.tp.points.en[c.i], h = fmt(p), tk = esc(c.tok), i = h.indexOf(tk);
     if (i < 0) return h;
-    return h.slice(0, i) + (reveal ? "<mark>" + tk + "</mark>" : '<span class="blank" aria-label="?">' + " ".repeat(Math.min(12, Math.max(4, c.tok.length))) + "</span>") + h.slice(i + tk.length);
+    // tutte le occorrenze: se il termine compare due volte nel punto, la seconda non deve svelare la risposta
+    var rep = reveal ? "<mark>" + tk + "</mark>" : '<span class="blank" aria-label="?">' + " ".repeat(Math.min(12, Math.max(4, c.tok.length))) + "</span>";
+    return h.split(tk).join(rep);
   }
   var flashKey = null;
   function pageFlash() {
@@ -894,7 +896,7 @@
     var d = FL.deck, c = d.list[d.i];
     if (!c) return flashDone();
     var h = '<div class="runbar"><span class="count">' + t("flashCardN", { i: d.i + 1, n: d.list.length }) + '</span><div class="bar"><i style="width:' + (100 * d.i / d.list.length) + '%"></i></div><button type="button" class="btn ghost" id="flQuit">✕</button></div>';
-    h += '<div class="card flashcard' + (d.shown ? " shown" : "") + '"><div class="spread small muted"><span>' + domTag(c.tp.dom) + " " + esc(L(c.tp.title)) + "</span><span>" + t("flashFill") + "</span></div>" +
+    h += '<div class="card flashcard' + (d.shown ? " shown" : "") + '"><div class="spread small muted"><span>' + domTag(c.tp.dom) + " " + (d.shown ? esc(L(c.tp.title)) : esc(L(c.tp.title)).split(esc(c.tok)).join("…")) + "</span><span>" + t("flashFill") + "</span></div>" +
       '<p class="fc-text">' + cardText(c, d.shown) + "</p>" +
       (d.shown ? '<div class="small"><a href="#t/' + c.tp.id + '" target="_blank" rel="noopener">' + t("openTheory") + " →</a></div>" : "") + "</div>";
     h += '<div class="actions">' + (d.shown ?

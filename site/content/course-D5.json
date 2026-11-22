@@ -348,7 +348,9 @@
      "Skills (io.modelcontextprotocol/skills): skill esposte come resources.",
      "Events: eventi upstream con poll, push o webhook.",
      "Auth: OAuth Client Credentials ed Enterprise-Managed Authorization.",
-     "Server Cards: metadata del server disponibili prima di connettersi."
+     "Server Cards: metadata del server disponibili prima di connettersi.",
+     "Skills: chi dichiara l'estensione MUST implementare skills/list e skills/get; i file delle skill si leggono con resources/read.",
+     "Events: il client scopre i tipi di evento con events/list e li legge con events/poll, che usa un cursor."
     ],
     "en": [
      "MCP Apps (io.modelcontextprotocol/ui): HTML UIs in a sandboxed iframe, ui:// resources.",
@@ -356,7 +358,9 @@
      "Skills (io.modelcontextprotocol/skills): skills exposed as resources.",
      "Events: upstream events via poll, push or webhook.",
      "Auth: OAuth Client Credentials and Enterprise-Managed Authorization.",
-     "Server Cards: server metadata available before connecting."
+     "Server Cards: server metadata available before connecting.",
+     "Skills: a server declaring the extension MUST implement skills/list and skills/get; skill files are read with resources/read.",
+     "Events: the client discovers event types with events/list and reads them with events/poll, which uses a cursor."
     ]
    },
    "source": {

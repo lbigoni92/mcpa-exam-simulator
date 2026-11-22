@@ -108,7 +108,7 @@
   "id": "o-D2-04",
   "t": "D2-02",
   "d": 2,
-  "type": "multiple",
+  "type": "multi",
   "q": {
    "it": "Quali due campi fanno parte del risultato di server/discover? (Selezionane due)",
    "en": "Which two fields are part of the server/discover result? (Select two)"
@@ -214,7 +214,7 @@
   "id": "o-D2-07",
   "t": "D2-04",
   "d": 2,
-  "type": "multiple",
+  "type": "multi",
   "q": {
    "it": "Quali due header sono obbligatori su OGNI POST verso un endpoint MCP 2026-07-28? (Selezionane due)",
    "en": "Which two headers are required on EVERY POST to a 2026-07-28 MCP endpoint? (Select two)"
