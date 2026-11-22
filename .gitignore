@@ -1,0 +1,15 @@
+# Database locale del simulatore: si crea da solo al primo avvio (migrazioni + bank.json)
+site/mcpa.db
+site/mcpa.db-journal
+site/mcpa.db-wal
+site/mcpa.db-shm
+*.db
+__pycache__/
+*.pyc
+# archivi delle fasi precedenti
+*.zip
+.DS_Store
+Thumbs.db
+# domande personali: restano solo in locale
+site/local/*
+!site/local/README.md

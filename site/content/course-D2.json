@@ -1,0 +1,458 @@
+{
+ "domain": "D2",
+ "topics": [
+  {
+   "id": "D2-01",
+   "title": {
+    "it": "Responsabilità di host, client e server",
+    "en": "Host, client and server responsibilities"
+   },
+   "summary": {
+    "it": "Ogni componente ha compiti precisi. L'host applica consenso e policy e aggrega il contesto. Il client allega versione e capability a ogni richiesta e isola i server tra loro. Il server espone primitive e, se gli serve input, lo chiede dentro una risposta (MRTR).",
+    "en": "Each component has specific duties. The host enforces consent and policy and aggregates context. The client attaches version and capabilities to every request and keeps servers isolated from each other. The server exposes primitives and, when it needs input, asks for it inside a response (MRTR)."
+   },
+   "points": {
+    "it": [
+     "Host: crea i client, gestisce consenso dell'utente, autorizzazioni e integrazione con l'LLM.",
+     "Client: una sessione logica verso un solo server; mantiene i confini di sicurezza.",
+     "Server: espone tools, resources e prompts; non invia richieste al client.",
+     "Il server chiede input solo con un InputRequiredResult in risposta a una richiesta del client."
+    ],
+    "en": [
+     "Host: creates clients, manages user consent, authorization and LLM integration.",
+     "Client: one logical connection to a single server; maintains security boundaries.",
+     "Server: exposes tools, resources and prompts; does not send requests to the client.",
+     "The server asks for input only via an InputRequiredResult in response to a client request."
+    ]
+   },
+   "source": {
+    "label": "Spec · Architecture",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+   }
+  },
+  {
+   "id": "D2-02",
+   "title": {
+    "it": "Capability negotiation e server/discover",
+    "en": "Capability negotiation and server/discover"
+   },
+   "summary": {
+    "it": "Nella 2026-07-28 non c'è più l'handshake: il client dichiara le sue capability nel _meta di ogni richiesta, il server le dichiara nel risultato di server/discover.",
+    "en": "In 2026-07-28 there is no handshake anymore: the client declares its capabilities in the _meta of every request, and the server declares its own in the server/discover result."
+   },
+   "points": {
+    "it": [
+     "server/discover: il server MUST implementarlo, il client MAY chiamarlo.",
+     "DiscoverResult: supportedVersions, capabilities, instructions (opzionali), serverInfo nel _meta; è cacheabile (ttlMs, cacheScope).",
+     "ClientCapabilities: elicitation {form, url}, sampling e roots (deprecate), experimental, extensions.",
+     "ServerCapabilities: tools {listChanged}, resources {subscribe, listChanged}, prompts {listChanged}, completions, logging (deprecata), extensions.",
+     "Su stdio il client dual-era usa server/discover come probe per capire se il server è modern.",
+     "Chiave assente nelle capabilities = feature non offerta; {} = supportata senza impostazioni.",
+     "-32021 porta data.requiredCapabilities (stessa forma di ClientCapabilities); -32022 porta data.supported e data.requested. Entrambi HTTP 400.",
+     "Dopo -32021 o -32022: nuovo id, si cambia solo ciò che l'errore chiede, e l'errore non va messo in cache come un risultato.",
+     "Chiedere una versione più vecchia con la forma moderna di _meta non rende il client legacy: un client legacy invia initialize."
+    ],
+    "en": [
+     "server/discover: the server MUST implement it, the client MAY call it.",
+     "DiscoverResult: supportedVersions, capabilities, optional instructions, serverInfo in _meta; it is cacheable (ttlMs, cacheScope).",
+     "ClientCapabilities: elicitation {form, url}, sampling and roots (deprecated), experimental, extensions.",
+     "ServerCapabilities: tools {listChanged}, resources {subscribe, listChanged}, prompts {listChanged}, completions, logging (deprecated), extensions.",
+     "Over stdio a dual-era client uses server/discover as a probe to tell whether the server is modern.",
+     "Missing capabilities key = feature not offered; {} = supported with no settings.",
+     "-32021 carries data.requiredCapabilities (shaped like ClientCapabilities); -32022 carries data.supported and data.requested. Both are HTTP 400.",
+     "After -32021 or -32022: new id, change only what the error asks for, and never cache the error as a result.",
+     "Requesting an older version through the modern _meta shape does not make a client legacy: a legacy client sends initialize."
+    ]
+   },
+   "trap": {
+    "it": "\"Il client deve chiamare server/discover prima di ogni altra richiesta\" è falso: è opzionale per il client.",
+    "en": "\"The client must call server/discover before any other request\" is false: it is optional for the client."
+   },
+   "source": {
+    "label": "Spec · server/discover",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
+   }
+  },
+  {
+   "id": "D2-03",
+   "title": {
+    "it": "Transport stdio",
+    "en": "stdio transport"
+   },
+   "summary": {
+    "it": "Con stdio il client lancia il server come sottoprocesso e scambia messaggi JSON-RPC su stdin/stdout, uno per riga.",
+    "en": "With stdio the client launches the server as a subprocess and exchanges JSON-RPC messages over stdin/stdout, one per line."
+   },
+   "points": {
+    "it": [
+     "Messaggi delimitati da newline, senza newline interne.",
+     "Su stdout solo messaggi MCP validi; i log vanno su stderr.",
+     "Chiusura: il client chiude lo stdin, attende, poi invia SIGTERM e infine SIGKILL.",
+     "Cancellazione: notifications/cancelled con l'id della richiesta.",
+     "Una connessione stdio aperta non è una sessione: ogni richiesta resta autocontenuta.",
+     "Autorizzazione: non si usa OAuth; le credenziali arrivano dall'ambiente.",
+     "Il client SHOULD NOT considerare l'output su stderr come segnale di errore.",
+     "Se il processo termina inaspettatamente le richieste in corso sono perse; dopo il riavvio il client reinvia subscriptions/listen."
+    ],
+    "en": [
+     "Newline-delimited messages, with no embedded newlines.",
+     "Only valid MCP messages on stdout; logs go to stderr.",
+     "Shutdown: the client closes stdin, waits, then sends SIGTERM and finally SIGKILL.",
+     "Cancellation: notifications/cancelled with the request id.",
+     "An open stdio connection is not a session: every request stays self-contained.",
+     "Authorization: no OAuth; credentials come from the environment.",
+     "The client SHOULD NOT treat stderr output as an error signal.",
+     "If the process exits unexpectedly, in-flight requests are lost; after the restart the client resends subscriptions/listen."
+    ]
+   },
+   "source": {
+    "label": "Spec · stdio",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio"
+   }
+  },
+  {
+   "id": "D2-04",
+   "title": {
+    "it": "Transport Streamable HTTP",
+    "en": "Streamable HTTP transport"
+   },
+   "summary": {
+    "it": "Un solo endpoint MCP che accetta POST: ogni messaggio del client è una nuova POST e la risposta è JSON singolo o uno stream SSE legato a quella richiesta.",
+    "en": "A single MCP endpoint that accepts POST: every client message is a new POST, and the response is a single JSON object or an SSE stream scoped to that request."
+   },
+   "points": {
+    "it": [
+     "Header Accept: application/json e text/event-stream.",
+     "Header obbligatori: MCP-Protocol-Version e Mcp-Method su ogni POST; Mcp-Name su tools/call, resources/read, prompts/get.",
+     "Notifica accettata: 202 Accepted senza body.",
+     "Rimossi nella 2026-07-28: GET, DELETE, Mcp-Session-Id, Last-Event-ID (resumability). GET o DELETE ricevono 405.",
+     "Chiudere lo stream SSE di una richiesta equivale a cancellarla.",
+     "Mismatch tra header e body: 400 con HeaderMismatch (-32020)."
+    ],
+    "en": [
+     "Accept header: application/json and text/event-stream.",
+     "Required headers: MCP-Protocol-Version and Mcp-Method on every POST; Mcp-Name on tools/call, resources/read, prompts/get.",
+     "Accepted notification: 202 Accepted with no body.",
+     "Removed in 2026-07-28: GET, DELETE, Mcp-Session-Id, Last-Event-ID (resumability). GET or DELETE get 405.",
+     "Closing a request's SSE stream cancels that request.",
+     "Header/body mismatch: 400 with HeaderMismatch (-32020)."
+    ]
+   },
+   "trap": {
+    "it": "Uno stream interrotto non si può riprendere: la caduta della connessione cancella la richiesta. Se serve, va reinviata con un nuovo id; per lavori che devono sopravvivere a una disconnessione si usa Tasks.",
+    "en": "A broken stream cannot be resumed: the dropped connection cancels the request. If needed, it is reissued with a new id; work that must survive a disconnect uses Tasks."
+   },
+   "source": {
+    "label": "Spec · Streamable HTTP",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+   }
+  },
+  {
+   "id": "D2-05",
+   "title": {
+    "it": "x-mcp-header e codifica dei valori",
+    "en": "x-mcp-header and value encoding"
+   },
+   "summary": {
+    "it": "Un server può annotare una proprietà dell'inputSchema con x-mcp-header: il client HTTP rispecchia quel valore nell'header Mcp-Param-{nome}, così gateway e load balancer possono instradare senza leggere il body.",
+    "en": "A server can annotate an inputSchema property with x-mcp-header: the HTTP client mirrors that value into the Mcp-Param-{name} header, so gateways and load balancers can route without parsing the body."
+   },
+   "points": {
+    "it": [
+     "Il server MAY usarlo; il client HTTP MUST supportarlo.",
+     "Solo su proprietà integer, string o boolean (non number) raggiungibili staticamente via properties.",
+     "Un tool con x-mcp-header invalido viene escluso da tools/list dal client HTTP.",
+     "Valori non ASCII-safe: codifica =?base64?…?=.",
+     "Mai per dati sensibili: gli header sono visibili a tutti gli intermediari.",
+     "Il valore di x-mcp-header deve essere un nome di header HTTP valido e unico (senza distinzione maiuscole/minuscole) tra i valori dello stesso inputSchema.",
+     "Nomi degli header case-insensitive (mcp-method va accettato); valori case-sensitive (Mcp-Method: TOOLS/CALL va rifiutato).",
+     "Base64 (=?base64?…?=) obbligatorio se il valore ha caratteri fuori dall'ASCII visibile, spazi iniziali o finali, o se assomiglia già al pattern sentinella.",
+     "Mcp-Name vale params.name per tools/call e prompts/get, params.uri per resources/read. Il body resta la fonte di verità."
+    ],
+    "en": [
+     "The server MAY use it; the HTTP client MUST support it.",
+     "Only on integer, string or boolean properties (not number) statically reachable via properties.",
+     "A tool with an invalid x-mcp-header is excluded from tools/list by the HTTP client.",
+     "Non ASCII-safe values: =?base64?…?= encoding.",
+     "Never for sensitive data: headers are visible to every intermediary.",
+     "The x-mcp-header value must be a valid HTTP field name, unique (case-insensitively) among the values in the same inputSchema.",
+     "Header names are case-insensitive (mcp-method must be accepted); values are case-sensitive (Mcp-Method: TOOLS/CALL must be rejected).",
+     "Base64 (=?base64?…?=) is required when the value has characters outside visible ASCII, leading or trailing whitespace, or already matches the sentinel pattern.",
+     "Mcp-Name is params.name for tools/call and prompts/get, params.uri for resources/read. The body stays the source of truth."
+    ]
+   },
+   "source": {
+    "label": "Spec · Streamable HTTP · x-mcp-header",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+   }
+  },
+  {
+   "id": "D2-13",
+   "title": {
+    "it": "Nomi dei tool e più server insieme",
+    "en": "Tool names and multiple servers"
+   },
+   "summary": {
+    "it": "I nomi dei tool sono univoci solo all'interno di un server. Chi aggrega più server deve gestire le collisioni.",
+    "en": "Tool names are unique only within one server. Whoever aggregates several servers must handle collisions."
+   },
+   "points": {
+    "it": [
+     "Nome: SHOULD 1-128 caratteri, case-sensitive, solo A-Z a-z 0-9 _ - . (es. getUser, admin.tools.list).",
+     "Collisioni tra server (due search): client e proxy SHOULD disambiguare, ad esempio con un prefisso del server.",
+     "serverInfo.name non è garantito univoco e SHOULD NOT essere usato per disambiguare.",
+     "Il nome visualizzato segue l'ordine title, poi annotations.title, poi name."
+    ],
+    "en": [
+     "Name: SHOULD be 1-128 characters, case-sensitive, only A-Z a-z 0-9 _ - . (e.g. getUser, admin.tools.list).",
+     "Collisions across servers (two search tools): clients and proxies SHOULD disambiguate, e.g. with a server prefix.",
+     "serverInfo.name is not guaranteed unique and SHOULD NOT be used to disambiguate.",
+     "The display name order is title, then annotations.title, then name."
+    ]
+   },
+   "source": {
+    "label": "Spec · Tools · Tool Names",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+   }
+  },
+  {
+   "id": "D2-06",
+   "title": {
+    "it": "JSON Schema in MCP",
+    "en": "JSON Schema in MCP"
+   },
+   "summary": {
+    "it": "inputSchema e outputSchema sono JSON Schema; senza $schema il dialetto di default è 2020-12.",
+    "en": "inputSchema and outputSchema are JSON Schemas; without $schema the default dialect is 2020-12."
+   },
+   "points": {
+    "it": [
+     "inputSchema: type object alla radice; può usare qualsiasi keyword di JSON Schema 2020-12.",
+     "Tool senza parametri: raccomandato {type: object, additionalProperties: false}.",
+     "Mai dereferenziare automaticamente $ref verso URI di rete.",
+     "Limitare la complessità delle composizioni (anyOf/oneOf/allOf) per evitare DoS del validatore.",
+     "requestedSchema delle elicitation: solo oggetti piatti con proprietà primitive.",
+     "outputSchema accetta qualsiasi JSON Schema valido (array, primitivi, composizioni): il vincolo type: object vale solo per inputSchema.",
+     "Un'eventuale modalità che scarica $ref di rete deve essere opt-in e disattivata di default; uno schema con $ref esterno non risolto SHOULD essere rifiutato, non trattato come permissivo."
+    ],
+    "en": [
+     "inputSchema: type object at the root; may use any JSON Schema 2020-12 keyword.",
+     "Tool with no parameters: {type: object, additionalProperties: false} is recommended.",
+     "Never automatically dereference $ref pointing to network URIs.",
+     "Limit composition complexity (anyOf/oneOf/allOf) to avoid validator DoS.",
+     "Elicitation requestedSchema: flat objects with primitive properties only.",
+     "outputSchema accepts any valid JSON Schema (arrays, primitives, compositions): the type: object constraint applies only to inputSchema.",
+     "Any mode that fetches network $refs must be opt-in and disabled by default; a schema with an unresolved external $ref SHOULD be rejected, not treated as permissive."
+    ]
+   },
+   "source": {
+    "label": "Spec · Basic · JSON Schema",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D2-07",
+   "title": {
+    "it": "_meta, icons e strutture comuni",
+    "en": "_meta, icons and common structures"
+   },
+   "summary": {
+    "it": "_meta è il campo per metadata riservati al protocollo e alle estensioni. Nella 2026-07-28 porta versione, capability e info del client in ogni richiesta.",
+    "en": "_meta is the field for metadata reserved to the protocol and extensions. In 2026-07-28 it carries version, capabilities and client info in every request."
+   },
+   "points": {
+    "it": [
+     "Chiavi riservate: prefissi con secondo label modelcontextprotocol o mcp (es. io.modelcontextprotocol/, dev.mcp/).",
+     "com.example.mcp/ non è riservato: conta il secondo label.",
+     "traceparent, tracestate e baggage sono riservati per il trace context OpenTelemetry.",
+     "Icons: solo https: o data:; chi le visualizza deve supportare PNG e JPEG.",
+     "clientInfo e serverInfo sono auto-dichiarati: mai usarli per decisioni di sicurezza.",
+     "Riservati: io.modelcontextprotocol/, dev.mcp/, org.modelcontextprotocol.api/, com.mcp.tools/. Non riservati: com.example.mcp/ e mcp.example/ (mcp è solo la prima label).",
+     "Chiavi _meta riservate: progressToken (senza prefisso), protocolVersion, clientCapabilities, clientInfo, logLevel (deprecata) nelle request; serverInfo nei result; subscriptionId nelle notifiche di listen.",
+     "Icone: verificare che l'URI sia della stessa origine del server, scaricarle senza credenziali (niente cookie o Authorization) e trattare gli SVG come potenzialmente eseguibili."
+    ],
+    "en": [
+     "Reserved keys: prefixes whose second label is modelcontextprotocol or mcp (e.g. io.modelcontextprotocol/, dev.mcp/).",
+     "com.example.mcp/ is not reserved: the second label is what matters.",
+     "traceparent, tracestate and baggage are reserved for OpenTelemetry trace context.",
+     "Icons: only https: or data:; renderers must support PNG and JPEG.",
+     "clientInfo and serverInfo are self-reported: never use them for security decisions.",
+     "Reserved: io.modelcontextprotocol/, dev.mcp/, org.modelcontextprotocol.api/, com.mcp.tools/. Not reserved: com.example.mcp/ and mcp.example/ (mcp is only the first label).",
+     "Reserved _meta keys: progressToken (no prefix), protocolVersion, clientCapabilities, clientInfo, logLevel (deprecated) on requests; serverInfo on results; subscriptionId on listen notifications.",
+     "Icons: check the URI has the same origin as the server, fetch without credentials (no cookies or Authorization) and treat SVG as potentially executable."
+    ]
+   },
+   "source": {
+    "label": "Spec · Basic · _meta",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D2-08",
+   "title": {
+    "it": "Structured tool output",
+    "en": "Structured tool output"
+   },
+   "summary": {
+    "it": "Oltre al content (testo, immagini…) un tool può restituire structuredContent, un valore JSON leggibile dalle macchine e descritto da outputSchema.",
+    "en": "Besides content (text, images…) a tool can return structuredContent, a machine-readable JSON value described by outputSchema."
+   },
+   "points": {
+    "it": [
+     "structuredContent può essere qualsiasi valore JSON (non solo un oggetto).",
+     "Se c'è outputSchema il server MUST rispettarlo e il client SHOULD validare.",
+     "Per retrocompatibilità si include anche il JSON serializzato in un TextContent.",
+     "Tipi di content: text, image, audio, resource_link, resource (embedded)."
+    ],
+    "en": [
+     "structuredContent can be any JSON value (not only an object).",
+     "If outputSchema is present the server MUST conform and the client SHOULD validate.",
+     "For backwards compatibility the serialized JSON is also included in a TextContent.",
+     "Content types: text, image, audio, resource_link, resource (embedded)."
+    ]
+   },
+   "source": {
+    "label": "Spec · Tools · Structured Content",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+   }
+  },
+  {
+   "id": "D2-09",
+   "title": {
+    "it": "Flusso end-to-end host-LLM-server",
+    "en": "End-to-end host-LLM-server flow"
+   },
+   "summary": {
+    "it": "Il flusso tipico: discovery opzionale, list delle primitive, il modello sceglie un tool, l'host chiede conferma, il client invia tools/call, l'eventuale MRTR raccoglie input, il risultato torna al modello.",
+    "en": "The typical flow: optional discovery, primitive listing, the model picks a tool, the host asks for confirmation, the client sends tools/call, MRTR collects input if needed, and the result goes back to the model."
+   },
+   "points": {
+    "it": [
+     "Il modello vede solo name, description, inputSchema e annotations dei tool.",
+     "Prima di tools/call il client SHOULD mostrare gli input all'utente e chiedere conferma per le operazioni sensibili.",
+     "Il client SHOULD validare il risultato prima di passarlo all'LLM.",
+     "L'host orchestra più server; i server non comunicano tra loro e non vedono l'intera conversazione.",
+     "Esempio ufficiale (travel planner): prompt scelto dall'utente, resources aggiunte dall'app, tools chiamati dal modello su server diversi.",
+     "Il modello non vede mai dettagli di trasporto (status HTTP, header). Una chiamata negata dall'utente non arriva mai sul wire.",
+     "Non riordinare la lista dei tool tra un turno e l'altro: l'ordine stabile preserva la prompt cache del provider LLM.",
+     "Dopo un errore JSON-RPC (es. tool sconosciuto, -32602) non si reinvia la stessa identica richiesta."
+    ],
+    "en": [
+     "The model only sees the tools' name, description, inputSchema and annotations.",
+     "Before tools/call the client SHOULD show the inputs to the user and ask for confirmation on sensitive operations.",
+     "The client SHOULD validate the result before passing it to the LLM.",
+     "The host orchestrates several servers; servers do not talk to each other or see the whole conversation.",
+     "Official example (travel planner): a prompt chosen by the user, resources added by the app, tools called by the model across servers.",
+     "The model never sees transport details (HTTP status, headers). A call the user denies never reaches the wire.",
+     "Do not re-sort the tool list between turns: a stable order preserves the LLM provider's prompt cache.",
+     "After a JSON-RPC error (e.g. unknown tool, -32602) the identical request is not resent."
+    ]
+   },
+   "source": {
+    "label": "Docs · Server concepts",
+    "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
+   }
+  },
+  {
+   "id": "D2-11",
+   "title": {
+    "it": "Server instructions",
+    "en": "Server instructions"
+   },
+   "summary": {
+    "it": "instructions è un campo opzionale di server/discover: testo per l'LLM su come usare il server nel suo insieme, di solito iniettato nel system prompt.",
+    "en": "instructions is an optional server/discover field: text for the LLM on how to use the server as a whole, usually injected into the system prompt."
+   },
+   "points": {
+    "it": [
+     "Buon contenuto: ordine e relazioni tra i tool, rate limit, fallback.",
+     "Da evitare: ripetere le descrizioni dei tool, marketing, istruzioni comportamentali generiche, manuali lunghi.",
+     "Non garantiscono il comportamento: mai usarle per controlli di sicurezza o privacy.",
+     "Il client dovrebbe mostrarle all'utente e permettere di disabilitarle.",
+     "Istruzioni con ordini rivolti al modello (\"ignora le indicazioni precedenti\", \"nascondi X all'utente\") vanno trattate come tentativo di prompt injection."
+    ],
+    "en": [
+     "Good content: tool ordering and relationships, rate limits, fallbacks.",
+     "Avoid: repeating tool descriptions, marketing, generic behavioral instructions, long manuals.",
+     "They do not guarantee behavior: never use them for security or privacy controls.",
+     "The client should show them to the user and allow disabling them.",
+     "Instructions that give orders to the model (\"ignore previous guidance\", \"hide X from the user\") should be treated as a prompt injection attempt."
+    ]
+   },
+   "source": {
+    "label": "Blog · Using server instructions",
+    "url": "https://blog.modelcontextprotocol.io/posts/2025-11-03-using-server-instructions/"
+   }
+  },
+  {
+   "id": "D2-12",
+   "title": {
+    "it": "Interazione utente per primitiva",
+    "en": "User interaction per primitive"
+   },
+   "summary": {
+    "it": "La spec non impone una UI, ma ogni primitiva ha un modello di interazione tipico che riflette chi la controlla.",
+    "en": "The spec does not mandate a UI, but each primitive has a typical interaction model that reflects who controls it."
+   },
+   "points": {
+    "it": [
+     "Tools: dialog di approvazione, permessi per pre-approvare operazioni sicure, activity log.",
+     "Resources: picker ad albero o lista, ricerca, inclusione automatica.",
+     "Prompts: slash command, command palette, pulsanti; il template deve essere visibile.",
+     "Elicitation: l'utente risponde accept, decline o cancel."
+    ],
+    "en": [
+     "Tools: approval dialogs, permissions to pre-approve safe operations, activity log.",
+     "Resources: tree or list pickers, search, automatic inclusion.",
+     "Prompts: slash commands, command palettes, buttons; the template should be visible.",
+     "Elicitation: the user answers accept, decline or cancel."
+    ]
+   },
+   "source": {
+    "label": "Docs · Server concepts",
+    "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
+   }
+  },
+  {
+   "id": "D2-10",
+   "title": {
+    "it": "Estensioni: negoziazione e ciclo di vita",
+    "en": "Extensions: negotiation and lifecycle"
+   },
+   "summary": {
+    "it": "Le estensioni aggiungono funzionalità fuori dal core. Sono identificate da {vendor-prefix}/{nome} e negoziate in capabilities.extensions.",
+    "en": "Extensions add functionality outside the core. They are identified as {vendor-prefix}/{name} and negotiated in capabilities.extensions."
+   },
+   "points": {
+    "it": [
+     "Estensioni ufficiali: prefisso io.modelcontextprotocol (es. io.modelcontextprotocol/tasks); terze parti: dominio rovesciato (com.example/…).",
+     "{} come valore indica supporto senza impostazioni.",
+     "Se l'altra parte non supporta l'estensione: tornare al comportamento core o rifiutare con un errore.",
+     "Ciclo di vita: Experimental → Beta → Stable, oppure promozione nel core.",
+     "Repository ufficiali con prefisso ext- nell'organizzazione modelcontextprotocol.",
+     "Il prefisso nell'identificatore è obbligatorio: my-extension senza prefisso non è valido e non si attiva.",
+     "Le estensioni sono versionate indipendentemente dal core. Una modifica incompatibile mantiene l'identificatore; uno nuovo (es. …-v2) serve solo se vecchio e nuovo comportamento devono coesistere nella stessa revisione.",
+     "Un Extensions Track SEP accettato porta l'estensione a Beta, un secondo la porta a Stable. Prima di un SEP si può sperimentare in un repository experimental-ext-.",
+     "Estensione obbligatoria per la chiamata ma non dichiarata dal client: errore -32021, non -32601 né -32602.",
+     "Nelle fasi Experimental e Beta una modifica incompatibile aggiunge o incrementa una stringa revision nelle impostazioni: un peer che riceve una revision sconosciuta non attiva l'estensione."
+    ],
+    "en": [
+     "Official extensions: io.modelcontextprotocol prefix (e.g. io.modelcontextprotocol/tasks); third parties: reversed domain (com.example/…).",
+     "{} as a value means supported with no settings.",
+     "If the other side does not support the extension: fall back to core behavior or reject with an error.",
+     "Lifecycle: Experimental → Beta → Stable, or promotion into the core.",
+     "Official repositories use the ext- prefix in the modelcontextprotocol organization.",
+     "The prefix in the identifier is mandatory: my-extension without a prefix is invalid and never activates.",
+     "Extensions version independently of the core. A breaking change keeps the identifier; a new one (e.g. …-v2) is used only when old and new behavior must coexist under one revision.",
+     "An accepted Extensions Track SEP moves the extension to Beta, a second one to Stable. Before a SEP, ideas can be tried in an experimental-ext- repository.",
+     "Extension mandatory for the call but not declared by the client: error -32021, not -32601 or -32602.",
+     "In the Experimental and Beta stages a breaking change adds or increments a revision string in the settings: a peer that receives an unknown revision should not enable the extension."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Overview",
+    "url": "https://modelcontextprotocol.io/extensions/overview"
+   }
+  }
+ ]
+}

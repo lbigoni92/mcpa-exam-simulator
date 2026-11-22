@@ -1,0 +1,375 @@
+"""Set di domande difficili (scenari, risposte multiple). Fonte: spec 2026-07-28 locale.
+Scrive content/questions-hard.json. Uso: python3 site/build/gen_hard.py"""
+import json, os
+OUT = os.path.join(os.path.dirname(__file__), "..", "content", "questions-hard.json")
+qs = []; cnt = {}
+def A(t, q, o, c, x):
+    d = t[:2]; cnt[d] = cnt.get(d, 0) + 1
+    qs.append({"id": f"o-H-{d}-{cnt[d]:02d}", "t": t, "d": 3, "type": "multi" if len(c) > 1 else "single",
+               "q": {"it": q[0], "en": q[1]}, "o": [{"it": a, "en": b} for a, b in o], "c": c, "x": {"it": x[0], "en": x[1]}})
+
+# ---------------- D1 ----------------
+A("D1-06", ("Roots è Deprecated nella revisione 2026-07-28. Quali affermazioni sono corrette? (scegli 2)", "Roots is Deprecated in the 2026-07-28 revision. Which statements are correct? (choose 2)"),
+ [("Resta funzionante per tutta la finestra di deprecazione", "It keeps working for the whole deprecation window"),
+  ("Viene rimosso in automatico 12 mesi dopo il rilascio", "It is removed automatically 12 months after release"),
+  ("La rimozione più precoce è la prima revisione Current rilasciata dopo la finestra", "The earliest removal is the first Current revision released after the window"),
+  ("Le nuove implementazioni dovrebbero adottarlo per compatibilità", "New implementations should adopt it for compatibility")], [0, 2],
+ ("Deprecated: la feature resta nella spec con un percorso di migrazione; la rimozione più precoce è la prima revisione Current rilasciata dopo la finestra minima (almeno 12 mesi). Non c'è rimozione automatica e le nuove implementazioni non dovrebbero adottarla.",
+  "Deprecated: the feature stays in the spec with a migration path; the earliest removal is the first Current revision released after the minimum window (at least 12 months). There is no automatic removal and new implementations should not adopt it."))
+A("D1-02", ("Un architetto obietta: \"Se ogni richiesta è stateless, il server non può sapere chi la sta facendo\". Qual è la risposta corretta?", "An architect objects: \"If every request is stateless, the server cannot know who is making it\". What is the correct answer?"),
+ [("L'identità arriva dal token Bearer su ogni richiesta; lo stato applicativo da handle espliciti", "Identity comes from the Bearer token on every request; app state from explicit handles"),
+  ("L'identità arriva da clientInfo, che il server può usare per autorizzare", "Identity comes from clientInfo, which the server can use to authorize"),
+  ("L'identità resta legata all'Mcp-Session-Id fissato dalla prima richiesta", "Identity stays bound to the Mcp-Session-Id set by the first request"),
+  ("L'identità è disponibile solo su stdio, dove c'è un solo processo", "Identity is only available over stdio, where there is a single process")], [0],
+ ("Stateless non significa anonimo: su HTTP ogni richiesta porta Authorization: Bearer e il server valida il token ogni volta. clientInfo è autodichiarato e l'Mcp-Session-Id non esiste più.",
+  "Stateless does not mean anonymous: over HTTP every request carries Authorization: Bearer and the server validates the token each time. clientInfo is self-declared and Mcp-Session-Id no longer exists."))
+A("D1-01", ("Quali di questi aspetti MCP lascia deliberatamente fuori dal protocollo? (scegli 2)", "Which of these does MCP deliberately leave out of the protocol? (choose 2)"),
+ [("Come l'host gestisce la finestra di contesto dell'LLM", "How the host manages the LLM's context window"),
+  ("Il formato JSON-RPC dei messaggi tra client e server", "The JSON-RPC format of client-server messages"),
+  ("Quale modello l'applicazione usa per ragionare", "Which model the application uses to reason"),
+  ("I tipi di contenuto che un risultato di tool può avere", "The content types a tool result can carry")], [0, 2],
+ ("MCP standardizza lo scambio di contesto (messaggi, primitive, tipi di contenuto). Come l'applicazione usa l'LLM e il contesto ricevuto, e quale modello sceglie, restano fuori dal protocollo.",
+  "MCP standardizes context exchange (messages, primitives, content types). How the application uses the LLM and the context it receives, and which model it picks, stay outside the protocol."))
+A("D1-08", ("In che revisione sono comparsi, nell'ordine: structured tool output, Client ID Metadata Documents, server/discover?", "In which revision did these appear, in order: structured tool output, Client ID Metadata Documents, server/discover?"),
+ [("2025-03-26, 2025-06-18, 2025-11-25", "2025-03-26, 2025-06-18, 2025-11-25"),
+  ("2025-06-18, 2025-11-25, 2026-07-28", "2025-06-18, 2025-11-25, 2026-07-28"),
+  ("2025-06-18, 2026-07-28, 2026-07-28", "2025-06-18, 2026-07-28, 2026-07-28"),
+  ("2025-11-25, 2025-11-25, 2026-07-28", "2025-11-25, 2025-11-25, 2026-07-28")], [1],
+ ("Structured output arriva con la 2025-06-18 (insieme all'elicitation), CIMD con la 2025-11-25, server/discover con la 2026-07-28 che elimina initialize.",
+  "Structured output came with 2025-06-18 (along with elicitation), CIMD with 2025-11-25, server/discover with 2026-07-28, which drops initialize."))
+
+# ---------------- D2 ----------------
+A("D2-05", ("Un tool annota con x-mcp-header una proprietà che sta dentro items di un array. Cosa deve fare un client Streamable HTTP?", "A tool puts x-mcp-header on a property inside an array's items. What must a Streamable HTTP client do?"),
+ [("Escludere il tool dal risultato di tools/list e, di norma, registrare un warning", "Exclude the tool from the tools/list result and, normally, log a warning"),
+  ("Inviare la chiamata senza header e lasciare decidere al server", "Send the call without the header and let the server decide"),
+  ("Copiare nell'header il valore del primo elemento dell'array", "Copy the value of the first array element into the header"),
+  ("Accettare il tool ma ignorare l'annotazione x-mcp-header", "Accept the tool but ignore the x-mcp-header annotation")], [0],
+ ("x-mcp-header è valido solo su proprietà raggiungibili staticamente con soli passi properties (niente items, oneOf, $ref...). Una definizione invalida MUST essere rifiutata: il client esclude il tool da tools/list e SHOULD loggare il motivo.",
+  "x-mcp-header is only valid on properties statically reachable through properties steps alone (no items, oneOf, $ref...). An invalid definition MUST be rejected: the client excludes the tool from tools/list and SHOULD log the reason."))
+A("D2-04", ("Un client invia resources/read per file:///projects/app/config.json via HTTP. Quali header deve avere il POST? (scegli 2)", "A client sends resources/read for file:///projects/app/config.json over HTTP. Which headers must the POST carry? (choose 2)"),
+ [("Mcp-Method: resources/read", "Mcp-Method: resources/read"),
+  ("Mcp-Session-Id con l'id della sessione corrente", "Mcp-Session-Id with the current session id"),
+  ("Mcp-Name: file:///projects/app/config.json", "Mcp-Name: file:///projects/app/config.json"),
+  ("Mcp-Param-Uri con l'URI della risorsa", "Mcp-Param-Uri with the resource URI")], [0, 2],
+ ("Mcp-Method va su ogni POST; Mcp-Name porta params.name o params.uri su tools/call, resources/read e prompts/get. Mcp-Param-* nasce solo da x-mcp-header nei tool, e Mcp-Session-Id non esiste più. Serve anche MCP-Protocol-Version.",
+  "Mcp-Method goes on every POST; Mcp-Name carries params.name or params.uri on tools/call, resources/read and prompts/get. Mcp-Param-* only comes from x-mcp-header in tools, and Mcp-Session-Id no longer exists. MCP-Protocol-Version is also needed."))
+A("D2-04", ("Header Mcp-Param-Region: eu-west, ma nel corpo region vale us-east. Cosa risponde il server?", "Header Mcp-Param-Region: eu-west, but region in the body is us-east. What does the server answer?"),
+ [("Usa il valore dell'header, che ha la precedenza", "It uses the header value, which takes precedence"),
+  ("Usa il valore del corpo e ignora l'header", "It uses the body value and ignores the header"),
+  ("HTTP 400 con errore -32020 HeaderMismatch", "HTTP 400 with error -32020 HeaderMismatch"),
+  ("Esegue il tool e restituisce isError: true", "It runs the tool and returns isError: true")], [2],
+ ("Header e corpo devono coincidere: un gateway potrebbe aver instradato sulla base dell'header. Una discrepanza è -32020 HeaderMismatch con HTTP 400.",
+  "Header and body must match: a gateway may have routed on the header. A mismatch is -32020 HeaderMismatch with HTTP 400."))
+A("D2-02", ("Quali affermazioni su server/discover sono corrette? (scegli 2)", "Which statements about server/discover are correct? (choose 2)"),
+ [("Il server deve implementarlo", "The server must implement it"),
+  ("Il client deve chiamarlo prima di ogni altra richiesta", "The client must call it before any other request"),
+  ("Il risultato completo deve avere ttlMs e cacheScope", "The complete result must carry ttlMs and cacheScope"),
+  ("Restituisce un Mcp-Session-Id da riusare", "It returns an Mcp-Session-Id to reuse")], [0, 2],
+ ("server/discover è MUST per i server e MAY per i client. È tra i metodi che MUST portare i caching hint (ttlMs, cacheScope) sui risultati complete. Non esistono sessioni.",
+  "server/discover is MUST for servers and MAY for clients. It is among the methods that MUST carry caching hints (ttlMs, cacheScope) on complete results. There are no sessions."))
+A("D2-08", ("Un tool con outputSchema restituisce structuredContent che non rispetta lo schema. Chi ha violato cosa?", "A tool with an outputSchema returns structuredContent that does not match the schema. Who violated what?"),
+ [("Il client, che doveva convertire il risultato nello schema", "The client, which should have converted the result to the schema"),
+  ("Nessuno: outputSchema è solo documentazione per il modello", "Nobody: outputSchema is just documentation for the model"),
+  ("Il server ha violato un MUST; un client che valida (SHOULD) se ne accorge", "The server broke a MUST; a validating client (SHOULD) notices"),
+  ("L'host, che doveva rimuovere outputSchema dal catalogo", "The host, which should have removed outputSchema from the catalog")], [2],
+ ("Con outputSchema il server MUST fornire risultati strutturati conformi e il client SHOULD validarli. Per compatibilità il JSON va anche in un TextContent.",
+  "With an outputSchema the server MUST provide conforming structured results and the client SHOULD validate them. For compatibility the JSON also goes in a TextContent."))
+A("D2-13", ("Un gateway aggrega due server che dichiarano entrambi serverInfo.name = \"primary\" ed espongono un tool search. Qual è la strategia corretta?", "A gateway aggregates two servers that both declare serverInfo.name = \"primary\" and expose a search tool. What is the correct strategy?"),
+ [("Prefissare i tool con un identificativo del server scelto dal gateway", "Prefix the tools with a server identifier chosen by the gateway"),
+  ("Prefissare i tool con serverInfo.name, che è univoco per spec", "Prefix the tools with serverInfo.name, which the spec makes unique"),
+  ("Tenere solo il tool del server che risponde per primo", "Keep only the tool of the server that answers first"),
+  ("Chiedere ai server di rinominare i tool con un errore -32602", "Ask the servers to rename the tools with a -32602 error")], [0],
+ ("L'unicità dei nomi vale solo dentro un server; gli aggregatori SHOULD disambiguare, ad esempio con un prefisso. serverInfo.name non è garantito univoco e SHOULD NOT essere usato per disambiguare.",
+  "Name uniqueness only holds within one server; aggregators SHOULD disambiguate, for example with a prefix. serverInfo.name is not guaranteed unique and SHOULD NOT be used for disambiguation."))
+A("D2-06", ("Quale $ref un client può risolvere automaticamente durante la validazione di un inputSchema?", "Which $ref may a client resolve automatically while validating an inputSchema?"),
+ [("https://schemas.example.com/address.json", "https://schemas.example.com/address.json"),
+  ("#/$defs/address", "#/$defs/address"),
+  ("http://intranet.local/schemas/address.json", "http://intranet.local/schemas/address.json"),
+  ("address.json, relativo a un $id https", "address.json, relative to an https $id")], [1],
+ ("I riferimenti interni al documento si risolvono normalmente. Un $ref che si risolve in un URI di rete (anche relativo a un $id https) MUST NOT essere dereferenziato automaticamente: rischi SSRF e DoS.",
+  "References internal to the document resolve normally. A $ref resolving to a network URI (even relative to an https $id) MUST NOT be dereferenced automatically: SSRF and DoS risks."))
+
+# ---------------- D3 ----------------
+A("D3-04", ("tools/call con id 7 riceve un InputRequiredResult con inputRequests {confirm} e requestState \"abc\". Qual è il retry corretto?", "tools/call with id 7 receives an InputRequiredResult with inputRequests {confirm} and requestState \"abc\". What is the correct retry?"),
+ [("id 7, stessi argomenti, inputResponses {confirm}, requestState \"abc\"", "id 7, same arguments, inputResponses {confirm}, requestState \"abc\""),
+  ("id 8, stessi argomenti, inputResponses {confirm}, requestState \"abc\"", "id 8, same arguments, inputResponses {confirm}, requestState \"abc\""),
+  ("id 8, stessi argomenti, inputResponses {confirm}, senza requestState", "id 8, same arguments, inputResponses {confirm}, no requestState"),
+  ("id 8, inputResponses {confirm}, requestState aggiornato dal client", "id 8, inputResponses {confirm}, requestState updated by the client")], [1],
+ ("Il retry è una richiesta indipendente: id diverso (MUST), stessi parametri, inputResponses con le stesse chiavi e requestState restituito identico. Il client MUST NOT ispezionarlo o modificarlo.",
+  "The retry is an independent request: different id (MUST), same parameters, inputResponses with the same keys and requestState echoed unchanged. The client MUST NOT inspect or modify it."))
+A("D3-04", ("Un InputRequiredResult contiene solo requestState, senza inputRequests. Cosa vale per il client? (scegli 2)", "An InputRequiredResult contains only requestState, without inputRequests. What applies to the client? (choose 2)"),
+ [("Può riprovare subito la richiesta originale", "It may retry the original request immediately"),
+  ("Deve rispondere con inputResponses vuote", "It must answer with empty inputResponses"),
+  ("Deve restituire esattamente lo stesso requestState", "It must echo exactly the same requestState"),
+  ("Deve trattarlo come errore e interrompere", "It must treat it as an error and stop")], [0, 2],
+ ("Senza inputRequests il client MAY riprovare subito; se c'è requestState MUST restituirlo identico. Un InputRequiredResult deve avere almeno uno dei due campi.",
+  "Without inputRequests the client MAY retry immediately; if requestState is present it MUST echo it unchanged. An InputRequiredResult must have at least one of the two fields."))
+A("D3-04", ("Un server usa requestState per un codice promozionale riscattabile una sola volta. Lo firma con HMAC, lo lega all'utente e gli dà un TTL breve. Basta?", "A server uses requestState for a one-time promo code. It signs it with HMAC, binds it to the user and gives it a short TTL. Is that enough?"),
+ [("Sì: firma, binding e TTL impediscono ogni riuso", "Yes: signature, binding and TTL prevent any reuse"),
+  ("No: limitano il replay, ma l'uso singolo va imposto lato server", "No: they bound replay, but single use must be enforced server-side"),
+  ("No: deve cifrarlo con AEAD, così diventa monouso", "No: it must encrypt it with AEAD, which makes it single-use"),
+  ("Sì, purché il client non lo modifichi", "Yes, as long as the client does not modify it")], [1],
+ ("Le misure anti-replay limitano la finestra e impediscono il riuso tra utenti o richieste, ma non garantiscono l'uso singolo: se il requestState deve essere consumato una volta sola, il server MUST imporlo lato server.",
+  "Anti-replay measures bound the window and prevent cross-user or cross-request reuse, but do not guarantee single use: if requestState must be consumed at most once, the server MUST enforce it server-side."))
+A("D3-07", ("Quali risultati devono portare ttlMs e cacheScope? (scegli 2)", "Which results must carry ttlMs and cacheScope? (choose 2)"),
+ [("Un tools/list con resultType complete", "A tools/list with resultType complete"),
+  ("Un resources/read con resultType input_required", "A resources/read with resultType input_required"),
+  ("Un resources/read con resultType complete", "A resources/read with resultType complete"),
+  ("Un tools/call con resultType complete", "A tools/call with resultType complete")], [0, 2],
+ ("I caching hint sono MUST sui risultati complete di server/discover, dei */list e di resources/read. I risultati intermedi input_required non li portano, e tools/call non è nell'elenco.",
+  "Caching hints are MUST on complete results of server/discover, the */list methods and resources/read. Interim input_required results carry none, and tools/call is not on the list."))
+A("D3-07", ("Il client ha in cache resources/read di uri A (ttlMs non scaduto). Arriva una resources/read di uri B e poi un retry di A con inputResponses. Cosa può servire dalla cache?", "The client has resources/read for uri A cached (ttlMs not expired). A resources/read for uri B arrives, then a retry of A with inputResponses. What can it serve from cache?"),
+ [("Entrambe, perché il metodo è lo stesso", "Both, because the method is the same"),
+  ("Solo B, perché A ora porta input", "Only B, because A now carries input"),
+  ("Nessuna delle due", "Neither of them"),
+  ("Solo il retry di A, perché ha lo stesso uri", "Only the retry of A, because it has the same uri")], [2],
+ ("La chiave di cache è metodo + parametri rilevanti (uri, cursor): B è un'altra chiave. I retry MRTR (inputResponses o requestState) MUST NOT essere serviti né salvati in cache.",
+  "The cache key is method + relevant parameters (uri, cursor): B is a different key. MRTR retries (inputResponses or requestState) MUST NOT be cached or served from cache."))
+A("D3-07", ("tools/list ha ttlMs 300000 e il server dichiara listChanged. Dopo un minuto arriva notifications/tools/list_changed. Cosa fa il client?", "tools/list has ttlMs 300000 and the server declares listChanged. After one minute notifications/tools/list_changed arrives. What does the client do?"),
+ [("Aspetta i 4 minuti rimanenti prima di ricaricare", "Waits the remaining 4 minutes before reloading"),
+  ("Invalida subito la cache e ricarica quando serve", "Invalidates the cache at once and reloads when needed"),
+  ("Ignora la notifica perché il TTL è ancora valido", "Ignores the notification because the TTL is still valid"),
+  ("Riduce il TTL a 60 secondi per le richieste future", "Shortens the TTL to 60 seconds for future requests")], [1],
+ ("Una notifica list_changed invalida subito la cache, indipendentemente dal TTL. TTL e listChanged possono coesistere.",
+  "A list_changed notification invalidates the cache immediately, regardless of the TTL. TTL and listChanged can coexist."))
+A("D3-06", ("Su stdio il client invia notifications/cancelled per la richiesta 12, poi arriva comunque la risposta 12. Cosa fa il client?", "Over stdio the client sends notifications/cancelled for request 12, then the response to 12 arrives anyway. What does the client do?"),
+ [("La consegna al modello come risultato valido", "Delivers it to the model as a valid result"),
+  ("Invia un secondo notifications/cancelled", "Sends a second notifications/cancelled"),
+  ("La ignora: la cancellazione può incrociare la risposta", "Ignores it: the cancellation can cross the response"),
+  ("Chiude il processo server con SIGTERM", "Terminates the server process with SIGTERM")], [2],
+ ("Per la latenza la cancellazione può arrivare a lavoro finito: il client SHOULD ignorare una risposta arrivata dopo aver cancellato.",
+  "Due to latency the cancellation can arrive after work finished: the client SHOULD ignore a response arriving after it cancelled."))
+A("D3-06", ("In quale caso un server invia notifications/cancelled nella 2026-07-28?", "In which case does a server send notifications/cancelled in 2026-07-28?"),
+ [("Quando abbandona una tools/call troppo lunga", "When it abandons a tools/call that takes too long"),
+  ("Quando chiude uno stream subscriptions/listen", "When it tears down a subscriptions/listen stream"),
+  ("Quando il client supera il rate limit", "When the client exceeds the rate limit"),
+  ("Quando riceve un retry MRTR scaduto", "When it receives an expired MRTR retry")], [1],
+ ("Il server MUST inviare notifications/cancelled con l'id della subscriptions/listen quando chiude quello stream, e MUST NOT usarlo per altri scopi.",
+  "The server MUST send notifications/cancelled referencing the subscriptions/listen id when it tears down that stream, and MUST NOT use it for any other purpose."))
+A("D3-05", ("Il client apre subscriptions/listen chiedendo toolsListChanged e resourceSubscriptions per tre URI; il server supporta solo le notifiche dei tool. Cosa succede? (scegli 2)", "The client opens subscriptions/listen asking for toolsListChanged and resourceSubscriptions for three URIs; the server only supports tool notifications. What happens? (choose 2)"),
+ [("L'acknowledged riporta solo il sottoinsieme accettato", "The acknowledgement reports only the accepted subset"),
+  ("Il server rifiuta l'intera richiesta con -32602", "The server rejects the whole request with -32602"),
+  ("Il client SHOULD confrontare l'acknowledged con quanto chiesto", "The client SHOULD compare the acknowledgement with what it asked"),
+  ("Il server invia comunque resources/updated per gli URI", "The server still sends resources/updated for the URIs")], [0, 2],
+ ("Il primo messaggio è notifications/subscriptions/acknowledged con il filtro accettato; il client SHOULD controllarlo. Il server MUST NOT inviare tipi di notifica non richiesti o non accettati.",
+  "The first message is notifications/subscriptions/acknowledged with the accepted filter; the client SHOULD check it. The server MUST NOT send notification types not requested or not accepted."))
+A("D3-09", ("Quali di questi casi sono errori di protocollo (errore JSON-RPC) e non errori di esecuzione del tool? (scegli 2)", "Which of these are protocol errors (JSON-RPC error) rather than tool execution errors? (choose 2)"),
+ [("tools/call con un nome di tool inesistente", "tools/call naming a nonexistent tool"),
+  ("L'API a valle risponde 500 durante l'esecuzione", "The downstream API answers 500 during execution"),
+  ("Richiesta senza clientCapabilities nel _meta", "A request without clientCapabilities in _meta"),
+  ("Argomenti che non rispettano l'inputSchema", "Arguments that fail the inputSchema")], [0, 2],
+ ("Tool sconosciuto e _meta incompleto sono -32602. Fallimenti di API e validazione degli argomenti sono errori di esecuzione (isError: true), utili al modello per correggersi.",
+  "Unknown tool and incomplete _meta are -32602. API failures and argument validation are execution errors (isError: true), useful to the model for self-correction."))
+A("D3-08", ("Un tool richiede elicitation, ma la richiesta non la dichiara in clientCapabilities. Cosa risponde il server via HTTP?", "A tool requires elicitation, but the request does not declare it in clientCapabilities. What does the server answer over HTTP?"),
+ [("Un InputRequiredResult con elicitation in URL mode", "An InputRequiredResult with URL-mode elicitation"),
+  ("HTTP 400 con -32021 MissingRequiredClientCapability", "HTTP 400 with -32021 MissingRequiredClientCapability"),
+  ("HTTP 200 con un risultato isError: true", "HTTP 200 with an isError: true result"),
+  ("HTTP 400 con -32602 Invalid params", "HTTP 400 with -32602 Invalid params")], [1],
+ ("Il server non può chiedere input per capability non dichiarate. Se l'operazione ne ha bisogno: -32021 (HTTP 400). -32602 è per campi obbligatori mancanti in _meta.",
+  "The server cannot ask for input needing undeclared capabilities. If the operation needs it: -32021 (HTTP 400). -32602 is for missing required _meta fields."))
+A("D3-14", ("Un tool eseguito come task termina con un risultato che ha isError: true. Quale stato raggiunge il task?", "A tool running as a task ends with a result that has isError: true. Which status does the task reach?"),
+ [("failed, con l'errore nel campo error", "failed, with the error in the error field"),
+  ("completed, e result contiene isError: true", "completed, and result contains isError: true"),
+  ("cancelled, perché il tool non è riuscito", "cancelled, because the tool did not succeed"),
+  ("input_required, per chiedere all'utente come proseguire", "input_required, to ask the user how to proceed")], [1],
+ ("failed indica un errore JSON-RPC durante l'esecuzione. Un tool che fallisce a livello applicativo produce comunque un risultato: il task è completed e result contiene isError: true.",
+  "failed means a JSON-RPC error occurred during execution. A tool failing at application level still produces a result: the task is completed and result contains isError: true."))
+A("D3-14", ("Un task passa a input_required. Come procede il client?", "A task moves to input_required. How does the client proceed?"),
+ [("Legge inputRequests da tasks/get e invia le risposte con tasks/update", "Reads inputRequests from tasks/get and sends the answers with tasks/update"),
+  ("Ripete la tools/call originale con inputResponses e un nuovo id", "Repeats the original tools/call with inputResponses and a new id"),
+  ("Chiama tasks/result per ottenere la richiesta di input", "Calls tasks/result to get the input request"),
+  ("Cancella il task e ne avvia uno nuovo con più argomenti", "Cancels the task and starts a new one with more arguments")], [0],
+ ("Con l'estensione Tasks l'input a metà esecuzione passa per tasks/get (che mostra inputRequests) e tasks/update. tasks/result non esiste più.",
+  "With the Tasks extension mid-flight input goes through tasks/get (which shows inputRequests) and tasks/update. tasks/result no longer exists."))
+A("D3-19", ("Una tools/call ha io.modelcontextprotocol/logLevel = \"warning\" nel _meta. Cosa vale? (scegli 2)", "A tools/call has io.modelcontextprotocol/logLevel = \"warning\" in _meta. What applies? (choose 2)"),
+ [("Il server può emettere notifications/message di livello warning o superiore per quella richiesta", "The server may emit notifications/message at warning or above for that request"),
+  ("I log arrivano sullo stream di subscriptions/listen", "The logs arrive on the subscriptions/listen stream"),
+  ("Per richieste senza logLevel il server non deve emettere notifications/message", "For requests without logLevel the server must not emit notifications/message"),
+  ("Il livello resta valido per tutte le richieste successive", "The level stays valid for all later requests")], [0, 2],
+ ("logging/setLevel è stato rimosso: il livello è per richiesta, nel _meta. I messaggi viaggiano sullo stream della richiesta, non su subscriptions/listen, e senza logLevel il server MUST NOT emetterli.",
+  "logging/setLevel was removed: the level is per request, in _meta. Messages travel on the request's own stream, not on subscriptions/listen, and without logLevel the server MUST NOT emit them."))
+A("D3-18", ("Un server vuole raccogliere con elicitation in form mode un indirizzo con via, città e CAP come oggetto annidato. È valido?", "A server wants to collect, via form-mode elicitation, an address with street, city and postcode as a nested object. Is it valid?"),
+ [("Sì, se l'oggetto annidato ha required", "Yes, if the nested object has required"),
+  ("No: solo schemi piatti con campi primitivi", "No: only flat schemas with primitive fields"),
+  ("Sì, ma solo passando all'URL mode", "Yes, but only by switching to URL mode"),
+  ("No: l'elicitation non può chiedere dati personali", "No: elicitation cannot ask for personal data")], [1],
+ ("In form mode requestedSchema è limitato a oggetti piatti con proprietà primitive (string, number, boolean, enum). Si usano tre campi separati.",
+  "In form mode requestedSchema is limited to flat objects with primitive properties (string, number, boolean, enum). Use three separate fields."))
+
+# ---------------- D4 ----------------
+A("D4-05", ("Il client ha un token con scope \"files:read\" e riceve 403 insufficient_scope con scope=\"files:write\". Cosa fa? (scegli 2)", "The client holds a token with scope \"files:read\" and gets 403 insufficient_scope with scope=\"files:write\". What does it do? (choose 2)"),
+ [("Chiede una nuova autorizzazione per files:read e files:write", "Requests new authorization for files:read and files:write"),
+  ("Chiede solo files:write, così il token resta minimo", "Requests only files:write, so the token stays minimal"),
+  ("Ripete la richiesta originale con il nuovo token", "Retries the original request with the new token"),
+  ("Chiede offline_access per evitare altri step-up", "Requests offline_access to avoid further step-ups")], [0, 2],
+ ("Nello step-up il client usa l'unione tra scope già concessi e quelli della challenge, per non perdere permessi, poi ripete la richiesta.",
+  "In step-up the client uses the union of already granted scopes and those in the challenge, so it does not lose permissions, then retries the request."))
+A("D4-08", ("L'AS non dichiara authorization_response_iss_parameter_supported, ma la risposta contiene iss diverso dall'issuer registrato. Cosa fa il client?", "The AS does not declare authorization_response_iss_parameter_supported, but the response contains an iss different from the recorded issuer. What does the client do?"),
+ [("Procede: senza dichiarazione iss va ignorato", "Proceeds: without the declaration iss is ignored"),
+  ("Rifiuta la risposta: un iss presente si confronta sempre", "Rejects the response: a present iss is always compared"),
+  ("Scambia il codice con l'AS indicato da iss", "Exchanges the code with the AS named in iss"),
+  ("Ripete l'autorizzazione con un nuovo PKCE", "Restarts authorization with a new PKCE")], [1],
+ ("Un iss presente si confronta sempre con l'issuer registrato (confronto semplice di stringhe), che l'AS lo dichiari o no. Si procede senza iss solo se l'AS non dichiara il supporto. Il controllo avviene prima dello scambio del codice.",
+  "A present iss is always compared with the recorded issuer (simple string comparison), whether or not the AS declares support. Proceeding without iss is only allowed when the AS does not declare support. The check happens before the code exchange."))
+A("D4-04", ("L'issuer dell'AS è https://auth.example.com/tenant1. Quale URL di metadati prova per primo il client?", "The AS issuer is https://auth.example.com/tenant1. Which metadata URL does the client try first?"),
+ [("https://auth.example.com/tenant1/.well-known/openid-configuration", "https://auth.example.com/tenant1/.well-known/openid-configuration"),
+  ("https://auth.example.com/.well-known/openid-configuration/tenant1", "https://auth.example.com/.well-known/openid-configuration/tenant1"),
+  ("https://auth.example.com/.well-known/oauth-authorization-server/tenant1", "https://auth.example.com/.well-known/oauth-authorization-server/tenant1"),
+  ("https://auth.example.com/.well-known/oauth-authorization-server", "https://auth.example.com/.well-known/oauth-authorization-server")], [2],
+ ("Con un issuer che ha un path, l'ordine è: OAuth 8414 con path insertion, poi OIDC con path insertion, poi OIDC con path appending. Il campo issuer del documento deve coincidere con l'issuer usato.",
+  "With an issuer that has a path, the order is: OAuth 8414 with path insertion, then OIDC with path insertion, then OIDC with path appending. The document's issuer field must match the issuer used."))
+A("D4-04", ("Un documento scaricato da https://attacker.example/.well-known/oauth-authorization-server contiene \"issuer\": \"https://honest.example\". Cosa fa il client?", "A document fetched from https://attacker.example/.well-known/oauth-authorization-server contains \"issuer\": \"https://honest.example\". What does the client do?"),
+ [("Lo usa, perché l'issuer dichiarato è affidabile", "Uses it, because the declared issuer is trustworthy"),
+  ("Lo scarta: l'issuer deve coincidere con quello usato per l'URL", "Discards it: the issuer must match the one used for the URL"),
+  ("Lo usa solo se il certificato TLS è valido", "Uses it only if the TLS certificate is valid"),
+  ("Riprova lo stesso URL con OIDC Discovery", "Retries the same URL with OIDC Discovery")], [1],
+ ("Dopo aver scaricato i metadati, l'issuer MUST essere identico a quello con cui si è costruito l'URL well-known; altrimenti il client MUST NOT usarli.",
+  "After fetching metadata, the issuer MUST be identical to the one used to build the well-known URL; otherwise the client MUST NOT use them."))
+A("D4-06", ("Un client usa CIMD con client_id https://app.example.com/oauth/client.json. Quali controlli fa l'AS? (scegli 2)", "A client uses CIMD with client_id https://app.example.com/oauth/client.json. Which checks does the AS make? (choose 2)"),
+ [("Il client_id nel documento coincide esattamente con l'URL", "The client_id in the document exactly matches the URL"),
+  ("Il dominio del client è nell'elenco dei partner approvati", "The client's domain is in the approved partner list"),
+  ("Il redirect_uri della richiesta è tra i redirect_uris del documento", "The request's redirect_uri is among the document's redirect_uris"),
+  ("Il client ha già un client_secret registrato via DCR", "The client already has a client_secret registered via DCR")], [0, 2],
+ ("Con CIMD l'AS scarica il documento dall'URL del client_id, verifica che il client_id interno coincida e che il redirect_uri sia tra quelli dichiarati. Non serve registrazione preventiva.",
+  "With CIMD the AS fetches the document from the client_id URL, checks the inner client_id matches and that the redirect_uri is among the declared ones. No prior registration is needed."))
+A("D4-10", ("Durante la discovery OAuth, quali misure riducono il rischio SSRF? (scegli 2)", "During OAuth discovery, which measures reduce SSRF risk? (choose 2)"),
+ [("Bloccare IP privati e 169.254.169.254", "Block private IPs and 169.254.169.254"),
+  ("Seguire i redirect verso qualsiasi host", "Follow redirects to any host"),
+  ("Richiedere HTTPS per gli endpoint dell'AS", "Require HTTPS for AS endpoints"),
+  ("Accettare http per i metadati in produzione", "Accept http for metadata in production")], [0, 2],
+ ("Gli URL di metadati arrivano dal server o dall'AS, quindi sono controllabili da un attaccante. Mitigazioni: bloccare indirizzi privati e link-local, richiedere HTTPS, usare un egress proxy.",
+  "Metadata URLs come from the server or the AS, so an attacker can control them. Mitigations: block private and link-local addresses, require HTTPS, use an egress proxy."))
+A("D4-03", ("Un server MCP deve leggere il calendario dell'utente su un'API di terze parti. Qual è il design corretto?", "An MCP server must read the user's calendar on a third-party API. What is the correct design?"),
+ [("Inoltrare all'API il token ricevuto dal client MCP", "Forward the token received from the MCP client to the API"),
+  ("Agire come client OAuth separato e usare un proprio token per l'API", "Act as a separate OAuth client and use its own token for the API"),
+  ("Chiedere la password del calendario con elicitation in form mode", "Ask for the calendar password with form-mode elicitation"),
+  ("Allargare l'audience del token MCP all'API del calendario", "Widen the MCP token's audience to the calendar API")], [1],
+ ("Token passthrough è vietato. Il server ottiene un token proprio per l'API a valle (ad esempio con elicitation in URL mode per il consenso), mantenendo audience distinte e audit.",
+  "Token passthrough is forbidden. The server obtains its own token for the downstream API (for example via URL-mode elicitation for consent), keeping distinct audiences and auditability."))
+A("D4-16", ("Una sessione ha un tool che legge email esterne, accesso a documenti riservati e un tool http_fetch. Qual è la mitigazione più efficace?", "A session has a tool reading external email, access to confidential documents and an http_fetch tool. What is the most effective mitigation?"),
+ [("Scrivere nelle instructions di non inviare dati all'esterno", "Write in the instructions not to send data outside"),
+  ("Togliere una gamba della trifecta, ad es. la comunicazione esterna", "Remove one leg of the trifecta, e.g. external communication"),
+  ("Marcare http_fetch con readOnlyHint: true perché non scriva", "Mark http_fetch with readOnlyHint: true so it cannot write"),
+  ("Usare cacheScope private su ogni risultato della sessione", "Use cacheScope private on every result in the session")], [1],
+ ("Dati privati, contenuti non fidati e comunicazione esterna insieme permettono l'esfiltrazione via prompt injection. Testo e annotation non garantiscono nulla: serve togliere una delle tre capacità o mettere un controllo deterministico.",
+  "Private data, untrusted content and external communication together enable exfiltration via prompt injection. Text and annotations guarantee nothing: remove one of the three capabilities or add a deterministic control."))
+A("D4-16", ("Un tool approvato mantiene nome e descrizione (con hash fissato), ma una nuova discovery mostra un inputSchema con un campo in più \"forward_to\". Cosa deve fare l'host?", "An approved tool keeps its name and description (hash-pinned), but a new discovery shows an inputSchema with an extra \"forward_to\" field. What should the host do?"),
+ [("Nulla: l'hash della descrizione coincide", "Nothing: the description hash matches"),
+  ("Trattarlo come definizione cambiata e chiedere una nuova approvazione", "Treat it as a changed definition and ask for new approval"),
+  ("Rimuovere il campo forward_to e chiamare il tool", "Remove the forward_to field and call the tool"),
+  ("Abbassare il ttlMs del catalogo a 0", "Lower the catalog's ttlMs to 0")], [1],
+ ("È una variante del rug pull: il pinning va fatto sull'intera definizione (schema e annotation incluse), e ogni cambiamento richiede una nuova revisione.",
+  "This is a rug-pull variant: pinning must cover the whole definition (schema and annotations included), and any change requires a new review."))
+A("D4-17", ("Un server non verificato dichiara readOnlyHint: true sul tool delete_all_records. Come si comporta un host prudente?", "An unvetted server declares readOnlyHint: true on the delete_all_records tool. How does a prudent host behave?"),
+ [("Lo esegue senza conferma, come indicato", "Runs it without confirmation, as indicated"),
+  ("Tratta le annotation come non fidate e chiede conferma", "Treats the annotations as untrusted and asks for confirmation"),
+  ("Rifiuta la connessione al server con 403", "Refuses the server connection with 403"),
+  ("Modifica l'annotation in destructiveHint: true", "Rewrites the annotation to destructiveHint: true")], [1],
+ ("Le annotation sono suggerimenti e vanno considerate non fidate se il server non lo è. Possono guidare la UX ma non sostituiscono controlli e conferme.",
+  "Annotations are hints and must be treated as untrusted unless the server is trusted. They can guide UX but do not replace controls and confirmations."))
+A("D4-12", ("Un gateway con cache condivisa riceve due resources/read identiche da due utenti con token diversi. Il risultato ha cacheScope private. Cosa può fare?", "A gateway with a shared cache gets two identical resources/read from two users with different tokens. The result has cacheScope private. What can it do?"),
+ [("Servire al secondo utente la risposta in cache del primo", "Serve the first user's cached response to the second user"),
+  ("Riutilizzarla solo nello stesso contesto di autorizzazione", "Reuse it only within the same authorization context"),
+  ("Riutilizzarla finché il ttlMs non è ancora scaduto", "Reuse it as long as the ttlMs has not expired yet"),
+  ("Riutilizzarla se entrambi gli utenti sono dello stesso tenant", "Reuse it if both users belong to the same tenant")], [1],
+ ("private significa riutilizzabile solo nello stesso contesto di autorizzazione. Solo public si condivide tra utenti, e cacheScope non è comunque controllo d'accesso.",
+  "private means reusable only within the same authorization context. Only public is shared across users, and cacheScope is not access control anyway."))
+A("D4-18", ("Un utente incolla da una pagina web la configurazione \"npx -y weather-mcp@2.1.0\". Cosa è corretto? (scegli 2)", "A user pastes the configuration \"npx -y weather-mcp@2.1.0\" from a web page. What is correct? (choose 2)"),
+ [("Il client mostra il comando completo e chiede approvazione esplicita", "The client shows the full command and asks for explicit approval"),
+  ("La versione fissata blocca tutto l'albero di dipendenze", "The pinned version locks the whole dependency tree"),
+  ("La versione fissata blocca solo il pacchetto di primo livello", "The pinned version only locks the top-level package"),
+  ("stdio isola il processo, quindi il rischio è basso", "stdio isolates the process, so the risk is low")], [0, 2],
+ ("Il setup one-click esegue codice con i privilegi dell'utente: comando visibile e consenso esplicito. Con npx/uvx si fissa solo il primo livello; per tutto l'albero serve un'immagine per digest. stdio non è una sandbox.",
+  "One-click setup runs code with the user's privileges: visible command and explicit consent. With npx/uvx only the top level is pinned; the whole tree needs an image by digest. stdio is not a sandbox."))
+A("D4-13", ("Un team progetta l'audit delle chiamate ai tool. Quali requisiti sono corretti? (scegli 2)", "A team designs auditing of tool calls. Which requirements are correct? (choose 2)"),
+ [("Registrare quale agente ha agito e per conto di quale utente", "Record which agent acted and on behalf of which user"),
+  ("Usare traceparent come unico registro di audit", "Use traceparent as the only audit record"),
+  ("Tenere un registro durevole senza credenziali né dati personali", "Keep a durable record with no credentials or personal data"),
+  ("Salvare i token di accesso per poter rifare le chiamate", "Store access tokens so calls can be replayed")], [0, 2],
+ ("Il trace context correla host, client, server e sistemi a valle, ma non sostituisce un audit durevole. Il log deve dire chi ha agito per chi, senza credenziali o dati personali.",
+  "Trace context correlates host, client, server and downstream systems, but does not replace a durable audit. The log must say who acted for whom, without credentials or personal data."))
+A("D4-14", ("Un'azienda vuole che i dipendenti accedano ai server MCP con SSO aziendale e che IT possa revocare l'accesso centralmente. Cosa usa?", "A company wants employees to reach MCP servers through corporate SSO and IT to revoke access centrally. What does it use?"),
+ [("OAuth Client Credentials con JWT assertion", "OAuth Client Credentials with a JWT assertion"),
+  ("Enterprise-Managed Authorization con ID-JAG emessi dall'IdP", "Enterprise-Managed Authorization with ID-JAGs issued by the IdP"),
+  ("Dynamic Client Registration per ogni dipendente", "Dynamic Client Registration for each employee"),
+  ("Elicitation in URL mode verso l'IdP a ogni chiamata", "URL-mode elicitation to the IdP on every call")], [1],
+ ("EMA fa decidere all'IdP aziendale l'accesso ai server, con policy e revoca centralizzate. Client Credentials è per servizi senza utente. Entrambe le estensioni sono opt-in.",
+  "EMA lets the enterprise IdP decide server access, with centralized policy and revocation. Client Credentials is for services with no user. Both extensions are opt-in."))
+
+# ---------------- D5 ----------------
+A("D5-07", ("Un team pubblica io.github.acme/weather nel registry con un pacchetto npm. Cosa serve? (scegli 2)", "A team publishes io.github.acme/weather to the registry with an npm package. What is needed? (choose 2)"),
+ [("Autenticarsi su GitHub come acme (o un suo membro)", "Authenticate on GitHub as acme (or one of its members)"),
+  ("Un record DNS TXT su github.com", "A DNS TXT record on github.com"),
+  ("mcpName in package.json uguale al nome del server", "mcpName in package.json equal to the server name"),
+  ("Una versione espressa come range, ad esempio ^1.0.0", "A version expressed as a range, e.g. ^1.0.0")], [0, 2],
+ ("Il namespace io.github.* si verifica con GitHub; la proprietà del pacchetto npm con mcpName in package.json. Le versioni a range sono vietate.",
+  "The io.github.* namespace is verified via GitHub; npm package ownership via mcpName in package.json. Range versions are prohibited."))
+A("D5-07", ("Per un server pubblicato solo come remote (URL HTTPS), cosa verifica il registry?", "For a server published only as a remote (HTTPS URL), what does the registry verify?"),
+ [("Che l'URL risponda a server/discover", "That the URL answers server/discover"),
+  ("Il namespace del nome, non l'URL", "The name's namespace, not the URL"),
+  ("Che l'URL sia sullo stesso dominio del namespace", "That the URL is on the namespace's domain"),
+  ("Un certificato firmato dal registry", "A certificate signed by the registry")], [1],
+ ("Per i remote il registry verifica la proprietà del namespace, non l'URL. Il controllo del servizio resta a chi lo usa.",
+  "For remotes the registry verifies namespace ownership, not the URL. Checking the service is up to whoever uses it."))
+A("D5-06", ("Un team vuole le nuove feature della spec già al rilascio e bug critici risolti in pochi giorni. Quale SDK sceglie?", "A team wants new spec features at release time and critical bugs fixed within days. Which SDK does it choose?"),
+ [("Java, Tier 2", "Java, Tier 2"),
+  ("Un Tier 1, ad esempio Python o TypeScript", "A Tier 1, e.g. Python or TypeScript"),
+  ("Swift, Tier 3", "Swift, Tier 3"),
+  ("Uno qualsiasi: i tier non danno garanzie", "Any of them: tiers give no guarantees")], [1],
+ ("Tier 1: 100% conformance, feature prima del rilascio della spec, triage in 2 giorni lavorativi, bug critici in 7 giorni. Tier 2: nuove feature entro 6 mesi. Tier 3: sperimentale.",
+  "Tier 1: 100% conformance, features before the spec release, triage in 2 business days, critical bugs in 7 days. Tier 2: new features within 6 months. Tier 3: experimental."))
+A("D5-11", ("Un server remoto deve notificare eventi a client che non possono tenere una connessione aperta. Cosa vale? (scegli 2)", "A remote server must notify events to clients that cannot hold a connection open. What applies? (choose 2)"),
+ [("Si usa la modalità webhook, con callback https firmata", "Use webhook mode, with a signed https callback"),
+  ("La consegna è exactly-once, quindi non serve deduplicare", "Delivery is exactly-once, so no deduplication is needed"),
+  ("Il client deduplica con eventId; l'ordine è best-effort", "The client deduplicates by eventId; ordering is best-effort"),
+  ("Si usa subscriptions/listen, che sopravvive alle disconnessioni", "Use subscriptions/listen, which survives disconnections")], [0, 2],
+ ("Webhook è per server remoti con client che non tengono connessioni. La consegna è at-least-once (eventId per deduplicare) e per i webhook l'ordine è best-effort.",
+  "Webhook is for remote servers with clients that cannot hold connections. Delivery is at-least-once (eventId for deduplication) and for webhooks ordering is best-effort."))
+A("D5-13", ("Un host scopre skill da un server con Skills over MCP. Qual è la sequenza corretta?", "A host discovers skills from a server via Skills over MCP. What is the correct sequence?"),
+ [("resources/read di SKILL.md, che attiva subito la skill", "resources/read of SKILL.md, which activates the skill at once"),
+  ("skills/list, verifica di digest SHA-256 e dimensione, approvazione, caricamento", "skills/list, SHA-256 digest and size check, approval, loading"),
+  ("tools/call skill_install, poi riavvio del server", "tools/call skill_install, then a server restart"),
+  ("prompts/get della skill, che il modello esegue subito", "prompts/get of the skill, which the model runs at once")], [1],
+ ("skills/list fornisce URI, digest SHA-256 e dimensione di ogni file. Leggere SKILL.md non attiva nulla: l'host carica la skill dopo verifica ed eventuale approvazione.",
+  "skills/list provides each file's URI, SHA-256 digest and size. Reading SKILL.md activates nothing: the host loads the skill after verification and any approval."))
+A("D5-08", ("Un tool ha una UI MCP Apps, ma il client non ha dichiarato l'estensione io.modelcontextprotocol/ui. Cosa ci si aspetta?", "A tool has an MCP Apps UI, but the client did not declare the io.modelcontextprotocol/ui extension. What is expected?"),
+ [("Il server restituisce comunque il contenuto normale del tool", "The server still returns the tool's normal content"),
+  ("Il server risponde -32021 a ogni chiamata del tool", "The server answers -32021 to every call of the tool"),
+  ("Il client apre la risorsa ui:// in una nuova finestra", "The client opens the ui:// resource in a new window"),
+  ("Il client esegue l'HTML direttamente nella pagina host", "The client runs the HTML directly in the host page")], [0],
+ ("Le estensioni sono opt-in con fallback al core: senza dichiarazione il tool funziona con il contenuto normale. Quando l'estensione c'è, la UI gira in un iframe sandboxed che comunica solo via postMessage.",
+  "Extensions are opt-in with fallback to core: without the declaration the tool works with normal content. When the extension is present, the UI runs in a sandboxed iframe communicating only via postMessage."))
+A("D5-05", ("Un host con 600 tool vuole ridurre token e dati sensibili nel contesto. Quali tecniche aiutano? (scegli 2)", "A host with 600 tools wants to cut tokens and sensitive data in context. Which techniques help? (choose 2)"),
+ [("Progressive discovery: Catalog, Inspect, Execute", "Progressive discovery: Catalog, Inspect, Execute"),
+  ("Caricare tutte le definizioni a ogni turno", "Load every definition on each turn"),
+  ("Code mode: il modello scrive codice che chiama i tool in sandbox", "Code mode: the model writes code that calls tools in a sandbox"),
+  ("Rimuovere inputSchema per accorciare le definizioni", "Drop inputSchema to shorten definitions")], [0, 2],
+ ("Oltre l'1-5% del contesto conviene caricare le definizioni solo quando servono. Con code mode i risultati intermedi restano fuori dal contesto del modello.",
+  "Beyond 1-5% of context, load definitions only when needed. With code mode intermediate results stay out of the model's context."))
+A("D5-04", ("Un server 2026-07-28 passa da 1 a 5 repliche dietro un load balancer round-robin. Cosa resta da fare? (scegli 2)", "A 2026-07-28 server goes from 1 to 5 replicas behind a round-robin load balancer. What is left to do? (choose 2)"),
+ [("Configurare sticky sessions sull'Mcp-Session-Id", "Configure sticky sessions on Mcp-Session-Id"),
+  ("Tenere lo stato degli handle in uno store condiviso", "Keep handle state in a shared store"),
+  ("Autorizzare l'handle su ogni chiamata, legandolo all'utente", "Authorize the handle on every call, bound to the user"),
+  ("Replicare la cache delle sessioni initialize", "Replicate the initialize session cache")], [1, 2],
+ ("Il protocollo è stateless: niente sessioni né sticky routing. Lo stato applicativo dietro gli handle deve però essere raggiungibile da ogni replica, e ogni uso dell'handle va autorizzato.",
+  "The protocol is stateless: no sessions or sticky routing. The application state behind handles must however be reachable from every replica, and every handle use must be authorized."))
+A("D5-12", ("Un team vuole distribuire un server locale a utenti non tecnici, con installazione in un clic su più client. Cosa usa?", "A team wants to distribute a local server to non-technical users, with one-click install across several clients. What does it use?"),
+ [("Un bundle .mcpb con manifest.json", "An .mcpb bundle with manifest.json"),
+  ("Un server.json con solo remotes", "A server.json with remotes only"),
+  ("Un'estensione MCP Apps", "An MCP Apps extension"),
+  ("Un link npx da incollare nel terminale", "An npx link to paste in a terminal")], [0],
+ ("MCPB (ex DXT) impacchetta server Node.js, Python o binari con un manifest.json obbligatorio, per l'installazione portabile tra client. Si può anche pubblicare nel registry con registryType mcpb.",
+  "MCPB (formerly DXT) packages Node.js, Python or binary servers with a required manifest.json, for portable install across clients. It can also be published to the registry with registryType mcpb."))
+A("D5-01", ("In un deployment remoto con gateway davanti al server, chi deve comunque autorizzare l'accesso a un handle specifico?", "In a remote deployment with a gateway in front of the server, who must still authorize access to a specific handle?"),
+ [("Il gateway, filtrando su Mcp-Method", "The gateway, filtering on Mcp-Method"),
+  ("Il server MCP, a ogni chiamata", "The MCP server, on every call"),
+  ("L'authorization server, all'emissione del token", "The authorization server, when issuing the token"),
+  ("L'host, mostrando una conferma all'utente", "The host, by showing the user a confirmation")], [1],
+ ("Il gateway filtra in modo grossolano sugli header; l'autorizzazione fine (incluso chi può usare quale handle) resta nel server a ogni chiamata.",
+  "The gateway filters coarsely on headers; fine-grained authorization (including who may use which handle) stays in the server on every call."))
+
+for q in qs:
+    assert all(0 <= i < len(q["o"]) for i in q["c"]), q["id"]
+json.dump(qs, open(OUT, "w"), ensure_ascii=False, indent=1)
+from collections import Counter
+print(len(qs), dict(cnt), "multi:", sum(q["type"] == "multi" for q in qs))

@@ -1,0 +1,1478 @@
+[
+ {
+  "id": "o-D3-01",
+  "t": "D3-01",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale di questi messaggi JSON-RPC è una notification MCP valida?",
+   "en": "Which of these JSON-RPC messages is a valid MCP notification?"
+  },
+  "o": [
+   {
+    "it": "Un messaggio con method e id null",
+    "en": "A message with method and a null id"
+   },
+   {
+    "it": "Un messaggio con method e senza id",
+    "en": "A message with method and no id"
+   },
+   {
+    "it": "Un array di due richieste (batch)",
+    "en": "An array of two requests (batch)"
+   },
+   {
+    "it": "Un messaggio con result e senza id",
+    "en": "A message with result and no id"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le notification non hanno id e non ricevono risposta. L'id null non è ammesso nelle richieste, e il batching non è supportato.",
+   "en": "Notifications have no id and get no response. A null id is not allowed in requests, and batching is not supported."
+  }
+ },
+ {
+  "id": "o-D3-02",
+  "t": "D3-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client riceve un risultato di tools/call senza il campo resultType. Come lo interpreta?",
+   "en": "A client receives a tools/call result with no resultType field. How does it interpret it?"
+  },
+  "o": [
+   {
+    "it": "Come input_required",
+    "en": "As input_required"
+   },
+   {
+    "it": "Come errore di protocollo",
+    "en": "As a protocol error"
+   },
+   {
+    "it": "Come task",
+    "en": "As a task"
+   },
+   {
+    "it": "Come complete",
+    "en": "As complete"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "resultType assente equivale a \"complete\". \"task\" esiste solo con l'estensione Tasks.",
+   "en": "A missing resultType means \"complete\". \"task\" only exists with the Tasks extension."
+  }
+ },
+ {
+  "id": "o-D3-03",
+  "t": "D3-01",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Quali affermazioni sono vere per la 2026-07-28? (scegli 2)",
+   "en": "Which statements are true for 2026-07-28? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il server non avvia mai richieste JSON-RPC verso il client",
+    "en": "The server never initiates JSON-RPC requests to the client"
+   },
+   {
+    "it": "Il batching JSON-RPC è supportato su HTTP",
+    "en": "JSON-RPC batching is supported over HTTP"
+   },
+   {
+    "it": "Un id non può essere riusato tra richieste ancora pendenti",
+    "en": "An id cannot be reused among still-pending requests"
+   },
+   {
+    "it": "Le notification ricevono una risposta vuota",
+    "en": "Notifications receive an empty response"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il server risponde soltanto (MRTR sostituisce le richieste server→client). Batching rimosso nella 2025-06-18; gli id devono essere unici tra le richieste pendenti.",
+   "en": "The server only responds (MRTR replaces server→client requests). Batching was removed in 2025-06-18; ids must be unique among pending requests."
+  }
+ },
+ {
+  "id": "o-D3-04",
+  "t": "D3-02",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quali campi di _meta sono obbligatori su ogni richiesta 2026-07-28?",
+   "en": "Which _meta fields are required on every 2026-07-28 request?"
+  },
+  "o": [
+   {
+    "it": "protocolVersion e clientCapabilities",
+    "en": "protocolVersion and clientCapabilities"
+   },
+   {
+    "it": "clientInfo e sessionId",
+    "en": "clientInfo and sessionId"
+   },
+   {
+    "it": "protocolVersion e clientInfo",
+    "en": "protocolVersion and clientInfo"
+   },
+   {
+    "it": "progressToken e logLevel",
+    "en": "progressToken and logLevel"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "io.modelcontextprotocol/protocolVersion e io.modelcontextprotocol/clientCapabilities sono obbligatori; clientInfo è SHOULD. Non esiste più una sessione.",
+   "en": "io.modelcontextprotocol/protocolVersion and io.modelcontextprotocol/clientCapabilities are required; clientInfo is SHOULD. There is no session any more."
+  }
+ },
+ {
+  "id": "o-D3-05",
+  "t": "D3-02",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una richiesta arriva senza clientCapabilities in _meta. Cosa risponde il server?",
+   "en": "A request arrives without clientCapabilities in _meta. What does the server answer?"
+  },
+  "o": [
+   {
+    "it": "-32021 MissingRequiredClientCapability",
+    "en": "-32021 MissingRequiredClientCapability"
+   },
+   {
+    "it": "-32600 Invalid Request con HTTP 200",
+    "en": "-32600 Invalid Request with HTTP 200"
+   },
+   {
+    "it": "-32602 Invalid params (HTTP 400)",
+    "en": "-32602 Invalid params (HTTP 400)"
+   },
+   {
+    "it": "Usa le capability della sessione precedente",
+    "en": "It uses the previous session's capabilities"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Un campo obbligatorio mancante in _meta è -32602. -32021 serve quando il client ha mandato le capability ma manca proprio quella richiesta dall'operazione.",
+   "en": "A missing required _meta field is -32602. -32021 is for when the client sent capabilities but lacks the specific one the operation needs."
+  }
+ },
+ {
+  "id": "o-D3-06",
+  "t": "D3-02",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool deve ricordare un carrello tra più chiamate. Qual è l'approccio corretto in un protocollo stateless?",
+   "en": "A tool must remember a cart across several calls. What is the correct approach in a stateless protocol?"
+  },
+  "o": [
+   {
+    "it": "Legare il carrello all'Mcp-Session-Id",
+    "en": "Bind the cart to the Mcp-Session-Id"
+   },
+   {
+    "it": "Usare sticky sessions sul load balancer",
+    "en": "Use sticky sessions on the load balancer"
+   },
+   {
+    "it": "Salvarlo nel campo clientInfo",
+    "en": "Store it in the clientInfo field"
+   },
+   {
+    "it": "Restituire un handle esplicito (es. cart_id) da passare come argomento",
+    "en": "Return an explicit handle (e.g. cart_id) passed as an argument"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Lo stato applicativo si porta con handle espliciti negli argomenti; così qualsiasi istanza può servire la richiesta.",
+   "en": "Application state is carried by explicit handles in arguments, so any instance can serve the request."
+  }
+ },
+ {
+  "id": "o-D3-07",
+  "t": "D3-03",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Il server risponde -32022 con data.supported = [\"2026-07-28\"]. Cosa fa il client?",
+   "en": "The server answers -32022 with data.supported = [\"2026-07-28\"]. What does the client do?"
+  },
+  "o": [
+   {
+    "it": "Riprova con initialize",
+    "en": "Retries with initialize"
+   },
+   {
+    "it": "Sceglie una versione da supported e ripete la richiesta",
+    "en": "Picks a version from supported and retries the request"
+   },
+   {
+    "it": "Chiude la connessione e segnala errore all'utente",
+    "en": "Closes the connection and reports an error to the user"
+   },
+   {
+    "it": "Invia un ping per verificare la connessione",
+    "en": "Sends a ping to check the connection"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "UnsupportedProtocolVersionError porta l'elenco delle versioni supportate: il client ne sceglie una e riprova. Un errore moderno riconosciuto esclude il fallback a initialize.",
+   "en": "UnsupportedProtocolVersionError carries the supported versions: the client picks one and retries. A recognized modern error rules out falling back to initialize."
+  }
+ },
+ {
+  "id": "o-D3-08",
+  "t": "D3-03",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un client dual-era su stdio invia server/discover e non riceve risposta entro il timeout. Cosa deve concludere?",
+   "en": "A dual-era client over stdio sends server/discover and gets no answer before the timeout. What should it conclude?"
+  },
+  "o": [
+   {
+    "it": "Che il server è legacy e deve fare fallback a initialize",
+    "en": "That the server is legacy and it should fall back to initialize"
+   },
+   {
+    "it": "Che il server è moderno ma lento: riprovare all'infinito",
+    "en": "That the server is modern but slow: retry forever"
+   },
+   {
+    "it": "Che deve inviare -32022 al server",
+    "en": "That it should send -32022 to the server"
+   },
+   {
+    "it": "Che deve passare a HTTP",
+    "en": "That it should switch to HTTP"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Errore non moderno o timeout della sonda → server legacy → fallback a initialize. L'era viene ricordata per processo (stdio) o per origin (HTTP).",
+   "en": "A non-modern error or probe timeout → legacy server → fall back to initialize. The era is remembered per process (stdio) or per origin (HTTP)."
+  }
+ },
+ {
+  "id": "o-D3-09",
+  "t": "D3-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Su quali metodi un server può restituire un InputRequiredResult?",
+   "en": "On which methods can a server return an InputRequiredResult?"
+  },
+  "o": [
+   {
+    "it": "Su qualsiasi metodo",
+    "en": "On any method"
+   },
+   {
+    "it": "Solo su tools/call",
+    "en": "Only on tools/call"
+   },
+   {
+    "it": "tools/call, resources/read e prompts/get",
+    "en": "tools/call, resources/read and prompts/get"
+   },
+   {
+    "it": "tools/list, resources/list e prompts/list",
+    "en": "tools/list, resources/list and prompts/list"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "MRTR è ammesso solo su tools/call, resources/read e prompts/get.",
+   "en": "MRTR is allowed only on tools/call, resources/read and prompts/get."
+  }
+ },
+ {
+  "id": "o-D3-10",
+  "t": "D3-04",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Come deve essere costruito il retry dopo un InputRequiredResult? (scegli 2)",
+   "en": "How must the retry after an InputRequiredResult be built? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Nuova richiesta con un nuovo id",
+    "en": "A new request with a new id"
+   },
+   {
+    "it": "Stesso id della richiesta originale",
+    "en": "Same id as the original request"
+   },
+   {
+    "it": "inputResponses con le stesse chiavi di inputRequests e requestState identico",
+    "en": "inputResponses with the same keys as inputRequests and an identical requestState"
+   },
+   {
+    "it": "requestState modificato dal client con le risposte",
+    "en": "requestState modified by the client with the answers"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il retry è una richiesta nuova (nuovo id), con inputResponses indicizzate dalle stesse chiavi di inputRequests e requestState restituito così com'è.",
+   "en": "The retry is a new request (new id), with inputResponses keyed like inputRequests and requestState echoed unchanged."
+  }
+ },
+ {
+  "id": "o-D3-11",
+  "t": "D3-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Nel retry MRTR manca una delle risposte richieste. Cosa fa il server?",
+   "en": "In the MRTR retry one requested answer is missing. What does the server do?"
+  },
+  "o": [
+   {
+    "it": "Restituisce -32602",
+    "en": "Returns -32602"
+   },
+   {
+    "it": "Esegue comunque il tool con valori di default",
+    "en": "Runs the tool anyway with default values"
+   },
+   {
+    "it": "Restituisce un nuovo InputRequiredResult",
+    "en": "Returns a new InputRequiredResult"
+   },
+   {
+    "it": "Restituisce isError: true",
+    "en": "Returns isError: true"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Se manca qualcosa, il server chiede di nuovo con un altro InputRequiredResult, non con un errore.",
+   "en": "If something is missing, the server asks again with another InputRequiredResult, not an error."
+  }
+ },
+ {
+  "id": "o-D3-12",
+  "t": "D3-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client non ha dichiarato la capability elicitation. Il server può includere una richiesta di elicitation in inputRequests?",
+   "en": "A client has not declared the elicitation capability. Can the server include an elicitation request in inputRequests?"
+  },
+  "o": [
+   {
+    "it": "Sì: il client ignorerà le richieste che non capisce",
+    "en": "Yes: the client will ignore requests it doesn't understand"
+   },
+   {
+    "it": "No: non può chiedere input per capability non dichiarate",
+    "en": "No: it can't ask for input needing undeclared capabilities"
+   },
+   {
+    "it": "Sì, purché usi l'elicitation in URL mode",
+    "en": "Yes, as long as it uses URL-mode elicitation"
+   },
+   {
+    "it": "Sì, ma solo nelle risposte a resources/read",
+    "en": "Yes, but only in responses to resources/read"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il server non può chiedere input che richiedono capability non dichiarate dal client; se l'operazione ne ha bisogno, risponde -32021.",
+   "en": "The server cannot ask for input requiring capabilities the client did not declare; if the operation needs it, it answers -32021."
+  }
+ },
+ {
+  "id": "o-D3-13",
+  "t": "D3-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Qual è il primo messaggio sullo stream di subscriptions/listen?",
+   "en": "What is the first message on the subscriptions/listen stream?"
+  },
+  "o": [
+   {
+    "it": "notifications/initialized, come nel vecchio handshake",
+    "en": "notifications/initialized, as in the old handshake"
+   },
+   {
+    "it": "Una risposta JSON-RPC che contiene il subscriptionId",
+    "en": "A JSON-RPC response containing the subscriptionId"
+   },
+   {
+    "it": "Un primo notifications/tools/list_changed di sincronizzazione",
+    "en": "An initial notifications/tools/list_changed to sync"
+   },
+   {
+    "it": "notifications/subscriptions/acknowledged",
+    "en": "notifications/subscriptions/acknowledged"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Il server conferma con notifications/subscriptions/acknowledged indicando cosa ha accettato. Il subscriptionId è l'id JSON-RPC della richiesta listen.",
+   "en": "The server confirms with notifications/subscriptions/acknowledged stating what it accepted. The subscriptionId is the JSON-RPC id of the listen request."
+  }
+ },
+ {
+  "id": "o-D3-14",
+  "t": "D3-05",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Quali messaggi NON viaggiano sullo stream di subscriptions/listen? (scegli 2)",
+   "en": "Which messages do NOT travel on the subscriptions/listen stream? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Notifiche di progress",
+    "en": "Progress notifications"
+   },
+   {
+    "it": "notifications/resources/updated per URI sottoscritti",
+    "en": "notifications/resources/updated for subscribed URIs"
+   },
+   {
+    "it": "Messaggi di log",
+    "en": "Log messages"
+   },
+   {
+    "it": "notifications/prompts/list_changed",
+    "en": "notifications/prompts/list_changed"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Progress e log restano legati alla richiesta che li genera; lo stream listen porta solo i cambiamenti sottoscritti.",
+   "en": "Progress and logs stay tied to the request that produced them; the listen stream carries only subscribed changes."
+  }
+ },
+ {
+  "id": "o-D3-15",
+  "t": "D3-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client stdio perde la connessione e riavvia il processo server. Cosa deve fare per continuare a ricevere list_changed?",
+   "en": "A stdio client loses the connection and restarts the server process. What must it do to keep receiving list_changed?"
+  },
+  "o": [
+   {
+    "it": "Nulla, la sottoscrizione è persistente",
+    "en": "Nothing, the subscription is persistent"
+   },
+   {
+    "it": "Inviare di nuovo subscriptions/listen",
+    "en": "Send subscriptions/listen again"
+   },
+   {
+    "it": "Inviare resources/subscribe",
+    "en": "Send resources/subscribe"
+   },
+   {
+    "it": "Ripetere initialize",
+    "en": "Repeat initialize"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Su stdio, dopo la riconnessione il client deve reinviare subscriptions/listen. resources/subscribe non esiste più come meccanismo separato.",
+   "en": "Over stdio, after reconnecting the client must resend subscriptions/listen. resources/subscribe no longer exists as a separate mechanism."
+  }
+ },
+ {
+  "id": "o-D3-16",
+  "t": "D3-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Come si cancella una richiesta in corso su Streamable HTTP nella 2026-07-28?",
+   "en": "How is an in-flight request cancelled over Streamable HTTP in 2026-07-28?"
+  },
+  "o": [
+   {
+    "it": "Inviando DELETE all'endpoint",
+    "en": "By sending DELETE to the endpoint"
+   },
+   {
+    "it": "Inviando notifications/cancelled con POST",
+    "en": "By POSTing notifications/cancelled"
+   },
+   {
+    "it": "Chiudendo lo stream di risposta",
+    "en": "By closing the response stream"
+   },
+   {
+    "it": "Inviando un nuovo initialize",
+    "en": "By sending a new initialize"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Su HTTP la cancellazione è la chiusura dello stream di risposta; su stdio si usa notifications/cancelled.",
+   "en": "Over HTTP, cancelling means closing the response stream; over stdio notifications/cancelled is used."
+  }
+ },
+ {
+  "id": "o-D3-17",
+  "t": "D3-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale affermazione sulle notifiche di progress è corretta?",
+   "en": "Which statement about progress notifications is correct?"
+  },
+  "o": [
+   {
+    "it": "Il valore progress deve crescere a ogni notifica; total è opzionale",
+    "en": "The progress value must increase with each notification; total is optional"
+   },
+   {
+    "it": "total è obbligatorio",
+    "en": "total is required"
+   },
+   {
+    "it": "progress deve essere un intero",
+    "en": "progress must be an integer"
+   },
+   {
+    "it": "Ogni notifica di progress azzera il timeout senza limiti",
+    "en": "Each progress notification resets the timeout without limit"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "progress cresce sempre, può essere decimale, total è facoltativo. Il timeout può essere esteso dal progress ma con un massimo assoluto.",
+   "en": "progress always increases, may be decimal, total is optional. Progress may extend the timeout, but with an absolute maximum."
+  }
+ },
+ {
+  "id": "o-D3-18",
+  "t": "D3-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server restituisce tools/list con ttlMs: -5. Come lo tratta il client?",
+   "en": "A server returns tools/list with ttlMs: -5. How does the client treat it?"
+  },
+  "o": [
+   {
+    "it": "Come cache infinita",
+    "en": "As infinite caching"
+   },
+   {
+    "it": "Come 0: niente cache",
+    "en": "As 0: no caching"
+   },
+   {
+    "it": "Come errore -32602",
+    "en": "As error -32602"
+   },
+   {
+    "it": "Come 5 ms",
+    "en": "As 5 ms"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "ttlMs mancante o negativo vale 0. Il TTL non è un intervallo di polling.",
+   "en": "A missing or negative ttlMs equals 0. The TTL is not a polling interval."
+  }
+ },
+ {
+  "id": "o-D3-19",
+  "t": "D3-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un risultato di resources/read contiene dati di un singolo utente. Quale cacheScope è corretto?",
+   "en": "A resources/read result contains a single user's data. Which cacheScope is correct?"
+  },
+  "o": [
+   {
+    "it": "public",
+    "en": "public"
+   },
+   {
+    "it": "shared",
+    "en": "shared"
+   },
+   {
+    "it": "private",
+    "en": "private"
+   },
+   {
+    "it": "none",
+    "en": "none"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "private = riutilizzabile solo nello stesso contesto di autorizzazione; public = condivisibile tra utenti.",
+   "en": "private = reusable only within the same authorization context; public = shareable across users."
+  }
+ },
+ {
+  "id": "o-D3-20",
+  "t": "D3-07",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Su quali metodi ttlMs e cacheScope sono obbligatori nei risultati? (scegli 2)",
+   "en": "On which methods are ttlMs and cacheScope required in results? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "tools/list",
+    "en": "tools/list"
+   },
+   {
+    "it": "tools/call",
+    "en": "tools/call"
+   },
+   {
+    "it": "resources/read",
+    "en": "resources/read"
+   },
+   {
+    "it": "completion/complete",
+    "en": "completion/complete"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Sono obbligatori su server/discover, i metodi */list (compresi i template) e resources/read; non su tools/call.",
+   "en": "They are required on server/discover, the */list methods (templates included) and resources/read; not on tools/call."
+  }
+ },
+ {
+  "id": "o-D3-21",
+  "t": "D3-07",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "La risposta di una lista paginata non contiene nextCursor. Cosa significa?",
+   "en": "A paginated list response contains no nextCursor. What does it mean?"
+  },
+  "o": [
+   {
+    "it": "Errore del server",
+    "en": "Server error"
+   },
+   {
+    "it": "Il client deve riprovare con cursor vuoto",
+    "en": "The client must retry with an empty cursor"
+   },
+   {
+    "it": "La lista è finita",
+    "en": "The list has ended"
+   },
+   {
+    "it": "La cache è scaduta",
+    "en": "The cache has expired"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "nextCursor assente = fine dei risultati. Il cursore è opaco; un cursore non valido dà -32602.",
+   "en": "Missing nextCursor = end of results. The cursor is opaque; an invalid cursor gives -32602."
+  }
+ },
+ {
+  "id": "o-D3-22",
+  "t": "D3-08",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client chiede resources/read su un URI inesistente. Quale errore restituisce un server 2026-07-28?",
+   "en": "A client calls resources/read on a nonexistent URI. Which error does a 2026-07-28 server return?"
+  },
+  "o": [
+   {
+    "it": "-32002",
+    "en": "-32002"
+   },
+   {
+    "it": "-32602",
+    "en": "-32602"
+   },
+   {
+    "it": "-32601",
+    "en": "-32601"
+   },
+   {
+    "it": "Un risultato con contents vuoto",
+    "en": "A result with empty contents"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Risorsa non trovata = -32602. -32002 era il vecchio codice: i client lo accettano ancora da server più vecchi, ma non va emesso.",
+   "en": "Resource not found = -32602. -32002 was the old code: clients still accept it from older servers, but it must not be emitted."
+  }
+ },
+ {
+  "id": "o-D3-23",
+  "t": "D3-08",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Abbina il codice: -32020 indica…",
+   "en": "Match the code: -32020 means…"
+  },
+  "o": [
+   {
+    "it": "HeaderMismatch",
+    "en": "HeaderMismatch"
+   },
+   {
+    "it": "UnsupportedProtocolVersion",
+    "en": "UnsupportedProtocolVersion"
+   },
+   {
+    "it": "MissingRequiredClientCapability",
+    "en": "MissingRequiredClientCapability"
+   },
+   {
+    "it": "Method not found",
+    "en": "Method not found"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "-32020 HeaderMismatch, -32021 MissingRequiredClientCapability, -32022 UnsupportedProtocolVersion.",
+   "en": "-32020 HeaderMismatch, -32021 MissingRequiredClientCapability, -32022 UnsupportedProtocolVersion."
+  }
+ },
+ {
+  "id": "o-D3-24",
+  "t": "D3-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un'implementazione vuole un codice di errore personalizzato. Quale intervallo NON deve usare?",
+   "en": "An implementation wants a custom error code. Which range must it NOT use?"
+  },
+  "o": [
+   {
+    "it": "-32020..-32099, riservato alla spec MCP",
+    "en": "-32020..-32099, reserved to the MCP spec"
+   },
+   {
+    "it": "Codici positivi definiti dall'applicazione",
+    "en": "Application-defined positive codes"
+   },
+   {
+    "it": "Codici fuori dall'intervallo riservato JSON-RPC",
+    "en": "Codes outside the JSON-RPC reserved range"
+   },
+   {
+    "it": "Nessuno: sono tutti liberi",
+    "en": "None: they are all free"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "-32020..-32099 è riservato alla spec; -32000..-32019 è legacy da non usare.",
+   "en": "-32020..-32099 is reserved to the spec; -32000..-32019 is legacy and must not be used."
+  }
+ },
+ {
+  "id": "o-D3-25",
+  "t": "D3-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool chiama un'API esterna che risponde 429 Too Many Requests. Come deve rispondere il server MCP?",
+   "en": "A tool calls an external API that answers 429 Too Many Requests. How should the MCP server respond?"
+  },
+  "o": [
+   {
+    "it": "Un errore JSON-RPC -32603 Internal error",
+    "en": "A JSON-RPC -32603 Internal error"
+   },
+   {
+    "it": "Un HTTP 429 inoltrato al client MCP",
+    "en": "An HTTP 429 forwarded to the MCP client"
+   },
+   {
+    "it": "Un errore -32602 Invalid params",
+    "en": "A -32602 Invalid params error"
+   },
+   {
+    "it": "Un risultato con isError: true",
+    "en": "A result with isError: true"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Fallimenti di API, validazione e logica di business sono errori di esecuzione del tool (isError), che il client passa al modello per correggersi.",
+   "en": "API, validation and business logic failures are tool execution errors (isError), which the client passes to the model to self-correct."
+  }
+ },
+ {
+  "id": "o-D3-26",
+  "t": "D3-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Il client chiama tools/call con un nome di tool che non esiste. Che tipo di errore è?",
+   "en": "The client calls tools/call with a tool name that does not exist. What kind of error is it?"
+  },
+  "o": [
+   {
+    "it": "Errore di esecuzione, isError: true",
+    "en": "Execution error, isError: true"
+   },
+   {
+    "it": "Errore di protocollo -32602",
+    "en": "Protocol error -32602"
+   },
+   {
+    "it": "Errore -32601 Method not found",
+    "en": "Error -32601 Method not found"
+   },
+   {
+    "it": "HTTP 404 senza corpo",
+    "en": "HTTP 404 with no body"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Tool sconosciuto = errore di protocollo -32602 (il metodo tools/call esiste, il parametro è invalido).",
+   "en": "Unknown tool = protocol error -32602 (the tools/call method exists, the parameter is invalid)."
+  }
+ },
+ {
+  "id": "o-D3-27",
+  "t": "D3-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server 2026-07-28 non implementa completion/complete e un client lo chiama via HTTP. Cosa risponde?",
+   "en": "A 2026-07-28 server does not implement completion/complete and a client calls it over HTTP. What does it answer?"
+  },
+  "o": [
+   {
+    "it": "200 con un risultato vuoto",
+    "en": "200 with an empty result"
+   },
+   {
+    "it": "404 Not Found con errore JSON-RPC -32601",
+    "en": "404 Not Found with JSON-RPC error -32601"
+   },
+   {
+    "it": "405 Method Not Allowed senza corpo",
+    "en": "405 Method Not Allowed with no body"
+   },
+   {
+    "it": "400 Bad Request con -32602",
+    "en": "400 Bad Request with -32602"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Metodo non implementato: 404 con -32601 (MUST). Il corpo JSON-RPC distingue questo caso dal 404 di un vecchio server HTTP+SSE che non ospita l'endpoint moderno. 405 è per GET e DELETE.",
+   "en": "Unimplemented method: 404 with -32601 (MUST). The JSON-RPC body distinguishes this from the 404 of an old HTTP+SSE server that doesn't host the modern endpoint. 405 is for GET and DELETE."
+  }
+ },
+ {
+  "id": "o-D3-28",
+  "t": "D3-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Il token è valido ma non ha gli scope necessari. Quale risposta HTTP è corretta?",
+   "en": "The token is valid but lacks the required scopes. Which HTTP response is correct?"
+  },
+  "o": [
+   {
+    "it": "401 con WWW-Authenticate: Bearer error=\"invalid_token\"",
+    "en": "401 with WWW-Authenticate: Bearer error=\"invalid_token\""
+   },
+   {
+    "it": "403 con WWW-Authenticate: Bearer error=\"insufficient_scope\"",
+    "en": "403 with WWW-Authenticate: Bearer error=\"insufficient_scope\""
+   },
+   {
+    "it": "400 con errore JSON-RPC -32021 MissingRequiredClientCapability",
+    "en": "400 with JSON-RPC error -32021 MissingRequiredClientCapability"
+   },
+   {
+    "it": "200 con un risultato del tool che ha isError: true",
+    "en": "200 with a tool result that has isError: true"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Scope insufficienti = 403 insufficient_scope (step-up). 401 = token mancante, invalido o scaduto.",
+   "en": "Insufficient scopes = 403 insufficient_scope (step-up). 401 = missing, invalid or expired token."
+  }
+ },
+ {
+  "id": "o-D3-29",
+  "t": "D3-11",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Perché tools/list SHOULD restituire i tool in ordine deterministico?",
+   "en": "Why SHOULD tools/list return tools in a deterministic order?"
+  },
+  "o": [
+   {
+    "it": "Perché la spec vieta la paginazione",
+    "en": "Because the spec forbids pagination"
+   },
+   {
+    "it": "Per aiutare caching e prompt caching dell'LLM",
+    "en": "To help caching and LLM prompt caching"
+   },
+   {
+    "it": "Per permettere al server di validare gli argomenti",
+    "en": "To let the server validate arguments"
+   },
+   {
+    "it": "Perché i nomi dei tool sono ordinali",
+    "en": "Because tool names are ordinal"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Un ordine stabile rende i cataloghi confrontabili e mantiene stabile il prefisso del prompt, migliorando il prompt caching.",
+   "en": "A stable order makes catalogs comparable and keeps the prompt prefix stable, improving prompt caching."
+  }
+ },
+ {
+  "id": "o-D3-30",
+  "t": "D3-11",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale campo di un risultato tools/call trasporta dati conformi a outputSchema?",
+   "en": "Which tools/call result field carries data conforming to outputSchema?"
+  },
+  "o": [
+   {
+    "it": "content",
+    "en": "content"
+   },
+   {
+    "it": "structuredContent",
+    "en": "structuredContent"
+   },
+   {
+    "it": "annotations",
+    "en": "annotations"
+   },
+   {
+    "it": "_meta",
+    "en": "_meta"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "structuredContent contiene l'output strutturato validabile con outputSchema; content resta per testo, immagini, audio e risorse.",
+   "en": "structuredContent holds the structured output validated by outputSchema; content remains for text, images, audio and resources."
+  }
+ },
+ {
+  "id": "o-D3-31",
+  "t": "D3-12",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool non dichiara annotation. Come deve considerarlo il client?",
+   "en": "A tool declares no annotations. How should the client consider it?"
+  },
+  "o": [
+   {
+    "it": "Read-only e chiuso",
+    "en": "Read-only and closed-world"
+   },
+   {
+    "it": "Distruttivo e open-world",
+    "en": "Destructive and open-world"
+   },
+   {
+    "it": "Idempotente",
+    "en": "Idempotent"
+   },
+   {
+    "it": "Non invocabile",
+    "en": "Not callable"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Default pessimistici: readOnlyHint false, destructiveHint true, idempotentHint false, openWorldHint true.",
+   "en": "Pessimistic defaults: readOnlyHint false, destructiveHint true, idempotentHint false, openWorldHint true."
+  }
+ },
+ {
+  "id": "o-D3-32",
+  "t": "D3-12",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool ha readOnlyHint: true e destructiveHint: true. Cosa conta?",
+   "en": "A tool has readOnlyHint: true and destructiveHint: true. What counts?"
+  },
+  "o": [
+   {
+    "it": "destructiveHint, perché è il valore più prudente",
+    "en": "destructiveHint, because it is the safer value"
+   },
+   {
+    "it": "Nessuno: la definizione è invalida e dà -32602",
+    "en": "Neither: the definition is invalid and gives -32602"
+   },
+   {
+    "it": "readOnlyHint: destructiveHint conta solo se è false",
+    "en": "readOnlyHint: destructiveHint only counts when it is false"
+   },
+   {
+    "it": "Nessuno: le annotation contraddittorie vanno ignorate",
+    "en": "Neither: contradictory annotations must be ignored"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "destructiveHint e idempotentHint hanno significato solo per tool non read-only. Le annotation restano comunque non fidate se il server non è fidato.",
+   "en": "destructiveHint and idempotentHint only mean something for non-read-only tools. Annotations stay untrusted unless the server is trusted."
+  }
+ },
+ {
+  "id": "o-D3-33",
+  "t": "D3-13",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool riceve un handle scaduto. Come risponde il server?",
+   "en": "A tool receives an expired handle. How does the server respond?"
+  },
+  "o": [
+   {
+    "it": "Errore di protocollo -32602",
+    "en": "Protocol error -32602"
+   },
+   {
+    "it": "HTTP 410 Gone",
+    "en": "HTTP 410 Gone"
+   },
+   {
+    "it": "Errore di esecuzione del tool (isError: true)",
+    "en": "Tool execution error (isError: true)"
+   },
+   {
+    "it": "Crea silenziosamente un nuovo handle",
+    "en": "Silently creates a new handle"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Handle scaduto o sconosciuto è un errore di esecuzione: il modello può reagire, ad esempio aprendone uno nuovo.",
+   "en": "An expired or unknown handle is an execution error: the model can react, for example by opening a new one."
+  }
+ },
+ {
+  "id": "o-D3-34",
+  "t": "D3-14",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quando un server può restituire un CreateTaskResult?",
+   "en": "When can a server return a CreateTaskResult?"
+  },
+  "o": [
+   {
+    "it": "Sempre, quando l'operazione è lunga",
+    "en": "Always, when the operation is long"
+   },
+   {
+    "it": "Solo se il client ha dichiarato l'estensione Tasks",
+    "en": "Only if the client declared the Tasks extension"
+   },
+   {
+    "it": "Solo su stdio, dove la connessione resta aperta",
+    "en": "Only over stdio, where the connection stays open"
+   },
+   {
+    "it": "Solo se l'operazione supera i 60 secondi",
+    "en": "Only if the operation exceeds 60 seconds"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Senza dichiarazione dell'estensione Tasks il server non restituisce mai un task.",
+   "en": "Without the Tasks extension being declared, the server never returns a task."
+  }
+ },
+ {
+  "id": "o-D3-35",
+  "t": "D3-14",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali metodi esistono nell'estensione Tasks attuale? (scegli 2)",
+   "en": "Which methods exist in the current Tasks extension? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "tasks/get",
+    "en": "tasks/get"
+   },
+   {
+    "it": "tasks/result",
+    "en": "tasks/result"
+   },
+   {
+    "it": "tasks/cancel",
+    "en": "tasks/cancel"
+   },
+   {
+    "it": "tasks/list",
+    "en": "tasks/list"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Ci sono tasks/get, tasks/update e tasks/cancel. tasks/result e tasks/list sono stati rimossi.",
+   "en": "There are tasks/get, tasks/update and tasks/cancel. tasks/result and tasks/list were removed."
+  }
+ },
+ {
+  "id": "o-D3-36",
+  "t": "D3-15",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Come si espongono risorse parametriche come file:///logs/{date}?",
+   "en": "How are parametric resources like file:///logs/{date} exposed?"
+  },
+  "o": [
+   {
+    "it": "Con resources/templates/list e URI template",
+    "en": "With resources/templates/list and URI templates"
+   },
+   {
+    "it": "Con un tool separato per ogni data possibile",
+    "en": "With a separate tool for each possible date"
+   },
+   {
+    "it": "Con prompts/list e un argomento date",
+    "en": "With prompts/list and a date argument"
+   },
+   {
+    "it": "Con completion/complete, che genera gli URI",
+    "en": "With completion/complete, which generates the URIs"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "resources/templates/list pubblica template RFC 6570; completion/complete può aiutare a completare i parametri.",
+   "en": "resources/templates/list publishes RFC 6570 templates; completion/complete can help fill in parameters."
+  }
+ },
+ {
+  "id": "o-D3-37",
+  "t": "D3-16",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "prompts/get viene chiamato senza un argomento obbligatorio. Cosa risponde il server?",
+   "en": "prompts/get is called without a required argument. What does the server answer?"
+  },
+  "o": [
+   {
+    "it": "-32602 Invalid params",
+    "en": "-32602 Invalid params"
+   },
+   {
+    "it": "Un messaggio assistant che chiede l'argomento",
+    "en": "An assistant message asking for the argument"
+   },
+   {
+    "it": "-32601",
+    "en": "-32601"
+   },
+   {
+    "it": "isError: true",
+    "en": "isError: true"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Nome non valido o argomenti obbligatori mancanti = -32602. In alternativa il server può chiedere l'input con MRTR.",
+   "en": "Invalid name or missing required arguments = -32602. Alternatively the server can ask for input via MRTR."
+  }
+ },
+ {
+  "id": "o-D3-38",
+  "t": "D3-17",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quanti valori al massimo può restituire una completion/complete?",
+   "en": "At most how many values can a completion/complete return?"
+  },
+  "o": [
+   {
+    "it": "10",
+    "en": "10"
+   },
+   {
+    "it": "50",
+    "en": "50"
+   },
+   {
+    "it": "100",
+    "en": "100"
+   },
+   {
+    "it": "Nessun limite",
+    "en": "No limit"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Al massimo 100 valori per risposta; total e hasMore sono opzionali.",
+   "en": "At most 100 values per response; total and hasMore are optional."
+  }
+ },
+ {
+  "id": "o-D3-39",
+  "t": "D3-18",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server deve ottenere la API key dell'utente per un servizio di terze parti. Quale meccanismo usa?",
+   "en": "A server needs the user's API key for a third-party service. Which mechanism does it use?"
+  },
+  "o": [
+   {
+    "it": "Elicitation in form mode con un campo password",
+    "en": "Form-mode elicitation with a password field"
+   },
+   {
+    "it": "Elicitation in URL mode verso una pagina del server",
+    "en": "URL-mode elicitation to a server page"
+   },
+   {
+    "it": "Un argomento del tool",
+    "en": "A tool argument"
+   },
+   {
+    "it": "Il campo clientInfo",
+    "en": "The clientInfo field"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il form mode MUST NOT chiedere segreti: le credenziali passano per URL mode, fuori dalla vista del client e del modello.",
+   "en": "Form mode MUST NOT ask for secrets: credentials go through URL mode, out of sight of the client and the model."
+  }
+ },
+ {
+  "id": "o-D3-40",
+  "t": "D3-18",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "In URL mode l'utente risponde accept. Cosa significa?",
+   "en": "In URL mode the user answers accept. What does it mean?"
+  },
+  "o": [
+   {
+    "it": "Che il flusso sulla pagina è completato con successo",
+    "en": "That the flow on the page completed successfully"
+   },
+   {
+    "it": "Solo che ha acconsentito ad aprire l'URL; l'esito si scopre al retry",
+    "en": "Only that they consented to open the URL; the outcome is discovered on retry"
+   },
+   {
+    "it": "Che il client ha ricevuto il token",
+    "en": "That the client received the token"
+   },
+   {
+    "it": "Che il server può fare passthrough del token",
+    "en": "That the server can pass the token through"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "accept in URL mode è solo consenso ad aprire l'URL. Il server verifica l'esito quando il client riprova la richiesta.",
+   "en": "accept in URL mode is only consent to open the URL. The server checks the outcome when the client retries the request."
+  }
+ },
+ {
+  "id": "o-D3-41",
+  "t": "D3-19",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server usava sampling per chiamare un LLM. Cosa raccomanda la 2026-07-28?",
+   "en": "A server used sampling to call an LLM. What does 2026-07-28 recommend?"
+  },
+  "o": [
+   {
+    "it": "Usare l'estensione Tasks",
+    "en": "Use the Tasks extension"
+   },
+   {
+    "it": "Chiamare direttamente le API del provider LLM",
+    "en": "Call the LLM provider's APIs directly"
+   },
+   {
+    "it": "Usare elicitation",
+    "en": "Use elicitation"
+   },
+   {
+    "it": "Usare includeContext allServers",
+    "en": "Use includeContext allServers"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Sampling è deprecato: il server chiama direttamente le API del provider. Roots e logging sono deprecati allo stesso modo.",
+   "en": "Sampling is deprecated: the server calls the provider's APIs directly. Roots and logging are deprecated in the same way."
+  }
+ },
+ {
+  "id": "o-D3-42",
+  "t": "D3-19",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Quali elementi sono stati rimossi del tutto nella 2026-07-28? (scegli 2)",
+   "en": "Which items were removed entirely in 2026-07-28? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "ping",
+    "en": "ping"
+   },
+   {
+    "it": "tools/list",
+    "en": "tools/list"
+   },
+   {
+    "it": "logging/setLevel",
+    "en": "logging/setLevel"
+   },
+   {
+    "it": "completion/complete",
+    "en": "completion/complete"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Rimossi: logging/setLevel, ping e notifications/roots/list_changed. tools/list e completion restano.",
+   "en": "Removed: logging/setLevel, ping and notifications/roots/list_changed. tools/list and completion remain."
+  }
+ }
+]

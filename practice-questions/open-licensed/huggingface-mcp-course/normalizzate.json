@@ -1,0 +1,817 @@
+{
+ "source": {
+  "name": "huggingface/mcp-course",
+  "url": "https://github.com/huggingface/mcp-course",
+  "license": "Apache-2.0",
+  "commit": "dbfa79bf6f311ae50256912308e169661996aab1"
+ },
+ "note": "Estratte dai file .mdx originali (in originali/), testo invariato. Licenza Apache-2.0: vedi LICENSE. Non specifiche MCPA, nessuna versione di spec dichiarata.",
+ "count": 23,
+ "questions": [
+  {
+   "id": "ext-hf-unit1-quiz1-q1",
+   "source": "huggingface",
+   "set": "unit1-quiz1",
+   "set_title": "Quiz 1: MCP Fundamentals",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the primary purpose of Model Context Protocol (MCP)?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To limit the training data of AI models",
+     "explain": "MCP aims to expand, not limit, the contexts AI models can access."
+    },
+    {
+     "key": "B",
+     "text": "To enable AI models to connect with external data sources, tools, and environments",
+     "explain": "Correct! MCP's main goal is to facilitate interoperability."
+    },
+    {
+     "key": "C",
+     "text": "To replace prompting when using Large Language Models",
+     "explain": "MCP is a protocol that enhances prompting, not a replacement for it."
+    },
+    {
+     "key": "D",
+     "text": "To create a new programming language for AI",
+     "explain": "MCP is a protocol, not a programming language."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz1-q2",
+   "source": "huggingface",
+   "set": "unit1-quiz1",
+   "set_title": "Quiz 1: MCP Fundamentals",
+   "domain": null,
+   "type": "single",
+   "stem": "What problem does MCP primarily aim to solve?",
+   "options": [
+    {
+     "key": "A",
+     "text": "The lack of AI models",
+     "explain": "MCP addresses integration challenges, not the availability of AI models themselves."
+    },
+    {
+     "key": "B",
+     "text": "The high cost of training LLMs",
+     "explain": "While MCP can improve efficiency, its primary focus is not on reducing training costs directly."
+    },
+    {
+     "key": "C",
+     "text": "The M×N Integration Problem",
+     "explain": "Correct! MCP standardizes connections to avoid M×N custom integrations."
+    },
+    {
+     "key": "D",
+     "text": "The difficulty in creating new AI algorithms",
+     "explain": "MCP facilitates using existing algorithms and tools, not creating new ones from scratch."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz1-q3",
+   "source": "huggingface",
+   "set": "unit1-quiz1",
+   "set_title": "Quiz 1: MCP Fundamentals",
+   "domain": null,
+   "type": "single",
+   "stem": "Which of the following is a key benefit of MCP?",
+   "options": [
+    {
+     "key": "A",
+     "text": "Reduced AI model accuracy",
+     "explain": "MCP aims to enhance AI capabilities, which should ideally lead to improved or maintained accuracy, not reduced."
+    },
+    {
+     "key": "B",
+     "text": "Increased complexity in AI development",
+     "explain": "MCP aims to simplify integration, thereby reducing complexity."
+    },
+    {
+     "key": "C",
+     "text": "Standardization and interoperability in the AI ecosystem",
+     "explain": "Correct! This is a primary goal and benefit of MCP."
+    },
+    {
+     "key": "D",
+     "text": "Isolation of AI models from external systems",
+     "explain": "MCP promotes connection and interaction, not isolation."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz1-q4",
+   "source": "huggingface",
+   "set": "unit1-quiz1",
+   "set_title": "Quiz 1: MCP Fundamentals",
+   "domain": null,
+   "type": "single",
+   "stem": "In MCP terminology, what is a \"Host\"?",
+   "options": [
+    {
+     "key": "A",
+     "text": "The external program exposing capabilities",
+     "explain": "This describes an MCP Server."
+    },
+    {
+     "key": "B",
+     "text": "The user-facing AI application",
+     "explain": "Correct! The Host is the application users interact with."
+    },
+    {
+     "key": "C",
+     "text": "A read-only data source",
+     "explain": "This describes a type of MCP Capability (Resource)."
+    },
+    {
+     "key": "D",
+     "text": "A pre-defined template for interactions",
+     "explain": "This describes a type of MCP Capability (Prompt)."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz1-q5",
+   "source": "huggingface",
+   "set": "unit1-quiz1",
+   "set_title": "Quiz 1: MCP Fundamentals",
+   "domain": null,
+   "type": "single",
+   "stem": "What does \"M×N Integration Problem\" refer to in the context of AI applications?",
+   "options": [
+    {
+     "key": "A",
+     "text": "The difficulty of training M models with N datasets",
+     "explain": "This relates to model training, not the integration problem MCP addresses."
+    },
+    {
+     "key": "B",
+     "text": "The challenge of connecting M AI applications to N external tools without a standard",
+     "explain": "Correct! MCP provides the standard to solve this M*N complexity."
+    },
+    {
+     "key": "C",
+     "text": "The problem of managing M users across N applications",
+     "explain": "This is a user management or identity problem, not the focus of MCP."
+    },
+    {
+     "key": "D",
+     "text": "The complexity of developing M features for N different user segments",
+     "explain": "This relates to product development strategy, not system integration in the way MCP defines."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz2-q1",
+   "source": "huggingface",
+   "set": "unit1-quiz2",
+   "set_title": "Quiz 2: MCP SDK",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the main purpose of the MCP SDKs?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To define the MCP protocol specification",
+     "explain": "The SDKs implement the protocol, they don't define it. The specification is separate."
+    },
+    {
+     "key": "B",
+     "text": "To make it easier to implement MCP clients and servers",
+     "explain": "Correct! SDKs abstract away low-level protocol details."
+    },
+    {
+     "key": "C",
+     "text": "To provide a visual interface for MCP interactions",
+     "explain": "While some tools might offer this (like MCP Inspector), it's not the primary purpose of the SDKs themselves."
+    },
+    {
+     "key": "D",
+     "text": "To replace the need for programming languages",
+     "explain": "SDKs are libraries used within programming languages."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz2-q2",
+   "source": "huggingface",
+   "set": "unit1-quiz2",
+   "set_title": "Quiz 2: MCP SDK",
+   "domain": null,
+   "type": "single",
+   "stem": "Which of the following functionalities do the MCP SDKs typically handle?",
+   "options": [
+    {
+     "key": "A",
+     "text": "Optimizing MCP Servers",
+     "explain": "This is outside the scope of MCP SDKs, which focus on protocol implementation."
+    },
+    {
+     "key": "B",
+     "text": "Defining new AI algorithms",
+     "explain": "This is outside the scope of MCP SDKs, which focus on protocol implementation."
+    },
+    {
+     "key": "C",
+     "text": "Message serialization/deserialization",
+     "explain": "Correct! This is a core function for handling JSON-RPC messages."
+    },
+    {
+     "key": "D",
+     "text": "Hosting Large Language Models",
+     "explain": "MCP enables connection to LLMs, but the SDKs themselves don't host them."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz2-q3",
+   "source": "huggingface",
+   "set": "unit1-quiz2",
+   "set_title": "Quiz 2: MCP SDK",
+   "domain": null,
+   "type": "single",
+   "stem": "According to the provided text, which company maintains the official Python SDK for MCP?",
+   "options": [
+    {
+     "key": "A",
+     "text": "Google",
+     "explain": "The text lists Anthropic as the maintainer."
+    },
+    {
+     "key": "B",
+     "text": "Anthropic",
+     "explain": "Correct! The course material indicates Anthropic maintains the Python SDK."
+    },
+    {
+     "key": "C",
+     "text": "Microsoft",
+     "explain": "Microsoft maintains the C# SDK according to the text."
+    },
+    {
+     "key": "D",
+     "text": "JetBrains",
+     "explain": "JetBrains maintains the Kotlin SDK according to the text."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz2-q4",
+   "source": "huggingface",
+   "set": "unit1-quiz2",
+   "set_title": "Quiz 2: MCP SDK",
+   "domain": null,
+   "type": "single",
+   "stem": "What command is used to start a development MCP server using a Python file named `server.py`?",
+   "options": [
+    {
+     "key": "A",
+     "text": "python server.py run",
+     "explain": "While you run Python scripts with `python`, MCP has a specific CLI command."
+    },
+    {
+     "key": "B",
+     "text": "mcp start server.py",
+     "explain": "The command is `mcp dev`, not `mcp start`."
+    },
+    {
+     "key": "C",
+     "text": "mcp dev server.py",
+     "explain": "Correct! This command initializes the development server."
+    },
+    {
+     "key": "D",
+     "text": "serve mcp server.py",
+     "explain": "This is not the standard MCP CLI command shown in the course material."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit1-quiz2-q5",
+   "source": "huggingface",
+   "set": "unit1-quiz2",
+   "set_title": "Quiz 2: MCP SDK",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the role of JSON-RPC 2.0 in MCP?",
+   "options": [
+    {
+     "key": "A",
+     "text": "As a primary transport mechanism for remote communication",
+     "explain": "HTTP+SSE or Streamable HTTP are transport mechanisms; JSON-RPC is the message format."
+    },
+    {
+     "key": "B",
+     "text": "As the message format for all communication between Clients and Servers",
+     "explain": "Correct! MCP uses JSON-RPC 2.0 for structuring messages."
+    },
+    {
+     "key": "C",
+     "text": "As a tool for debugging AI models",
+     "explain": "While its human-readable nature helps in debugging communications, it's not a debugging tool for AI models themselves."
+    },
+    {
+     "key": "D",
+     "text": "As a method for defining AI capabilities like Tools and Resources",
+     "explain": "Capabilities are defined by their own schemas; JSON-RPC is used to invoke them and exchange data."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q1",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the primary role of an MCP Server in the Pull Request Agent architecture?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To host the user interface for the application",
+     "explain": "The MCP Server provides backend capabilities, not the user interface."
+    },
+    {
+     "key": "B",
+     "text": "To expose tools and resources that the AI agent can use to interact with GitHub",
+     "explain": "Close, but this project focuses on the Hugging Face Hub, not GitHub."
+    },
+    {
+     "key": "C",
+     "text": "To expose tools for reading and updating model repository tags on the Hugging Face Hub",
+     "explain": "Correct! The MCP Server provides get_current_tags and add_new_tag tools for Hub interactions."
+    },
+    {
+     "key": "D",
+     "text": "To train the AI model on pull request data",
+     "explain": "MCP Servers provide runtime capabilities, not model training functionality."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q2",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "In the FastMCP implementation, why must all MCP tool functions return strings instead of Python objects?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To improve performance by reducing memory usage",
+     "explain": "While strings might be more memory efficient, this is not the primary reason."
+    },
+    {
+     "key": "B",
+     "text": "To ensure reliable data exchange between the MCP server and client",
+     "explain": "Correct! MCP protocol requires string responses, so we use json.dumps() to serialize data."
+    },
+    {
+     "key": "C",
+     "text": "To make the code easier to debug",
+     "explain": "While JSON strings are readable, this is not the primary technical requirement."
+    },
+    {
+     "key": "D",
+     "text": "To comply with Hugging Face Hub API requirements",
+     "explain": "This is an MCP protocol requirement, not specific to the Hub API."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q3",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "When implementing the `add_new_tag` tool, what is the purpose of checking if a tag already exists before creating a pull request?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To reduce API calls and improve performance",
+     "explain": "While this helps performance, it's not the primary reason for the check."
+    },
+    {
+     "key": "B",
+     "text": "To prevent creating duplicate pull requests and provide better user feedback",
+     "explain": "Correct! This validation prevents unnecessary PRs and returns meaningful status messages."
+    },
+    {
+     "key": "C",
+     "text": "To comply with Hugging Face Hub rate limits",
+     "explain": "While avoiding unnecessary calls helps with rate limits, this is not the primary purpose."
+    },
+    {
+     "key": "D",
+     "text": "To ensure the tag format is valid",
+     "explain": "Tag validation is separate from checking if it already exists."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q4",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "In the MCP server implementation, what happens when a model repository doesn't have an existing README.md file?",
+   "options": [
+    {
+     "key": "A",
+     "text": "The add_new_tag tool will fail with an error",
+     "explain": "The implementation handles this case gracefully."
+    },
+    {
+     "key": "B",
+     "text": "The tool creates a new ModelCard with ModelCardData and proceeds with the tag addition",
+     "explain": "Correct! The code handles HfHubHTTPError and creates a new model card when none exists."
+    },
+    {
+     "key": "C",
+     "text": "The tool skips adding the tag and returns a warning",
+     "explain": "The tool doesn't skip the operation - it creates what's needed."
+    },
+    {
+     "key": "D",
+     "text": "The tool automatically creates a default README with placeholder content",
+     "explain": "It creates a minimal model card structure, not placeholder content."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q5",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the significance of using `create_pr=True` in the `hf_api.create_commit()` function call?",
+   "options": [
+    {
+     "key": "A",
+     "text": "It makes the commit directly to the main branch",
+     "explain": "Setting create_pr=True creates a pull request, not a direct commit to main."
+    },
+    {
+     "key": "B",
+     "text": "It automatically creates a pull request instead of committing directly to the main branch",
+     "explain": "Correct! This enables the review workflow and follows repository governance practices."
+    },
+    {
+     "key": "C",
+     "text": "It creates a private branch that only the repository owner can see",
+     "explain": "Pull requests are visible to repository collaborators and can be public."
+    },
+    {
+     "key": "D",
+     "text": "It validates the commit before creating it",
+     "explain": "Validation happens regardless of the create_pr parameter."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz1-q6",
+   "source": "huggingface",
+   "set": "unit3_1-quiz1",
+   "set_title": "Quiz 1: MCP Server Implementation",
+   "domain": null,
+   "type": "single",
+   "stem": "Why does the MCP server implementation use extensive logging with emojis throughout the code?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To make the code more fun and engaging for developers",
+     "explain": "While emojis are visually appealing, there's a more practical reason."
+    },
+    {
+     "key": "B",
+     "text": "To help with debugging and monitoring when the server runs autonomously in response to Hub events",
+     "explain": "Correct! Since the agent responds to webhooks automatically, detailed logs are crucial for troubleshooting."
+    },
+    {
+     "key": "C",
+     "text": "To comply with FastMCP logging requirements",
+     "explain": "FastMCP doesn't require specific logging formats or emojis."
+    },
+    {
+     "key": "D",
+     "text": "To reduce the amount of text in log files",
+     "explain": "Emojis don't significantly reduce log file size and this isn't the primary goal."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q1",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the primary purpose of the webhook listener in the Pull Request Agent architecture?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To provide a user interface for managing pull requests",
+     "explain": "The webhook listener handles GitHub events, not user interfaces."
+    },
+    {
+     "key": "B",
+     "text": "To receive and process Hugging Face Hub discussion comment events in real-time",
+     "explain": "Correct! The webhook listener responds to Hub discussion events to trigger agent actions."
+    },
+    {
+     "key": "C",
+     "text": "To store pull request data permanently in a database",
+     "explain": "While it may process PR data, its primary role is event handling, not storage."
+    },
+    {
+     "key": "D",
+     "text": "To authenticate users with the Hugging Face Hub",
+     "explain": "Webhook listeners handle events, not user authentication."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q2",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "In the Agent-based MCP client implementation, how does the client connect to the MCP server?",
+   "options": [
+    {
+     "key": "A",
+     "text": "Through direct function calls in the same process",
+     "explain": "The Agent uses subprocess communication, not direct function calls."
+    },
+    {
+     "key": "B",
+     "text": "Using stdio connection type to communicate with the MCP server as a subprocess",
+     "explain": "Correct! The Agent starts the MCP server with 'python mcp_server.py' and communicates via stdin/stdout."
+    },
+    {
+     "key": "C",
+     "text": "By writing files to a shared directory",
+     "explain": "MCP uses real-time communication, not file-based communication."
+    },
+    {
+     "key": "D",
+     "text": "Through HTTP REST API calls",
+     "explain": "The stdio connection type doesn't use HTTP - it uses standard input/output streams."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q3",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "Why does the webhook handler use FastAPI's `background_tasks.add_task()` instead of processing requests synchronously?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To reduce server memory usage",
+     "explain": "Background tasks don't necessarily reduce memory usage."
+    },
+    {
+     "key": "B",
+     "text": "To comply with Hugging Face Hub requirements",
+     "explain": "While Hub expects timely responses, this isn't a specific Hub requirement."
+    },
+    {
+     "key": "C",
+     "text": "To return responses quickly (within 10 seconds) while allowing complex tag processing in the background",
+     "explain": "Correct! Webhook endpoints must respond quickly or be considered failed by the sending platform."
+    },
+    {
+     "key": "D",
+     "text": "To enable multiple webhook requests to be processed in parallel",
+     "explain": "While this enables parallelism, the primary reason is response time requirements."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q4",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "What is the purpose of validating the `X-Webhook-Secret` header in the webhook handler?",
+   "options": [
+    {
+     "key": "A",
+     "text": "To identify which repository sent the webhook",
+     "explain": "Repository information comes from the webhook payload, not the secret header."
+    },
+    {
+     "key": "B",
+     "text": "To prevent unauthorized requests and ensure the webhook is legitimate from Hugging Face",
+     "explain": "Correct! The shared secret acts as authentication between Hugging Face and your application."
+    },
+    {
+     "key": "C",
+     "text": "To decode the webhook payload data",
+     "explain": "The secret is for authentication, not for decoding payload data."
+    },
+    {
+     "key": "D",
+     "text": "To determine which MCP tools to use",
+     "explain": "Tool selection is based on the webhook content, not the secret header."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q5",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "In the Agent implementation, what happens when `await agent_instance.load_tools()` is called?",
+   "options": [
+    {
+     "key": "A",
+     "text": "It downloads tools from the Hugging Face Hub",
+     "explain": "The tools are local MCP server tools, not downloaded from the Hub."
+    },
+    {
+     "key": "B",
+     "text": "It discovers and makes available the MCP tools from the connected server (get_current_tags and add_new_tag)",
+     "explain": "Correct! This discovers what tools the MCP server provides and makes them available to the agent's reasoning engine."
+    },
+    {
+     "key": "C",
+     "text": "It starts the FastAPI webhook server",
+     "explain": "load_tools() is specific to MCP tool discovery, not starting web servers."
+    },
+    {
+     "key": "D",
+     "text": "It authenticates with the Hugging Face API",
+     "explain": "Authentication happens during agent creation, not during tool loading."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q6",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "How does the Agent intelligently use MCP tools when processing a natural language instruction?",
+   "options": [
+    {
+     "key": "A",
+     "text": "It randomly calls available tools until one works",
+     "explain": "The Agent uses reasoning to determine which tools to call and in what order."
+    },
+    {
+     "key": "B",
+     "text": "It always calls get_current_tags first, then add_new_tag second",
+     "explain": "While this might be a common pattern, the Agent reasons about which tools to use based on the instruction."
+    },
+    {
+     "key": "C",
+     "text": "It reasons about the instruction and determines which tools to call and in what sequence",
+     "explain": "Correct! The Agent can understand complex instructions and create tool execution plans automatically."
+    },
+    {
+     "key": "D",
+     "text": "It requires explicit function calls to be specified in the instruction",
+     "explain": "The Agent can work with natural language instructions without explicit function specifications."
+    }
+   ],
+   "correct": [
+    "C"
+   ],
+   "spec_version": null
+  },
+  {
+   "id": "ext-hf-unit3_1-quiz2-q7",
+   "source": "huggingface",
+   "set": "unit3_1-quiz2",
+   "set_title": "Quiz 2: Pull Request Agent Integration",
+   "domain": null,
+   "type": "single",
+   "stem": "What filtering logic determines whether a webhook event should trigger tag processing?",
+   "options": [
+    {
+     "key": "A",
+     "text": "All webhook events are processed regardless of type",
+     "explain": "The handler filters events to only process relevant ones."
+    },
+    {
+     "key": "B",
+     "text": "Only events where action='create' and scope='discussion.comment'",
+     "explain": "Correct! This ensures we only process new discussion comments, ignoring other Hub events."
+    },
+    {
+     "key": "C",
+     "text": "Only events from verified repository owners",
+     "explain": "The filtering is based on event type, not user verification status."
+    },
+    {
+     "key": "D",
+     "text": "Only events that contain the word 'tag' in the comment",
+     "explain": "Event filtering happens before content analysis - we filter by event type first."
+    }
+   ],
+   "correct": [
+    "B"
+   ],
+   "spec_version": null
+  }
+ ]
+}

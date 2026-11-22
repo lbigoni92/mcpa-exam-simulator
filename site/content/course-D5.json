@@ -1,0 +1,490 @@
+{
+ "domain": "D5",
+ "topics": [
+  {
+   "id": "D5-01",
+   "title": {
+    "it": "Chi è responsabile di cosa",
+    "en": "Who is responsible for what"
+   },
+   "summary": {
+    "it": "Un deployment MCP coinvolge più attori. Molte domande d'esame chiedono di attribuire una responsabilità al ruolo giusto.",
+    "en": "An MCP deployment involves several actors. Many exam questions ask you to assign a responsibility to the right role."
+   },
+   "points": {
+    "it": [
+     "Host/client: consenso e UI, approvazioni, _meta per richiesta, disambiguazione dei tool, cache coerente con cacheScope.",
+     "Server author: validazione input, access control, rate limit, PRM e validazione dei token, autorizzazione degli handle, annotations oneste.",
+     "Authorization server / IAM: emette i token, valida redirect URI esatti, invia iss; con EMA l'IdP aziendale decide gli accessi.",
+     "Operatore / piattaforma: sandbox dei server locali, gateway, egress, osservabilità e audit.",
+     "Utente finale: approva tool, accessi ed elicitation; sceglie i prompts.",
+     "Publisher sul registry: server.json e namespace; gli aggregatori fanno curation e scansioni di sicurezza.",
+     "Lo stesso MUST può cambiare responsabile con la forma del deployment: la validazione di Origin spetta all'autore del server, ma dietro un gateway spetta all'operatore del gateway."
+    ],
+    "en": [
+     "Host/client: consent and UI, approvals, per-request _meta, tool disambiguation, caching consistent with cacheScope.",
+     "Server author: input validation, access control, rate limiting, PRM and token validation, handle authorization, honest annotations.",
+     "Authorization server / IAM: issues tokens, validates exact redirect URIs, sends iss; with EMA the enterprise IdP decides access.",
+     "Operator / platform: local server sandboxing, gateways, egress, observability and audit.",
+     "End user: approves tools, access and elicitation; chooses prompts.",
+     "Registry publisher: server.json and namespace; aggregators handle curation and security scanning.",
+     "The same MUST can change owner with the deployment shape: Origin validation belongs to the server author, but behind a gateway it belongs to the gateway operator."
+    ]
+   },
+   "source": {
+    "label": "Spec · Architecture + Authorization",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+   }
+  },
+  {
+   "id": "D5-02",
+   "title": {
+    "it": "AAIF, governance e adozione",
+    "en": "AAIF, governance and adoption"
+   },
+   "summary": {
+    "it": "Nel dicembre 2025 Anthropic ha donato MCP all'Agentic AI Foundation (AAIF), fondo della Linux Foundation. MCP mantiene autonomia tecnica.",
+    "en": "In December 2025 Anthropic donated MCP to the Agentic AI Foundation (AAIF), a Linux Foundation directed fund. MCP keeps technical autonomy."
+   },
+   "points": {
+    "it": [
+     "AAIF co-fondata da Anthropic, Block e OpenAI; progetti fondatori: MCP, goose, AGENTS.md.",
+     "La membership di governance è individuale, non aziendale.",
+     "Codice e spec sotto Apache 2.0, documentazione sotto CC-BY 4.0.",
+     "L'esame MCPA è rilasciato da AAIF tramite Linux Foundation Training & Certification.",
+     "Supporto da molti client (Claude, ChatGPT, VS Code, Cursor e altri)."
+    ],
+    "en": [
+     "AAIF was co-founded by Anthropic, Block and OpenAI; founding projects: MCP, goose, AGENTS.md.",
+     "Governance membership is individual, not corporate.",
+     "Code and spec are Apache 2.0, documentation CC-BY 4.0.",
+     "The MCPA exam is issued by AAIF through Linux Foundation Training & Certification.",
+     "Supported by many clients (Claude, ChatGPT, VS Code, Cursor and others)."
+    ]
+   },
+   "source": {
+    "label": "Blog · MCP joins the AAIF",
+    "url": "https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/"
+   }
+  },
+  {
+   "id": "D5-03",
+   "title": {
+    "it": "Server locali o remoti",
+    "en": "Local or remote servers"
+   },
+   "summary": {
+    "it": "La scelta tra server locale e remoto cambia transport, autenticazione e rischi.",
+    "en": "Choosing between a local and a remote server changes the transport, authentication and risks."
+   },
+   "points": {
+    "it": [
+     "Locale: stdio, il client lancia il processo, credenziali dall'ambiente; serve se il server deve accedere a file o tool della macchina.",
+     "Remoto: Streamable HTTP, OAuth 2.1, serve molti client e si aggiorna in un punto solo.",
+     "Rischi locali: codice con i privilegi dell'utente, comandi di avvio malevoli → sandbox, provenienza, consenso one-click.",
+     "Rischi remoti: SSRF, token passthrough, confused deputy, mix-up → HTTPS, PKCE, resource, iss.",
+     "Esempi: server filesystem locale; Sentry come server remoto."
+    ],
+    "en": [
+     "Local: stdio, the client launches the process, credentials from the environment; needed when the server must reach local files or tools.",
+     "Remote: Streamable HTTP, OAuth 2.1, serves many clients and is patched in one place.",
+     "Local risks: code running with the user's privileges, malicious launch commands → sandbox, provenance, one-click consent.",
+     "Remote risks: SSRF, token passthrough, confused deputy, mix-up → HTTPS, PKCE, resource, iss.",
+     "Examples: a local filesystem server; Sentry as a remote server."
+    ]
+   },
+   "source": {
+    "label": "Docs · Connect remote servers",
+    "url": "https://modelcontextprotocol.io/docs/develop/connect-remote-servers"
+   }
+  },
+  {
+   "id": "D5-04",
+   "title": {
+    "it": "Pattern operativi della 2026-07-28",
+    "en": "Operational patterns in 2026-07-28"
+   },
+   "summary": {
+    "it": "La statelessness cambia il modo di gestire MCP in produzione: scalabilità orizzontale, routing sugli header, caching dei cataloghi.",
+    "en": "Statelessness changes how MCP runs in production: horizontal scaling, header-based routing, catalog caching."
+   },
+   "points": {
+    "it": [
+     "Qualsiasi istanza dietro un load balancer round-robin può servire qualsiasi richiesta: niente sticky session.",
+     "Gateway e WAF instradano e applicano rate limit su Mcp-Method, Mcp-Name, Mcp-Param-*.",
+     "Cataloghi dei tool in cache (ttlMs, cacheScope, ordine deterministico) → meno polling, prompt cache più stabili.",
+     "Stato applicativo con handle espliciti; lavori lunghi con Tasks; M2M con Client Credentials; eventi con Events.",
+     "Ordine in un gateway: controllare _meta, confrontare header e body (-32020 se diversi), instradare sull'header, autorizzare, inoltrare una richiesta nuova senza il token del chiamante, restituire resultType, ttlMs e cacheScope invariati."
+    ],
+    "en": [
+     "Any instance behind a round-robin load balancer can serve any request: no sticky sessions.",
+     "Gateways and WAFs route and rate-limit on Mcp-Method, Mcp-Name, Mcp-Param-*.",
+     "Cached tool catalogs (ttlMs, cacheScope, deterministic order) → less polling, more stable prompt caches.",
+     "Application state with explicit handles; long jobs with Tasks; M2M with Client Credentials; events with Events.",
+     "Gateway order: check _meta, compare headers with body (-32020 if different), route on the header, authorize, forward a fresh request without the caller's token, return resultType, ttlMs and cacheScope unchanged."
+    ]
+   },
+   "source": {
+    "label": "Blog · The 2026-07-28 Specification",
+    "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+   }
+  },
+  {
+   "id": "D5-05",
+   "title": {
+    "it": "Grandi cataloghi: progressive discovery e code mode",
+    "en": "Large catalogs: progressive discovery and code mode"
+   },
+   "summary": {
+    "it": "Con centinaia di tool, iniettare tutte le definizioni nel contesto costa troppo. Le best practice per i client propongono due tecniche.",
+    "en": "With hundreds of tools, injecting every definition into the context costs too much. The client best practices propose two techniques."
+   },
+   "points": {
+    "it": [
+     "Progressive discovery: l'host espone un meta-tool di ricerca e carica le definizioni complete solo quando servono.",
+     "Soglia indicativa: quando le definizioni superano l'1-5% della context window.",
+     "Pattern a tre livelli: Catalog → Inspect → Execute.",
+     "Code mode: il modello scrive codice che chiama i tool in una sandbox; i risultati intermedi non passano nel contesto."
+    ],
+    "en": [
+     "Progressive discovery: the host exposes a search meta-tool and loads full definitions only when needed.",
+     "Rule of thumb: when definitions exceed 1-5% of the context window.",
+     "Three-level pattern: Catalog → Inspect → Execute.",
+     "Code mode: the model writes code that calls tools in a sandbox; intermediate results stay out of the context."
+    ]
+   },
+   "source": {
+    "label": "Docs · Client best practices",
+    "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
+   }
+  },
+  {
+   "id": "D5-10",
+   "title": {
+    "it": "Quale estensione per quale caso",
+    "en": "Which extension for which case"
+   },
+   "summary": {
+    "it": "Molte domande di scenario chiedono il meccanismo giusto per un caso d'uso. Le pagine ufficiali \"When to use\" danno i criteri.",
+    "en": "Many scenario questions ask for the right mechanism for a use case. The official \"When to use\" pages give the criteria."
+   },
+   "points": {
+    "it": [
+     "MCP Apps: esplorare dati complessi, configurazioni con molte opzioni, media ricchi, dashboard in tempo reale, workflow a più passi. Iframe sandbox, comunicazione solo via postMessage.",
+     "OAuth Client Credentials: servizi in background, CI/CD, server-to-server, daemon senza utente.",
+     "Enterprise-Managed Authorization: IT che gestisce gli accessi, policy e revoca centralizzate, SSO aziendale, compliance.",
+     "Events: reagire ad attività upstream, svegliare agenti non presidiati, stream filtrati.",
+     "Tasks: risultato di un'operazione lunga avviata dal client.",
+     "Skills: workflow riutilizzabili con documenti di supporto."
+    ],
+    "en": [
+     "MCP Apps: exploring complex data, many-option configuration, rich media, real-time dashboards, multi-step workflows. Sandboxed iframe, postMessage-only communication.",
+     "OAuth Client Credentials: background services, CI/CD, server-to-server, daemons with no user.",
+     "Enterprise-Managed Authorization: IT-managed access, centralized policy and revocation, corporate SSO, compliance.",
+     "Events: reacting to upstream activity, waking unattended agents, filtered streams.",
+     "Tasks: the result of a long operation started by the client.",
+     "Skills: reusable workflows with supporting documents."
+    ]
+   },
+   "trap": {
+    "it": "Se un utente deve autorizzare l'accesso, Client Credentials è la scelta sbagliata.",
+    "en": "If a user must authorize access, Client Credentials is the wrong choice."
+   },
+   "source": {
+    "label": "Extensions · Overview",
+    "url": "https://modelcontextprotocol.io/extensions/overview"
+   }
+  },
+  {
+   "id": "D5-11",
+   "title": {
+    "it": "Events: consegna e garanzie",
+    "en": "Events: delivery and guarantees"
+   },
+   "summary": {
+    "it": "L'estensione Events serve quando le notifiche non bastano: niente payload, serve una connessione aperta, nessuna ripresa dopo una disconnessione.",
+    "en": "The Events extension is for when notifications are not enough: no payload, an open connection is required, no resumption after a disconnect."
+   },
+   "points": {
+    "it": [
+     "Tre modalità, nessuna obbligatoria: poll (events/poll), push (events/stream), webhook (events/subscribe, callback https firmata con TTL).",
+     "Poll per server serverless, push per server stdio, webhook per server remoti con client senza connessione persistente.",
+     "Cursori opachi: consegna at-least-once; eventId per deduplicare; maxAgeMs limita il replay.",
+     "Ordine garantito per poll e push, best-effort per webhook. Le subscription appartengono al client."
+    ],
+    "en": [
+     "Three modes, none mandatory: poll (events/poll), push (events/stream), webhook (events/subscribe, signed https callback with TTL).",
+     "Poll for serverless servers, push for stdio servers, webhook for remote servers with clients that cannot hold a connection.",
+     "Opaque cursors: at-least-once delivery; eventId for deduplication; maxAgeMs limits replay.",
+     "Ordering guaranteed for poll and push, best-effort for webhook. Subscriptions belong to the client."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Events",
+    "url": "https://modelcontextprotocol.io/extensions/events/overview"
+   }
+  },
+  {
+   "id": "D5-14",
+   "title": {
+    "it": "Pattern enterprise",
+    "en": "Enterprise patterns"
+   },
+   "summary": {
+    "it": "In azienda la difficoltà non è il protocollo ma l'operatività: ownership, governance, deploy e osservabilità di molti server. (Fonte: blog AAIF ed Enterprise Interest Group, non normativi.)",
+    "en": "In enterprises the challenge is not the protocol but operations: ownership, governance, deployment and observability of many servers. (Source: AAIF blog and Enterprise Interest Group, non-normative.)"
+   },
+   "points": {
+    "it": [
+     "Cataloghi di tool enormi = più token, latenza e superficie d'attacco: meglio tool stretti e contestuali.",
+     "Il gateway filtra in modo grossolano sugli header; l'autorizzazione fine resta nel server a ogni chiamata.",
+     "Gli handle sono capability: autorizzarli a ogni chiamata, con scope e scadenza.",
+     "Il trace context correla ma non è audit: serve un record durevole per richiesta.",
+     "Settori regolati: dati sensibili fuori dal contesto del modello quando possibile, correlation ID end-to-end, cacheScope private.",
+     "L'Enterprise Interest Group raccoglie requisiti e li passa ai Working Group; non scrive SEP."
+    ],
+    "en": [
+     "Huge tool catalogs = more tokens, latency and attack surface: prefer narrow, contextual tools.",
+     "The gateway filters coarsely on headers; fine-grained authorization stays in the server on every call.",
+     "Handles are capabilities: authorize them on every call, with scope and expiry.",
+     "Trace context correlates but is not an audit trail: a durable per-request record is needed.",
+     "Regulated industries: keep sensitive data out of the model context when possible, end-to-end correlation IDs, cacheScope private.",
+     "The Enterprise Interest Group gathers requirements and passes them to Working Groups; it does not write SEPs."
+    ]
+   },
+   "source": {
+    "label": "Community · Enterprise IG",
+    "url": "https://modelcontextprotocol.io/community/interest-groups/enterprise"
+   }
+  },
+  {
+   "id": "D5-06",
+   "title": {
+    "it": "SDK ufficiali e tier",
+    "en": "Official SDKs and tiers"
+   },
+   "summary": {
+    "it": "Gli SDK ufficiali sono classificati in tier in base alla conformità e agli impegni di manutenzione. Decide lo SDK Working Group.",
+    "en": "Official SDKs are ranked in tiers based on conformance and maintenance commitments. The SDK Working Group decides."
+   },
+   "points": {
+    "it": [
+     "Tier 1: TypeScript, Python, C#, Go, Rust, Ruby. Tier 2: Java. Tier 3: Swift, PHP, Kotlin.",
+     "Tier 1: 100% dei test di conformità, feature prima del rilascio della spec, triage entro 2 giorni lavorativi, bug critici entro 7 giorni.",
+     "Tier 2: almeno 80% dei test, nuove feature entro 6 mesi. Tier 3: sperimentale, nessuna garanzia.",
+     "Retrocessione dopo 4 settimane di fallimenti continui dei test (Tier 1 → 2 se fallisce un qualsiasi test).",
+     "Le estensioni non sono obbligatorie per nessun tier.",
+     "Tier 2: triage entro un mese, bug critici entro due settimane, almeno un rilascio stabile. Tier 1: rilascio stabile e roadmap pubblicata obbligatori.",
+     "Retrocessione Tier 2 → 3 se oltre il 20% dei test di conformità fallisce per 4 settimane; anche issue ignorate per due mesi possono causarla."
+    ],
+    "en": [
+     "Tier 1: TypeScript, Python, C#, Go, Rust, Ruby. Tier 2: Java. Tier 3: Swift, PHP, Kotlin.",
+     "Tier 1: 100% of conformance tests, features before the spec release, triage within 2 business days, critical bugs within 7 days.",
+     "Tier 2: at least 80% of tests, new features within 6 months. Tier 3: experimental, no guarantees.",
+     "Relegation after 4 weeks of continuous test failures (Tier 1 → 2 if any test fails).",
+     "Extensions are not required at any tier.",
+     "Tier 2: triage within a month, critical bugs within two weeks, at least one stable release. Tier 1: stable release and published roadmap required.",
+     "Tier 2 → 3 relegation if more than 20% of conformance tests fail for 4 weeks; issues left unaddressed for two months can also trigger it."
+    ]
+   },
+   "source": {
+    "label": "Community · SDK tiers",
+    "url": "https://modelcontextprotocol.io/community/sdk-tiers"
+   }
+  },
+  {
+   "id": "D5-07",
+   "title": {
+    "it": "MCP Registry",
+    "en": "MCP Registry"
+   },
+   "summary": {
+    "it": "Il registry ufficiale (in preview) contiene metadata di server pubblici, non il loro codice. È pensato per essere consumato da aggregatori e subregistry.",
+    "en": "The official registry (in preview) holds metadata about public servers, not their code. It is meant to be consumed by aggregators and subregistries."
+   },
+   "points": {
+    "it": [
+     "server.json: name in reverse DNS (io.github.utente/server, com.example/server), version unica e immutabile (niente range come ^1.2.3), packages e/o remotes.",
+     "Namespace verificati via GitHub, DNS o HTTP (/.well-known/mcp-registry-auth).",
+     "Proprietà dei pacchetti: npm (mcpName in package.json), PyPI (mcp-name nel README), OCI (label io.modelcontextprotocol.server.name).",
+     "Per i remoti verifica il namespace, non l'URL; i record si identificano per nome + versione.",
+     "Metadata immutabili tranne status (deprecated, deleted). Moderazione permissiva: rimuove illegale, malware, spam, server non funzionanti.",
+     "Non supporta server privati; la verifica del namespace prova chi possiede il nome, non che il codice sia sicuro.",
+     "packages: npm, PyPI, NuGet, Cargo, OCI, MCPB; remotes: streamable-http o sse (deprecato). Possono coesistere nella stessa voce.",
+     "Proprietà per PyPI e NuGet: stringa mcp-name nel README. Il $schema di server.json (es. 2025-12-11) è la versione del formato dei metadati, non la versione del protocollo MCP.",
+     "Il registry non scansiona il codice: delega la sicurezza ai registri dei pacchetti e agli aggregatori. In preview sono possibili reset dei dati."
+    ],
+    "en": [
+     "server.json: name in reverse DNS (io.github.user/server, com.example/server), unique immutable version (no ranges like ^1.2.3), packages and/or remotes.",
+     "Namespaces verified via GitHub, DNS or HTTP (/.well-known/mcp-registry-auth).",
+     "Package ownership: npm (mcpName in package.json), PyPI (mcp-name in the README), OCI (io.modelcontextprotocol.server.name label).",
+     "For remotes it verifies the namespace, not the URL; records are identified by name + version.",
+     "Metadata is immutable except status (deprecated, deleted). Permissive moderation: removes illegal content, malware, spam, non-functioning servers.",
+     "No private servers; namespace verification proves who owns the name, not that the code is safe.",
+     "packages: npm, PyPI, NuGet, Cargo, OCI, MCPB; remotes: streamable-http or sse (deprecated). Both can be on one entry.",
+     "Ownership for PyPI and NuGet: mcp-name string in the README. server.json's $schema (e.g. 2025-12-11) is the metadata format version, not the MCP protocol version.",
+     "The registry does not scan code: it delegates security to package registries and aggregators. During preview, data resets are possible."
+    ]
+   },
+   "source": {
+    "label": "Registry · About",
+    "url": "https://modelcontextprotocol.io/registry/about"
+   }
+  },
+  {
+   "id": "D5-08",
+   "title": {
+    "it": "Estensioni ufficiali",
+    "en": "Official extensions"
+   },
+   "summary": {
+    "it": "Le estensioni ufficiali vivono in repository ext- dell'organizzazione modelcontextprotocol e hanno stadi di maturità diversi.",
+    "en": "Official extensions live in ext- repositories of the modelcontextprotocol organization and have different maturity stages."
+   },
+   "points": {
+    "it": [
+     "MCP Apps (io.modelcontextprotocol/ui): UI HTML in iframe sandbox, resource ui://.",
+     "Tasks (io.modelcontextprotocol/tasks): lavori lunghi con polling.",
+     "Skills (io.modelcontextprotocol/skills): skill esposte come resources.",
+     "Events: eventi upstream con poll, push o webhook.",
+     "Auth: OAuth Client Credentials ed Enterprise-Managed Authorization.",
+     "Server Cards: metadata del server disponibili prima di connettersi."
+    ],
+    "en": [
+     "MCP Apps (io.modelcontextprotocol/ui): HTML UIs in a sandboxed iframe, ui:// resources.",
+     "Tasks (io.modelcontextprotocol/tasks): long jobs with polling.",
+     "Skills (io.modelcontextprotocol/skills): skills exposed as resources.",
+     "Events: upstream events via poll, push or webhook.",
+     "Auth: OAuth Client Credentials and Enterprise-Managed Authorization.",
+     "Server Cards: server metadata available before connecting."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Overview",
+    "url": "https://modelcontextprotocol.io/extensions/overview"
+   }
+  },
+  {
+   "id": "D5-15",
+   "title": {
+    "it": "MCP Apps nel dettaglio",
+    "en": "MCP Apps in detail"
+   },
+   "summary": {
+    "it": "L'estensione io.modelcontextprotocol/ui permette a un tool di indicare un'interfaccia HTML che l'host mostra in un iframe sandbox. Le regole su mimeType, visibility, CSP e permessi sono frequenti nelle domande di scenario.",
+    "en": "The io.modelcontextprotocol/ui extension lets a tool point at an HTML interface that the host renders in a sandboxed iframe. The rules on mimeType, visibility, CSP and permissions come up often in scenario questions."
+   },
+   "points": {
+    "it": [
+     "Il tool indica la UI con _meta.ui.resourceUri (risorsa ui://), letta con una normale resources/read.",
+     "mimeType MUST essere text/html;profile=mcp-app: un semplice text/html non è un'app.",
+     "_meta.ui.visibility vale [\"model\", \"app\"] se omesso. Senza \"model\" l'host MUST NOT mostrare il tool nella lista del modello; senza \"app\" l'app non può chiamarlo.",
+     "_meta.ui.csp è un oggetto con connectDomains, resourceDomains, frameDomains e baseUriDomains. Senza frameDomains vale frame-src 'none'; senza baseUriDomains vale base-uri 'self'.",
+     "_meta.ui.permissions (camera, microphone, geolocation, clipboardWrite): l'host MAY concederli con l'attributo allow dell'iframe; l'app SHOULD NOT darli per scontati.",
+     "Un host web MUST passare da un sandbox proxy su un'origine diversa; app e host comunicano via postMessage con metodi ui/ (es. ui/initialize, che non è l'initialize rimosso dal core).",
+     "Il tool restituisce sempre anche un content testuale: un host senza l'estensione usa quello e non legge mai la risorsa ui://."
+    ],
+    "en": [
+     "The tool points at the UI with _meta.ui.resourceUri (a ui:// resource), read with an ordinary resources/read.",
+     "mimeType MUST be text/html;profile=mcp-app: plain text/html is not an app.",
+     "_meta.ui.visibility defaults to [\"model\", \"app\"]. Without \"model\" the host MUST NOT show the tool in the model's list; without \"app\" the app cannot call it.",
+     "_meta.ui.csp is an object with connectDomains, resourceDomains, frameDomains and baseUriDomains. Without frameDomains, frame-src is 'none'; without baseUriDomains, base-uri is 'self'.",
+     "_meta.ui.permissions (camera, microphone, geolocation, clipboardWrite): the host MAY grant them through the iframe allow attribute; the app SHOULD NOT assume they are granted.",
+     "A web host MUST go through a sandbox proxy on a different origin; app and host talk via postMessage with ui/ methods (e.g. ui/initialize, which is not the initialize removed from the core).",
+     "The tool always also returns text content: a host without the extension uses that and never reads the ui:// resource."
+    ]
+   },
+   "source": {
+    "label": "MCP Apps spec 2026-01-26",
+    "url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
+   }
+  },
+  {
+   "id": "D5-13",
+   "title": {
+    "it": "Skills over MCP",
+    "en": "Skills over MCP"
+   },
+   "summary": {
+    "it": "Un server può esporre skill (cartelle con SKILL.md e file di supporto) che il client scopre e legge tramite resources.",
+    "en": "A server can expose skills (folders with SKILL.md and supporting files) that the client discovers and reads through resources."
+   },
+   "points": {
+    "it": [
+     "Il server MUST dichiarare la capability resources e l'estensione io.modelcontextprotocol/skills.",
+     "URI con schema skill:// (raccomandato).",
+     "skills/list fornisce URI, digest SHA-256 e dimensione di ogni file per verificarne l'integrità.",
+     "Leggere SKILL.md con resources/read non attiva la skill: l'host la carica dopo verifica ed eventuale approvazione."
+    ],
+    "en": [
+     "The server MUST declare the resources capability and the io.modelcontextprotocol/skills extension.",
+     "URIs use the skill:// scheme (recommended).",
+     "skills/list provides each file's URI, SHA-256 digest and size to verify integrity.",
+     "Reading SKILL.md with resources/read does not activate the skill: the host loads it after verification and any approval."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Skills",
+    "url": "https://modelcontextprotocol.io/extensions/skills/overview"
+   }
+  },
+  {
+   "id": "D5-12",
+   "title": {
+    "it": "MCP Bundles (MCPB)",
+    "en": "MCP Bundles (MCPB)"
+   },
+   "summary": {
+    "it": "Un MCPB è un archivio ZIP con un server locale e un manifest.json, per installarlo con un clic in qualsiasi client compatibile.",
+    "en": "An MCPB is a ZIP archive with a local server and a manifest.json, to install it with one click in any compatible client."
+   },
+   "points": {
+    "it": [
+     "Estensione .mcpb; manifest.json obbligatorio.",
+     "Supporta server Node.js, Python e binari.",
+     "Nato da Anthropic come DXT per Claude Desktop, poi spostato nel progetto MCP per la portabilità tra client.",
+     "Pubblicabile sul registry con registryType mcpb."
+    ],
+    "en": [
+     ".mcpb extension; manifest.json is required.",
+     "Supports Node.js, Python and binary servers.",
+     "Created by Anthropic as DXT for Claude Desktop, then moved into the MCP project for cross-client portability.",
+     "Can be published to the registry with registryType mcpb."
+    ]
+   },
+   "source": {
+    "label": "Blog · Adopting MCPB",
+    "url": "https://blog.modelcontextprotocol.io/posts/2025-11-20-adopting-mcpb/"
+   }
+  },
+  {
+   "id": "D5-09",
+   "title": {
+    "it": "Strumenti e portabilità",
+    "en": "Tools and portability"
+   },
+   "summary": {
+    "it": "Lo stesso server MCP funziona con qualsiasi host compatibile. Per testarlo si usa MCP Inspector.",
+    "en": "The same MCP server works with any compatible host. MCP Inspector is used to test it."
+   },
+   "points": {
+    "it": [
+     "MCP Inspector: strumento ufficiale di test e debug, in versione web, --cli e --tui.",
+     "Server stdio: log su stderr, mai su stdout (romperebbe il protocollo).",
+     "Implementazioni dual-era servono sia client legacy sia modern durante la migrazione.",
+     "Portabilità: stesso server su più host; stesso formato JSON-RPC su stdio e HTTP; estensioni con fallback al core."
+    ],
+    "en": [
+     "MCP Inspector: official testing and debugging tool, in web, --cli and --tui versions.",
+     "stdio servers: log to stderr, never stdout (it would break the protocol).",
+     "Dual-era implementations serve both legacy and modern clients during migration.",
+     "Portability: same server across hosts; same JSON-RPC format over stdio and HTTP; extensions with fallback to core."
+    ]
+   },
+   "source": {
+    "label": "Docs · MCP Inspector",
+    "url": "https://modelcontextprotocol.io/docs/tools/inspector"
+   }
+  }
+ ]
+}

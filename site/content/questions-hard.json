@@ -1,0 +1,1770 @@
+[
+ {
+  "id": "o-H-D1-01",
+  "t": "D1-06",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Roots è Deprecated nella revisione 2026-07-28. Quali affermazioni sono corrette? (scegli 2)",
+   "en": "Roots is Deprecated in the 2026-07-28 revision. Which statements are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Resta funzionante per tutta la finestra di deprecazione",
+    "en": "It keeps working for the whole deprecation window"
+   },
+   {
+    "it": "Viene rimosso in automatico 12 mesi dopo il rilascio",
+    "en": "It is removed automatically 12 months after release"
+   },
+   {
+    "it": "La rimozione più precoce è la prima revisione Current rilasciata dopo la finestra",
+    "en": "The earliest removal is the first Current revision released after the window"
+   },
+   {
+    "it": "Le nuove implementazioni dovrebbero adottarlo per compatibilità",
+    "en": "New implementations should adopt it for compatibility"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Deprecated: la feature resta nella spec con un percorso di migrazione; la rimozione più precoce è la prima revisione Current rilasciata dopo la finestra minima (almeno 12 mesi). Non c'è rimozione automatica e le nuove implementazioni non dovrebbero adottarla.",
+   "en": "Deprecated: the feature stays in the spec with a migration path; the earliest removal is the first Current revision released after the minimum window (at least 12 months). There is no automatic removal and new implementations should not adopt it."
+  }
+ },
+ {
+  "id": "o-H-D1-02",
+  "t": "D1-02",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un architetto obietta: \"Se ogni richiesta è stateless, il server non può sapere chi la sta facendo\". Qual è la risposta corretta?",
+   "en": "An architect objects: \"If every request is stateless, the server cannot know who is making it\". What is the correct answer?"
+  },
+  "o": [
+   {
+    "it": "L'identità arriva dal token Bearer su ogni richiesta; lo stato applicativo da handle espliciti",
+    "en": "Identity comes from the Bearer token on every request; app state from explicit handles"
+   },
+   {
+    "it": "L'identità arriva da clientInfo, che il server può usare per autorizzare",
+    "en": "Identity comes from clientInfo, which the server can use to authorize"
+   },
+   {
+    "it": "L'identità resta legata all'Mcp-Session-Id fissato dalla prima richiesta",
+    "en": "Identity stays bound to the Mcp-Session-Id set by the first request"
+   },
+   {
+    "it": "L'identità è disponibile solo su stdio, dove c'è un solo processo",
+    "en": "Identity is only available over stdio, where there is a single process"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Stateless non significa anonimo: su HTTP ogni richiesta porta Authorization: Bearer e il server valida il token ogni volta. clientInfo è autodichiarato e l'Mcp-Session-Id non esiste più.",
+   "en": "Stateless does not mean anonymous: over HTTP every request carries Authorization: Bearer and the server validates the token each time. clientInfo is self-declared and Mcp-Session-Id no longer exists."
+  }
+ },
+ {
+  "id": "o-H-D1-03",
+  "t": "D1-01",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali di questi aspetti MCP lascia deliberatamente fuori dal protocollo? (scegli 2)",
+   "en": "Which of these does MCP deliberately leave out of the protocol? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Come l'host gestisce la finestra di contesto dell'LLM",
+    "en": "How the host manages the LLM's context window"
+   },
+   {
+    "it": "Il formato JSON-RPC dei messaggi tra client e server",
+    "en": "The JSON-RPC format of client-server messages"
+   },
+   {
+    "it": "Quale modello l'applicazione usa per ragionare",
+    "en": "Which model the application uses to reason"
+   },
+   {
+    "it": "I tipi di contenuto che un risultato di tool può avere",
+    "en": "The content types a tool result can carry"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "MCP standardizza lo scambio di contesto (messaggi, primitive, tipi di contenuto). Come l'applicazione usa l'LLM e il contesto ricevuto, e quale modello sceglie, restano fuori dal protocollo.",
+   "en": "MCP standardizes context exchange (messages, primitives, content types). How the application uses the LLM and the context it receives, and which model it picks, stay outside the protocol."
+  }
+ },
+ {
+  "id": "o-H-D1-04",
+  "t": "D1-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "In che revisione sono comparsi, nell'ordine: structured tool output, Client ID Metadata Documents, server/discover?",
+   "en": "In which revision did these appear, in order: structured tool output, Client ID Metadata Documents, server/discover?"
+  },
+  "o": [
+   {
+    "it": "2025-03-26, 2025-06-18, 2025-11-25",
+    "en": "2025-03-26, 2025-06-18, 2025-11-25"
+   },
+   {
+    "it": "2025-06-18, 2025-11-25, 2026-07-28",
+    "en": "2025-06-18, 2025-11-25, 2026-07-28"
+   },
+   {
+    "it": "2025-06-18, 2026-07-28, 2026-07-28",
+    "en": "2025-06-18, 2026-07-28, 2026-07-28"
+   },
+   {
+    "it": "2025-11-25, 2025-11-25, 2026-07-28",
+    "en": "2025-11-25, 2025-11-25, 2026-07-28"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Structured output arriva con la 2025-06-18 (insieme all'elicitation), CIMD con la 2025-11-25, server/discover con la 2026-07-28 che elimina initialize.",
+   "en": "Structured output came with 2025-06-18 (along with elicitation), CIMD with 2025-11-25, server/discover with 2026-07-28, which drops initialize."
+  }
+ },
+ {
+  "id": "o-H-D2-01",
+  "t": "D2-05",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool annota con x-mcp-header una proprietà che sta dentro items di un array. Cosa deve fare un client Streamable HTTP?",
+   "en": "A tool puts x-mcp-header on a property inside an array's items. What must a Streamable HTTP client do?"
+  },
+  "o": [
+   {
+    "it": "Escludere il tool dal risultato di tools/list e, di norma, registrare un warning",
+    "en": "Exclude the tool from the tools/list result and, normally, log a warning"
+   },
+   {
+    "it": "Inviare la chiamata senza header e lasciare decidere al server",
+    "en": "Send the call without the header and let the server decide"
+   },
+   {
+    "it": "Copiare nell'header il valore del primo elemento dell'array",
+    "en": "Copy the value of the first array element into the header"
+   },
+   {
+    "it": "Accettare il tool ma ignorare l'annotazione x-mcp-header",
+    "en": "Accept the tool but ignore the x-mcp-header annotation"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "x-mcp-header è valido solo su proprietà raggiungibili staticamente con soli passi properties (niente items, oneOf, $ref...). Una definizione invalida MUST essere rifiutata: il client esclude il tool da tools/list e SHOULD loggare il motivo.",
+   "en": "x-mcp-header is only valid on properties statically reachable through properties steps alone (no items, oneOf, $ref...). An invalid definition MUST be rejected: the client excludes the tool from tools/list and SHOULD log the reason."
+  }
+ },
+ {
+  "id": "o-H-D2-02",
+  "t": "D2-04",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un client invia resources/read per file:///projects/app/config.json via HTTP. Quali header deve avere il POST? (scegli 2)",
+   "en": "A client sends resources/read for file:///projects/app/config.json over HTTP. Which headers must the POST carry? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Mcp-Method: resources/read",
+    "en": "Mcp-Method: resources/read"
+   },
+   {
+    "it": "Mcp-Session-Id con l'id della sessione corrente",
+    "en": "Mcp-Session-Id with the current session id"
+   },
+   {
+    "it": "Mcp-Name: file:///projects/app/config.json",
+    "en": "Mcp-Name: file:///projects/app/config.json"
+   },
+   {
+    "it": "Mcp-Param-Uri con l'URI della risorsa",
+    "en": "Mcp-Param-Uri with the resource URI"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Mcp-Method va su ogni POST; Mcp-Name porta params.name o params.uri su tools/call, resources/read e prompts/get. Mcp-Param-* nasce solo da x-mcp-header nei tool, e Mcp-Session-Id non esiste più. Serve anche MCP-Protocol-Version.",
+   "en": "Mcp-Method goes on every POST; Mcp-Name carries params.name or params.uri on tools/call, resources/read and prompts/get. Mcp-Param-* only comes from x-mcp-header in tools, and Mcp-Session-Id no longer exists. MCP-Protocol-Version is also needed."
+  }
+ },
+ {
+  "id": "o-H-D2-03",
+  "t": "D2-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Header Mcp-Param-Region: eu-west, ma nel corpo region vale us-east. Cosa risponde il server?",
+   "en": "Header Mcp-Param-Region: eu-west, but region in the body is us-east. What does the server answer?"
+  },
+  "o": [
+   {
+    "it": "Usa il valore dell'header, che ha la precedenza",
+    "en": "It uses the header value, which takes precedence"
+   },
+   {
+    "it": "Usa il valore del corpo e ignora l'header",
+    "en": "It uses the body value and ignores the header"
+   },
+   {
+    "it": "HTTP 400 con errore -32020 HeaderMismatch",
+    "en": "HTTP 400 with error -32020 HeaderMismatch"
+   },
+   {
+    "it": "Esegue il tool e restituisce isError: true",
+    "en": "It runs the tool and returns isError: true"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Header e corpo devono coincidere: un gateway potrebbe aver instradato sulla base dell'header. Una discrepanza è -32020 HeaderMismatch con HTTP 400.",
+   "en": "Header and body must match: a gateway may have routed on the header. A mismatch is -32020 HeaderMismatch with HTTP 400."
+  }
+ },
+ {
+  "id": "o-H-D2-04",
+  "t": "D2-02",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali affermazioni su server/discover sono corrette? (scegli 2)",
+   "en": "Which statements about server/discover are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il server deve implementarlo",
+    "en": "The server must implement it"
+   },
+   {
+    "it": "Il client deve chiamarlo prima di ogni altra richiesta",
+    "en": "The client must call it before any other request"
+   },
+   {
+    "it": "Il risultato completo deve avere ttlMs e cacheScope",
+    "en": "The complete result must carry ttlMs and cacheScope"
+   },
+   {
+    "it": "Restituisce un Mcp-Session-Id da riusare",
+    "en": "It returns an Mcp-Session-Id to reuse"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "server/discover è MUST per i server e MAY per i client. È tra i metodi che MUST portare i caching hint (ttlMs, cacheScope) sui risultati complete. Non esistono sessioni.",
+   "en": "server/discover is MUST for servers and MAY for clients. It is among the methods that MUST carry caching hints (ttlMs, cacheScope) on complete results. There are no sessions."
+  }
+ },
+ {
+  "id": "o-H-D2-05",
+  "t": "D2-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool con outputSchema restituisce structuredContent che non rispetta lo schema. Chi ha violato cosa?",
+   "en": "A tool with an outputSchema returns structuredContent that does not match the schema. Who violated what?"
+  },
+  "o": [
+   {
+    "it": "Il client, che doveva convertire il risultato nello schema",
+    "en": "The client, which should have converted the result to the schema"
+   },
+   {
+    "it": "Nessuno: outputSchema è solo documentazione per il modello",
+    "en": "Nobody: outputSchema is just documentation for the model"
+   },
+   {
+    "it": "Il server ha violato un MUST; un client che valida (SHOULD) se ne accorge",
+    "en": "The server broke a MUST; a validating client (SHOULD) notices"
+   },
+   {
+    "it": "L'host, che doveva rimuovere outputSchema dal catalogo",
+    "en": "The host, which should have removed outputSchema from the catalog"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Con outputSchema il server MUST fornire risultati strutturati conformi e il client SHOULD validarli. Per compatibilità il JSON va anche in un TextContent.",
+   "en": "With an outputSchema the server MUST provide conforming structured results and the client SHOULD validate them. For compatibility the JSON also goes in a TextContent."
+  }
+ },
+ {
+  "id": "o-H-D2-06",
+  "t": "D2-13",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un gateway aggrega due server che dichiarano entrambi serverInfo.name = \"primary\" ed espongono un tool search. Qual è la strategia corretta?",
+   "en": "A gateway aggregates two servers that both declare serverInfo.name = \"primary\" and expose a search tool. What is the correct strategy?"
+  },
+  "o": [
+   {
+    "it": "Prefissare i tool con un identificativo del server scelto dal gateway",
+    "en": "Prefix the tools with a server identifier chosen by the gateway"
+   },
+   {
+    "it": "Prefissare i tool con serverInfo.name, che è univoco per spec",
+    "en": "Prefix the tools with serverInfo.name, which the spec makes unique"
+   },
+   {
+    "it": "Tenere solo il tool del server che risponde per primo",
+    "en": "Keep only the tool of the server that answers first"
+   },
+   {
+    "it": "Chiedere ai server di rinominare i tool con un errore -32602",
+    "en": "Ask the servers to rename the tools with a -32602 error"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "L'unicità dei nomi vale solo dentro un server; gli aggregatori SHOULD disambiguare, ad esempio con un prefisso. serverInfo.name non è garantito univoco e SHOULD NOT essere usato per disambiguare.",
+   "en": "Name uniqueness only holds within one server; aggregators SHOULD disambiguate, for example with a prefix. serverInfo.name is not guaranteed unique and SHOULD NOT be used for disambiguation."
+  }
+ },
+ {
+  "id": "o-H-D2-07",
+  "t": "D2-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Quale $ref un client può risolvere automaticamente durante la validazione di un inputSchema?",
+   "en": "Which $ref may a client resolve automatically while validating an inputSchema?"
+  },
+  "o": [
+   {
+    "it": "https://schemas.example.com/address.json",
+    "en": "https://schemas.example.com/address.json"
+   },
+   {
+    "it": "#/$defs/address",
+    "en": "#/$defs/address"
+   },
+   {
+    "it": "http://intranet.local/schemas/address.json",
+    "en": "http://intranet.local/schemas/address.json"
+   },
+   {
+    "it": "address.json, relativo a un $id https",
+    "en": "address.json, relative to an https $id"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "I riferimenti interni al documento si risolvono normalmente. Un $ref che si risolve in un URI di rete (anche relativo a un $id https) MUST NOT essere dereferenziato automaticamente: rischi SSRF e DoS.",
+   "en": "References internal to the document resolve normally. A $ref resolving to a network URI (even relative to an https $id) MUST NOT be dereferenced automatically: SSRF and DoS risks."
+  }
+ },
+ {
+  "id": "o-H-D3-01",
+  "t": "D3-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "tools/call con id 7 riceve un InputRequiredResult con inputRequests {confirm} e requestState \"abc\". Qual è il retry corretto?",
+   "en": "tools/call with id 7 receives an InputRequiredResult with inputRequests {confirm} and requestState \"abc\". What is the correct retry?"
+  },
+  "o": [
+   {
+    "it": "id 7, stessi argomenti, inputResponses {confirm}, requestState \"abc\"",
+    "en": "id 7, same arguments, inputResponses {confirm}, requestState \"abc\""
+   },
+   {
+    "it": "id 8, stessi argomenti, inputResponses {confirm}, requestState \"abc\"",
+    "en": "id 8, same arguments, inputResponses {confirm}, requestState \"abc\""
+   },
+   {
+    "it": "id 8, stessi argomenti, inputResponses {confirm}, senza requestState",
+    "en": "id 8, same arguments, inputResponses {confirm}, no requestState"
+   },
+   {
+    "it": "id 8, inputResponses {confirm}, requestState aggiornato dal client",
+    "en": "id 8, inputResponses {confirm}, requestState updated by the client"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il retry è una richiesta indipendente: id diverso (MUST), stessi parametri, inputResponses con le stesse chiavi e requestState restituito identico. Il client MUST NOT ispezionarlo o modificarlo.",
+   "en": "The retry is an independent request: different id (MUST), same parameters, inputResponses with the same keys and requestState echoed unchanged. The client MUST NOT inspect or modify it."
+  }
+ },
+ {
+  "id": "o-H-D3-02",
+  "t": "D3-04",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un InputRequiredResult contiene solo requestState, senza inputRequests. Cosa vale per il client? (scegli 2)",
+   "en": "An InputRequiredResult contains only requestState, without inputRequests. What applies to the client? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Può riprovare subito la richiesta originale",
+    "en": "It may retry the original request immediately"
+   },
+   {
+    "it": "Deve rispondere con inputResponses vuote",
+    "en": "It must answer with empty inputResponses"
+   },
+   {
+    "it": "Deve restituire esattamente lo stesso requestState",
+    "en": "It must echo exactly the same requestState"
+   },
+   {
+    "it": "Deve trattarlo come errore e interrompere",
+    "en": "It must treat it as an error and stop"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Senza inputRequests il client MAY riprovare subito; se c'è requestState MUST restituirlo identico. Un InputRequiredResult deve avere almeno uno dei due campi.",
+   "en": "Without inputRequests the client MAY retry immediately; if requestState is present it MUST echo it unchanged. An InputRequiredResult must have at least one of the two fields."
+  }
+ },
+ {
+  "id": "o-H-D3-03",
+  "t": "D3-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un server usa requestState per un codice promozionale riscattabile una sola volta. Lo firma con HMAC, lo lega all'utente e gli dà un TTL breve. Basta?",
+   "en": "A server uses requestState for a one-time promo code. It signs it with HMAC, binds it to the user and gives it a short TTL. Is that enough?"
+  },
+  "o": [
+   {
+    "it": "Sì: firma, binding e TTL impediscono ogni riuso",
+    "en": "Yes: signature, binding and TTL prevent any reuse"
+   },
+   {
+    "it": "No: limitano il replay, ma l'uso singolo va imposto lato server",
+    "en": "No: they bound replay, but single use must be enforced server-side"
+   },
+   {
+    "it": "No: deve cifrarlo con AEAD, così diventa monouso",
+    "en": "No: it must encrypt it with AEAD, which makes it single-use"
+   },
+   {
+    "it": "Sì, purché il client non lo modifichi",
+    "en": "Yes, as long as the client does not modify it"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le misure anti-replay limitano la finestra e impediscono il riuso tra utenti o richieste, ma non garantiscono l'uso singolo: se il requestState deve essere consumato una volta sola, il server MUST imporlo lato server.",
+   "en": "Anti-replay measures bound the window and prevent cross-user or cross-request reuse, but do not guarantee single use: if requestState must be consumed at most once, the server MUST enforce it server-side."
+  }
+ },
+ {
+  "id": "o-H-D3-04",
+  "t": "D3-07",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali risultati devono portare ttlMs e cacheScope? (scegli 2)",
+   "en": "Which results must carry ttlMs and cacheScope? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Un tools/list con resultType complete",
+    "en": "A tools/list with resultType complete"
+   },
+   {
+    "it": "Un resources/read con resultType input_required",
+    "en": "A resources/read with resultType input_required"
+   },
+   {
+    "it": "Un resources/read con resultType complete",
+    "en": "A resources/read with resultType complete"
+   },
+   {
+    "it": "Un tools/call con resultType complete",
+    "en": "A tools/call with resultType complete"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "I caching hint sono MUST sui risultati complete di server/discover, dei */list e di resources/read. I risultati intermedi input_required non li portano, e tools/call non è nell'elenco.",
+   "en": "Caching hints are MUST on complete results of server/discover, the */list methods and resources/read. Interim input_required results carry none, and tools/call is not on the list."
+  }
+ },
+ {
+  "id": "o-H-D3-05",
+  "t": "D3-07",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Il client ha in cache resources/read di uri A (ttlMs non scaduto). Arriva una resources/read di uri B e poi un retry di A con inputResponses. Cosa può servire dalla cache?",
+   "en": "The client has resources/read for uri A cached (ttlMs not expired). A resources/read for uri B arrives, then a retry of A with inputResponses. What can it serve from cache?"
+  },
+  "o": [
+   {
+    "it": "Entrambe, perché il metodo è lo stesso",
+    "en": "Both, because the method is the same"
+   },
+   {
+    "it": "Solo B, perché A ora porta input",
+    "en": "Only B, because A now carries input"
+   },
+   {
+    "it": "Nessuna delle due",
+    "en": "Neither of them"
+   },
+   {
+    "it": "Solo il retry di A, perché ha lo stesso uri",
+    "en": "Only the retry of A, because it has the same uri"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "La chiave di cache è metodo + parametri rilevanti (uri, cursor): B è un'altra chiave. I retry MRTR (inputResponses o requestState) MUST NOT essere serviti né salvati in cache.",
+   "en": "The cache key is method + relevant parameters (uri, cursor): B is a different key. MRTR retries (inputResponses or requestState) MUST NOT be cached or served from cache."
+  }
+ },
+ {
+  "id": "o-H-D3-06",
+  "t": "D3-07",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "tools/list ha ttlMs 300000 e il server dichiara listChanged. Dopo un minuto arriva notifications/tools/list_changed. Cosa fa il client?",
+   "en": "tools/list has ttlMs 300000 and the server declares listChanged. After one minute notifications/tools/list_changed arrives. What does the client do?"
+  },
+  "o": [
+   {
+    "it": "Aspetta i 4 minuti rimanenti prima di ricaricare",
+    "en": "Waits the remaining 4 minutes before reloading"
+   },
+   {
+    "it": "Invalida subito la cache e ricarica quando serve",
+    "en": "Invalidates the cache at once and reloads when needed"
+   },
+   {
+    "it": "Ignora la notifica perché il TTL è ancora valido",
+    "en": "Ignores the notification because the TTL is still valid"
+   },
+   {
+    "it": "Riduce il TTL a 60 secondi per le richieste future",
+    "en": "Shortens the TTL to 60 seconds for future requests"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Una notifica list_changed invalida subito la cache, indipendentemente dal TTL. TTL e listChanged possono coesistere.",
+   "en": "A list_changed notification invalidates the cache immediately, regardless of the TTL. TTL and listChanged can coexist."
+  }
+ },
+ {
+  "id": "o-H-D3-07",
+  "t": "D3-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Su stdio il client invia notifications/cancelled per la richiesta 12, poi arriva comunque la risposta 12. Cosa fa il client?",
+   "en": "Over stdio the client sends notifications/cancelled for request 12, then the response to 12 arrives anyway. What does the client do?"
+  },
+  "o": [
+   {
+    "it": "La consegna al modello come risultato valido",
+    "en": "Delivers it to the model as a valid result"
+   },
+   {
+    "it": "Invia un secondo notifications/cancelled",
+    "en": "Sends a second notifications/cancelled"
+   },
+   {
+    "it": "La ignora: la cancellazione può incrociare la risposta",
+    "en": "Ignores it: the cancellation can cross the response"
+   },
+   {
+    "it": "Chiude il processo server con SIGTERM",
+    "en": "Terminates the server process with SIGTERM"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Per la latenza la cancellazione può arrivare a lavoro finito: il client SHOULD ignorare una risposta arrivata dopo aver cancellato.",
+   "en": "Due to latency the cancellation can arrive after work finished: the client SHOULD ignore a response arriving after it cancelled."
+  }
+ },
+ {
+  "id": "o-H-D3-08",
+  "t": "D3-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "In quale caso un server invia notifications/cancelled nella 2026-07-28?",
+   "en": "In which case does a server send notifications/cancelled in 2026-07-28?"
+  },
+  "o": [
+   {
+    "it": "Quando abbandona una tools/call troppo lunga",
+    "en": "When it abandons a tools/call that takes too long"
+   },
+   {
+    "it": "Quando chiude uno stream subscriptions/listen",
+    "en": "When it tears down a subscriptions/listen stream"
+   },
+   {
+    "it": "Quando il client supera il rate limit",
+    "en": "When the client exceeds the rate limit"
+   },
+   {
+    "it": "Quando riceve un retry MRTR scaduto",
+    "en": "When it receives an expired MRTR retry"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il server MUST inviare notifications/cancelled con l'id della subscriptions/listen quando chiude quello stream, e MUST NOT usarlo per altri scopi.",
+   "en": "The server MUST send notifications/cancelled referencing the subscriptions/listen id when it tears down that stream, and MUST NOT use it for any other purpose."
+  }
+ },
+ {
+  "id": "o-H-D3-09",
+  "t": "D3-05",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Il client apre subscriptions/listen chiedendo toolsListChanged e resourceSubscriptions per tre URI; il server supporta solo le notifiche dei tool. Cosa succede? (scegli 2)",
+   "en": "The client opens subscriptions/listen asking for toolsListChanged and resourceSubscriptions for three URIs; the server only supports tool notifications. What happens? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "L'acknowledged riporta solo il sottoinsieme accettato",
+    "en": "The acknowledgement reports only the accepted subset"
+   },
+   {
+    "it": "Il server rifiuta l'intera richiesta con -32602",
+    "en": "The server rejects the whole request with -32602"
+   },
+   {
+    "it": "Il client SHOULD confrontare l'acknowledged con quanto chiesto",
+    "en": "The client SHOULD compare the acknowledgement with what it asked"
+   },
+   {
+    "it": "Il server invia comunque resources/updated per gli URI",
+    "en": "The server still sends resources/updated for the URIs"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il primo messaggio è notifications/subscriptions/acknowledged con il filtro accettato; il client SHOULD controllarlo. Il server MUST NOT inviare tipi di notifica non richiesti o non accettati.",
+   "en": "The first message is notifications/subscriptions/acknowledged with the accepted filter; the client SHOULD check it. The server MUST NOT send notification types not requested or not accepted."
+  }
+ },
+ {
+  "id": "o-H-D3-10",
+  "t": "D3-09",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali di questi casi sono errori di protocollo (errore JSON-RPC) e non errori di esecuzione del tool? (scegli 2)",
+   "en": "Which of these are protocol errors (JSON-RPC error) rather than tool execution errors? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "tools/call con un nome di tool inesistente",
+    "en": "tools/call naming a nonexistent tool"
+   },
+   {
+    "it": "L'API a valle risponde 500 durante l'esecuzione",
+    "en": "The downstream API answers 500 during execution"
+   },
+   {
+    "it": "Richiesta senza clientCapabilities nel _meta",
+    "en": "A request without clientCapabilities in _meta"
+   },
+   {
+    "it": "Argomenti che non rispettano l'inputSchema",
+    "en": "Arguments that fail the inputSchema"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Tool sconosciuto e _meta incompleto sono -32602. Fallimenti di API e validazione degli argomenti sono errori di esecuzione (isError: true), utili al modello per correggersi.",
+   "en": "Unknown tool and incomplete _meta are -32602. API failures and argument validation are execution errors (isError: true), useful to the model for self-correction."
+  }
+ },
+ {
+  "id": "o-H-D3-11",
+  "t": "D3-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool richiede elicitation, ma la richiesta non la dichiara in clientCapabilities. Cosa risponde il server via HTTP?",
+   "en": "A tool requires elicitation, but the request does not declare it in clientCapabilities. What does the server answer over HTTP?"
+  },
+  "o": [
+   {
+    "it": "Un InputRequiredResult con elicitation in URL mode",
+    "en": "An InputRequiredResult with URL-mode elicitation"
+   },
+   {
+    "it": "HTTP 400 con -32021 MissingRequiredClientCapability",
+    "en": "HTTP 400 with -32021 MissingRequiredClientCapability"
+   },
+   {
+    "it": "HTTP 200 con un risultato isError: true",
+    "en": "HTTP 200 with an isError: true result"
+   },
+   {
+    "it": "HTTP 400 con -32602 Invalid params",
+    "en": "HTTP 400 with -32602 Invalid params"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il server non può chiedere input per capability non dichiarate. Se l'operazione ne ha bisogno: -32021 (HTTP 400). -32602 è per campi obbligatori mancanti in _meta.",
+   "en": "The server cannot ask for input needing undeclared capabilities. If the operation needs it: -32021 (HTTP 400). -32602 is for missing required _meta fields."
+  }
+ },
+ {
+  "id": "o-H-D3-12",
+  "t": "D3-14",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool eseguito come task termina con un risultato che ha isError: true. Quale stato raggiunge il task?",
+   "en": "A tool running as a task ends with a result that has isError: true. Which status does the task reach?"
+  },
+  "o": [
+   {
+    "it": "failed, con l'errore nel campo error",
+    "en": "failed, with the error in the error field"
+   },
+   {
+    "it": "completed, e result contiene isError: true",
+    "en": "completed, and result contains isError: true"
+   },
+   {
+    "it": "cancelled, perché il tool non è riuscito",
+    "en": "cancelled, because the tool did not succeed"
+   },
+   {
+    "it": "input_required, per chiedere all'utente come proseguire",
+    "en": "input_required, to ask the user how to proceed"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "failed indica un errore JSON-RPC durante l'esecuzione. Un tool che fallisce a livello applicativo produce comunque un risultato: il task è completed e result contiene isError: true.",
+   "en": "failed means a JSON-RPC error occurred during execution. A tool failing at application level still produces a result: the task is completed and result contains isError: true."
+  }
+ },
+ {
+  "id": "o-H-D3-13",
+  "t": "D3-14",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un task passa a input_required. Come procede il client?",
+   "en": "A task moves to input_required. How does the client proceed?"
+  },
+  "o": [
+   {
+    "it": "Legge inputRequests da tasks/get e invia le risposte con tasks/update",
+    "en": "Reads inputRequests from tasks/get and sends the answers with tasks/update"
+   },
+   {
+    "it": "Ripete la tools/call originale con inputResponses e un nuovo id",
+    "en": "Repeats the original tools/call with inputResponses and a new id"
+   },
+   {
+    "it": "Chiama tasks/result per ottenere la richiesta di input",
+    "en": "Calls tasks/result to get the input request"
+   },
+   {
+    "it": "Cancella il task e ne avvia uno nuovo con più argomenti",
+    "en": "Cancels the task and starts a new one with more arguments"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Con l'estensione Tasks l'input a metà esecuzione passa per tasks/get (che mostra inputRequests) e tasks/update. tasks/result non esiste più.",
+   "en": "With the Tasks extension mid-flight input goes through tasks/get (which shows inputRequests) and tasks/update. tasks/result no longer exists."
+  }
+ },
+ {
+  "id": "o-H-D3-14",
+  "t": "D3-19",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Una tools/call ha io.modelcontextprotocol/logLevel = \"warning\" nel _meta. Cosa vale? (scegli 2)",
+   "en": "A tools/call has io.modelcontextprotocol/logLevel = \"warning\" in _meta. What applies? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il server può emettere notifications/message di livello warning o superiore per quella richiesta",
+    "en": "The server may emit notifications/message at warning or above for that request"
+   },
+   {
+    "it": "I log arrivano sullo stream di subscriptions/listen",
+    "en": "The logs arrive on the subscriptions/listen stream"
+   },
+   {
+    "it": "Per richieste senza logLevel il server non deve emettere notifications/message",
+    "en": "For requests without logLevel the server must not emit notifications/message"
+   },
+   {
+    "it": "Il livello resta valido per tutte le richieste successive",
+    "en": "The level stays valid for all later requests"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "logging/setLevel è stato rimosso: il livello è per richiesta, nel _meta. I messaggi viaggiano sullo stream della richiesta, non su subscriptions/listen, e senza logLevel il server MUST NOT emetterli.",
+   "en": "logging/setLevel was removed: the level is per request, in _meta. Messages travel on the request's own stream, not on subscriptions/listen, and without logLevel the server MUST NOT emit them."
+  }
+ },
+ {
+  "id": "o-H-D3-15",
+  "t": "D3-18",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un server vuole raccogliere con elicitation in form mode un indirizzo con via, città e CAP come oggetto annidato. È valido?",
+   "en": "A server wants to collect, via form-mode elicitation, an address with street, city and postcode as a nested object. Is it valid?"
+  },
+  "o": [
+   {
+    "it": "Sì, se l'oggetto annidato ha required",
+    "en": "Yes, if the nested object has required"
+   },
+   {
+    "it": "No: solo schemi piatti con campi primitivi",
+    "en": "No: only flat schemas with primitive fields"
+   },
+   {
+    "it": "Sì, ma solo passando all'URL mode",
+    "en": "Yes, but only by switching to URL mode"
+   },
+   {
+    "it": "No: l'elicitation non può chiedere dati personali",
+    "en": "No: elicitation cannot ask for personal data"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "In form mode requestedSchema è limitato a oggetti piatti con proprietà primitive (string, number, boolean, enum). Si usano tre campi separati.",
+   "en": "In form mode requestedSchema is limited to flat objects with primitive properties (string, number, boolean, enum). Use three separate fields."
+  }
+ },
+ {
+  "id": "o-H-D4-01",
+  "t": "D4-05",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Il client ha un token con scope \"files:read\" e riceve 403 insufficient_scope con scope=\"files:write\". Cosa fa? (scegli 2)",
+   "en": "The client holds a token with scope \"files:read\" and gets 403 insufficient_scope with scope=\"files:write\". What does it do? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Chiede una nuova autorizzazione per files:read e files:write",
+    "en": "Requests new authorization for files:read and files:write"
+   },
+   {
+    "it": "Chiede solo files:write, così il token resta minimo",
+    "en": "Requests only files:write, so the token stays minimal"
+   },
+   {
+    "it": "Ripete la richiesta originale con il nuovo token",
+    "en": "Retries the original request with the new token"
+   },
+   {
+    "it": "Chiede offline_access per evitare altri step-up",
+    "en": "Requests offline_access to avoid further step-ups"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Nello step-up il client usa l'unione tra scope già concessi e quelli della challenge, per non perdere permessi, poi ripete la richiesta.",
+   "en": "In step-up the client uses the union of already granted scopes and those in the challenge, so it does not lose permissions, then retries the request."
+  }
+ },
+ {
+  "id": "o-H-D4-02",
+  "t": "D4-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "L'AS non dichiara authorization_response_iss_parameter_supported, ma la risposta contiene iss diverso dall'issuer registrato. Cosa fa il client?",
+   "en": "The AS does not declare authorization_response_iss_parameter_supported, but the response contains an iss different from the recorded issuer. What does the client do?"
+  },
+  "o": [
+   {
+    "it": "Procede: senza dichiarazione iss va ignorato",
+    "en": "Proceeds: without the declaration iss is ignored"
+   },
+   {
+    "it": "Rifiuta la risposta: un iss presente si confronta sempre",
+    "en": "Rejects the response: a present iss is always compared"
+   },
+   {
+    "it": "Scambia il codice con l'AS indicato da iss",
+    "en": "Exchanges the code with the AS named in iss"
+   },
+   {
+    "it": "Ripete l'autorizzazione con un nuovo PKCE",
+    "en": "Restarts authorization with a new PKCE"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Un iss presente si confronta sempre con l'issuer registrato (confronto semplice di stringhe), che l'AS lo dichiari o no. Si procede senza iss solo se l'AS non dichiara il supporto. Il controllo avviene prima dello scambio del codice.",
+   "en": "A present iss is always compared with the recorded issuer (simple string comparison), whether or not the AS declares support. Proceeding without iss is only allowed when the AS does not declare support. The check happens before the code exchange."
+  }
+ },
+ {
+  "id": "o-H-D4-03",
+  "t": "D4-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "L'issuer dell'AS è https://auth.example.com/tenant1. Quale URL di metadati prova per primo il client?",
+   "en": "The AS issuer is https://auth.example.com/tenant1. Which metadata URL does the client try first?"
+  },
+  "o": [
+   {
+    "it": "https://auth.example.com/tenant1/.well-known/openid-configuration",
+    "en": "https://auth.example.com/tenant1/.well-known/openid-configuration"
+   },
+   {
+    "it": "https://auth.example.com/.well-known/openid-configuration/tenant1",
+    "en": "https://auth.example.com/.well-known/openid-configuration/tenant1"
+   },
+   {
+    "it": "https://auth.example.com/.well-known/oauth-authorization-server/tenant1",
+    "en": "https://auth.example.com/.well-known/oauth-authorization-server/tenant1"
+   },
+   {
+    "it": "https://auth.example.com/.well-known/oauth-authorization-server",
+    "en": "https://auth.example.com/.well-known/oauth-authorization-server"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Con un issuer che ha un path, l'ordine è: OAuth 8414 con path insertion, poi OIDC con path insertion, poi OIDC con path appending. Il campo issuer del documento deve coincidere con l'issuer usato.",
+   "en": "With an issuer that has a path, the order is: OAuth 8414 with path insertion, then OIDC with path insertion, then OIDC with path appending. The document's issuer field must match the issuer used."
+  }
+ },
+ {
+  "id": "o-H-D4-04",
+  "t": "D4-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un documento scaricato da https://attacker.example/.well-known/oauth-authorization-server contiene \"issuer\": \"https://honest.example\". Cosa fa il client?",
+   "en": "A document fetched from https://attacker.example/.well-known/oauth-authorization-server contains \"issuer\": \"https://honest.example\". What does the client do?"
+  },
+  "o": [
+   {
+    "it": "Lo usa, perché l'issuer dichiarato è affidabile",
+    "en": "Uses it, because the declared issuer is trustworthy"
+   },
+   {
+    "it": "Lo scarta: l'issuer deve coincidere con quello usato per l'URL",
+    "en": "Discards it: the issuer must match the one used for the URL"
+   },
+   {
+    "it": "Lo usa solo se il certificato TLS è valido",
+    "en": "Uses it only if the TLS certificate is valid"
+   },
+   {
+    "it": "Riprova lo stesso URL con OIDC Discovery",
+    "en": "Retries the same URL with OIDC Discovery"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Dopo aver scaricato i metadati, l'issuer MUST essere identico a quello con cui si è costruito l'URL well-known; altrimenti il client MUST NOT usarli.",
+   "en": "After fetching metadata, the issuer MUST be identical to the one used to build the well-known URL; otherwise the client MUST NOT use them."
+  }
+ },
+ {
+  "id": "o-H-D4-05",
+  "t": "D4-06",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un client usa CIMD con client_id https://app.example.com/oauth/client.json. Quali controlli fa l'AS? (scegli 2)",
+   "en": "A client uses CIMD with client_id https://app.example.com/oauth/client.json. Which checks does the AS make? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il client_id nel documento coincide esattamente con l'URL",
+    "en": "The client_id in the document exactly matches the URL"
+   },
+   {
+    "it": "Il dominio del client è nell'elenco dei partner approvati",
+    "en": "The client's domain is in the approved partner list"
+   },
+   {
+    "it": "Il redirect_uri della richiesta è tra i redirect_uris del documento",
+    "en": "The request's redirect_uri is among the document's redirect_uris"
+   },
+   {
+    "it": "Il client ha già un client_secret registrato via DCR",
+    "en": "The client already has a client_secret registered via DCR"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Con CIMD l'AS scarica il documento dall'URL del client_id, verifica che il client_id interno coincida e che il redirect_uri sia tra quelli dichiarati. Non serve registrazione preventiva.",
+   "en": "With CIMD the AS fetches the document from the client_id URL, checks the inner client_id matches and that the redirect_uri is among the declared ones. No prior registration is needed."
+  }
+ },
+ {
+  "id": "o-H-D4-06",
+  "t": "D4-10",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Durante la discovery OAuth, quali misure riducono il rischio SSRF? (scegli 2)",
+   "en": "During OAuth discovery, which measures reduce SSRF risk? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Bloccare IP privati e 169.254.169.254",
+    "en": "Block private IPs and 169.254.169.254"
+   },
+   {
+    "it": "Seguire i redirect verso qualsiasi host",
+    "en": "Follow redirects to any host"
+   },
+   {
+    "it": "Richiedere HTTPS per gli endpoint dell'AS",
+    "en": "Require HTTPS for AS endpoints"
+   },
+   {
+    "it": "Accettare http per i metadati in produzione",
+    "en": "Accept http for metadata in production"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Gli URL di metadati arrivano dal server o dall'AS, quindi sono controllabili da un attaccante. Mitigazioni: bloccare indirizzi privati e link-local, richiedere HTTPS, usare un egress proxy.",
+   "en": "Metadata URLs come from the server or the AS, so an attacker can control them. Mitigations: block private and link-local addresses, require HTTPS, use an egress proxy."
+  }
+ },
+ {
+  "id": "o-H-D4-07",
+  "t": "D4-03",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un server MCP deve leggere il calendario dell'utente su un'API di terze parti. Qual è il design corretto?",
+   "en": "An MCP server must read the user's calendar on a third-party API. What is the correct design?"
+  },
+  "o": [
+   {
+    "it": "Inoltrare all'API il token ricevuto dal client MCP",
+    "en": "Forward the token received from the MCP client to the API"
+   },
+   {
+    "it": "Agire come client OAuth separato e usare un proprio token per l'API",
+    "en": "Act as a separate OAuth client and use its own token for the API"
+   },
+   {
+    "it": "Chiedere la password del calendario con elicitation in form mode",
+    "en": "Ask for the calendar password with form-mode elicitation"
+   },
+   {
+    "it": "Allargare l'audience del token MCP all'API del calendario",
+    "en": "Widen the MCP token's audience to the calendar API"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Token passthrough è vietato. Il server ottiene un token proprio per l'API a valle (ad esempio con elicitation in URL mode per il consenso), mantenendo audience distinte e audit.",
+   "en": "Token passthrough is forbidden. The server obtains its own token for the downstream API (for example via URL-mode elicitation for consent), keeping distinct audiences and auditability."
+  }
+ },
+ {
+  "id": "o-H-D4-08",
+  "t": "D4-16",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Una sessione ha un tool che legge email esterne, accesso a documenti riservati e un tool http_fetch. Qual è la mitigazione più efficace?",
+   "en": "A session has a tool reading external email, access to confidential documents and an http_fetch tool. What is the most effective mitigation?"
+  },
+  "o": [
+   {
+    "it": "Scrivere nelle instructions di non inviare dati all'esterno",
+    "en": "Write in the instructions not to send data outside"
+   },
+   {
+    "it": "Togliere una gamba della trifecta, ad es. la comunicazione esterna",
+    "en": "Remove one leg of the trifecta, e.g. external communication"
+   },
+   {
+    "it": "Marcare http_fetch con readOnlyHint: true perché non scriva",
+    "en": "Mark http_fetch with readOnlyHint: true so it cannot write"
+   },
+   {
+    "it": "Usare cacheScope private su ogni risultato della sessione",
+    "en": "Use cacheScope private on every result in the session"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Dati privati, contenuti non fidati e comunicazione esterna insieme permettono l'esfiltrazione via prompt injection. Testo e annotation non garantiscono nulla: serve togliere una delle tre capacità o mettere un controllo deterministico.",
+   "en": "Private data, untrusted content and external communication together enable exfiltration via prompt injection. Text and annotations guarantee nothing: remove one of the three capabilities or add a deterministic control."
+  }
+ },
+ {
+  "id": "o-H-D4-09",
+  "t": "D4-16",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool approvato mantiene nome e descrizione (con hash fissato), ma una nuova discovery mostra un inputSchema con un campo in più \"forward_to\". Cosa deve fare l'host?",
+   "en": "An approved tool keeps its name and description (hash-pinned), but a new discovery shows an inputSchema with an extra \"forward_to\" field. What should the host do?"
+  },
+  "o": [
+   {
+    "it": "Nulla: l'hash della descrizione coincide",
+    "en": "Nothing: the description hash matches"
+   },
+   {
+    "it": "Trattarlo come definizione cambiata e chiedere una nuova approvazione",
+    "en": "Treat it as a changed definition and ask for new approval"
+   },
+   {
+    "it": "Rimuovere il campo forward_to e chiamare il tool",
+    "en": "Remove the forward_to field and call the tool"
+   },
+   {
+    "it": "Abbassare il ttlMs del catalogo a 0",
+    "en": "Lower the catalog's ttlMs to 0"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "È una variante del rug pull: il pinning va fatto sull'intera definizione (schema e annotation incluse), e ogni cambiamento richiede una nuova revisione.",
+   "en": "This is a rug-pull variant: pinning must cover the whole definition (schema and annotations included), and any change requires a new review."
+  }
+ },
+ {
+  "id": "o-H-D4-10",
+  "t": "D4-17",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un server non verificato dichiara readOnlyHint: true sul tool delete_all_records. Come si comporta un host prudente?",
+   "en": "An unvetted server declares readOnlyHint: true on the delete_all_records tool. How does a prudent host behave?"
+  },
+  "o": [
+   {
+    "it": "Lo esegue senza conferma, come indicato",
+    "en": "Runs it without confirmation, as indicated"
+   },
+   {
+    "it": "Tratta le annotation come non fidate e chiede conferma",
+    "en": "Treats the annotations as untrusted and asks for confirmation"
+   },
+   {
+    "it": "Rifiuta la connessione al server con 403",
+    "en": "Refuses the server connection with 403"
+   },
+   {
+    "it": "Modifica l'annotation in destructiveHint: true",
+    "en": "Rewrites the annotation to destructiveHint: true"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le annotation sono suggerimenti e vanno considerate non fidate se il server non lo è. Possono guidare la UX ma non sostituiscono controlli e conferme.",
+   "en": "Annotations are hints and must be treated as untrusted unless the server is trusted. They can guide UX but do not replace controls and confirmations."
+  }
+ },
+ {
+  "id": "o-H-D4-11",
+  "t": "D4-12",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un gateway con cache condivisa riceve due resources/read identiche da due utenti con token diversi. Il risultato ha cacheScope private. Cosa può fare?",
+   "en": "A gateway with a shared cache gets two identical resources/read from two users with different tokens. The result has cacheScope private. What can it do?"
+  },
+  "o": [
+   {
+    "it": "Servire al secondo utente la risposta in cache del primo",
+    "en": "Serve the first user's cached response to the second user"
+   },
+   {
+    "it": "Riutilizzarla solo nello stesso contesto di autorizzazione",
+    "en": "Reuse it only within the same authorization context"
+   },
+   {
+    "it": "Riutilizzarla finché il ttlMs non è ancora scaduto",
+    "en": "Reuse it as long as the ttlMs has not expired yet"
+   },
+   {
+    "it": "Riutilizzarla se entrambi gli utenti sono dello stesso tenant",
+    "en": "Reuse it if both users belong to the same tenant"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "private significa riutilizzabile solo nello stesso contesto di autorizzazione. Solo public si condivide tra utenti, e cacheScope non è comunque controllo d'accesso.",
+   "en": "private means reusable only within the same authorization context. Only public is shared across users, and cacheScope is not access control anyway."
+  }
+ },
+ {
+  "id": "o-H-D4-12",
+  "t": "D4-18",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un utente incolla da una pagina web la configurazione \"npx -y weather-mcp@2.1.0\". Cosa è corretto? (scegli 2)",
+   "en": "A user pastes the configuration \"npx -y weather-mcp@2.1.0\" from a web page. What is correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il client mostra il comando completo e chiede approvazione esplicita",
+    "en": "The client shows the full command and asks for explicit approval"
+   },
+   {
+    "it": "La versione fissata blocca tutto l'albero di dipendenze",
+    "en": "The pinned version locks the whole dependency tree"
+   },
+   {
+    "it": "La versione fissata blocca solo il pacchetto di primo livello",
+    "en": "The pinned version only locks the top-level package"
+   },
+   {
+    "it": "stdio isola il processo, quindi il rischio è basso",
+    "en": "stdio isolates the process, so the risk is low"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il setup one-click esegue codice con i privilegi dell'utente: comando visibile e consenso esplicito. Con npx/uvx si fissa solo il primo livello; per tutto l'albero serve un'immagine per digest. stdio non è una sandbox.",
+   "en": "One-click setup runs code with the user's privileges: visible command and explicit consent. With npx/uvx only the top level is pinned; the whole tree needs an image by digest. stdio is not a sandbox."
+  }
+ },
+ {
+  "id": "o-H-D4-13",
+  "t": "D4-13",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un team progetta l'audit delle chiamate ai tool. Quali requisiti sono corretti? (scegli 2)",
+   "en": "A team designs auditing of tool calls. Which requirements are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Registrare quale agente ha agito e per conto di quale utente",
+    "en": "Record which agent acted and on behalf of which user"
+   },
+   {
+    "it": "Usare traceparent come unico registro di audit",
+    "en": "Use traceparent as the only audit record"
+   },
+   {
+    "it": "Tenere un registro durevole senza credenziali né dati personali",
+    "en": "Keep a durable record with no credentials or personal data"
+   },
+   {
+    "it": "Salvare i token di accesso per poter rifare le chiamate",
+    "en": "Store access tokens so calls can be replayed"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il trace context correla host, client, server e sistemi a valle, ma non sostituisce un audit durevole. Il log deve dire chi ha agito per chi, senza credenziali o dati personali.",
+   "en": "Trace context correlates host, client, server and downstream systems, but does not replace a durable audit. The log must say who acted for whom, without credentials or personal data."
+  }
+ },
+ {
+  "id": "o-H-D4-14",
+  "t": "D4-14",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un'azienda vuole che i dipendenti accedano ai server MCP con SSO aziendale e che IT possa revocare l'accesso centralmente. Cosa usa?",
+   "en": "A company wants employees to reach MCP servers through corporate SSO and IT to revoke access centrally. What does it use?"
+  },
+  "o": [
+   {
+    "it": "OAuth Client Credentials con JWT assertion",
+    "en": "OAuth Client Credentials with a JWT assertion"
+   },
+   {
+    "it": "Enterprise-Managed Authorization con ID-JAG emessi dall'IdP",
+    "en": "Enterprise-Managed Authorization with ID-JAGs issued by the IdP"
+   },
+   {
+    "it": "Dynamic Client Registration per ogni dipendente",
+    "en": "Dynamic Client Registration for each employee"
+   },
+   {
+    "it": "Elicitation in URL mode verso l'IdP a ogni chiamata",
+    "en": "URL-mode elicitation to the IdP on every call"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "EMA fa decidere all'IdP aziendale l'accesso ai server, con policy e revoca centralizzate. Client Credentials è per servizi senza utente. Entrambe le estensioni sono opt-in.",
+   "en": "EMA lets the enterprise IdP decide server access, with centralized policy and revocation. Client Credentials is for services with no user. Both extensions are opt-in."
+  }
+ },
+ {
+  "id": "o-H-D5-01",
+  "t": "D5-07",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un team pubblica io.github.acme/weather nel registry con un pacchetto npm. Cosa serve? (scegli 2)",
+   "en": "A team publishes io.github.acme/weather to the registry with an npm package. What is needed? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Autenticarsi su GitHub come acme (o un suo membro)",
+    "en": "Authenticate on GitHub as acme (or one of its members)"
+   },
+   {
+    "it": "Un record DNS TXT su github.com",
+    "en": "A DNS TXT record on github.com"
+   },
+   {
+    "it": "mcpName in package.json uguale al nome del server",
+    "en": "mcpName in package.json equal to the server name"
+   },
+   {
+    "it": "Una versione espressa come range, ad esempio ^1.0.0",
+    "en": "A version expressed as a range, e.g. ^1.0.0"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il namespace io.github.* si verifica con GitHub; la proprietà del pacchetto npm con mcpName in package.json. Le versioni a range sono vietate.",
+   "en": "The io.github.* namespace is verified via GitHub; npm package ownership via mcpName in package.json. Range versions are prohibited."
+  }
+ },
+ {
+  "id": "o-H-D5-02",
+  "t": "D5-07",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Per un server pubblicato solo come remote (URL HTTPS), cosa verifica il registry?",
+   "en": "For a server published only as a remote (HTTPS URL), what does the registry verify?"
+  },
+  "o": [
+   {
+    "it": "Che l'URL risponda a server/discover",
+    "en": "That the URL answers server/discover"
+   },
+   {
+    "it": "Il namespace del nome, non l'URL",
+    "en": "The name's namespace, not the URL"
+   },
+   {
+    "it": "Che l'URL sia sullo stesso dominio del namespace",
+    "en": "That the URL is on the namespace's domain"
+   },
+   {
+    "it": "Un certificato firmato dal registry",
+    "en": "A certificate signed by the registry"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Per i remote il registry verifica la proprietà del namespace, non l'URL. Il controllo del servizio resta a chi lo usa.",
+   "en": "For remotes the registry verifies namespace ownership, not the URL. Checking the service is up to whoever uses it."
+  }
+ },
+ {
+  "id": "o-H-D5-03",
+  "t": "D5-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un team vuole le nuove feature della spec già al rilascio e bug critici risolti in pochi giorni. Quale SDK sceglie?",
+   "en": "A team wants new spec features at release time and critical bugs fixed within days. Which SDK does it choose?"
+  },
+  "o": [
+   {
+    "it": "Java, Tier 2",
+    "en": "Java, Tier 2"
+   },
+   {
+    "it": "Un Tier 1, ad esempio Python o TypeScript",
+    "en": "A Tier 1, e.g. Python or TypeScript"
+   },
+   {
+    "it": "Swift, Tier 3",
+    "en": "Swift, Tier 3"
+   },
+   {
+    "it": "Uno qualsiasi: i tier non danno garanzie",
+    "en": "Any of them: tiers give no guarantees"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Tier 1: 100% conformance, feature prima del rilascio della spec, triage in 2 giorni lavorativi, bug critici in 7 giorni. Tier 2: nuove feature entro 6 mesi. Tier 3: sperimentale.",
+   "en": "Tier 1: 100% conformance, features before the spec release, triage in 2 business days, critical bugs in 7 days. Tier 2: new features within 6 months. Tier 3: experimental."
+  }
+ },
+ {
+  "id": "o-H-D5-04",
+  "t": "D5-11",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un server remoto deve notificare eventi a client che non possono tenere una connessione aperta. Cosa vale? (scegli 2)",
+   "en": "A remote server must notify events to clients that cannot hold a connection open. What applies? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Si usa la modalità webhook, con callback https firmata",
+    "en": "Use webhook mode, with a signed https callback"
+   },
+   {
+    "it": "La consegna è exactly-once, quindi non serve deduplicare",
+    "en": "Delivery is exactly-once, so no deduplication is needed"
+   },
+   {
+    "it": "Il client deduplica con eventId; l'ordine è best-effort",
+    "en": "The client deduplicates by eventId; ordering is best-effort"
+   },
+   {
+    "it": "Si usa subscriptions/listen, che sopravvive alle disconnessioni",
+    "en": "Use subscriptions/listen, which survives disconnections"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Webhook è per server remoti con client che non tengono connessioni. La consegna è at-least-once (eventId per deduplicare) e per i webhook l'ordine è best-effort.",
+   "en": "Webhook is for remote servers with clients that cannot hold connections. Delivery is at-least-once (eventId for deduplication) and for webhooks ordering is best-effort."
+  }
+ },
+ {
+  "id": "o-H-D5-05",
+  "t": "D5-13",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un host scopre skill da un server con Skills over MCP. Qual è la sequenza corretta?",
+   "en": "A host discovers skills from a server via Skills over MCP. What is the correct sequence?"
+  },
+  "o": [
+   {
+    "it": "resources/read di SKILL.md, che attiva subito la skill",
+    "en": "resources/read of SKILL.md, which activates the skill at once"
+   },
+   {
+    "it": "skills/list, verifica di digest SHA-256 e dimensione, approvazione, caricamento",
+    "en": "skills/list, SHA-256 digest and size check, approval, loading"
+   },
+   {
+    "it": "tools/call skill_install, poi riavvio del server",
+    "en": "tools/call skill_install, then a server restart"
+   },
+   {
+    "it": "prompts/get della skill, che il modello esegue subito",
+    "en": "prompts/get of the skill, which the model runs at once"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "skills/list fornisce URI, digest SHA-256 e dimensione di ogni file. Leggere SKILL.md non attiva nulla: l'host carica la skill dopo verifica ed eventuale approvazione.",
+   "en": "skills/list provides each file's URI, SHA-256 digest and size. Reading SKILL.md activates nothing: the host loads the skill after verification and any approval."
+  }
+ },
+ {
+  "id": "o-H-D5-06",
+  "t": "D5-08",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un tool ha una UI MCP Apps, ma il client non ha dichiarato l'estensione io.modelcontextprotocol/ui. Cosa ci si aspetta?",
+   "en": "A tool has an MCP Apps UI, but the client did not declare the io.modelcontextprotocol/ui extension. What is expected?"
+  },
+  "o": [
+   {
+    "it": "Il server restituisce comunque il contenuto normale del tool",
+    "en": "The server still returns the tool's normal content"
+   },
+   {
+    "it": "Il server risponde -32021 a ogni chiamata del tool",
+    "en": "The server answers -32021 to every call of the tool"
+   },
+   {
+    "it": "Il client apre la risorsa ui:// in una nuova finestra",
+    "en": "The client opens the ui:// resource in a new window"
+   },
+   {
+    "it": "Il client esegue l'HTML direttamente nella pagina host",
+    "en": "The client runs the HTML directly in the host page"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Le estensioni sono opt-in con fallback al core: senza dichiarazione il tool funziona con il contenuto normale. Quando l'estensione c'è, la UI gira in un iframe sandboxed che comunica solo via postMessage.",
+   "en": "Extensions are opt-in with fallback to core: without the declaration the tool works with normal content. When the extension is present, the UI runs in a sandboxed iframe communicating only via postMessage."
+  }
+ },
+ {
+  "id": "o-H-D5-07",
+  "t": "D5-05",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un host con 600 tool vuole ridurre token e dati sensibili nel contesto. Quali tecniche aiutano? (scegli 2)",
+   "en": "A host with 600 tools wants to cut tokens and sensitive data in context. Which techniques help? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Progressive discovery: Catalog, Inspect, Execute",
+    "en": "Progressive discovery: Catalog, Inspect, Execute"
+   },
+   {
+    "it": "Caricare tutte le definizioni a ogni turno",
+    "en": "Load every definition on each turn"
+   },
+   {
+    "it": "Code mode: il modello scrive codice che chiama i tool in sandbox",
+    "en": "Code mode: the model writes code that calls tools in a sandbox"
+   },
+   {
+    "it": "Rimuovere inputSchema per accorciare le definizioni",
+    "en": "Drop inputSchema to shorten definitions"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Oltre l'1-5% del contesto conviene caricare le definizioni solo quando servono. Con code mode i risultati intermedi restano fuori dal contesto del modello.",
+   "en": "Beyond 1-5% of context, load definitions only when needed. With code mode intermediate results stay out of the model's context."
+  }
+ },
+ {
+  "id": "o-H-D5-08",
+  "t": "D5-04",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Un server 2026-07-28 passa da 1 a 5 repliche dietro un load balancer round-robin. Cosa resta da fare? (scegli 2)",
+   "en": "A 2026-07-28 server goes from 1 to 5 replicas behind a round-robin load balancer. What is left to do? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Configurare sticky sessions sull'Mcp-Session-Id",
+    "en": "Configure sticky sessions on Mcp-Session-Id"
+   },
+   {
+    "it": "Tenere lo stato degli handle in uno store condiviso",
+    "en": "Keep handle state in a shared store"
+   },
+   {
+    "it": "Autorizzare l'handle su ogni chiamata, legandolo all'utente",
+    "en": "Authorize the handle on every call, bound to the user"
+   },
+   {
+    "it": "Replicare la cache delle sessioni initialize",
+    "en": "Replicate the initialize session cache"
+   }
+  ],
+  "c": [
+   1,
+   2
+  ],
+  "x": {
+   "it": "Il protocollo è stateless: niente sessioni né sticky routing. Lo stato applicativo dietro gli handle deve però essere raggiungibile da ogni replica, e ogni uso dell'handle va autorizzato.",
+   "en": "The protocol is stateless: no sessions or sticky routing. The application state behind handles must however be reachable from every replica, and every handle use must be authorized."
+  }
+ },
+ {
+  "id": "o-H-D5-09",
+  "t": "D5-12",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un team vuole distribuire un server locale a utenti non tecnici, con installazione in un clic su più client. Cosa usa?",
+   "en": "A team wants to distribute a local server to non-technical users, with one-click install across several clients. What does it use?"
+  },
+  "o": [
+   {
+    "it": "Un bundle .mcpb con manifest.json",
+    "en": "An .mcpb bundle with manifest.json"
+   },
+   {
+    "it": "Un server.json con solo remotes",
+    "en": "A server.json with remotes only"
+   },
+   {
+    "it": "Un'estensione MCP Apps",
+    "en": "An MCP Apps extension"
+   },
+   {
+    "it": "Un link npx da incollare nel terminale",
+    "en": "An npx link to paste in a terminal"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "MCPB (ex DXT) impacchetta server Node.js, Python o binari con un manifest.json obbligatorio, per l'installazione portabile tra client. Si può anche pubblicare nel registry con registryType mcpb.",
+   "en": "MCPB (formerly DXT) packages Node.js, Python or binary servers with a required manifest.json, for portable install across clients. It can also be published to the registry with registryType mcpb."
+  }
+ },
+ {
+  "id": "o-H-D5-10",
+  "t": "D5-01",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "In un deployment remoto con gateway davanti al server, chi deve comunque autorizzare l'accesso a un handle specifico?",
+   "en": "In a remote deployment with a gateway in front of the server, who must still authorize access to a specific handle?"
+  },
+  "o": [
+   {
+    "it": "Il gateway, filtrando su Mcp-Method",
+    "en": "The gateway, filtering on Mcp-Method"
+   },
+   {
+    "it": "Il server MCP, a ogni chiamata",
+    "en": "The MCP server, on every call"
+   },
+   {
+    "it": "L'authorization server, all'emissione del token",
+    "en": "The authorization server, when issuing the token"
+   },
+   {
+    "it": "L'host, mostrando una conferma all'utente",
+    "en": "The host, by showing the user a confirmation"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il gateway filtra in modo grossolano sugli header; l'autorizzazione fine (incluso chi può usare quale handle) resta nel server a ogni chiamata.",
+   "en": "The gateway filters coarsely on headers; fine-grained authorization (including who may use which handle) stays in the server on every call."
+  }
+ }
+]

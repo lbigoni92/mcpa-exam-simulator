@@ -1,0 +1,1022 @@
+[
+ {
+  "id": "o-D5-01",
+  "t": "D5-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Chi è responsabile di validare l'audience del token e autorizzare ogni uso di un handle?",
+   "en": "Who is responsible for validating token audience and authorizing every use of a handle?"
+  },
+  "o": [
+   {
+    "it": "L'host, che raccoglie il consenso",
+    "en": "The host, which collects consent"
+   },
+   {
+    "it": "L'autore del server MCP",
+    "en": "The MCP server author"
+   },
+   {
+    "it": "Il registry, che verifica i namespace",
+    "en": "The registry, which verifies namespaces"
+   },
+   {
+    "it": "L'utente finale, che approva i tool",
+    "en": "The end user, who approves the tools"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Validazione input, controllo accessi, rate limit, PRM, validazione token e autorizzazione degli handle spettano al server.",
+   "en": "Input validation, access control, rate limiting, PRM, token validation and handle authorization belong to the server."
+  }
+ },
+ {
+  "id": "o-D5-02",
+  "t": "D5-01",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Quali compiti spettano all'host/client? (scegli 2)",
+   "en": "Which tasks belong to the host/client? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Raccogliere il consenso e mostrare le approvazioni",
+    "en": "Collect consent and show approvals"
+   },
+   {
+    "it": "Emettere i token di accesso",
+    "en": "Issue access tokens"
+   },
+   {
+    "it": "Usare la cache in modo coerente con cacheScope",
+    "en": "Use caching consistently with cacheScope"
+   },
+   {
+    "it": "Moderare le voci del registry",
+    "en": "Moderate registry entries"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "I token li emette l'authorization server; la moderazione è del registry. L'host gestisce consenso, UI, _meta e caching.",
+   "en": "Tokens are issued by the authorization server; moderation is the registry's job. The host handles consent, UI, _meta and caching."
+  }
+ },
+ {
+  "id": "o-D5-03",
+  "t": "D5-01",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "In un'azienda con Enterprise-Managed Authorization, chi decide a quali server MCP può accedere un dipendente?",
+   "en": "In a company using Enterprise-Managed Authorization, who decides which MCP servers an employee can reach?"
+  },
+  "o": [
+   {
+    "it": "Il dipendente, server per server",
+    "en": "The employee, server by server"
+   },
+   {
+    "it": "L'IdP aziendale",
+    "en": "The enterprise IdP"
+   },
+   {
+    "it": "L'autore del client",
+    "en": "The client author"
+   },
+   {
+    "it": "Il registry ufficiale",
+    "en": "The official registry"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Con EMA l'IdP aziendale decide l'accesso con policy e revoca centralizzate (ID-JAG).",
+   "en": "With EMA the enterprise IdP decides access with centralized policy and revocation (ID-JAG)."
+  }
+ },
+ {
+  "id": "o-D5-04",
+  "t": "D5-02",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Chi ha co-fondato l'Agentic AI Foundation (AAIF)?",
+   "en": "Who co-founded the Agentic AI Foundation (AAIF)?"
+  },
+  "o": [
+   {
+    "it": "Anthropic, Block e OpenAI",
+    "en": "Anthropic, Block and OpenAI"
+   },
+   {
+    "it": "Google, Microsoft e Amazon",
+    "en": "Google, Microsoft and Amazon"
+   },
+   {
+    "it": "Solo Anthropic",
+    "en": "Anthropic alone"
+   },
+   {
+    "it": "La CNCF",
+    "en": "The CNCF"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "AAIF è stata co-fondata da Anthropic, Block e OpenAI sotto la Linux Foundation; progetti fondativi: MCP, goose, AGENTS.md.",
+   "en": "AAIF was co-founded by Anthropic, Block and OpenAI under the Linux Foundation; founding projects: MCP, goose, AGENTS.md."
+  }
+ },
+ {
+  "id": "o-D5-05",
+  "t": "D5-02",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Con quali licenze sono distribuiti codice/spec e documentazione di MCP?",
+   "en": "Under which licenses are MCP code/spec and documentation distributed?"
+  },
+  "o": [
+   {
+    "it": "MIT per codice, spec e documentazione",
+    "en": "MIT for code, spec and documentation"
+   },
+   {
+    "it": "Apache 2.0 per codice e spec, CC-BY 4.0 per i doc",
+    "en": "Apache 2.0 for code and spec, CC-BY 4.0 for docs"
+   },
+   {
+    "it": "GPL v3 per il codice, CC0 per la documentazione",
+    "en": "GPL v3 for code, CC0 for documentation"
+   },
+   {
+    "it": "Licenza proprietaria di Anthropic con uso gratuito",
+    "en": "Anthropic proprietary license with free use"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Codice e spec Apache 2.0, documentazione CC-BY 4.0. La membership nella governance è individuale.",
+   "en": "Code and spec Apache 2.0, documentation CC-BY 4.0. Governance membership is individual."
+  }
+ },
+ {
+  "id": "o-D5-06",
+  "t": "D5-03",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un'azienda vuole offrire un server MCP a migliaia di utenti, aggiornabile in un unico punto. Quale scelta è più adatta?",
+   "en": "A company wants to offer an MCP server to thousands of users, patched in one place. Which choice fits best?"
+  },
+  "o": [
+   {
+    "it": "Server locale stdio distribuito come pacchetto",
+    "en": "Local stdio server distributed as a package"
+   },
+   {
+    "it": "Server remoto Streamable HTTP con OAuth 2.1",
+    "en": "Remote Streamable HTTP server with OAuth 2.1"
+   },
+   {
+    "it": "Server locale HTTP su 0.0.0.0",
+    "en": "Local HTTP server on 0.0.0.0"
+   },
+   {
+    "it": "Un bundle MCPB per ogni utente",
+    "en": "An MCPB bundle per user"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il server remoto serve molti client e si aggiorna in un solo punto; il locale serve quando bisogna raggiungere file o strumenti della macchina.",
+   "en": "A remote server serves many clients and is patched in one place; local is needed to reach the machine's files or tools."
+  }
+ },
+ {
+  "id": "o-D5-07",
+  "t": "D5-03",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server deve leggere file del progetto sul laptop dello sviluppatore. Cosa si sceglie e con quale rischio principale?",
+   "en": "A server must read project files on the developer's laptop. What do you choose and with what main risk?"
+  },
+  "o": [
+   {
+    "it": "Remoto; rischio SSRF",
+    "en": "Remote; SSRF risk"
+   },
+   {
+    "it": "Locale stdio; codice eseguito con i privilegi dell'utente",
+    "en": "Local stdio; code running with the user's privileges"
+   },
+   {
+    "it": "Remoto; rischio mix-up",
+    "en": "Remote; mix-up risk"
+   },
+   {
+    "it": "Locale; nessun rischio perché stdio è isolato",
+    "en": "Local; no risk because stdio is isolated"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Per accedere a risorse locali serve un server locale; mitigazioni: sandbox, provenienza, consenso one-click.",
+   "en": "Reaching local resources needs a local server; mitigations: sandboxing, provenance, one-click consent."
+  }
+ },
+ {
+  "id": "o-D5-08",
+  "t": "D5-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server 2026-07-28 gira su 10 istanze dietro un load balancer round-robin. Cosa serve per funzionare?",
+   "en": "A 2026-07-28 server runs on 10 instances behind a round-robin load balancer. What does it need to work?"
+  },
+  "o": [
+   {
+    "it": "Sticky sessions sull'Mcp-Session-Id",
+    "en": "Sticky sessions on Mcp-Session-Id"
+   },
+   {
+    "it": "Nulla di particolare: ogni istanza può servire ogni richiesta",
+    "en": "Nothing special: any instance can serve any request"
+   },
+   {
+    "it": "Una cache condivisa delle sessioni initialize",
+    "en": "A shared cache of initialize sessions"
+   },
+   {
+    "it": "Un solo stream GET per client",
+    "en": "A single GET stream per client"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il protocollo è stateless: niente sessioni né sticky routing. Lo stato applicativo passa con handle espliciti.",
+   "en": "The protocol is stateless: no sessions or sticky routing. Application state travels via explicit handles."
+  }
+ },
+ {
+  "id": "o-D5-09",
+  "t": "D5-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un gateway vuole applicare rate limit specifici al tool delete_repo senza leggere il corpo JSON. Su cosa si basa?",
+   "en": "A gateway wants a specific rate limit on the delete_repo tool without parsing the JSON body. What does it use?"
+  },
+  "o": [
+   {
+    "it": "Sull'header Mcp-Name",
+    "en": "The Mcp-Name header"
+   },
+   {
+    "it": "Sull'header Mcp-Session-Id",
+    "en": "The Mcp-Session-Id header"
+   },
+   {
+    "it": "Sul campo clientInfo",
+    "en": "The clientInfo field"
+   },
+   {
+    "it": "Sul cookie di sessione",
+    "en": "The session cookie"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Mcp-Method e Mcp-Name (su tools/call, resources/read, prompts/get) permettono routing e rate limit a livello HTTP; il server verifica che corrispondano al corpo (-32020).",
+   "en": "Mcp-Method and Mcp-Name (on tools/call, resources/read, prompts/get) allow HTTP-level routing and rate limiting; the server checks they match the body (-32020)."
+  }
+ },
+ {
+  "id": "o-D5-10",
+  "t": "D5-04",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quale combinazione è corretta per un caso d'uso? (scegli 2)",
+   "en": "Which pairing of use case and mechanism is correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Job lungo avviato dal client → Tasks",
+    "en": "Long job started by the client → Tasks"
+   },
+   {
+    "it": "Notificare un agente non presidiato di un evento upstream → Events",
+    "en": "Notify an unattended agent of an upstream event → Events"
+   },
+   {
+    "it": "Comunicazione M2M → elicitation",
+    "en": "M2M communication → elicitation"
+   },
+   {
+    "it": "Stato tra chiamate → sticky sessions",
+    "en": "State across calls → sticky sessions"
+   }
+  ],
+  "c": [
+   0,
+   1
+  ],
+  "x": {
+   "it": "Tasks per risultati di operazioni lunghe, Events per attività upstream, Client Credentials per M2M, handle per lo stato.",
+   "en": "Tasks for long-operation results, Events for upstream activity, Client Credentials for M2M, handles for state."
+  }
+ },
+ {
+  "id": "o-D5-11",
+  "t": "D5-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un host ha 400 tool che occupano il 15% della finestra di contesto. Quale pattern è consigliato?",
+   "en": "A host has 400 tools taking 15% of the context window. Which pattern is recommended?"
+  },
+  "o": [
+   {
+    "it": "Caricarli tutti: il contesto è abbastanza grande",
+    "en": "Load them all: the context is big enough"
+   },
+   {
+    "it": "Progressive discovery con un meta-tool di ricerca",
+    "en": "Progressive discovery with a search meta-tool"
+   },
+   {
+    "it": "Dividerli su più sessioni del protocollo",
+    "en": "Split them across several protocol sessions"
+   },
+   {
+    "it": "Togliere le descrizioni e lasciare solo i nomi",
+    "en": "Drop the descriptions and keep only the names"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Regola pratica: oltre l'1-5% del contesto conviene la progressive discovery (Catalog → Inspect → Execute).",
+   "en": "Rule of thumb: beyond 1-5% of context, progressive discovery pays off (Catalog → Inspect → Execute)."
+  }
+ },
+ {
+  "id": "o-D5-12",
+  "t": "D5-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Qual è il vantaggio principale del code mode?",
+   "en": "What is the main benefit of code mode?"
+  },
+  "o": [
+   {
+    "it": "Elimina la necessità di autorizzazione",
+    "en": "It removes the need for authorization"
+   },
+   {
+    "it": "I risultati intermedi restano fuori dal contesto del modello",
+    "en": "Intermediate results stay out of the model's context"
+   },
+   {
+    "it": "Sostituisce il trasporto stdio",
+    "en": "It replaces the stdio transport"
+   },
+   {
+    "it": "Rende i tool deterministici",
+    "en": "It makes tools deterministic"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il modello scrive codice che chiama i tool in una sandbox: meno token e meno dati sensibili nel contesto.",
+   "en": "The model writes code that calls tools in a sandbox: fewer tokens and less sensitive data in context."
+  }
+ },
+ {
+  "id": "o-D5-13",
+  "t": "D5-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un team vuole mostrare una dashboard interattiva in tempo reale dentro il client. Quale estensione?",
+   "en": "A team wants to show a real-time interactive dashboard inside the client. Which extension?"
+  },
+  "o": [
+   {
+    "it": "Tasks",
+    "en": "Tasks"
+   },
+   {
+    "it": "MCP Apps",
+    "en": "MCP Apps"
+   },
+   {
+    "it": "Skills",
+    "en": "Skills"
+   },
+   {
+    "it": "Server Cards",
+    "en": "Server Cards"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "MCP Apps: UI HTML in iframe sandboxed, comunicazione solo via postMessage, risorse ui://.",
+   "en": "MCP Apps: HTML UIs in a sandboxed iframe, postMessage-only communication, ui:// resources."
+  }
+ },
+ {
+  "id": "o-D5-14",
+  "t": "D5-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un'azienda vuole che IT gestisca centralmente accesso e revoca ai server MCP con SSO aziendale. Quale estensione?",
+   "en": "A company wants IT to centrally manage access and revocation to MCP servers with corporate SSO. Which extension?"
+  },
+  "o": [
+   {
+    "it": "OAuth Client Credentials",
+    "en": "OAuth Client Credentials"
+   },
+   {
+    "it": "Enterprise-Managed Authorization",
+    "en": "Enterprise-Managed Authorization"
+   },
+   {
+    "it": "Events",
+    "en": "Events"
+   },
+   {
+    "it": "MCPB",
+    "en": "MCPB"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "EMA: policy centralizzate, revoca, SSO e compliance. Client Credentials è per servizi senza utente.",
+   "en": "EMA: centralized policy, revocation, SSO and compliance. Client Credentials is for services with no user."
+  }
+ },
+ {
+  "id": "o-D5-15",
+  "t": "D5-11",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server serverless non può tenere connessioni aperte. Quale modalità Events è più adatta?",
+   "en": "A serverless server cannot hold connections open. Which Events mode fits best?"
+  },
+  "o": [
+   {
+    "it": "push (events/stream)",
+    "en": "push (events/stream)"
+   },
+   {
+    "it": "poll (events/poll)",
+    "en": "poll (events/poll)"
+   },
+   {
+    "it": "Nessuna: Events richiede stdio",
+    "en": "None: Events requires stdio"
+   },
+   {
+    "it": "subscriptions/listen",
+    "en": "subscriptions/listen"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Poll per server serverless, push per server stdio, webhook per server remoti con client che non tengono connessioni.",
+   "en": "Poll for serverless servers, push for stdio servers, webhook for remote servers whose clients can't hold connections."
+  }
+ },
+ {
+  "id": "o-D5-16",
+  "t": "D5-11",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali garanzie offre Events? (scegli 2)",
+   "en": "Which guarantees does Events offer? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Consegna at-least-once con eventId per deduplicare",
+    "en": "At-least-once delivery with eventId for deduplication"
+   },
+   {
+    "it": "Consegna exactly-once",
+    "en": "Exactly-once delivery"
+   },
+   {
+    "it": "Ordine garantito per poll e push, best-effort per webhook",
+    "en": "Ordering guaranteed for poll and push, best-effort for webhook"
+   },
+   {
+    "it": "Ordine garantito anche per webhook",
+    "en": "Ordering guaranteed for webhook too"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Cursori opachi e at-least-once: il client deduplica con eventId; maxAgeMs limita il replay.",
+   "en": "Opaque cursors and at-least-once: the client deduplicates with eventId; maxAgeMs limits replay."
+  }
+ },
+ {
+  "id": "o-D5-17",
+  "t": "D5-14",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un gateway filtra le richieste per header Mcp-Method. Basta per l'autorizzazione?",
+   "en": "A gateway filters requests by the Mcp-Method header. Is that enough for authorization?"
+  },
+  "o": [
+   {
+    "it": "Sì: il gateway vede già metodo e nome del tool",
+    "en": "Yes: the gateway already sees the method and tool name"
+   },
+   {
+    "it": "No: l'autorizzazione fine resta nel server",
+    "en": "No: fine-grained authorization stays in the server"
+   },
+   {
+    "it": "Sì, purché il traffico sia cifrato con TLS",
+    "en": "Yes, as long as traffic is encrypted with TLS"
+   },
+   {
+    "it": "Sì, se le risposte hanno cacheScope private",
+    "en": "Yes, if responses have cacheScope private"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il gateway filtra in modo grossolano; il server autorizza ogni chiamata, inclusi gli handle.",
+   "en": "The gateway filters coarsely; the server authorizes every call, handles included."
+  }
+ },
+ {
+  "id": "o-D5-18",
+  "t": "D5-14",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "In un settore regolamentato, quali pratiche sono raccomandate? (scegli 2)",
+   "en": "In a regulated industry, which practices are recommended? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Tenere i dati sensibili fuori dal contesto del modello quando possibile",
+    "en": "Keep sensitive data out of the model context when possible"
+   },
+   {
+    "it": "Usare cacheScope public per ridurre i costi",
+    "en": "Use cacheScope public to cut costs"
+   },
+   {
+    "it": "ID di correlazione end-to-end e un audit trail durevole",
+    "en": "End-to-end correlation IDs and a durable audit trail"
+   },
+   {
+    "it": "Affidarsi solo al trace context come audit",
+    "en": "Rely only on trace context as audit"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il trace context correla ma non è un audit trail; dati sensibili con cacheScope private.",
+   "en": "Trace context correlates but is not an audit trail; sensitive data with cacheScope private."
+  }
+ },
+ {
+  "id": "o-D5-19",
+  "t": "D5-06",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale SDK è Tier 2?",
+   "en": "Which SDK is Tier 2?"
+  },
+  "o": [
+   {
+    "it": "Python",
+    "en": "Python"
+   },
+   {
+    "it": "Java",
+    "en": "Java"
+   },
+   {
+    "it": "Swift",
+    "en": "Swift"
+   },
+   {
+    "it": "Go",
+    "en": "Go"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Tier 1: TypeScript, Python, C#, Go, Rust, Ruby. Tier 2: Java. Tier 3: Swift, PHP, Kotlin.",
+   "en": "Tier 1: TypeScript, Python, C#, Go, Rust, Ruby. Tier 2: Java. Tier 3: Swift, PHP, Kotlin."
+  }
+ },
+ {
+  "id": "o-D5-20",
+  "t": "D5-06",
+  "d": 2,
+  "type": "multi",
+  "q": {
+   "it": "Quali requisiti valgono per un SDK Tier 1? (scegli 2)",
+   "en": "Which requirements apply to a Tier 1 SDK? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "100% dei test di conformance",
+    "en": "100% of conformance tests"
+   },
+   {
+    "it": "Supporto obbligatorio a tutte le estensioni",
+    "en": "Mandatory support for all extensions"
+   },
+   {
+    "it": "Triage entro 2 giorni lavorativi",
+    "en": "Triage within 2 business days"
+   },
+   {
+    "it": "Nuove feature entro 6 mesi",
+    "en": "New features within 6 months"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Tier 1: 100% conformance, feature prima del rilascio della spec, triage in 2 giorni lavorativi, bug critici in 7 giorni. Le estensioni non sono richieste.",
+   "en": "Tier 1: 100% conformance, features before the spec release, triage in 2 business days, critical bugs in 7 days. Extensions are not required."
+  }
+ },
+ {
+  "id": "o-D5-21",
+  "t": "D5-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un SDK Tier 1 fallisce un test di conformance per 4 settimane consecutive. Cosa succede?",
+   "en": "A Tier 1 SDK fails a conformance test for 4 consecutive weeks. What happens?"
+  },
+  "o": [
+   {
+    "it": "Nulla",
+    "en": "Nothing"
+   },
+   {
+    "it": "Viene retrocesso a Tier 2",
+    "en": "It is relegated to Tier 2"
+   },
+   {
+    "it": "Viene rimosso dall'organizzazione",
+    "en": "It is removed from the organization"
+   },
+   {
+    "it": "Passa a Tier 3",
+    "en": "It moves to Tier 3"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Retrocessione dopo 4 settimane di fallimenti continui: Tier 1 → 2 se fallisce anche un solo test.",
+   "en": "Relegation after 4 weeks of continuous failures: Tier 1 → 2 if any test fails."
+  }
+ },
+ {
+  "id": "o-D5-22",
+  "t": "D5-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale versione è valida in un server.json del registry?",
+   "en": "Which version is valid in a registry server.json?"
+  },
+  "o": [
+   {
+    "it": "^1.2.3",
+    "en": "^1.2.3"
+   },
+   {
+    "it": "1.2.3",
+    "en": "1.2.3"
+   },
+   {
+    "it": ">=1.0",
+    "en": ">=1.0"
+   },
+   {
+    "it": "1.x",
+    "en": "1.x"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il registry vieta le stringhe che sembrano range (^, ~, >=, 1.x, 1.2.*). La versione è unica e immutabile; consigliato il semantic versioning.",
+   "en": "The registry prohibits strings that look like ranges (^, ~, >=, 1.x, 1.2.*). The version is unique and immutable; semantic versioning is recommended."
+  }
+ },
+ {
+  "id": "o-D5-23",
+  "t": "D5-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Come dimostra un autore la proprietà di un pacchetto npm pubblicato nel registry?",
+   "en": "How does an author prove ownership of an npm package published to the registry?"
+  },
+  "o": [
+   {
+    "it": "Con il campo mcpName in package.json",
+    "en": "With the mcpName field in package.json"
+   },
+   {
+    "it": "Con un label OCI",
+    "en": "With an OCI label"
+   },
+   {
+    "it": "Con mcp-name nel README",
+    "en": "With mcp-name in the README"
+   },
+   {
+    "it": "Con un record DNS TXT",
+    "en": "With a DNS TXT record"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "npm: mcpName in package.json; PyPI: mcp-name nel README; OCI: label io.modelcontextprotocol.server.name. Il DNS verifica il namespace, non il pacchetto.",
+   "en": "npm: mcpName in package.json; PyPI: mcp-name in the README; OCI: io.modelcontextprotocol.server.name label. DNS verifies the namespace, not the package."
+  }
+ },
+ {
+  "id": "o-D5-24",
+  "t": "D5-07",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Dopo la pubblicazione, cosa si può modificare di una voce del registry?",
+   "en": "After publishing, what can be changed in a registry entry?"
+  },
+  "o": [
+   {
+    "it": "La descrizione, se resta coerente con il nome",
+    "en": "The description, if it stays consistent with the name"
+   },
+   {
+    "it": "Gli URL dei pacchetti, se puntano alla stessa versione",
+    "en": "Package URLs, if they point to the same version"
+   },
+   {
+    "it": "Solo lo status (deprecated, deleted)",
+    "en": "Only the status (deprecated, deleted)"
+   },
+   {
+    "it": "Il nome, se il namespace resta verificato",
+    "en": "The name, if the namespace stays verified"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "I metadati sono immutabili tranne lo status; per altre modifiche si pubblica una nuova versione.",
+   "en": "Metadata is immutable except status; for other changes a new version is published."
+  }
+ },
+ {
+  "id": "o-D5-25",
+  "t": "D5-08",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale estensione ufficiale espone metadati del server prima della connessione?",
+   "en": "Which official extension exposes server metadata before connecting?"
+  },
+  "o": [
+   {
+    "it": "Server Cards",
+    "en": "Server Cards"
+   },
+   {
+    "it": "Tasks",
+    "en": "Tasks"
+   },
+   {
+    "it": "Skills",
+    "en": "Skills"
+   },
+   {
+    "it": "MCP Apps",
+    "en": "MCP Apps"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Server Cards: metadati disponibili prima della connessione.",
+   "en": "Server Cards: metadata available before connecting."
+  }
+ },
+ {
+  "id": "o-D5-26",
+  "t": "D5-13",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un host legge SKILL.md con resources/read. La skill è attiva?",
+   "en": "A host reads SKILL.md with resources/read. Is the skill active?"
+  },
+  "o": [
+   {
+    "it": "Sì: leggere SKILL.md la attiva subito",
+    "en": "Yes: reading SKILL.md activates it at once"
+   },
+   {
+    "it": "No: l'host la carica dopo verifica e approvazione",
+    "en": "No: the host loads it after verification and approval"
+   },
+   {
+    "it": "Sì, se il digest SHA-256 coincide",
+    "en": "Yes, if the SHA-256 digest matches"
+   },
+   {
+    "it": "Dipende da come il server la dichiara",
+    "en": "It depends on how the server declares it"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Leggere non attiva. skills/list fornisce URI, digest SHA-256 e dimensione per verificare l'integrità.",
+   "en": "Reading does not activate. skills/list provides URI, SHA-256 digest and size to verify integrity."
+  }
+ },
+ {
+  "id": "o-D5-27",
+  "t": "D5-12",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale file è obbligatorio in un bundle .mcpb?",
+   "en": "Which file is required in an .mcpb bundle?"
+  },
+  "o": [
+   {
+    "it": "server.json",
+    "en": "server.json"
+   },
+   {
+    "it": "manifest.json",
+    "en": "manifest.json"
+   },
+   {
+    "it": "package.json",
+    "en": "package.json"
+   },
+   {
+    "it": "SKILL.md",
+    "en": "SKILL.md"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "MCPB (ex DXT di Claude Desktop) richiede manifest.json; supporta server Node.js, Python e binari; si pubblica nel registry con registryType mcpb.",
+   "en": "MCPB (formerly Claude Desktop's DXT) requires manifest.json; supports Node.js, Python and binary servers; published to the registry with registryType mcpb."
+  }
+ },
+ {
+  "id": "o-D5-28",
+  "t": "D5-09",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Lo stesso server MCP viene esposto sia su stdio sia su Streamable HTTP. Cosa resta identico tra i due trasporti?",
+   "en": "The same MCP server is exposed over both stdio and Streamable HTTP. What stays identical across the two transports?"
+  },
+  "o": [
+   {
+    "it": "Il formato dei messaggi JSON-RPC",
+    "en": "The JSON-RPC message format"
+   },
+   {
+    "it": "Il meccanismo di autorizzazione OAuth",
+    "en": "The OAuth authorization mechanism"
+   },
+   {
+    "it": "Il modo di cancellare una richiesta",
+    "en": "The way a request is cancelled"
+   },
+   {
+    "it": "Gli header Mcp-Method e Mcp-Name",
+    "en": "The Mcp-Method and Mcp-Name headers"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Il livello dati è lo stesso: stessi messaggi JSON-RPC su ogni trasporto. Cambiano autorizzazione (stdio usa l'ambiente), cancellazione (chiusura stream vs notifications/cancelled) e header (solo HTTP).",
+   "en": "The data layer is the same: the same JSON-RPC messages on every transport. Authorization (stdio uses the environment), cancellation (closing the stream vs notifications/cancelled) and headers (HTTP only) differ."
+  }
+ },
+ {
+  "id": "o-D5-29",
+  "t": "D5-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale strumento ufficiale si usa per testare e fare debug di un server MCP?",
+   "en": "Which official tool is used to test and debug an MCP server?"
+  },
+  "o": [
+   {
+    "it": "MCP Inspector",
+    "en": "MCP Inspector"
+   },
+   {
+    "it": "Postman MCP",
+    "en": "Postman MCP"
+   },
+   {
+    "it": "MCPB CLI",
+    "en": "MCPB CLI"
+   },
+   {
+    "it": "Registry validator",
+    "en": "Registry validator"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "MCP Inspector esiste in versione web, --cli e --tui.",
+   "en": "MCP Inspector comes in web, --cli and --tui versions."
+  }
+ }
+]

@@ -1,0 +1,149 @@
+---
+title: Working Groups and Interest Groups
+description: The MCP project's working groups and interest groups, how to join or start one, and the operating rules every group follows.
+---
+
+This page lists the project's working groups and interest groups, explains how to join or start one, and sets the operating rules every group follows. The rules were adopted by [SEP-2149](/seps/2149), a Specification Enhancement Proposal (SEP). A group's charter cannot override them, and changing them requires a Process SEP. Group membership is not required to take part in a group's work, though a [SEP](/community/sep-guidelines) needs [prior discussion](/community/sep-guidelines#before-you-write) with the relevant working group and its agreement to sponsor before the pull request is [marked ready for review](/community/sep-guidelines#workflow). You may take part in as many groups as your time allows.
+
+## Working groups and interest groups
+
+|           | Working group                                                                                                        | Interest group                                                                       |
+| --------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Purpose   | Build a concrete solution                                                                                            | Identify and discuss a problem                                                       |
+| Output    | SEPs, reference implementations, or stewardship of an endorsed project such as the Inspector, the Registry or an SDK | Problem statements, use cases, recommendations, and input to working groups and SEPs |
+| Decisions | Binding within scope: lazy consensus, then vote, then escalation                                                     | Non-binding, by rough consensus                                                      |
+| Led by    | Leads                                                                                                                | Facilitators                                                                         |
+| Duration  | Until its deliverables are complete                                                                                  | Ongoing while the topic is relevant                                                  |
+| Example   | [Transports](/community/working-groups/transports)                                                                   | [Security](/community/interest-groups/security)                                      |
+
+In the usual path an interest group frames a problem, and a working group solves it. That can be an existing working group or a new one the interest group starts through the [forming a group](#forming-a-group) process, and the working group sponsors any resulting SEP.
+
+## Current groups
+
+Working groups:
+
+- [MCP Apps](/community/working-groups/apps)
+- [File Uploads](/community/working-groups/file-uploads)
+- [Filesystems](/community/working-groups/filesystems)
+- [Governance](/community/working-groups/governance)
+- [Infrastructure](/community/working-groups/infrastructure)
+- [Inspector V2](/community/working-groups/inspector-v2)
+- [Interceptors](/community/working-groups/interceptors)
+- [Progressive Disclosure](/community/working-groups/progressive-disclosure)
+- [Registry](/community/working-groups/registry)
+- [SDK](/community/working-groups/sdk)
+- [Server Card](/community/working-groups/server-card)
+- [Skills Over MCP](/community/working-groups/skills-over-mcp)
+- [Tasks and Events](/community/working-groups/tasks-events)
+- [Transports](/community/working-groups/transports)
+
+Interest groups:
+
+- [Agents](/community/interest-groups/agents)
+- [Authorization](/community/interest-groups/auth)
+- [Enterprise](/community/interest-groups/enterprise)
+- [Financial Services](/community/interest-groups/financial-services)
+- [Scientific Computing](/community/interest-groups/scientific-computing)
+- [Security](/community/interest-groups/security)
+- [Tool Annotations](/community/interest-groups/tool-annotations)
+
+## Joining a group
+
+Join the group's Discord channel, which the charter names ([Communication](/community/communication#discord) gives the naming convention). Attend the group's call, listed on [meet.modelcontextprotocol.io](https://meet.modelcontextprotocol.io), and follow its agenda and notes thread (see [Meetings and channels](#meetings-and-channels)). Offering to take notes, prepare an agenda or facilitate a call is the fastest way in. Share your use cases in SEP discussions and take on working group deliverables when you are ready.
+
+To be listed as a Participant, ask a Lead. WG Member status follows the nomination process under [Participation levels](#participation-levels). Member lists live in the [access repository](https://github.com/modelcontextprotocol/access), which drives GitHub team membership and Discord roles. The [Antitrust Policy](/community/antitrust) applies in every group meeting.
+
+## Leadership
+
+Each group has one or more Leads, called Facilitators in an interest group. A Lead or Facilitator must hold at least [Member](/community/contributor-ladder#member) status and show sustained engagement with the group's scope. They must be able to facilitate across organizations, represent several perspectives fairly, and commit to running the group's operations; for a WG Lead that means 2 to 3 hours a week. The group and its leadership must be sponsored by at least two Core Maintainers or one Lead Maintainer.
+
+Every Lead and Facilitator must:
+
+- schedule and run regular meetings under [Meetings and channels](#meetings-and-channels)
+- set agendas with participants and publish them in advance
+- make sure meeting notes are published
+- keep the charter and other group documentation current
+- keep the member list and access list in the [access repository](https://github.com/modelcontextprotocol/access) current
+- recruit and retain a broad membership across organizations and perspectives
+
+A WG Lead must also:
+
+- drive the group's proposals through the [SEP process](/community/sep-guidelines) to resolution
+- triage SEPs in the group's scope and close those that do not fit the roadmap, giving written rationale on the pull request; the author may appeal to Core Maintainers
+- escalate blocked decisions to Core Maintainers with clear context
+- keep the group's roadmap (the charter's Active Work Items) current and feed it into the [project roadmap](/development/roadmap)
+- regularly check the group's general direction with one or more Core Maintainers
+- post the quarterly update under [Reporting](#reporting)
+
+Leading a group does not require Maintainer status, and it counts toward advancement to [Maintainer](/community/contributor-ladder#maintainer). A Lead or Facilitator who is not a Maintainer works with one for merge decisions. Lead authority covers group operations, not specification approval. A WG Lead may [sponsor SEPs](/community/sep-guidelines#sponsors) within the group's scope.
+
+## Participation levels
+
+| Level            | Description                                       | Privileges                                                         |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------------------ |
+| Observer         | Anyone interested in following the group's work   | Read access, may attend meetings, limited discussion participation |
+| Participant      | Active contributor to group discussions           | Can propose agenda items, participate in async votes               |
+| WG Member        | Sustained contributor with demonstrated expertise | Counted for quorum (WGs only)                                      |
+| Lead/Facilitator | Operational leadership of the group               | Sets agenda, facilitates, escalates                                |
+
+WG Member is a group-level tier distinct from the project-wide [Member](/community/contributor-ladder#member) role: a person may be a WG Member without holding Member status, and the reverse. Interest groups primarily operate with Observers, Participants and Facilitators, and may adopt the WG Member tier if their work warrants formal decision-making.
+
+In a working group, or an interest group that has adopted the tier, becoming a WG Member requires three things: sustained participation over 3 months with contributions of code, specification text, reviews or documentation; nomination by an existing WG Member or Lead; and no objection from the Leads, Core Maintainers or Lead Maintainers within 7 days. WG Members keep their name, organization and Discord handle current in the group's member list. A WG Member who does not participate for 3 consecutive months is moved to emeritus status and may return by demonstrating renewed participation.
+
+## Making decisions
+
+Working groups make binding decisions within their scope through three steps, each attempted before the next.
+
+1. Lazy consensus. A proposal is announced with a clear deadline of at least 5 days for minor items and 10 days for significant items. Silence is consent. Any WG Member may block with a documented objection, which must propose alternatives or clear criteria for resolution. If no block is raised by the deadline, the proposal is accepted.
+2. Formal vote. A vote is triggered when a WG Member blocks during the lazy consensus period, or when a Lead or three or more WG Members request one. Quorum is 50% of active WG Members. Routine matters pass by simple majority and scope changes by a two-thirds majority. Core Maintainer feedback is advisory unless explicitly stated as binding. Every vote is documented with rationale.
+3. Escalation. If the vote fails to resolve the matter (no quorum, no passage, or a contested result), the Lead escalates to Core Maintainers under [Escalation](#escalation).
+
+Interest groups operate by rough consensus and their output is non-binding. An interest group that has adopted the WG Member tier may use these steps for internal decisions.
+
+Each working group's charter records, in its Authority and Decision Rights table, the decisions the group takes at each level. That table is approved with the charter and changed under [Amending or retiring a group](#amending-or-retiring-a-group).
+
+## Escalation
+
+The generic escalation procedure and response-time matrix are defined in the [Contributor Ladder](/community/contributor-ladder#escalation).
+
+Technical and design disagreements within a group's scope are resolved in the group before Core Maintainers are involved: a working group uses [Making decisions](#making-decisions), and an interest group's Facilitator seeks rough consensus. Scope disputes (whether a topic falls within the charter), authority disputes (whether the group may decide a matter), cross-group conflicts, Code of Conduct or behavioral concerns, and membership or participation disputes should be escalated directly to Core Maintainers.
+
+When a Lead escalates, the Core Maintainer group designates one of its members, who should not share organizational affiliation with the parties involved, to resolve the issue and report back to the group. That Core Maintainer provides binding guidance, requests more information, or recommends that the full Core Maintainer group deliberate. An escalation should receive an initial response within 5 business days.
+
+## Meetings and channels
+
+Leads set each group's meeting frequency, format and duration; there is no fixed cadence. Every group meeting must:
+
+- be open to all community participants, with no closed or organization-internal meetings
+- be published on [meet.modelcontextprotocol.io](https://meet.modelcontextprotocol.io) at least 7 days in advance
+- have a public agenda; the agenda or a link to it should be posted as a [GitHub Discussion in the Meeting Notes category](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/) before the meeting
+- have its notes published to the same discussion within 48 hours
+- use the official Google Meet transcription as its only automated record; third-party AI notetakers and meeting bots are not permitted, per the [Code of Conduct](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/CODE_OF_CONDUCT.md#community-meetings)
+- run under the [Code of Conduct](/community/policies#code-of-conduct) and the [Antitrust Policy](/community/antitrust), whose Conduct of Meetings section requires agendas and minutes
+- link [Project Policies](/community/policies) from its agenda
+
+Leads should involve WG Members and Participants in preparing agendas, taking notes and facilitating.
+
+Each group has a Discord channel (naming at [Communication](/community/communication#discord)) for quick questions and coordination; responses there are best effort. Long-form technical discussion goes to [GitHub Discussions](https://github.com/modelcontextprotocol/modelcontextprotocol/discussions/), which are triaged weekly, and a group may have its own Discussions category on request. Leads are granted the roles needed to manage and moderate both.
+
+## Reporting
+
+Each working group posts a quarterly update at the end of January, April, July and October as a document in its GitHub Discussions category, covering progress against deliverables, blocked items and escalations, membership changes, upcoming priorities, and resource needs. Core Maintainers may take it up at their meeting. Interest groups have no reporting requirement but should keep their charter and member list current.
+
+## Forming a group
+
+### Working group
+
+A working group is formed when a widely acknowledged problem needs coordinated work. Prior discussion in an interest group helps but is not required. With a clear deliverable you may propose a working group directly. The group and its Leads need the sponsorship set out under [Leadership](#leadership); ask in the Discord channel closest to the topic or in `#wg-ig-group-creation`. Once sponsored, the proposers submit a charter as described in [Submitting a charter](/community/charter-template#submitting-a-charter). The WG Lead approves the initial member list.
+
+### Interest group
+
+Fill out the creation template in the `#wg-ig-group-creation` channel on [Discord](https://discord.gg/modelcontextprotocol). A Core Maintainer reviews the proposal, and the group and its Facilitators need the same sponsorship. Once sponsored, the Facilitators organize the group and submit a charter the same way, with the file under `docs/community/interest-groups/`.
+
+## Amending or retiring a group
+
+A change to a group's charter is proposed by a Lead, a Facilitator or a Core Maintainer, approved by Core Maintainers, and recorded in the charter's Changelog.
+
+A working group is retired when its Lead or a Core Maintainer proposes retirement with rationale and a Core Maintainer or Lead Maintainer approves. It is also retired when it has completed all planned deliverables or has had no active work for a sustained period. Core Maintainers or Lead Maintainers may retire an interest group that is no longer active or needed.
+
+In both cases the group's documentation is archived and its channels are marked inactive.

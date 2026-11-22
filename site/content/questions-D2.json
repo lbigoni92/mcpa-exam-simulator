@@ -1,0 +1,774 @@
+[
+ {
+  "id": "o-D2-01",
+  "t": "D2-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server MCP ha bisogno della conferma dell'utente prima di cancellare un record. Come la ottiene nella 2026-07-28?",
+   "en": "An MCP server needs user confirmation before deleting a record. How does it get it in 2026-07-28?"
+  },
+  "o": [
+   {
+    "it": "Invia al client una richiesta elicitation/create su uno stream separato",
+    "en": "It sends the client an elicitation/create request on a separate stream"
+   },
+   {
+    "it": "Risponde alla tools/call con un InputRequiredResult che contiene la richiesta di elicitation",
+    "en": "It answers tools/call with an InputRequiredResult containing the elicitation request"
+   },
+   {
+    "it": "Apre una connessione GET verso il client",
+    "en": "It opens a GET connection to the client"
+   },
+   {
+    "it": "Chiede all'host di riavviare la sessione",
+    "en": "It asks the host to restart the session"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Con MRTR il server non invia richieste: restituisce un InputRequiredResult in risposta alla richiesta del client, che poi riprova con le risposte.",
+   "en": "With MRTR the server sends no requests: it returns an InputRequiredResult in response to the client's request, and the client retries with the answers."
+  }
+ },
+ {
+  "id": "o-D2-02",
+  "t": "D2-02",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Dove dichiara le proprie capability un client conforme alla 2026-07-28?",
+   "en": "Where does a 2026-07-28 client declare its capabilities?"
+  },
+  "o": [
+   {
+    "it": "Una sola volta, nella richiesta initialize",
+    "en": "Once, in the initialize request"
+   },
+   {
+    "it": "In un header HTTP Mcp-Capabilities su ogni POST",
+    "en": "In an Mcp-Capabilities HTTP header on every POST"
+   },
+   {
+    "it": "Nel _meta di ogni richiesta (clientCapabilities)",
+    "en": "In the _meta of every request (clientCapabilities)"
+   },
+   {
+    "it": "Solo nella prima richiesta della connessione",
+    "en": "Only in the first request of the connection"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Senza handshake, ogni richiesta porta le capability del client nel _meta. Il server le dichiara invece in server/discover.",
+   "en": "With no handshake, every request carries the client's capabilities in _meta. The server declares its own in server/discover."
+  }
+ },
+ {
+  "id": "o-D2-03",
+  "t": "D2-02",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale affermazione su server/discover è corretta?",
+   "en": "Which statement about server/discover is correct?"
+  },
+  "o": [
+   {
+    "it": "Il server MUST implementarlo; il client MAY chiamarlo",
+    "en": "The server MUST implement it; the client MAY call it"
+   },
+   {
+    "it": "Il client MUST chiamarlo prima di ogni altra richiesta",
+    "en": "The client MUST call it before any other request"
+   },
+   {
+    "it": "È opzionale sia per il server sia per il client",
+    "en": "It is optional for both server and client"
+   },
+   {
+    "it": "Sostituisce tools/list",
+    "en": "It replaces tools/list"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "server/discover è obbligatorio da implementare per i server ma facoltativo da chiamare per i client (utile per scegliere la versione o come probe su stdio).",
+   "en": "server/discover is mandatory for servers to implement but optional for clients to call (useful to pick a version or as a probe over stdio)."
+  }
+ },
+ {
+  "id": "o-D2-04",
+  "t": "D2-02",
+  "d": 2,
+  "type": "multiple",
+  "q": {
+   "it": "Quali due campi fanno parte del risultato di server/discover? (Selezionane due)",
+   "en": "Which two fields are part of the server/discover result? (Select two)"
+  },
+  "o": [
+   {
+    "it": "supportedVersions",
+    "en": "supportedVersions"
+   },
+   {
+    "it": "sessionId",
+    "en": "sessionId"
+   },
+   {
+    "it": "capabilities",
+    "en": "capabilities"
+   },
+   {
+    "it": "clientCapabilities",
+    "en": "clientCapabilities"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "DiscoverResult contiene supportedVersions, capabilities, instructions opzionali, serverInfo nel _meta e i campi di caching. Non esistono session ID; clientCapabilities è del client.",
+   "en": "DiscoverResult contains supportedVersions, capabilities, optional instructions, serverInfo in _meta and caching fields. There are no session IDs; clientCapabilities belongs to the client."
+  }
+ },
+ {
+  "id": "o-D2-05",
+  "t": "D2-03",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Un server stdio stampa messaggi di debug su stdout e il client smette di funzionare. Qual è la correzione?",
+   "en": "A stdio server prints debug messages to stdout and the client breaks. What is the fix?"
+  },
+  "o": [
+   {
+    "it": "Inviare i log come notifications/message",
+    "en": "Send the logs as notifications/message"
+   },
+   {
+    "it": "Aggiungere un prefisso # che il client salta",
+    "en": "Add a # prefix that the client skips"
+   },
+   {
+    "it": "Passare a Streamable HTTP, che tollera i log",
+    "en": "Switch to Streamable HTTP, which tolerates logs"
+   },
+   {
+    "it": "Scrivere i log su stderr, non su stdout",
+    "en": "Write the logs to stderr, not stdout"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Su stdio, stdout è riservato ai messaggi JSON-RPC delimitati da newline. I log vanno su stderr (il logging di protocollo è deprecato).",
+   "en": "Over stdio, stdout is reserved for newline-delimited JSON-RPC messages. Logs go to stderr (protocol logging is deprecated)."
+  }
+ },
+ {
+  "id": "o-D2-06",
+  "t": "D2-03",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Qual è la sequenza raccomandata per chiudere un server stdio?",
+   "en": "What is the recommended sequence to shut down a stdio server?"
+  },
+  "o": [
+   {
+    "it": "Inviare una notifica di shutdown e attendere la risposta",
+    "en": "Send a shutdown notification and wait for the reply"
+   },
+   {
+    "it": "Chiudere lo stdin, attendere, poi SIGTERM e infine SIGKILL se necessario",
+    "en": "Close stdin, wait, then SIGTERM and finally SIGKILL if needed"
+   },
+   {
+    "it": "Inviare SIGKILL subito",
+    "en": "Send SIGKILL immediately"
+   },
+   {
+    "it": "Chiudere stdout del server",
+    "en": "Close the server's stdout"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "La spec stdio prevede: il client chiude lo stdin, attende l'uscita, poi SIGTERM e, se il server non termina, SIGKILL.",
+   "en": "The stdio spec says: the client closes stdin, waits for exit, then SIGTERM and, if the server does not exit, SIGKILL."
+  }
+ },
+ {
+  "id": "o-D2-07",
+  "t": "D2-04",
+  "d": 2,
+  "type": "multiple",
+  "q": {
+   "it": "Quali due header sono obbligatori su OGNI POST verso un endpoint MCP 2026-07-28? (Selezionane due)",
+   "en": "Which two headers are required on EVERY POST to a 2026-07-28 MCP endpoint? (Select two)"
+  },
+  "o": [
+   {
+    "it": "MCP-Protocol-Version",
+    "en": "MCP-Protocol-Version"
+   },
+   {
+    "it": "Mcp-Session-Id",
+    "en": "Mcp-Session-Id"
+   },
+   {
+    "it": "Mcp-Method",
+    "en": "Mcp-Method"
+   },
+   {
+    "it": "Mcp-Name",
+    "en": "Mcp-Name"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "MCP-Protocol-Version e Mcp-Method servono su ogni POST. Mcp-Name serve solo su tools/call, resources/read e prompts/get. Mcp-Session-Id non esiste più.",
+   "en": "MCP-Protocol-Version and Mcp-Method are needed on every POST. Mcp-Name is only for tools/call, resources/read and prompts/get. Mcp-Session-Id no longer exists."
+  }
+ },
+ {
+  "id": "o-D2-08",
+  "t": "D2-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un vecchio client invia una GET all'endpoint MCP di un server che supporta solo la 2026-07-28. Cosa dovrebbe rispondere il server?",
+   "en": "An old client sends a GET to the MCP endpoint of a 2026-07-28-only server. What should the server respond?"
+  },
+  "o": [
+   {
+    "it": "200 con uno stream SSE vuoto",
+    "en": "200 with an empty SSE stream"
+   },
+   {
+    "it": "404 Not Found",
+    "en": "404 Not Found"
+   },
+   {
+    "it": "405 Method Not Allowed",
+    "en": "405 Method Not Allowed"
+   },
+   {
+    "it": "401 Unauthorized",
+    "en": "401 Unauthorized"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "GET e DELETE sull'endpoint MCP sono stati rimossi: un server solo-2026-07-28 SHOULD rispondere 405.",
+   "en": "GET and DELETE on the MCP endpoint were removed: a 2026-07-28-only server SHOULD respond 405."
+  }
+ },
+ {
+  "id": "o-D2-09",
+  "t": "D2-04",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Lo stream SSE di una tools/call si interrompe a metà per un problema di rete. Cosa deve fare il client?",
+   "en": "The SSE stream of a tools/call breaks halfway due to a network issue. What should the client do?"
+  },
+  "o": [
+   {
+    "it": "Riconnettersi con Last-Event-ID e riprendere lo stream",
+    "en": "Reconnect with Last-Event-ID and resume the stream"
+   },
+   {
+    "it": "Aprire una GET sull'endpoint per ricevere il resto",
+    "en": "Open a GET on the endpoint to receive the rest"
+   },
+   {
+    "it": "Aspettare che il server reinvii la risposta sullo stream listen",
+    "en": "Wait for the server to resend the response on the listen stream"
+   },
+   {
+    "it": "Reinviarla come nuova richiesta con un nuovo id",
+    "en": "Re-issue it as a new request with a new id"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Nella 2026-07-28 la caduta della connessione cancella implicitamente la richiesta e la resumability (Last-Event-ID) non esiste più: la richiesta è persa. Se serve ancora il risultato, il client la reinvia come richiesta nuova con un nuovo id (attenzione ai tool non idempotenti); per lavori che devono sopravvivere a una disconnessione si usa l'estensione Tasks (SEP-2575).",
+   "en": "In 2026-07-28 a dropped connection implicitly cancels the request and stream resumability (Last-Event-ID) no longer exists: the request is lost. If the result is still needed, the client re-issues it as a new request with a new id (careful with non-idempotent tools); work that must survive a disconnect uses the Tasks extension (SEP-2575)."
+  }
+ },
+ {
+  "id": "o-D2-10",
+  "t": "D2-05",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un server annota il parametro \"region\" (type string) con x-mcp-header. Cosa fa il client HTTP?",
+   "en": "A server annotates the \"region\" parameter (type string) with x-mcp-header. What does the HTTP client do?"
+  },
+  "o": [
+   {
+    "it": "Copia il valore nell'header Mcp-Param-{nome} della POST, così i gateway possono instradare",
+    "en": "Copies the value into the POST's Mcp-Param-{name} header so gateways can route"
+   },
+   {
+    "it": "Rimuove il parametro dal body",
+    "en": "Removes the parameter from the body"
+   },
+   {
+    "it": "Cifra il valore prima di inviarlo",
+    "en": "Encrypts the value before sending"
+   },
+   {
+    "it": "Ignora l'annotazione: è solo documentazione",
+    "en": "Ignores the annotation: it is documentation only"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "x-mcp-header rispecchia il valore in un header Mcp-Param-*; il valore resta anche nel body e deve coincidere (altrimenti HeaderMismatch). Non va usato per dati sensibili.",
+   "en": "x-mcp-header mirrors the value into an Mcp-Param-* header; the value stays in the body too and must match (otherwise HeaderMismatch). It must not be used for sensitive data."
+  }
+ },
+ {
+  "id": "o-D2-11",
+  "t": "D2-05",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Su quale tipo di proprietà x-mcp-header NON è ammesso?",
+   "en": "On which property type is x-mcp-header NOT allowed?"
+  },
+  "o": [
+   {
+    "it": "string",
+    "en": "string"
+   },
+   {
+    "it": "number",
+    "en": "number"
+   },
+   {
+    "it": "integer",
+    "en": "integer"
+   },
+   {
+    "it": "boolean",
+    "en": "boolean"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "x-mcp-header è ammesso solo su integer, string e boolean; number non è permesso. Gli integer devono stare nell'intervallo sicuro (±2^53−1).",
+   "en": "x-mcp-header is only allowed on integer, string and boolean; number is not permitted. Integers must be within the safe range (±2^53−1)."
+  }
+ },
+ {
+  "id": "o-D2-12",
+  "t": "D2-13",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un gateway aggrega due server che espongono entrambi un tool \"search\". Qual è la strategia indicata dalla spec?",
+   "en": "A gateway aggregates two servers that both expose a \"search\" tool. What strategy does the spec suggest?"
+  },
+  "o": [
+   {
+    "it": "Tenere solo il tool del server collegato per primo",
+    "en": "Keep only the tool of the first connected server"
+   },
+   {
+    "it": "Usare serverInfo.name per distinguerli, perché è univoco",
+    "en": "Use serverInfo.name to tell them apart, because it is unique"
+   },
+   {
+    "it": "Disambiguare, ad esempio con un prefisso che identifica il server",
+    "en": "Disambiguate, for example with a prefix identifying the server"
+   },
+   {
+    "it": "Chiedere ai server di rinominare i tool a runtime",
+    "en": "Ask the servers to rename the tools at runtime"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "L'unicità dei nomi vale solo dentro un server; chi aggrega SHOULD disambiguare (es. prefisso). serverInfo.name non è garantito univoco.",
+   "en": "Name uniqueness only holds within one server; aggregators SHOULD disambiguate (e.g. a prefix). serverInfo.name is not guaranteed to be unique."
+  }
+ },
+ {
+  "id": "o-D2-13",
+  "t": "D2-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un inputSchema non contiene la keyword $schema. Quale dialetto JSON Schema si applica?",
+   "en": "An inputSchema has no $schema keyword. Which JSON Schema dialect applies?"
+  },
+  "o": [
+   {
+    "it": "JSON Schema Draft-04",
+    "en": "JSON Schema Draft-04"
+   },
+   {
+    "it": "JSON Schema Draft-07",
+    "en": "JSON Schema Draft-07"
+   },
+   {
+    "it": "Il dialetto di OpenAPI 3.0",
+    "en": "The OpenAPI 3.0 dialect"
+   },
+   {
+    "it": "JSON Schema 2020-12",
+    "en": "JSON Schema 2020-12"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Senza $schema il default è JSON Schema 2020-12. Un altro dialetto si può indicare esplicitamente con $schema.",
+   "en": "Without $schema the default is JSON Schema 2020-12. Another dialect can be stated explicitly with $schema."
+  }
+ },
+ {
+  "id": "o-D2-14",
+  "t": "D2-06",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un inputSchema contiene un $ref verso https://schemas.example.com/user.json. Cosa deve fare il client che valida?",
+   "en": "An inputSchema contains a $ref to https://schemas.example.com/user.json. What should the validating client do?"
+  },
+  "o": [
+   {
+    "it": "Scaricare lo schema e metterlo in cache",
+    "en": "Download the schema and cache it"
+   },
+   {
+    "it": "Non dereferenziarlo automaticamente via rete",
+    "en": "Not dereference it automatically over the network"
+   },
+   {
+    "it": "Rifiutare il tool con errore -32602",
+    "en": "Reject the tool with error -32602"
+   },
+   {
+    "it": "Inoltrare il riferimento al modello",
+    "en": "Forward the reference to the model"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "La spec vieta di risolvere automaticamente $ref verso URI di rete (rischi SSRF e DoS). Si risolvono solo riferimenti interni secondo le regole di $ref resolution.",
+   "en": "The spec forbids automatically resolving $ref to network URIs (SSRF and DoS risks). Only internal references are resolved, per the $ref resolution rules."
+  }
+ },
+ {
+  "id": "o-D2-15",
+  "t": "D2-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale chiave di _meta un'azienda può usare liberamente, perché non è riservata?",
+   "en": "Which _meta key can a company use freely, because it is not reserved?"
+  },
+  "o": [
+   {
+    "it": "io.modelcontextprotocol/audit",
+    "en": "io.modelcontextprotocol/audit"
+   },
+   {
+    "it": "dev.mcp/audit",
+    "en": "dev.mcp/audit"
+   },
+   {
+    "it": "com.example.mcp/audit",
+    "en": "com.example.mcp/audit"
+   },
+   {
+    "it": "traceparent",
+    "en": "traceparent"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Sono riservati i prefissi il cui secondo label è modelcontextprotocol o mcp (io.modelcontextprotocol/, dev.mcp/) e le chiavi OpenTelemetry. In com.example.mcp/ il secondo label è example.",
+   "en": "Prefixes whose second label is modelcontextprotocol or mcp (io.modelcontextprotocol/, dev.mcp/) and the OpenTelemetry keys are reserved. In com.example.mcp/ the second label is example."
+  }
+ },
+ {
+  "id": "o-D2-16",
+  "t": "D2-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server chiede accesso privilegiato perché il client dichiara clientInfo.name = \"OfficialAdminClient\". È una base valida?",
+   "en": "A server grants privileged access because the client declares clientInfo.name = \"OfficialAdminClient\". Is that a valid basis?"
+  },
+  "o": [
+   {
+    "it": "No: clientInfo è auto-dichiarato e non verificato",
+    "en": "No: clientInfo is self-reported and unverified"
+   },
+   {
+    "it": "Sì, se la richiesta arriva su HTTPS",
+    "en": "Yes, if the request arrives over HTTPS"
+   },
+   {
+    "it": "Sì, perché clientInfo è firmato dall'host",
+    "en": "Yes, because clientInfo is signed by the host"
+   },
+   {
+    "it": "Sì, ma solo su stdio",
+    "en": "Yes, but only over stdio"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "clientInfo e serverInfo servono per display e diagnostica; chiunque può scriverci qualsiasi valore. Le decisioni di sicurezza vanno su autenticazione e autorizzazione.",
+   "en": "clientInfo and serverInfo are for display and diagnostics; anyone can put any value there. Security decisions belong to authentication and authorization."
+  }
+ },
+ {
+  "id": "o-D2-17",
+  "t": "D2-08",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool dichiara un outputSchema. Quali sono gli obblighi?",
+   "en": "A tool declares an outputSchema. What are the obligations?"
+  },
+  "o": [
+   {
+    "it": "Il client MUST rifiutare risultati non conformi; il server MAY ignorarlo",
+    "en": "The client MUST reject non-conforming results; the server MAY ignore it"
+   },
+   {
+    "it": "Nessuno: outputSchema è solo documentazione",
+    "en": "None: outputSchema is documentation only"
+   },
+   {
+    "it": "Il server MUST restituire solo testo",
+    "en": "The server MUST return text only"
+   },
+   {
+    "it": "Il server MUST restituire structuredContent conforme; il client SHOULD validare",
+    "en": "The server MUST return conforming structuredContent; the client SHOULD validate"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Con outputSchema il server deve produrre structuredContent conforme e il client dovrebbe validarlo. Per compatibilità si include anche il JSON in un TextContent.",
+   "en": "With outputSchema the server must produce conforming structuredContent and the client should validate it. For compatibility the JSON is also included in a TextContent."
+  }
+ },
+ {
+  "id": "o-D2-18",
+  "t": "D2-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Cosa vede il modello di un tool prima di decidere di chiamarlo?",
+   "en": "What does the model see about a tool before deciding to call it?"
+  },
+  "o": [
+   {
+    "it": "Il codice sorgente e le dipendenze del tool",
+    "en": "The tool's source code and dependencies"
+   },
+   {
+    "it": "Nome, descrizione, inputSchema, annotations",
+    "en": "Name, description, inputSchema, annotations"
+   },
+   {
+    "it": "Lo storico delle chiamate di altri utenti",
+    "en": "Other users' call history"
+   },
+   {
+    "it": "La voce del tool nel registry ufficiale",
+    "en": "The tool's entry in the official registry"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il modello riceve le definizioni da tools/list (name, description, inputSchema, annotations). Per questo le descrizioni sono una superficie d'attacco (tool poisoning).",
+   "en": "The model receives definitions from tools/list (name, description, inputSchema, annotations). That is why descriptions are an attack surface (tool poisoning)."
+  }
+ },
+ {
+  "id": "o-D2-19",
+  "t": "D2-11",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server vuole spiegare all'LLM di chiamare sempre validate_schema prima di migrate_schema. Dove conviene scriverlo?",
+   "en": "A server wants to tell the LLM to always call validate_schema before migrate_schema. Where is the best place to write that?"
+  },
+  "o": [
+   {
+    "it": "Nel campo instructions di server/discover",
+    "en": "In the instructions field of server/discover"
+   },
+   {
+    "it": "In ogni messaggio di errore restituito dal tool",
+    "en": "In every error message the tool returns"
+   },
+   {
+    "it": "In un header HTTP personalizzato sulla risposta",
+    "en": "In a custom HTTP header on the response"
+   },
+   {
+    "it": "Nel nome del tool, come prefisso numerico",
+    "en": "In the tool name, as a numeric prefix"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Le server instructions servono proprio a descrivere relazioni e ordine tra tool; l'host di solito le mette nel system prompt. Non garantiscono però il comportamento.",
+   "en": "Server instructions exist precisely to describe relationships and ordering between tools; the host usually puts them in the system prompt. They do not guarantee behavior, though."
+  }
+ },
+ {
+  "id": "o-D2-20",
+  "t": "D2-11",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Un team vuole impedire che un tool di pagamento venga chiamato senza conferma, e pensa di scriverlo nelle server instructions. Cosa rispondi?",
+   "en": "A team wants to stop a payment tool from being called without confirmation and plans to write that in the server instructions. What do you answer?"
+  },
+  "o": [
+   {
+    "it": "Va bene: il modello è obbligato a seguire le instructions",
+    "en": "Fine: the model is bound to follow the instructions"
+   },
+   {
+    "it": "Meglio la descrizione del tool, che il modello deve rispettare",
+    "en": "Better the tool description, which the model must obey"
+   },
+   {
+    "it": "Le instructions non garantiscono nulla: serve un controllo nell'host",
+    "en": "Instructions guarantee nothing: a host-side control is needed"
+   },
+   {
+    "it": "Basta readOnlyHint: false, che obbliga il client a chiedere",
+    "en": "readOnlyHint: false is enough, it forces the client to ask"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Le instructions sono testo per l'LLM e non garantiscono il comportamento: mai usarle per controlli critici di sicurezza. Servono regole deterministiche nell'host.",
+   "en": "Instructions are text for the LLM and do not guarantee behavior: never use them for critical security controls. Deterministic rules in the host are needed."
+  }
+ },
+ {
+  "id": "o-D2-21",
+  "t": "D2-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client dichiara un'estensione che il server non supporta. Cosa prevede il framework delle estensioni?",
+   "en": "A client declares an extension the server does not support. What does the extensions framework say?"
+  },
+  "o": [
+   {
+    "it": "Il server deve chiudere la connessione",
+    "en": "The server must close the connection"
+   },
+   {
+    "it": "Si torna al comportamento core oppure si rifiuta con un errore",
+    "en": "Fall back to core behavior or reject with an error"
+   },
+   {
+    "it": "Il server deve installare l'estensione",
+    "en": "The server must install the extension"
+   },
+   {
+    "it": "Il client deve ripetere l'initialize",
+    "en": "The client must redo initialize"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le estensioni sono opt-in: se l'altra parte non le supporta si ricade sul core o, se l'estensione è indispensabile, si rifiuta con un errore.",
+   "en": "Extensions are opt-in: if the other side does not support one, fall back to core or, if the extension is essential, reject with an error."
+  }
+ },
+ {
+  "id": "o-D2-22",
+  "t": "D2-12",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale interazione utente è tipica dei prompt, secondo la documentazione MCP?",
+   "en": "Which user interaction is typical for prompts, according to the MCP docs?"
+  },
+  "o": [
+   {
+    "it": "Dialog di approvazione prima di ogni invocazione",
+    "en": "An approval dialog before each invocation"
+   },
+   {
+    "it": "Inclusione automatica decisa dal modello",
+    "en": "Automatic inclusion decided by the model"
+   },
+   {
+    "it": "Slash command o command palette scelti dall'utente",
+    "en": "Slash commands or command palettes chosen by the user"
+   },
+   {
+    "it": "Nessuna: i prompt sono invisibili all'utente",
+    "en": "None: prompts are invisible to the user"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "I prompt sono controllati dall'utente (slash command, palette, pulsanti); i tool dal modello con approvazione; le risorse dall'applicazione.",
+   "en": "Prompts are user-controlled (slash commands, palettes, buttons); tools are model-controlled with approval; resources are application-controlled."
+  }
+ }
+]

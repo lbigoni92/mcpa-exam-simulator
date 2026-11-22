@@ -1,0 +1,16 @@
+services:
+  mcpa-sim:
+    build: .
+    image: mcpa-sim
+    container_name: mcpa-sim
+    # pubblicata solo su localhost: il simulatore non è raggiungibile dalla rete
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      - mcpa-data:/data
+      # domande personali (cartella esclusa da git), lette all'avvio se presenti
+      - ./local:/app/local:ro
+    restart: unless-stopped
+
+volumes:
+  mcpa-data:

@@ -1,0 +1,710 @@
+{
+ "domain": "D3",
+ "topics": [
+  {
+   "id": "D3-01",
+   "title": {
+    "it": "Messaggi JSON-RPC e resultType",
+    "en": "JSON-RPC messages and resultType"
+   },
+   "summary": {
+    "it": "MCP usa request, result, error e notification JSON-RPC 2.0. Nella 2026-07-28 le request vanno solo dal client al server, e ogni result dichiara il suo resultType.",
+    "en": "MCP uses JSON-RPC 2.0 requests, results, errors and notifications. In 2026-07-28 requests only flow from client to server, and every result declares its resultType."
+   },
+   "points": {
+    "it": [
+     "Request: id string o integer, mai null, non riusato tra richieste pendenti.",
+     "Notification: senza id, non riceve risposta.",
+     "resultType: \"complete\" oppure \"input_required\" (e \"task\" con l'estensione Tasks); se assente vale complete.",
+     "Il server non avvia mai richieste JSON-RPC verso il client.",
+     "Il batching JSON-RPC non è supportato (rimosso nella 2025-06-18).",
+     "Un resultType non riconosciuto dal client MUST essere considerato invalido; un valore di estensione (task) è valido solo se la capability è stata dichiarata.",
+     "Un error response omette l'id solo se l'id non era leggibile (es. -32700 Parse error su body non JSON)."
+    ],
+    "en": [
+     "Request: string or integer id, never null, not reused among pending requests.",
+     "Notification: no id, gets no response.",
+     "resultType: \"complete\" or \"input_required\" (and \"task\" with the Tasks extension); absent means complete.",
+     "The server never initiates JSON-RPC requests to the client.",
+     "JSON-RPC batching is not supported (removed in 2025-06-18).",
+     "A resultType the client does not recognize MUST be considered invalid; an extension value (task) is valid only if the capability was declared.",
+     "An error response omits the id only when the id could not be read (e.g. -32700 Parse error on a non-JSON body)."
+    ]
+   },
+   "source": {
+    "label": "Spec · Basic · Messages",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D3-02",
+   "title": {
+    "it": "Statelessness e _meta per richiesta",
+    "en": "Statelessness and per-request _meta"
+   },
+   "summary": {
+    "it": "Ogni richiesta è autocontenuta: porta in _meta la versione del protocollo e le capability del client. Il server non deve dedurre contesto dalle richieste precedenti, nemmeno sulla stessa connessione.",
+    "en": "Every request is self-contained: it carries the protocol version and client capabilities in _meta. The server must not infer context from earlier requests, even on the same connection."
+   },
+   "points": {
+    "it": [
+     "Obbligatori: io.modelcontextprotocol/protocolVersion e io.modelcontextprotocol/clientCapabilities.",
+     "clientInfo: SHOULD. serverInfo nei result: SHOULD.",
+     "Campo obbligatorio mancante: -32602 (su HTTP 400).",
+     "Capability necessaria non dichiarata: MissingRequiredClientCapabilityError (-32021).",
+     "Lo stato applicativo tra chiamate si gestisce con handle espliciti passati come argomenti.",
+     "tools/list, resources/list e prompts/list non possono variare per connessione né come effetto collaterale di una chiamata precedente; possono variare solo in base all'autorizzazione della richiesta.",
+     "Rimossi nella 2026-07-28: initialize, notifications/initialized, Mcp-Session-Id e le capabilities legate alla connessione."
+    ],
+    "en": [
+     "Required: io.modelcontextprotocol/protocolVersion and io.modelcontextprotocol/clientCapabilities.",
+     "clientInfo: SHOULD. serverInfo in results: SHOULD.",
+     "Missing required field: -32602 (HTTP 400).",
+     "Required capability not declared: MissingRequiredClientCapabilityError (-32021).",
+     "Application state across calls is handled with explicit handles passed as arguments.",
+     "tools/list, resources/list and prompts/list must not vary per connection or as a side effect of an earlier call; they may vary only by the request's authorization.",
+     "Removed in 2026-07-28: initialize, notifications/initialized, Mcp-Session-Id and connection-scoped capabilities."
+    ]
+   },
+   "trap": {
+    "it": "Una connessione stdio aperta o una connessione HTTP keep-alive non è una sessione.",
+    "en": "An open stdio connection or an HTTP keep-alive connection is not a session."
+   },
+   "source": {
+    "label": "Spec · Basic · Statelessness",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D3-03",
+   "title": {
+    "it": "Versione per richiesta e retrocompatibilità",
+    "en": "Per-request versioning and backwards compatibility"
+   },
+   "summary": {
+    "it": "Il server accetta o rifiuta ogni richiesta in base alla versione dichiarata. Se non la supporta risponde con l'elenco delle versioni che conosce.",
+    "en": "The server accepts or rejects each request based on the declared version. If it does not support it, it replies with the list of versions it knows."
+   },
+   "points": {
+    "it": [
+     "Versione non supportata: UnsupportedProtocolVersionError (-32022) con data.supported.",
+     "Il client sceglie una versione da supported e riprova.",
+     "Un errore modern riconosciuto significa server modern: niente fallback a initialize.",
+     "Client dual-era su stdio: errore non modern o timeout del probe → server legacy → fallback a initialize.",
+     "L'era si ricorda per processo (stdio) o per origin (HTTP).",
+     "Probe HTTP: si prova una richiesta moderna; su 4xx si legge il body. Errore moderno riconosciuto = server moderno (correggi e riprova); body vuoto o non riconosciuto = legacy, fallback a initialize ed eventualmente a HTTP+SSE.",
+     "Matrice: moderno con legacy fallisce; legacy con solo-moderno fallisce (i client legacy non possono passare al moderno da soli); dual-era da una delle due parti funziona.",
+     "Un server solo moderno dovrebbe indicare le versioni supportate anche quando rifiuta un initialize legacy: può essere l'unica diagnostica per l'utente."
+    ],
+    "en": [
+     "Unsupported version: UnsupportedProtocolVersionError (-32022) with data.supported.",
+     "The client picks a version from supported and retries.",
+     "A recognized modern error means a modern server: no fallback to initialize.",
+     "Dual-era client over stdio: non-modern error or probe timeout → legacy server → fallback to initialize.",
+     "The era is remembered per process (stdio) or per origin (HTTP).",
+     "HTTP probe: try a modern request; on a 4xx read the body. Recognized modern error = modern server (fix and retry); empty or unrecognized body = legacy, fall back to initialize and possibly to HTTP+SSE.",
+     "Matrix: modern with legacy fails; legacy with modern-only fails (legacy clients cannot fall forward); dual-era on either side works.",
+     "A modern-only server should state its supported versions even when rejecting a legacy initialize: it may be the user's only diagnostic."
+    ]
+   },
+   "source": {
+    "label": "Spec · Versioning",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
+   }
+  },
+  {
+   "id": "D3-04",
+   "title": {
+    "it": "Multi Round-Trip Requests (MRTR)",
+    "en": "Multi Round-Trip Requests (MRTR)"
+   },
+   "summary": {
+    "it": "MRTR sostituisce le richieste server→client. Se al server serve qualcosa (es. una conferma dell'utente), risponde con un InputRequiredResult; il client raccoglie l'input e riprova la richiesta.",
+    "en": "MRTR replaces server-to-client requests. When the server needs something (e.g. user confirmation), it replies with an InputRequiredResult; the client collects the input and retries the request."
+   },
+   "points": {
+    "it": [
+     "InputRequiredResult: resultType input_required, con inputRequests e/o requestState (almeno uno).",
+     "Ammesso solo su tools/call, resources/read e prompts/get.",
+     "Il retry è una nuova richiesta con nuovo id, inputResponses con le stesse chiavi e requestState identico.",
+     "Il server non può chiedere input per capability che il client non ha dichiarato.",
+     "Se nel retry manca qualcosa, il server risponde con un nuovo InputRequiredResult, non con un errore.",
+     "I risultati dei retry MRTR non vanno messi in cache.",
+     "Ogni voce di inputRequests è esattamente una tra elicitation/create, sampling/createMessage e roots/list, con una chiave scelta dal server.",
+     "Il server non deve dare per scontato che il client riprovi né tenere risorse aperte in attesa del retry.",
+     "Senza inputRequests il client può riprovare subito; requestState si rimanda solo se il server l'ha inviato, identico e senza interpretarlo.",
+     "inputResponses e requestState valgono solo per il retry di quella richiesta, mai per altre chiamate in parallelo."
+    ],
+    "en": [
+     "InputRequiredResult: resultType input_required, with inputRequests and/or requestState (at least one).",
+     "Allowed only on tools/call, resources/read and prompts/get.",
+     "The retry is a new request with a new id, inputResponses with the same keys and an identical requestState.",
+     "The server cannot ask for input requiring capabilities the client did not declare.",
+     "If something is missing in the retry, the server replies with a new InputRequiredResult, not an error.",
+     "Results of MRTR retries must not be cached.",
+     "Each inputRequests entry is exactly one of elicitation/create, sampling/createMessage or roots/list, under a server-chosen key.",
+     "The server must not assume the client will retry, nor hold resources open waiting for the retry.",
+     "Without inputRequests the client may retry immediately; requestState is echoed only if the server sent it, unchanged and uninterpreted.",
+     "inputResponses and requestState apply only to the retry of that request, never to other parallel calls."
+    ]
+   },
+   "trap": {
+    "it": "Il retry MRTR non riusa lo stesso id JSON-RPC.",
+    "en": "An MRTR retry does not reuse the same JSON-RPC id."
+   },
+   "source": {
+    "label": "Spec · Patterns · MRTR",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr"
+   }
+  },
+  {
+   "id": "D3-05",
+   "title": {
+    "it": "Subscriptions",
+    "en": "Subscriptions"
+   },
+   "summary": {
+    "it": "Per ricevere notifiche di cambiamento il client apre uno stream con subscriptions/listen, indicando cosa gli interessa. Sostituisce il GET SSE e resources/subscribe.",
+    "en": "To receive change notifications the client opens a stream with subscriptions/listen, stating what it wants. It replaces the standalone GET SSE and resources/subscribe."
+   },
+   "points": {
+    "it": [
+     "Filtro opt-in: toolsListChanged, promptsListChanged, resourcesListChanged, resourceSubscriptions (URI).",
+     "Primo messaggio: notifications/subscriptions/acknowledged con il sottoinsieme accettato.",
+     "subscriptionId = id JSON-RPC della richiesta subscriptions/listen.",
+     "Progress e log non passano dallo stream di listen.",
+     "Su stdio, dopo una riconnessione, il client deve ri-inviare subscriptions/listen.",
+     "Fine di una subscription: cancellazione del client; chiusura gradevole del server (SHOULD rispondere alla richiesta subscriptions/listen con un result complete, poi chiudere); oppure caduta del trasporto, che non porta nessuna risposta.",
+     "Più subscription contemporanee sono permesse: il client le distingue tramite subscriptionId."
+    ],
+    "en": [
+     "Opt-in filter: toolsListChanged, promptsListChanged, resourcesListChanged, resourceSubscriptions (URIs).",
+     "First message: notifications/subscriptions/acknowledged with the accepted subset.",
+     "subscriptionId = JSON-RPC id of the subscriptions/listen request.",
+     "Progress and log messages do not travel on the listen stream.",
+     "Over stdio, after reconnecting, the client must resend subscriptions/listen.",
+     "A subscription ends by client cancellation; by graceful server closure (SHOULD answer the subscriptions/listen request with a complete result, then close); or by a transport drop, which carries no response.",
+     "Several concurrent subscriptions are allowed: the client tells them apart by subscriptionId."
+    ]
+   },
+   "source": {
+    "label": "Spec · Patterns · Subscriptions",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
+   }
+  },
+  {
+   "id": "D3-06",
+   "title": {
+    "it": "Progress, cancellazione e timeout",
+    "en": "Progress, cancellation and timeouts"
+   },
+   "summary": {
+    "it": "Le operazioni lunghe possono segnalare l'avanzamento; il client può cancellarle. Il meccanismo di cancellazione dipende dal transport.",
+    "en": "Long operations can report progress; the client can cancel them. The cancellation mechanism depends on the transport."
+   },
+   "points": {
+    "it": [
+     "progressToken (string o integer) in _meta, unico tra le richieste attive.",
+     "Il valore progress deve crescere a ogni notifica; total è opzionale; sono ammessi decimali.",
+     "HTTP: cancellare = chiudere lo stream di risposta. stdio: notifications/cancelled.",
+     "Dopo la cancellazione il server non invia risposta; una risposta tardiva va ignorata.",
+     "Timeout SHOULD su tutte le richieste, con un massimo assoluto anche se arrivano notifiche di progress.",
+     "Le race sono normali: una cancellazione può arrivare dopo la fine della richiesta e una risposta dopo la cancellazione; entrambe le parti MUST gestirle senza errori.",
+     "Dopo uno stream interrotto la richiesta va reinviata con un nuovo id; prima di ripetere un tool con effetti collaterali, idempotentHint resta solo un indizio."
+    ],
+    "en": [
+     "progressToken (string or integer) in _meta, unique among active requests.",
+     "The progress value must increase with each notification; total is optional; decimals are allowed.",
+     "HTTP: cancel = close the response stream. stdio: notifications/cancelled.",
+     "After cancellation the server sends no response; a late response is ignored.",
+     "Timeouts SHOULD apply to all requests, with an absolute maximum even when progress notifications arrive.",
+     "Races are normal: a cancellation may arrive after the request finished and a response after the cancellation; both sides MUST handle them gracefully.",
+     "After a broken stream the request is reissued with a new id; before repeating a side-effecting tool, idempotentHint is only a hint."
+    ]
+   },
+   "source": {
+    "label": "Spec · Patterns · Cancellation",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation"
+   }
+  },
+  {
+   "id": "D3-07",
+   "title": {
+    "it": "Caching e paginazione",
+    "en": "Caching and pagination"
+   },
+   "summary": {
+    "it": "I result cacheabili dichiarano per quanto restano freschi (ttlMs) e con chi si possono condividere (cacheScope). Le liste lunghe si paginano con un cursore opaco.",
+    "en": "Cacheable results declare how long they stay fresh (ttlMs) and who may share them (cacheScope). Long lists are paginated with an opaque cursor."
+   },
+   "points": {
+    "it": [
+     "ttlMs e cacheScope obbligatori su: server/discover, tools/list, prompts/list, resources/list, resources/templates/list, resources/read.",
+     "ttlMs assente o negativo = 0. Il TTL non è un intervallo di polling.",
+     "public = condivisibile tra utenti; private = solo nello stesso contesto di autorizzazione.",
+     "Una notifica list_changed invalida subito la cache.",
+     "Cursore opaco; stringa vuota valida; nextCursor assente = fine; cursore invalido = -32602.",
+     "Chiave di cache: metodo più parametri rilevanti (uri, cursor); le voci private vanno separate per contesto di autorizzazione.",
+     "Un result input_required non è mai cacheabile e non porta ttlMs né cacheScope.",
+     "Freschezza verificata quando serve, non con polling; se il re-fetch fallisce il client MAY servire la copia scaduta.",
+     "Stesso cacheScope su tutte le pagine di una lista (ttlMs può variare); cursor non valido: scartare le pagine in cache e ripartire dall'inizio.",
+     "La dimensione della pagina la decide il server: il client MUST NOT assumerla fissa. Conta la presenza di nextCursor, non il suo valore."
+    ],
+    "en": [
+     "ttlMs and cacheScope are required on: server/discover, tools/list, prompts/list, resources/list, resources/templates/list, resources/read.",
+     "Missing or negative ttlMs = 0. The TTL is not a polling interval.",
+     "public = shareable across users; private = only within the same authorization context.",
+     "A list_changed notification invalidates the cache immediately.",
+     "Opaque cursor; empty string is valid; missing nextCursor = end; invalid cursor = -32602.",
+     "Cache key: method plus relevant parameters (uri, cursor); private entries are partitioned by authorization context.",
+     "An input_required result is never cacheable and carries neither ttlMs nor cacheScope.",
+     "Freshness is checked when needed, not by polling; if the re-fetch fails the client MAY serve the stale copy.",
+     "Same cacheScope on every page of a listing (ttlMs may vary); invalid cursor: discard cached pages and restart from the beginning.",
+     "Page size is decided by the server: the client MUST NOT assume a fixed one. What matters is whether nextCursor is present, not its value."
+    ]
+   },
+   "trap": {
+    "it": "cacheScope public non è un controllo d'accesso: il server deve comunque autorizzare ogni richiesta.",
+    "en": "cacheScope public is not access control: the server must still authorize every request."
+   },
+   "source": {
+    "label": "Spec · Caching",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
+   }
+  },
+  {
+   "id": "D3-08",
+   "title": {
+    "it": "Codici d'errore",
+    "en": "Error codes"
+   },
+   "summary": {
+    "it": "Oltre ai codici JSON-RPC standard, la 2026-07-28 assegna un intervallo riservato alla spec e introduce tre errori nuovi.",
+    "en": "Besides standard JSON-RPC codes, 2026-07-28 assigns a range reserved to the spec and introduces three new errors."
+   },
+   "points": {
+    "it": [
+     "-32600 Invalid Request, -32601 Method not found (HTTP 404), -32602 Invalid params, -32603 Internal error.",
+     "-32020 HeaderMismatch, -32021 MissingRequiredClientCapability, -32022 UnsupportedProtocolVersion.",
+     "-32000..-32019: legacy, da non usare; -32020..-32099: riservati alla spec MCP.",
+     "Risorsa non trovata: -32602 (prima -32002, che il client accetta ancora dai server vecchi).",
+     "-32042 (URL elicitation required, solo 2025-11-25) non va più emesso.",
+     "-32700 Parse error: body non JSON valido (id null).",
+     "-32000..-32019: nuovi codici MUST NOT, uso SHOULD NOT; -32020..-32099: MUST NOT emettere codici non definiti dalla spec.",
+     "Codici applicativi nuovi SHOULD stare fuori da -32768..-32000; prima però si preferisce isError.",
+     "Livello di log non valido: -32602. Gli errori locali (es. timeout nell'SDK) non hanno codici e non devono sembrare errori del peer."
+    ],
+    "en": [
+     "-32600 Invalid Request, -32601 Method not found (HTTP 404), -32602 Invalid params, -32603 Internal error.",
+     "-32020 HeaderMismatch, -32021 MissingRequiredClientCapability, -32022 UnsupportedProtocolVersion.",
+     "-32000..-32019: legacy, do not use; -32020..-32099: reserved to the MCP spec.",
+     "Resource not found: -32602 (formerly -32002, which clients still accept from older servers).",
+     "-32042 (URL elicitation required, 2025-11-25 only) must no longer be emitted.",
+     "-32700 Parse error: body is not valid JSON (id null).",
+     "-32000..-32019: new codes MUST NOT be allocated and SHOULD NOT be used; -32020..-32099: undefined codes MUST NOT be emitted.",
+     "New application codes SHOULD sit outside -32768..-32000; but isError is preferred first.",
+     "Invalid log level: -32602. Local errors (e.g. an SDK timeout) have no codes and must not look like errors from the peer."
+    ]
+   },
+   "source": {
+    "label": "Spec · Basic · Errors",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D3-09",
+   "title": {
+    "it": "Protocol error o tool execution error",
+    "en": "Protocol error vs tool execution error"
+   },
+   "summary": {
+    "it": "Un tool può fallire in due modi. Se la richiesta stessa è sbagliata si risponde con un errore JSON-RPC; se il tool è stato eseguito ma qualcosa è andato storto, si restituisce un result con isError: true.",
+    "en": "A tool can fail in two ways. If the request itself is wrong, the response is a JSON-RPC error; if the tool ran but something went wrong, the result carries isError: true."
+   },
+   "points": {
+    "it": [
+     "Protocol error: tool sconosciuto (-32602), richiesta malformata, errore del server.",
+     "Tool execution error (isError: true): errori delle API, validazione dell'input, logica di business, rate limit applicativo.",
+     "Il client SHOULD passare i tool execution error al modello per l'autocorrezione.",
+     "Il client MAY passare anche i protocol error, ma il modello difficilmente si riprende.",
+     "Validazione (il tool esiste?) produce solo errori di protocollo; esecuzione produce isError, e -32603 solo per un guasto inatteso non causato dall'input.",
+     "I prompt non hanno un canale isError: nome sconosciuto o argomento mancante sono sempre -32602.",
+     "Un rifiuto per policy (rate limit, consenso negato) va in un result con isError, non in un codice di errore inventato."
+    ],
+    "en": [
+     "Protocol error: unknown tool (-32602), malformed request, server error.",
+     "Tool execution error (isError: true): API failures, input validation, business logic, application rate limits.",
+     "The client SHOULD pass tool execution errors to the model for self-correction.",
+     "The client MAY pass protocol errors too, but the model is unlikely to recover.",
+     "Validation (does the tool exist?) only produces protocol errors; execution produces isError, and -32603 only for an unexpected fault not caused by the input.",
+     "Prompts have no isError channel: unknown name or missing argument is always -32602.",
+     "A policy refusal (rate limit, consent withheld) goes in a result with isError, not in an invented error code."
+    ]
+   },
+   "trap": {
+    "it": "Un argomento con formato sbagliato (es. data nel passato) è un tool execution error, non un -32602.",
+    "en": "An argument in the wrong format (e.g. a date in the past) is a tool execution error, not -32602."
+   },
+   "source": {
+    "label": "Spec · Tools · Error Handling",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+   }
+  },
+  {
+   "id": "D3-10",
+   "title": {
+    "it": "Status HTTP",
+    "en": "HTTP status codes"
+   },
+   "summary": {
+    "it": "Su Streamable HTTP alcuni esiti hanno uno status preciso, spesso abbinato a un errore JSON-RPC nel body.",
+    "en": "Over Streamable HTTP some outcomes map to a specific status, often paired with a JSON-RPC error in the body."
+   },
+   "points": {
+    "it": [
+     "202 Accepted senza body: notifica accettata.",
+     "400: header mancanti o non coerenti (-32020), versione non supportata (-32022), capability mancante (-32021).",
+     "401: token mancante, invalido o scaduto (con WWW-Authenticate).",
+     "403: Origin non valido oppure scope insufficienti (insufficient_scope).",
+     "404 con -32601: metodo non implementato. 405: GET o DELETE su un server solo-2026-07-28."
+    ],
+    "en": [
+     "202 Accepted with no body: notification accepted.",
+     "400: missing or mismatched headers (-32020), unsupported version (-32022), missing capability (-32021).",
+     "401: missing, invalid or expired token (with WWW-Authenticate).",
+     "403: invalid Origin or insufficient scopes (insufficient_scope).",
+     "404 with -32601: method not implemented. 405: GET or DELETE on a 2026-07-28-only server."
+    ]
+   },
+   "source": {
+    "label": "Spec · Streamable HTTP",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+   }
+  },
+  {
+   "id": "D3-11",
+   "title": {
+    "it": "Tools: definizione, list e call",
+    "en": "Tools: definition, list and call"
+   },
+   "summary": {
+    "it": "I tool si scoprono con tools/list e si invocano con tools/call. La lista può dipendere dall'autorizzazione dell'utente ma non dalla connessione.",
+    "en": "Tools are discovered with tools/list and invoked with tools/call. The list may depend on the user's authorization but not on the connection."
+   },
+   "points": {
+    "it": [
+     "Definizione: name, title, description, inputSchema, outputSchema opzionale, annotations, icons.",
+     "tools/list SHOULD restituire i tool in ordine deterministico (aiuta cache e prompt cache dell'LLM).",
+     "Il risultato contiene content (text, image, audio, resource_link, resource), structuredContent opzionale, isError.",
+     "tools/call può rispondere con InputRequiredResult (MRTR).",
+     "Cambi della lista: notifications/tools/list_changed (se il server dichiara listChanged).",
+     "content è sempre presente (può essere vuoto). Le annotations di un content block (audience, priority, lastModified) stanno accanto ai campi del blocco, non dentro resource.",
+     "resource_link richiede uri e name; resource incorpora uri, mimeType e text o blob."
+    ],
+    "en": [
+     "Definition: name, title, description, inputSchema, optional outputSchema, annotations, icons.",
+     "tools/list SHOULD return tools in a deterministic order (helps caching and LLM prompt caching).",
+     "The result has content (text, image, audio, resource_link, resource), optional structuredContent, isError.",
+     "tools/call may respond with an InputRequiredResult (MRTR).",
+     "List changes: notifications/tools/list_changed (if the server declares listChanged).",
+     "content is always present (may be empty). A content block's annotations (audience, priority, lastModified) sit beside the block's fields, not inside resource.",
+     "resource_link requires uri and name; resource embeds uri, mimeType and text or blob."
+    ]
+   },
+   "source": {
+    "label": "Spec · Tools",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+   }
+  },
+  {
+   "id": "D3-12",
+   "title": {
+    "it": "Tool annotations",
+    "en": "Tool annotations"
+   },
+   "summary": {
+    "it": "Le annotations descrivono il comportamento atteso del tool. Sono suggerimenti, non garanzie, e hanno default pessimisti.",
+    "en": "Annotations describe a tool's expected behavior. They are hints, not guarantees, and have pessimistic defaults."
+   },
+   "points": {
+    "it": [
+     "readOnlyHint (default false), destructiveHint (default true), idempotentHint (default false), openWorldHint (default true), title.",
+     "destructiveHint e idempotentHint contano solo se readOnlyHint è false.",
+     "Vanno trattate come non fidate, salvo che il server sia fidato.",
+     "Uso tipico: decidere quando chiedere conferma all'utente."
+    ],
+    "en": [
+     "readOnlyHint (default false), destructiveHint (default true), idempotentHint (default false), openWorldHint (default true), title.",
+     "destructiveHint and idempotentHint only matter when readOnlyHint is false.",
+     "They must be treated as untrusted unless the server is trusted.",
+     "Typical use: deciding when to ask the user for confirmation."
+    ]
+   },
+   "source": {
+    "label": "Spec · Schema · ToolAnnotations",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/schema"
+   }
+  },
+  {
+   "id": "D3-13",
+   "title": {
+    "it": "Tool con stato tramite handle",
+    "en": "Stateful tools with handles"
+   },
+   "summary": {
+    "it": "Senza sessioni, lo stato applicativo (un carrello, una transazione) si rappresenta con un handle: un tool lo crea e il modello lo ripassa come argomento agli altri tool.",
+    "en": "Without sessions, application state (a cart, a transaction) is represented by a handle: one tool creates it and the model passes it back as an argument to other tools."
+   },
+   "points": {
+    "it": [
+     "Gli handle devono essere opachi; la durata va dichiarata nella description.",
+     "Handle scaduto o sconosciuto: tool execution error (isError), non errore di protocollo.",
+     "Possedere un handle non è autenticazione: il server deve legarlo all'utente e autorizzare ogni uso.",
+     "Così qualsiasi istanza dietro un load balancer può servire qualsiasi richiesta."
+    ],
+    "en": [
+     "Handles must be opaque; their lifetime should be stated in the description.",
+     "Expired or unknown handle: tool execution error (isError), not a protocol error.",
+     "Holding a handle is not authentication: the server must bind it to the user and authorize every use.",
+     "This way any instance behind a load balancer can serve any request."
+    ]
+   },
+   "source": {
+    "label": "Spec · Tools · Stateful Tools",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+   }
+  },
+  {
+   "id": "D3-14",
+   "title": {
+    "it": "Estensione Tasks",
+    "en": "Tasks extension"
+   },
+   "summary": {
+    "it": "Per lavori lunghi (minuti o ore) il server può restituire un task invece del risultato. Nella 2026-07-28 Tasks è un'estensione, non più parte del core.",
+    "en": "For long-running work (minutes or hours) the server can return a task instead of the result. In 2026-07-28 Tasks is an extension, no longer part of the core."
+   },
+   "points": {
+    "it": [
+     "ID io.modelcontextprotocol/tasks; il client deve dichiararla perché il server restituisca un task.",
+     "CreateTaskResult con resultType task.",
+     "Stati: working, input_required, completed, failed, cancelled.",
+     "tasks/get per il polling, tasks/update per fornire input, tasks/cancel (cooperativo).",
+     "Rimossi tasks/result e tasks/list.",
+     "Solo tools/call può diventare un task. Il server decide richiesta per richiesta: un client che dichiara l'estensione deve gestire sia un result normale sia resultType task.",
+     "Client senza l'estensione e lavoro impossibile senza task: -32021 con data.requiredCapabilities (anche per tasks/get, tasks/update, tasks/cancel).",
+     "CreateTaskResult: taskId generato dal server, status (di solito working), createdAt, lastUpdatedAt, ttlMs (null = illimitato), pollIntervalMs, statusMessage opzionale.",
+     "Il server MUST NOT restituire il taskId prima che il task sia creato in modo durevole (cioè prima che tasks/get lo trovi).",
+     "tasks/get ha resultType complete; lo stato è nel campo status. completed include il result originale, failed include l'errore JSON-RPC.",
+     "Un result con isError: true porta il task a completed, non a failed (failed è solo per errori JSON-RPC).",
+     "Input a metà esecuzione: tasks/update con inputResponses, senza ripetere tools/call. Le chiavi di inputRequests sono uniche per tutta la vita del task.",
+     "Per cancellare un task si usa tasks/cancel: notifications/cancelled MUST NOT essere usata per i task.",
+     "Differenze dalla 2025-11-25 sperimentale: taskId ora generato dal server (prima dal client), capability per richiesta invece che all'inizializzazione, niente tasks/result e tasks/list."
+    ],
+    "en": [
+     "ID io.modelcontextprotocol/tasks; the client must declare it for the server to return a task.",
+     "CreateTaskResult with resultType task.",
+     "States: working, input_required, completed, failed, cancelled.",
+     "tasks/get for polling, tasks/update to provide input, tasks/cancel (cooperative).",
+     "tasks/result and tasks/list were removed.",
+     "Only tools/call can become a task. The server decides per request: a client that declares the extension must handle both a normal result and resultType task.",
+     "Client without the extension and work impossible without a task: -32021 with data.requiredCapabilities (also for tasks/get, tasks/update, tasks/cancel).",
+     "CreateTaskResult: server-generated taskId, status (usually working), createdAt, lastUpdatedAt, ttlMs (null = unlimited), pollIntervalMs, optional statusMessage.",
+     "The server MUST NOT return the taskId before the task is durably created (i.e. before tasks/get would find it).",
+     "tasks/get has resultType complete; the state is in the status field. completed inlines the original result, failed inlines the JSON-RPC error.",
+     "A result with isError: true takes the task to completed, not failed (failed is only for JSON-RPC errors).",
+     "Mid-execution input: tasks/update with inputResponses, without repeating tools/call. inputRequests keys are unique for the task's whole life.",
+     "Cancelling a task uses tasks/cancel: notifications/cancelled MUST NOT be used for tasks.",
+     "Differences from the experimental 2025-11-25 version: taskId now server-generated (was client-generated), per-request capability instead of at initialization, no tasks/result or tasks/list."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Tasks",
+    "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
+   }
+  },
+  {
+   "id": "D3-15",
+   "title": {
+    "it": "Resources",
+    "en": "Resources"
+   },
+   "summary": {
+    "it": "Le resources espongono dati di contesto identificati da URI. Si elencano con resources/list, si leggono con resources/read e possono essere parametriche tramite template.",
+    "en": "Resources expose context data identified by URIs. They are listed with resources/list, read with resources/read and can be parameterized through templates."
+   },
+   "points": {
+    "it": [
+     "Capability resources con subscribe e listChanged, indipendenti tra loro.",
+     "resources/templates/list: URI template RFC 6570.",
+     "Contenuto text oppure blob (base64); annotations audience, priority (0-1), lastModified.",
+     "Risorsa inesistente: errore -32602, mai contents vuoto.",
+     "Aggiornamenti di una risorsa: subscriptions/listen con resourceSubscriptions.",
+     "Risorsa non trovata: -32602 con data.uri; un errore interno è -32603. I client accettano ancora -32002 dai server più vecchi.",
+     "Una sola resources/read può restituire più elementi in contents.",
+     "Schemi URI: https:// solo se il client può scaricare la risorsa direttamente dal web; file:// non deve per forza essere un filesystem reale; git:// per contenuti versionati; schemi custom conformi a RFC 3986.",
+     "Validare ogni URI e autorizzare ogni lettura: comparire in resources/list non rende una risorsa leggibile da chiunque."
+    ],
+    "en": [
+     "resources capability with subscribe and listChanged, independent of each other.",
+     "resources/templates/list: RFC 6570 URI templates.",
+     "Content is text or blob (base64); annotations audience, priority (0-1), lastModified.",
+     "Missing resource: error -32602, never empty contents.",
+     "Updates for a resource: subscriptions/listen with resourceSubscriptions.",
+     "Resource not found: -32602 with data.uri; an internal failure is -32603. Clients still accept -32002 from older servers.",
+     "A single resources/read may return several items in contents.",
+     "URI schemes: https:// only if the client can fetch the resource directly from the web; file:// need not be a real filesystem; git:// for versioned content; custom schemes must follow RFC 3986.",
+     "Validate every URI and authorize every read: appearing in resources/list does not make a resource readable by anyone."
+    ]
+   },
+   "source": {
+    "label": "Spec · Resources",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
+   }
+  },
+  {
+   "id": "D3-16",
+   "title": {
+    "it": "Prompts",
+    "en": "Prompts"
+   },
+   "summary": {
+    "it": "I prompts sono template di messaggi che l'utente sceglie esplicitamente. Si elencano con prompts/list e si ottengono con prompts/get passando gli argomenti.",
+    "en": "Prompts are message templates the user explicitly picks. They are listed with prompts/list and fetched with prompts/get, passing arguments."
+   },
+   "points": {
+    "it": [
+     "prompts/get restituisce messages con role user o assistant.",
+     "Nome non valido o argomenti obbligatori mancanti: -32602.",
+     "prompts/get può rispondere con InputRequiredResult.",
+     "Gli argomenti si possono completare con completion/complete.",
+     "prompts/list è cacheable; prompts/get no (niente ttlMs e cacheScope).",
+     "I messaggi possono contenere text, image, audio, resource_link o resource incorporata."
+    ],
+    "en": [
+     "prompts/get returns messages with role user or assistant.",
+     "Invalid name or missing required arguments: -32602.",
+     "prompts/get may respond with an InputRequiredResult.",
+     "Arguments can be autocompleted with completion/complete.",
+     "prompts/list is cacheable; prompts/get is not (no ttlMs or cacheScope).",
+     "Messages can contain text, image, audio, resource_link or an embedded resource."
+    ]
+   },
+   "source": {
+    "label": "Spec · Prompts",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
+   }
+  },
+  {
+   "id": "D3-17",
+   "title": {
+    "it": "Completion",
+    "en": "Completion"
+   },
+   "summary": {
+    "it": "completion/complete suggerisce valori per gli argomenti di prompts e resource template, come l'autocompletamento in un IDE.",
+    "en": "completion/complete suggests values for prompt and resource template arguments, like IDE autocompletion."
+   },
+   "points": {
+    "it": [
+     "Riferimenti: ref/prompt e ref/resource.",
+     "Massimo 100 valori per risposta; total e hasMore opzionali.",
+     "context.arguments contiene gli argomenti già scelti.",
+     "Il server dichiara la capability completions; deve validare l'input e applicare rate limit.",
+     "completion/complete non è cacheable e non usa cursor: hasMore indica che le corrispondenze superano i 100 valori."
+    ],
+    "en": [
+     "References: ref/prompt and ref/resource.",
+     "At most 100 values per response; total and hasMore are optional.",
+     "context.arguments holds arguments already chosen.",
+     "The server declares the completions capability; it must validate input and rate-limit.",
+     "completion/complete is not cacheable and uses no cursor: hasMore means matches exceed the 100 values."
+    ]
+   },
+   "source": {
+    "label": "Spec · Completion",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion"
+   }
+  },
+  {
+   "id": "D3-18",
+   "title": {
+    "it": "Elicitation",
+    "en": "Elicitation"
+   },
+   "summary": {
+    "it": "Con l'elicitation il server chiede informazioni all'utente tramite MRTR. Esistono due modalità: form (dati strutturati) e url (interazione su una pagina esterna).",
+    "en": "With elicitation the server asks the user for information via MRTR. There are two modes: form (structured data) and url (interaction on an external page)."
+   },
+   "points": {
+    "it": [
+     "elicitation: {} equivale al solo form mode; mode omesso = form.",
+     "Form: requestedSchema piatto di primitive; formati email, uri, date, date-time.",
+     "Form mode MUST NOT chiedere segreti (password, token): per quelli si usa URL mode.",
+     "Azioni dell'utente: accept, decline, cancel.",
+     "URL mode: accept indica solo il consenso ad aprire l'URL; l'esito si scopre al retry.",
+     "URL elicitation serve per autorizzazioni verso terze parti, non sostituisce l'autorizzazione MCP.",
+     "Nella 2026-07-28 la URL mode ha solo mode, message e url: elicitationId e notifications/elicitation/complete sono stati rimossi (con -32042).",
+     "Lo schema form supporta string, number, integer, boolean ed enum a scelta singola o multipla; decline e cancel non sono errori."
+    ],
+    "en": [
+     "elicitation: {} means form mode only; omitted mode = form.",
+     "Form: flat requestedSchema of primitives; formats email, uri, date, date-time.",
+     "Form mode MUST NOT request secrets (passwords, tokens): use URL mode for those.",
+     "User actions: accept, decline, cancel.",
+     "URL mode: accept only means consent to open the URL; the outcome is discovered on retry.",
+     "URL elicitation is for third-party authorization; it does not replace MCP authorization.",
+     "In 2026-07-28 URL mode has only mode, message and url: elicitationId and notifications/elicitation/complete were removed (along with -32042).",
+     "The form schema supports string, number, integer, boolean and single or multi select enums; decline and cancel are not errors."
+    ]
+   },
+   "source": {
+    "label": "Spec · Elicitation",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
+   }
+  },
+  {
+   "id": "D3-19",
+   "title": {
+    "it": "Feature deprecate: sampling, roots, logging",
+    "en": "Deprecated features: sampling, roots, logging"
+   },
+   "summary": {
+    "it": "Sampling, roots e logging sono deprecati nella 2026-07-28 ma funzionano ancora (via MRTR o _meta) per almeno 12 mesi.",
+    "en": "Sampling, roots and logging are deprecated in 2026-07-28 but still work (via MRTR or _meta) for at least 12 months."
+   },
+   "points": {
+    "it": [
+     "Sampling → integrare direttamente le API dei provider LLM. toolChoice: auto, required, none.",
+     "Roots (URI file://) → passare file e directory come parametri dei tool, URI di resource o configurazione.",
+     "Logging → stderr (stdio) e OpenTelemetry; notifications/message solo se la richiesta ha _meta logLevel.",
+     "Rimossi del tutto: logging/setLevel, ping, notifications/roots/list_changed.",
+     "includeContext thisServer/allServers: soft-deprecated, usare none o ometterlo.",
+     "Rimozione più precoce di roots, sampling, logging e DCR: prima revisione dal 2027-07-28. includeContext thisServer/allServers è deprecato dalla 2025-11-25.",
+     "roots/list e sampling/createMessage restano validi come voci di inputRequests MRTR, se il client dichiara la capability.",
+     "logLevel per richiesta: notifications/message solo sullo stream di quella richiesta, al livello richiesto o superiore, finché è in corso.",
+     "Rimossi del tutto anche resources/subscribe e resources/unsubscribe (si usa subscriptions/listen)."
+    ],
+    "en": [
+     "Sampling → call LLM provider APIs directly. toolChoice: auto, required, none.",
+     "Roots (file:// URIs) → pass files and directories as tool parameters, resource URIs or configuration.",
+     "Logging → stderr (stdio) and OpenTelemetry; notifications/message only if the request has _meta logLevel.",
+     "Removed entirely: logging/setLevel, ping, notifications/roots/list_changed.",
+     "includeContext thisServer/allServers: soft-deprecated, use none or omit it.",
+     "Earliest removal of roots, sampling, logging and DCR: first revision on or after 2027-07-28. includeContext thisServer/allServers has been deprecated since 2025-11-25.",
+     "roots/list and sampling/createMessage stay valid as MRTR inputRequests entries, if the client declares the capability.",
+     "Per-request logLevel: notifications/message only on that request's own stream, at or above the requested level, while it is in flight.",
+     "Also removed entirely: resources/subscribe and resources/unsubscribe (use subscriptions/listen)."
+    ]
+   },
+   "trap": {
+    "it": "Deprecato non significa rimosso: sampling e roots funzionano ancora.",
+    "en": "Deprecated does not mean removed: sampling and roots still work."
+   },
+   "source": {
+    "label": "Spec · Deprecated features",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated"
+   }
+  }
+ ]
+}

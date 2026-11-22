@@ -1,0 +1,144 @@
+---
+title: Feature Lifecycle and Deprecation
+description: How individual MCP specification features move through Active, Deprecated, and Removed states, and the timeline implementers can plan against.
+---
+
+This page defines how a feature of the MCP specification is deprecated and
+later removed, and the obligations that follow for SDKs. It was adopted by
+[SEP-2596](/seps/2596), a Specification Enhancement Proposal (SEP), and is
+changed by a Process SEP. Features
+currently Deprecated or scheduled for removal are listed in the
+[Deprecated registry](/specification/draft/deprecated).
+
+## Scope
+
+This policy governs **features** of the MCP core specification: protocol
+messages, capabilities, transports, schema types, and normative behavioral
+requirements. The revision lifecycle of the specification document itself
+(Draft, Current, Final) is defined in the [versioning guide](/docs/learn/versioning).
+
+## Feature States
+
+A specification feature is in exactly one of three states:
+
+| State          | Meaning                                                                                                                                                       | Implementer expectation                                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Active**     | The feature is part of the Current specification revision.                                                                                                    | Implement per the feature's normative requirements.                                                                         |
+| **Deprecated** | The feature remains in the specification but is scheduled for removal. A migration path is documented (see below).                                            | New implementations should not adopt the feature. Existing implementations should migrate before the earliest removal date. |
+| **Removed**    | The feature has been deleted from `draft` and will be absent from the next Current revision. It remains documented in the Final revision it last appeared in. | Implementations targeting that next Current revision must not depend on the feature.                                        |
+
+A Deprecated feature may be restored to Active by a SEP that supersedes the
+deprecation SEP and documents the changed circumstances. Restoration follows
+the same approval path as deprecation. If the feature is later deprecated
+again, the minimum deprecation window in
+[Deprecating a Feature](#deprecating-a-feature) is measured afresh from the
+revision in which the new deprecation takes effect.
+
+### SDKs
+
+Removal from the specification does not oblige an SDK to drop the feature from
+releases. That timeline is governed by the SDK's own revision-support policy.
+
+## Deprecating a Feature
+
+A feature may be proposed for deprecation when:
+
+- it has been superseded by another feature that covers the same use cases,
+- it presents a security, privacy, or interoperability risk that cannot be
+  mitigated in place,
+- ecosystem telemetry or SDK maintainer consensus indicates negligible adoption
+  relative to its maintenance cost,
+- the Core Maintainers deem it appropriate for any other reason.
+
+Deprecation requires a SEP (see [SEP Guidelines](/community/sep-guidelines)).
+The deprecation SEP must:
+
+1. Identify the feature by name and link to its definition in `schema.ts`
+   (where applicable) and the specification prose.
+2. State the rationale against the criteria above.
+3. Document the migration path, or state explicitly that none is required. If
+   the migration path names a replacement feature, that feature must be Active
+   in the revision in which the deprecation takes effect; the replacement and
+   the deprecation may land in the same revision.
+4. Specify the **minimum deprecation window**: the number of months, at least
+   twelve, that the feature must remain Deprecated. The feature's **earliest
+   removal** is the first specification revision released as Current on or
+   after the window elapses.
+
+When the deprecation SEP is accepted, its author makes the following changes
+to the draft specification in the SEP's pull request, and the sponsor verifies
+them before setting `final` (see
+[SEP Guidelines](/community/sep-guidelines#workflow)):
+
+- Add a `@deprecated` JSDoc tag to the feature's entry in `schema.ts`,
+  referencing the deprecation SEP and the revision in which the deprecation
+  takes effect.
+- Add a deprecation notice with the same information to the feature's
+  specification prose.
+- Record the deprecation in that revision's `changelog.mdx` under a
+  "Deprecated" heading. "Deprecated" and "Removed" are standing changelog
+  headings alongside Major/Minor/Other.
+- List the feature in the [deprecated registry](#the-deprecated-registry) with
+  its deprecation SEP, the revision in which it became Deprecated, its
+  migration path, and its earliest removal.
+
+The feature becomes Deprecated when the revision carrying these edits is
+released as Current (see [versioning guide](/docs/learn/versioning)), and the
+minimum deprecation window is counted from that release, not from the date the
+SEP reaches Final.
+[SEP-2577](/seps/2577) is a worked example of a deprecation SEP.
+
+## The Deprecated Registry
+
+[`docs/specification/draft/deprecated.mdx`](/specification/draft/deprecated) is
+the single list of every feature in a Deprecated or Removed state.
+
+## Tier 1 SDK Obligations
+
+Once the revision in which a feature becomes Deprecated is released as Current,
+Tier 1 SDKs:
+
+- Must mark the corresponding API surface deprecated using the language's
+  native mechanism (for example `@Deprecated` in Java, `[Obsolete]` in .NET,
+  `@deprecated` JSDoc in TypeScript, the `Deprecated:` doc convention in Go) in
+  their next release, referencing the deprecation SEP and the earliest removal
+  date where the mechanism permits.
+- Should emit a runtime warning when a deprecated feature is exercised, using
+  the language's idiomatic mechanism (for example Python's
+  `DeprecationWarning`, Node.js's `process.emitWarning`, or a configurable
+  logger).
+
+A Tier 1 SDK that consistently fails to surface a Deprecated feature is subject
+to [tier relegation](/community/sdk-tiers#tier-relegation).
+
+## Removing a Feature
+
+After the minimum deprecation window has elapsed, Core Maintainers may remove
+the feature when preparing a release. The removal is recorded in
+`changelog.mdx` under the "Removed" heading and in the
+[registry](#the-deprecated-registry). Any change to the original deprecation or
+removal, such as extending or shortening the timeline
+([Expedited removal](#expedited-removal)) or restoring the feature to Active
+([Feature states](#feature-states)), requires a SEP. A feature may remain
+Deprecated indefinitely.
+
+## Expedited Removal
+
+The twelve-month minimum window may be shortened when the feature presents an
+active security risk, meaning a vulnerability with a published security
+advisory or documented in-the-wild exploitation for which no in-place
+mitigation exists. Shortening the window requires Core Maintainer approval
+under the [governance decision process](/community/governance#decision-process),
+recorded in the deprecation SEP or, where the risk surfaces after that SEP is
+already Final, in a short expedited-removal SEP that references it. The
+shortened window must still provide at least ninety days between the feature
+becoming Deprecated and its earliest removal.
+
+## Roles
+
+Any contributor may propose a deprecation, extension, or restoration through
+a SEP with a sponsor (see [SEP Guidelines](/community/sep-guidelines#sponsors)).
+Core Maintainers approve deprecations, removal timing, extensions,
+restorations, and expedited removals under the
+[governance decision process](/community/governance#decision-process), subject
+to Lead Maintainer veto (see [Governance](/community/governance#roles)).

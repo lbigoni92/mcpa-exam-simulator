@@ -1,0 +1,335 @@
+{
+ "domain": "D1",
+ "topics": [
+  {
+   "id": "D1-01",
+   "title": {
+    "it": "Definizione e scopo di MCP",
+    "en": "What MCP is and why it exists"
+   },
+   "summary": {
+    "it": "MCP (Model Context Protocol) è uno standard open source per collegare le applicazioni AI a sistemi esterni: fonti di dati, tool e workflow. Definisce solo come si scambia il contesto, non come l'applicazione usa l'LLM.",
+    "en": "MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems: data sources, tools and workflows. It only defines how context is exchanged, not how the application uses the LLM."
+   },
+   "points": {
+    "it": [
+     "Analogia ufficiale: MCP è la \"porta USB-C\" delle applicazioni AI.",
+     "Si ispira al Language Server Protocol (LSP), che ha standardizzato il supporto dei linguaggi negli editor.",
+     "Il progetto comprende la specifica, gli SDK, gli strumenti di sviluppo (MCP Inspector) e i reference server.",
+     "I messaggi sono JSON-RPC 2.0; la fonte di verità è schema.ts (schema.json è generato).",
+     "MUST / SHOULD / MAY hanno valore normativo (BCP 14, RFC 2119/8174) solo quando sono scritti in maiuscolo.",
+     "Parole chiave equivalenti: MUST = SHALL = REQUIRED; SHOULD = RECOMMENDED; MAY = OPTIONAL; MUST NOT = SHALL NOT."
+    ],
+    "en": [
+     "Official analogy: MCP is the \"USB-C port\" for AI applications.",
+     "It takes inspiration from the Language Server Protocol (LSP), which standardized language support across editors.",
+     "The project includes the specification, the SDKs, development tools (MCP Inspector) and reference servers.",
+     "Messages are JSON-RPC 2.0; the source of truth is schema.ts (schema.json is generated).",
+     "MUST / SHOULD / MAY are normative (BCP 14, RFC 2119/8174) only when written in capitals.",
+     "Equivalent keywords: MUST = SHALL = REQUIRED; SHOULD = RECOMMENDED; MAY = OPTIONAL; MUST NOT = SHALL NOT."
+    ]
+   },
+   "trap": {
+    "it": "MCP non decide come l'host gestisce il contesto o quale modello usare: se un'opzione dice il contrario, è sbagliata.",
+    "en": "MCP does not dictate how the host manages context or which model it uses: an option claiming otherwise is wrong."
+   },
+   "source": {
+    "label": "Spec 2026-07-28 · Overview",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+   }
+  },
+  {
+   "id": "D1-10",
+   "title": {
+    "it": "Struttura e perimetro della specifica",
+    "en": "Structure and scope of the specification"
+   },
+   "summary": {
+    "it": "La specifica 2026-07-28 è organizzata in base protocol, server features, client features, utility ed estensioni. La spec è autorevole; le guide su modelcontextprotocol.io sono di supporto.",
+    "en": "The 2026-07-28 specification is organized into base protocol, server features, client features, utilities and extensions. The spec is authoritative; the guides on modelcontextprotocol.io are supporting material."
+   },
+   "points": {
+    "it": [
+     "Base protocol: JSON-RPC, richieste stateless e autocontenute, capability negotiation per richiesta.",
+     "Server features: resources (contesto), prompts (template per gli utenti), tools (funzioni eseguite dal modello).",
+     "Client feature attiva: elicitation (il server chiede informazioni all'utente). Sampling e roots sono deprecati.",
+     "Utility: configuration, progress tracking, cancellation, error reporting.",
+     "Le estensioni sono sempre opt-in e vanno negoziate tramite capabilities da entrambe le parti."
+    ],
+    "en": [
+     "Base protocol: JSON-RPC, stateless self-contained requests, per-request capability negotiation.",
+     "Server features: resources (context), prompts (templates for users), tools (functions executed by the model).",
+     "Active client feature: elicitation (the server asks the user for information). Sampling and roots are deprecated.",
+     "Utilities: configuration, progress tracking, cancellation, error reporting.",
+     "Extensions are always opt-in and must be negotiated through capabilities by both sides."
+    ]
+   },
+   "source": {
+    "label": "Spec 2026-07-28 · Key Details",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+   }
+  },
+  {
+   "id": "D1-02",
+   "title": {
+    "it": "Partecipanti: host, client, server",
+    "en": "Participants: host, client, server"
+   },
+   "summary": {
+    "it": "L'host è l'applicazione AI (es. un IDE o una chat) che crea e gestisce i client. Ogni client mantiene una connessione con un solo server. Il server espone contesto e capability.",
+    "en": "The host is the AI application (e.g. an IDE or chat app) that creates and manages clients. Each client keeps a connection to exactly one server. The server exposes context and capabilities."
+   },
+   "points": {
+    "it": [
+     "Relazione client-server 1:1: due server = due oggetti client nell'host.",
+     "Server locali (stdio) servono di solito un solo client; server remoti (Streamable HTTP) servono molti client.",
+     "L'host applica consenso e policy di sicurezza e aggrega il contesto dei vari server.",
+     "Un server non vede gli altri server né l'intera conversazione."
+    ],
+    "en": [
+     "1:1 client-server relationship: two servers = two client objects in the host.",
+     "Local servers (stdio) usually serve one client; remote servers (Streamable HTTP) serve many clients.",
+     "The host enforces consent and security policies and aggregates context from the servers.",
+     "A server cannot see other servers or the whole conversation."
+    ]
+   },
+   "source": {
+    "label": "Docs · Architecture",
+    "url": "https://modelcontextprotocol.io/docs/learn/architecture"
+   }
+  },
+  {
+   "id": "D1-03",
+   "title": {
+    "it": "Data layer e transport layer",
+    "en": "Data layer and transport layer"
+   },
+   "summary": {
+    "it": "MCP ha due livelli: il data layer definisce i messaggi JSON-RPC (discovery, primitive, utility); il transport layer gestisce connessione, framing e autorizzazione.",
+    "en": "MCP has two layers: the data layer defines the JSON-RPC messages (discovery, primitives, utilities); the transport layer handles connection, framing and authorization."
+   },
+   "points": {
+    "it": [
+     "Il data layer è indipendente dal transport: stesso formato su stdio e HTTP.",
+     "Transport standard: stdio (processo locale) e Streamable HTTP (remoto).",
+     "L'autorizzazione OAuth appartiene al transport HTTP, non al data layer.",
+     "Sono ammessi transport custom purché preservino il formato JSON-RPC."
+    ],
+    "en": [
+     "The data layer is transport-independent: same format over stdio and HTTP.",
+     "Standard transports: stdio (local process) and Streamable HTTP (remote).",
+     "OAuth authorization belongs to the HTTP transport, not to the data layer.",
+     "Custom transports are allowed as long as they preserve the JSON-RPC format."
+    ]
+   },
+   "source": {
+    "label": "Docs · Architecture",
+    "url": "https://modelcontextprotocol.io/docs/learn/architecture"
+   }
+  },
+  {
+   "id": "D1-04",
+   "title": {
+    "it": "Primitive e gerarchia di controllo",
+    "en": "Primitives and control hierarchy"
+   },
+   "summary": {
+    "it": "Le tre primitive server si distinguono per chi ne controlla l'uso: i tools sono controllati dal modello, le resources dall'applicazione, i prompts dall'utente.",
+    "en": "The three server primitives differ in who controls their use: tools are model-controlled, resources are application-controlled, prompts are user-controlled."
+   },
+   "points": {
+    "it": [
+     "Tools = azioni che possono avere effetti (es. creare un ticket).",
+     "Resources = dati di contesto identificati da URI, anche parametrici (resource template, RFC 6570).",
+     "Prompts = template riutilizzabili con argomenti, scelti dall'utente (es. slash command).",
+     "Ogni primitiva ha un metodo */list e uno di uso: tools/call, resources/read, prompts/get.",
+     "Lato client resta attiva solo elicitation; sampling e roots sono deprecati."
+    ],
+    "en": [
+     "Tools = actions that may have side effects (e.g. creating a ticket).",
+     "Resources = context data identified by URIs, possibly parameterized (resource templates, RFC 6570).",
+     "Prompts = reusable templates with arguments, chosen by the user (e.g. slash commands).",
+     "Each primitive has a */list method and a use method: tools/call, resources/read, prompts/get.",
+     "On the client side only elicitation remains active; sampling and roots are deprecated."
+    ]
+   },
+   "trap": {
+    "it": "\"User-controlled\" per i prompts significa che l'utente decide quando usarli: il contenuto lo definisce comunque il server.",
+    "en": "\"User-controlled\" for prompts means the user decides when to use them: the content is still defined by the server."
+   },
+   "source": {
+    "label": "Spec · Server features",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/server"
+   }
+  },
+  {
+   "id": "D1-05",
+   "title": {
+    "it": "Design principles architetturali",
+    "en": "Architectural design principles"
+   },
+   "summary": {
+    "it": "La spec descrive come devono essere costruiti client e server: server semplici e componibili, isolati tra loro, con funzionalità aggiunte in modo progressivo.",
+    "en": "The spec describes how clients and servers should be built: simple, composable servers, isolated from each other, with features added progressively."
+   },
+   "points": {
+    "it": [
+     "I server devono essere estremamente facili da costruire: la complessità di orchestrazione sta nell'host.",
+     "I server devono essere altamente componibili: ognuno offre una funzione mirata.",
+     "I server non devono leggere l'intera conversazione né vedere dentro altri server.",
+     "Le funzionalità si aggiungono progressivamente tramite la negoziazione delle capability."
+    ],
+    "en": [
+     "Servers should be extremely easy to build: orchestration complexity lives in the host.",
+     "Servers should be highly composable: each one provides focused functionality.",
+     "Servers must not read the whole conversation or see into other servers.",
+     "Features are added progressively through capability negotiation."
+    ]
+   },
+   "source": {
+    "label": "Spec · Architecture",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+   }
+  },
+  {
+   "id": "D1-06",
+   "title": {
+    "it": "Versioning e stati",
+    "en": "Versioning and lifecycle states"
+   },
+   "summary": {
+    "it": "La versione del protocollo è una data YYYY-MM-DD, quella dell'ultima modifica incompatibile. La versione Current è 2026-07-28.",
+    "en": "The protocol version is a YYYY-MM-DD date: the date of the last backwards-incompatible change. The Current version is 2026-07-28."
+   },
+   "points": {
+    "it": [
+     "Stati delle revisioni: Draft (in lavorazione), Current (in uso), Final (chiuse, non cambiano più).",
+     "Stati delle feature: Active, Deprecated, Removed; tra deprecazione e rimozione passano almeno 12 mesi.",
+     "Ere: Modern (≥ 2026-07-28, metadata per richiesta), Legacy (≤ 2025-11-25, handshake initialize), Dual-era (supporta entrambe).",
+     "La versione viaggia in ogni richiesta (_meta e, su HTTP, header MCP-Protocol-Version).",
+     "La finestra di deprecazione (almeno 12 mesi) parte dal rilascio della revisione che marca la feature Deprecated, non dalla data del SEP.",
+     "Rimozione più precoce: la prima revisione rilasciata come Current alla scadenza della finestra o dopo; la rimozione vera richiede comunque una decisione dei Core Maintainer.",
+     "Per le deprecazioni della 2026-07-28 (roots, sampling, logging, DCR) la rimozione più precoce è la prima revisione dal 2027-07-28 in poi: una data esatta di rimozione è un distrattore.",
+     "Una feature Deprecated può tornare Active con un SEP che sostituisce quello di deprecazione."
+    ],
+    "en": [
+     "Revision states: Draft (in progress), Current (in use), Final (closed, never changed).",
+     "Feature states: Active, Deprecated, Removed; at least 12 months pass between deprecation and removal.",
+     "Eras: Modern (≥ 2026-07-28, per-request metadata), Legacy (≤ 2025-11-25, initialize handshake), Dual-era (supports both).",
+     "The version travels in every request (_meta and, over HTTP, the MCP-Protocol-Version header).",
+     "The deprecation window (at least 12 months) starts at the release of the revision that marks the feature Deprecated, not at the SEP's date.",
+     "Earliest removal: the first revision released as Current on or after the window elapses; actual removal still needs a Core Maintainer decision.",
+     "For 2026-07-28 deprecations (roots, sampling, logging, DCR) the earliest removal is the first revision on or after 2027-07-28: an exact removal date is a distractor.",
+     "A Deprecated feature can be restored to Active by a SEP that supersedes the deprecation SEP."
+    ]
+   },
+   "source": {
+    "label": "Docs · Versioning",
+    "url": "https://modelcontextprotocol.io/docs/learn/versioning"
+   }
+  },
+  {
+   "id": "D1-09",
+   "title": {
+    "it": "Principi di design del progetto",
+    "en": "Project design principles"
+   },
+   "summary": {
+    "it": "Sono i principi con cui i Core Maintainer valutano SEP ed estensioni. Non vanno confusi con i design principles architetturali della spec. In caso di conflitto si bilanciano, non c'è una gerarchia.",
+    "en": "These are the principles Core Maintainers use to evaluate SEPs and extensions. Do not confuse them with the spec's architectural design principles. When they conflict they are weighed against each other; there is no ranking."
+   },
+   "points": {
+    "it": [
+     "Convergence over choice: un solo modo di risolvere un problema.",
+     "Composability over specificity: niente feature costruibili con resources, tools e prompts.",
+     "Interoperability over optimization: feature che degradano con grazia.",
+     "Stability over velocity: ogni aggiunta è permanente.",
+     "Demonstration over deliberation: una SEP richiede un prototipo funzionante.",
+     "Standardization over innovation: i pattern nuovi si provano prima nelle estensioni."
+    ],
+    "en": [
+     "Convergence over choice: one way to solve a problem.",
+     "Composability over specificity: no features that can be built from resources, tools and prompts.",
+     "Interoperability over optimization: features that degrade gracefully.",
+     "Stability over velocity: every addition is permanent.",
+     "Demonstration over deliberation: a SEP needs a working prototype.",
+     "Standardization over innovation: new patterns are tried in extensions first."
+    ]
+   },
+   "source": {
+    "label": "Community · Design principles",
+    "url": "https://modelcontextprotocol.io/community/design-principles"
+   }
+  },
+  {
+   "id": "D1-07",
+   "title": {
+    "it": "Valore e interoperabilità",
+    "en": "Value and interoperability"
+   },
+   "summary": {
+    "it": "Senza uno standard, N applicazioni e M sistemi richiedono N×M integrazioni. Con MCP ognuno implementa il protocollo una volta: N+M.",
+    "en": "Without a standard, N applications and M systems require N×M integrations. With MCP each side implements the protocol once: N+M."
+   },
+   "points": {
+    "it": [
+     "Sviluppatori: meno tempo e complessità per integrare.",
+     "Applicazioni AI: accesso a un ecosistema di data source e tool.",
+     "Utenti finali: applicazioni più capaci che agiscono per loro.",
+     "Protocollo vendor-neutral, governato dalla Agentic AI Foundation (Linux Foundation).",
+     "Capability negotiation ed estensioni opt-in con ritorno al core: componenti di diversa maturità interoperano."
+    ],
+    "en": [
+     "Developers: less time and complexity to integrate.",
+     "AI applications: access to an ecosystem of data sources and tools.",
+     "End users: more capable applications that act on their behalf.",
+     "Vendor-neutral protocol, governed by the Agentic AI Foundation (Linux Foundation).",
+     "Capability negotiation and opt-in extensions with fallback to core: components of different maturity interoperate."
+    ]
+   },
+   "source": {
+    "label": "Docs · Introduction",
+    "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+   }
+  },
+  {
+   "id": "D1-08",
+   "title": {
+    "it": "Storia delle revisioni",
+    "en": "Revision history"
+   },
+   "summary": {
+    "it": "Ogni revisione ha portato cambiamenti precisi: conoscerli aiuta a riconoscere i distrattori \"da versione vecchia\".",
+    "en": "Each revision brought specific changes: knowing them helps you spot \"old version\" distractors."
+   },
+   "points": {
+    "it": [
+     "2024-11-05: prima versione pubblica.",
+     "2025-03-26: Streamable HTTP e framework OAuth 2.1; tool annotations.",
+     "2025-06-18: rimosso il batching JSON-RPC; structured output, elicitation, header MCP-Protocol-Version.",
+     "2025-11-25: URL elicitation, CIMD, icons, tasks sperimentali, OIDC Discovery.",
+     "2026-07-28: stateless (niente initialize né sessioni), MRTR, server/discover, subscriptions/listen, caching, deprecazione di roots, sampling, logging e DCR.",
+     "2024-11-05 aveva i trasporti stdio e HTTP+SSE; HTTP+SSE è deprecato dalla 2025-03-26 (sostituito da Streamable HTTP).",
+     "2025-03-26 ha aggiunto anche l'audio content; il batching JSON-RPC, aggiunto in questa revisione, è stato rimosso nella successiva senza finestra di deprecazione.",
+     "2025-06-18 ha aggiunto anche i resource link e ha classificato il server MCP come OAuth resource server.",
+     "2025-11-25 ha aggiunto anche il consenso incrementale degli scope (SEP-835), la guida sui nomi dei tool (SEP-986) e gli errori di validazione degli input come tool execution error (SEP-1303)."
+    ],
+    "en": [
+     "2024-11-05: first public version.",
+     "2025-03-26: Streamable HTTP and the OAuth 2.1 framework; tool annotations.",
+     "2025-06-18: JSON-RPC batching removed; structured output, elicitation, MCP-Protocol-Version header.",
+     "2025-11-25: URL elicitation, CIMD, icons, experimental tasks, OIDC Discovery.",
+     "2026-07-28: stateless (no initialize, no sessions), MRTR, server/discover, subscriptions/listen, caching, deprecation of roots, sampling, logging and DCR.",
+     "2024-11-05 had the stdio and HTTP+SSE transports; HTTP+SSE has been deprecated since 2025-03-26 (replaced by Streamable HTTP).",
+     "2025-03-26 also added audio content; JSON-RPC batching, added in this revision, was removed in the next one with no deprecation window.",
+     "2025-06-18 also added resource links and classified the MCP server as an OAuth resource server.",
+     "2025-11-25 also added incremental scope consent (SEP-835), tool name guidance (SEP-986) and input validation errors as tool execution errors (SEP-1303)."
+    ]
+   },
+   "source": {
+    "label": "Spec · Changelog",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
+   }
+  }
+ ]
+}

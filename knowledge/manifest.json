@@ -1,0 +1,1874 @@
+{
+  "schema_version": "1.0",
+  "generated": "2026-11-22",
+  "spec_version": "2026-07-28",
+  "kb_revision": "fase1.2 (2026-11-22)",
+  "spec_repo_commit": "862397cec702e8f828713071da501cf56158e8fc",
+  "exam": {
+    "name": "Model Context Protocol Associate (MCPA)",
+    "provider": "Linux Foundation / Agentic AI Foundation",
+    "format": "multiple-choice, online, proctored (PSI)",
+    "duration_minutes": 90,
+    "duration_note": "90 min: pagina ufficiale MCPA + FAQ/Important Instructions LF per esami MC. I 120 min (press release LF, blog AAIF, alcuni siti di pratica) sono precedenti al lancio; 120 min nelle pagine LF attuali e' la durata del CNPA.",
+    "question_count": null,
+    "question_count_probable": 60,
+    "passing_score": null,
+    "passing_score_probable": "75%",
+    "probable_values_note": "60 domande e 75% sono le regole generiche LF per gli esami multiple-choice (Important Instructions MC, FAQ MC), non dichiarate sulla pagina MCPA.",
+    "closed_book": true,
+    "results": "pass/fail via email entro 24h",
+    "practice_questions_dir": "practice-questions/ (fonti gratuite non ufficiali: solo calibrazione di stile/difficolta', mai fonte di fatti)",
+    "official_page": "https://training.linuxfoundation.org/certification/model-context-protocol-associate-mcpa/"
+  },
+  "question_generation_rules": [
+    "Domande originali: non usare né cercare domande reali o dump (LF Confidentiality Agreement).",
+    "Ogni domanda deve citare almeno una fonte del topic (campo sources) e la sezione della spec.",
+    "In caso di contrasto con versioni precedenti vale la spec 2026-07-28; usare le differenze come distrattori (notes/13-trappole-e-ambiguita.md).",
+    "Distribuzione secondo weight dei domini; dare priorità ai topic priority=alta e new_in_2026_07_28=true.",
+    "Lingua: italiano, con termini tecnici e nomi dei metodi in inglese.",
+    "Evitare domande su punti ambigui della spec elencati in notes/13 sezione C.",
+    "Le domande di practice-questions/ servono solo per calibrare stile e difficolta': non parafrasarle ne' copiarle nelle nostre; scrivere scenari originali.",
+    "Stile target: scenario breve (2-3 frasi) che richiede di applicare una regola della spec, 4 opzioni, ~15% multiple 'select two/three' (come i mock rohitg00)."
+  ],
+  "practice_questions": {
+    "dir": "practice-questions/",
+    "status": "non ufficiali, verificate sulla spec dove indicato",
+    "open_licensed": [
+      {
+        "source": "rohitg00/ai-engineering-from-scratch certifications/mcpa",
+        "license": "MIT",
+        "count": 414,
+        "file": "practice-questions/open-licensed/rohitg00-mcpa/normalizzate.json",
+        "aligned_2026_07_28": true
+      },
+      {
+        "source": "huggingface/mcp-course",
+        "license": "Apache-2.0",
+        "count": 23,
+        "file": "practice-questions/open-licensed/huggingface-mcp-course/normalizzate.json",
+        "aligned_2026_07_28": null
+      }
+    ],
+    "catalogued_only": [
+      {
+        "source": "CertSafari",
+        "url": "https://www.certsafari.com/linux/model-context-protocol-associate/practice-questions",
+        "free": 35,
+        "aligned_2026_07_28": false
+      },
+      {
+        "source": "eSEOspace",
+        "url": "https://eseospace.com/blog/mcpa-practice-questions/",
+        "free": 18,
+        "aligned_2026_07_28": true
+      },
+      {
+        "source": "aguidetocloud",
+        "url": "https://www.aguidetocloud.com/guided/cncf-mcpa/",
+        "free": 20,
+        "aligned_2026_07_28": null
+      },
+      {
+        "source": "Cloud Soft Solutions",
+        "url": "https://cloudsoftsol.com/blog/mcpa-model-context-protocol-associate-exam-guide/",
+        "free": 15,
+        "aligned_2026_07_28": false
+      }
+    ]
+  },
+  "distribution_example": {
+    "60_questions": {
+      "D1": 10,
+      "D2": 8,
+      "D3": 16,
+      "D4": 14,
+      "D5": 12
+    },
+    "40_questions": {
+      "D1": 6,
+      "D2": 6,
+      "D3": 10,
+      "D4": 10,
+      "D5": 8
+    }
+  },
+  "domains": [
+    {
+      "id": "D1",
+      "name": "MCP Fundamentals",
+      "weight": 16,
+      "notes": "notes/01-mcp-fundamentals.md",
+      "competencies": [
+        {
+          "name": "MCP Purpose & Scope",
+          "topics": [
+            {
+              "id": "D1-01",
+              "title": "Definizione e scopo di MCP",
+              "notes": "notes/01-mcp-fundamentals.md#1-purpose--scope",
+              "sources": [
+                {
+                  "local": "sources/docs/getting-started/intro.md",
+                  "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+                }
+              ],
+              "key_facts": [
+                "MCP è uno standard open-source per connettere applicazioni AI a sistemi esterni (data source, tool, workflow).",
+                "Analogia ufficiale: MCP è come una porta USB-C per le applicazioni AI.",
+                "MCP si ispira al Language Server Protocol (LSP).",
+                "MCP definisce solo il protocollo di scambio del contesto, non come l'app usa gli LLM o gestisce il contesto.",
+                "Il progetto comprende specification, SDK, strumenti di sviluppo (MCP Inspector) e reference server.",
+                "I messaggi usano JSON-RPC 2.0; la fonte di verità è schema.ts (schema.json è generato).",
+                "MUST/SHOULD/MAY seguono BCP 14 (RFC 2119/8174) solo se in maiuscolo."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-10",
+              "title": "Struttura e perimetro della specifica",
+              "notes": "notes/01-mcp-fundamentals.md#1-purpose--scope",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+                }
+              ],
+              "key_facts": [
+                "MCP serve a: condividere informazioni di contesto con i modelli, esporre tool e capability ai sistemi AI, costruire integrazioni e workflow componibili.",
+                "La spec è autorevole ed è basata sullo schema TypeScript (schema.ts); le guide e gli esempi stanno su modelcontextprotocol.io.",
+                "Base protocol della 2026-07-28: formato JSON-RPC, richieste stateless e autocontenute, capability negotiation per richiesta.",
+                "Server features: resources (contesto per utente o modello), prompts (messaggi e workflow template per gli utenti), tools (funzioni eseguite dal modello).",
+                "Client feature non deprecata: elicitation (il server chiede informazioni aggiuntive all'utente).",
+                "Utility: configuration, progress tracking, cancellation, error reporting.",
+                "Le estensioni sono sempre opt-in e richiedono il supporto esplicito di client e server, negoziato tramite capabilities.",
+                "MCP definisce lo scambio di contesto, non come l'applicazione usa l'LLM o gestisce il contesto ricevuto."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Core MCP Concepts",
+          "topics": [
+            {
+              "id": "D1-02",
+              "title": "Partecipanti: host, client, server",
+              "notes": "notes/01-mcp-fundamentals.md#21-partecipanti",
+              "sources": [
+                {
+                  "local": "sources/docs/learn/architecture.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/architecture"
+                }
+              ],
+              "key_facts": [
+                "L'host è l'app AI che crea e gestisce uno o più client.",
+                "Ogni client mantiene una connessione con un solo server (1:1).",
+                "Server locali (stdio) servono tipicamente un client; server remoti (Streamable HTTP) molti client.",
+                "Connettersi a due server comporta due oggetti client nell'host."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-03",
+              "title": "Data layer e transport layer",
+              "notes": "notes/01-mcp-fundamentals.md#22-due-layer",
+              "sources": [
+                {
+                  "local": "sources/docs/learn/architecture.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/architecture"
+                }
+              ],
+              "key_facts": [
+                "Il data layer (interno) definisce il protocollo JSON-RPC: discovery, primitive, utility.",
+                "Il transport layer (esterno) gestisce connessione, framing e autorizzazione.",
+                "Transport standard: stdio e Streamable HTTP."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-04",
+              "title": "Primitive e gerarchia di controllo",
+              "notes": "notes/01-mcp-fundamentals.md#23-primitive",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server"
+                },
+                {
+                  "local": "sources/docs/learn/server-concepts.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
+                }
+              ],
+              "key_facts": [
+                "Tools: model-controlled. Resources: application-controlled. Prompts: user-controlled.",
+                "Elicitation è l'unica client feature non deprecata; sampling e roots sono deprecati.",
+                "Ogni primitiva server ha un metodo */list e uno di retrieval (read/get) o esecuzione (call).",
+                "Tools = azioni (possono avere effetti); resources = dati di contesto in sola lettura identificati da URI; prompts = template riutilizzabili con argomenti.",
+                "Il controllo indica chi decide l'uso: il modello per i tools, l'applicazione per le resources, l'utente per i prompts (es. slash command).",
+                "Le resources sono identificate da URI e possono essere parametrizzate con resource template (RFC 6570)."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-05",
+              "title": "Design principles",
+              "notes": "notes/01-mcp-fundamentals.md#25-design-principles",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/architecture/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+                }
+              ],
+              "key_facts": [
+                "I server devono essere estremamente facili da costruire.",
+                "I server devono essere altamente componibili.",
+                "I server non devono leggere l'intera conversazione né vedere dentro altri server.",
+                "Le feature si aggiungono progressivamente tramite negoziazione delle capability."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-06",
+              "title": "Versioning e stati delle revisioni",
+              "notes": "notes/01-mcp-fundamentals.md#3-versioning",
+              "sources": [
+                {
+                  "local": "sources/docs/learn/versioning.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/versioning"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/basic/versioning.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
+                }
+              ],
+              "key_facts": [
+                "La versione ha formato YYYY-MM-DD = data dell'ultima modifica incompatibile.",
+                "Stati delle revisioni: Draft, Current, Final. La Current è 2026-07-28.",
+                "Stati delle feature: Active, Deprecated, Removed; deprecazione minima 12 mesi.",
+                "Ere: Modern (>=2026-07-28), Legacy (<=2025-11-25 con initialize), Dual-era."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-09",
+              "title": "Principi di design del progetto (governance delle SEP)",
+              "notes": "notes/01-mcp-fundamentals.md#26-principi-di-design-del-progetto",
+              "sources": [
+                {
+                  "local": "sources/community/design-principles.md",
+                  "url": "https://modelcontextprotocol.io/community/design-principles"
+                }
+              ],
+              "key_facts": [
+                "I design principles del progetto guidano l'accettazione di SEP ed estensioni; sono distinti dai design principles architetturali della spec.",
+                "Convergence over choice: un solo modo di risolvere un problema; le estensioni testano la convergenza, la spec la consolida.",
+                "Composability over specificity: niente feature per casi costruibili con resources, tools e prompts; i pattern emergenti diventano estensioni (MCP Apps, Tasks).",
+                "Interoperability over optimization: feature che degradano con grazia; la capability negotiation adatta il protocollo invece di presumere.",
+                "Stability over velocity: ogni aggiunta è permanente; le rimozioni seguono la Feature Lifecycle policy.",
+                "Demonstration over deliberation: una SEP richiede un prototipo funzionante per essere accettata.",
+                "Capability over compensation: niente struttura permanente per aggirare limiti temporanei dei modelli.",
+                "Standardization over innovation: si standardizzano pattern già provati; quelli nuovi si sperimentano prima nelle estensioni.",
+                "In caso di conflitto i principi si bilanciano tra loro, non sono in ordine gerarchico."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Interoperability & Value",
+          "topics": [
+            {
+              "id": "D1-07",
+              "title": "Valore e interoperabilità",
+              "notes": "notes/01-mcp-fundamentals.md#4-interoperability--value",
+              "sources": [
+                {
+                  "local": "sources/docs/getting-started/intro.md",
+                  "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
+                }
+              ],
+              "key_facts": [
+                "Per gli sviluppatori MCP riduce tempo e complessità di integrazione.",
+                "MCP trasforma il problema di integrazione N×M in N+M.",
+                "Il protocollo è vendor-neutral e governato da AAIF/Linux Foundation.",
+                "Le estensioni sono opt-in con fallback al core.",
+                "Problema N×M: senza uno standard servono N×M integrazioni custom; con MCP ognuno implementa il protocollo una volta (N+M).",
+                "Valore per gli sviluppatori: meno tempo e complessità; per le app AI: accesso a un ecosistema di data source e tool; per gli utenti finali: app più capaci che agiscono per loro.",
+                "MCP è vendor-neutral, governato dalla Agentic AI Foundation sotto la Linux Foundation."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D1-08",
+              "title": "Storia delle revisioni",
+              "notes": "notes/01-mcp-fundamentals.md#5-cronologia-essenziale-delle-revisioni",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/changelog.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
+                },
+                {
+                  "local": "sources/spec-2025-11-25/changelog.md",
+                  "url": "https://modelcontextprotocol.io/specification/2025-11-25/changelog"
+                }
+              ],
+              "key_facts": [
+                "2025-03-26 introduce Streamable HTTP e il framework OAuth 2.1.",
+                "2025-06-18 rimuove il JSON-RPC batching e introduce structured output ed elicitation.",
+                "2025-11-25 introduce URL elicitation, CIMD, icons, tasks sperimentali.",
+                "2026-07-28 rende MCP stateless, introduce MRTR, server/discover e subscriptions/listen."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            }
+          ]
+        }
+      ],
+      "coverage_score_10": 9,
+      "difficulty_multiplier": 0.8,
+      "study_weight_pct": 12,
+      "study_note": "concettuale, poco cambiato; buona copertura"
+    },
+    {
+      "id": "D2",
+      "name": "Architecture & Components",
+      "weight": 14,
+      "notes": "notes/02-architecture-components.md",
+      "competencies": [
+        {
+          "name": "MCP Hosts, Clients and Servers",
+          "topics": [
+            {
+              "id": "D2-01",
+              "title": "Responsabilità di host, client e server",
+              "notes": "notes/02-architecture-components.md#1-hosts-clients-servers",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/architecture/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+                }
+              ],
+              "key_facts": [
+                "L'host applica policy di sicurezza e consenso e aggrega il contesto.",
+                "Il client allega versione e capability a ogni richiesta e mantiene i confini di sicurezza tra server.",
+                "Il server chiede input al client tramite InputRequiredResult in una risposta."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-02",
+              "title": "Capability negotiation e server/discover",
+              "notes": "notes/02-architecture-components.md#2-capability-negotiation-2026-07-28",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/discover.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/schema.ts",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/schema"
+                }
+              ],
+              "key_facts": [
+                "Il client dichiara le capability nel _meta di ogni richiesta.",
+                "Il server dichiara le capability nel risultato di server/discover.",
+                "server/discover è MUST per il server e opzionale per il client.",
+                "DiscoverResult contiene supportedVersions, capabilities, serverInfo (in _meta) e instructions opzionali; è cacheabile.",
+                "ClientCapabilities: elicitation{form,url}, sampling{context,tools} (deprecata), roots (deprecata), experimental, extensions.",
+                "ServerCapabilities: tools{listChanged}, resources{subscribe,listChanged}, prompts{listChanged}, completions, logging (deprecata), experimental, extensions."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D2-03",
+              "title": "Transport stdio",
+              "notes": "notes/02-architecture-components.md#41-stdio",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/stdio.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio"
+                }
+              ],
+              "key_facts": [
+                "Il client lancia il server come subprocess; messaggi delimitati da newline senza newline interne.",
+                "Il server può loggare su stderr; su stdout solo messaggi MCP validi.",
+                "Shutdown: il client chiude lo stdin, attende, poi SIGTERM/SIGKILL (o TerminateProcess su Windows).",
+                "Su stdio la cancellazione usa notifications/cancelled.",
+                "Il client dual-era fa probe con server/discover e ripiega su initialize per errori non-modern o timeout."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-04",
+              "title": "Transport Streamable HTTP",
+              "notes": "notes/02-architecture-components.md#42-streamable-http-introdotto-nella-2025-03-26-cambiato-nella-2026-07-28",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/streamable-http.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+                }
+              ],
+              "key_facts": [
+                "Un solo endpoint MCP che accetta POST; ogni messaggio è una nuova POST.",
+                "Accept deve elencare application/json e text/event-stream.",
+                "Notifica accettata: 202 Accepted senza body.",
+                "La risposta è JSON singolo o SSE scoped alla richiesta.",
+                "Niente GET, niente DELETE, niente Mcp-Session-Id, niente Last-Event-ID; GET/DELETE → 405.",
+                "La chiusura dello stream SSE è la cancellazione.",
+                "Header obbligatori: MCP-Protocol-Version e Mcp-Method su ogni POST; Mcp-Name solo per tools/call, resources/read, prompts/get.",
+                "Mismatch header/body → 400 + HeaderMismatch -32020; metodo sconosciuto → 404 + -32601."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D2-05",
+              "title": "x-mcp-header e codifica dei valori",
+              "notes": "notes/02-architecture-components.md#x-mcp-header",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/streamable-http.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http#custom-headers-from-tool-parameters"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#x-mcp-header"
+                }
+              ],
+              "key_facts": [
+                "x-mcp-header rispecchia un parametro del tool nell'header Mcp-Param-{name}.",
+                "Ammesso solo su integer, string, boolean (non number) staticamente raggiungibili via properties.",
+                "Tool con x-mcp-header invalido viene escluso da tools/list dal client HTTP.",
+                "Valori non sicuri si codificano come =?base64?...?=.",
+                "Non usarlo per parametri sensibili: gli header sono visibili agli intermediari."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-13",
+              "title": "Nomi dei tool e aggregazione multi-server",
+              "notes": "notes/02-architecture-components.md#33-più-server-insieme-e-nomi-dei-tool",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+                }
+              ],
+              "key_facts": [
+                "Nomi dei tool: SHOULD 1-128 caratteri, case-sensitive, solo A-Z a-z 0-9 _ - . , senza spazi né virgole.",
+                "L'unicità dei nomi dei tool vale solo all'interno di un singolo server.",
+                "Client e proxy che aggregano più server SHOULD disambiguare le collisioni, ad esempio con un prefisso che identifica il server.",
+                "serverInfo.name non è garantito univoco e SHOULD NOT essere usato per la disambiguazione."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Schemas & Structured Data",
+          "topics": [
+            {
+              "id": "D2-06",
+              "title": "JSON Schema in MCP",
+              "notes": "notes/02-architecture-components.md#52-json-schema-in-mcp",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#json-schema-usage"
+                }
+              ],
+              "key_facts": [
+                "Senza $schema il dialetto di default è JSON Schema 2020-12.",
+                "inputSchema deve avere type object alla radice e può usare qualsiasi keyword 2020-12.",
+                "Mai dereferenziare automaticamente $ref verso URI di rete.",
+                "Applicare limiti alle composizioni (anyOf/oneOf/allOf) contro DoS del validatore.",
+                "requestedSchema delle elicitation è limitato a oggetti piatti di primitive."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-07",
+              "title": "_meta, icons e strutture comuni",
+              "notes": "notes/02-architecture-components.md#54-strutture-comuni",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#_meta"
+                }
+              ],
+              "key_facts": [
+                "Prefissi _meta con secondo label modelcontextprotocol o mcp sono riservati.",
+                "com.example.mcp/ non è riservato.",
+                "traceparent, tracestate, baggage sono riservati per OpenTelemetry.",
+                "Icons: solo https o data:, PNG e JPEG obbligatori per chi renderizza.",
+                "clientInfo e serverInfo sono self-reported e non verificati."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-08",
+              "title": "Structured tool output",
+              "notes": "notes/02-architecture-components.md#53-structured-tool-output",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#structured-content"
+                }
+              ],
+              "key_facts": [
+                "structuredContent può essere qualsiasi valore JSON.",
+                "Con outputSchema il server MUST conformarsi e il client SHOULD validare.",
+                "Per retrocompatibilità includere anche il JSON serializzato in un TextContent."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        },
+        {
+          "name": "Model Interaction Flow",
+          "topics": [
+            {
+              "id": "D2-09",
+              "title": "Flusso end-to-end host-LLM-server",
+              "notes": "notes/02-architecture-components.md#3-model-interaction-flow",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/architecture/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#message-flow"
+                },
+                {
+                  "local": "sources/docs/learn/server-concepts.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
+                }
+              ],
+              "key_facts": [
+                "Discovery opzionale, list delle primitive, selezione da parte del modello, conferma utente, tools/call, eventuale MRTR, risultato al modello.",
+                "Il contesto completo resta nell'host; i server ricevono solo il necessario.",
+                "Esempio ufficiale multi-server (travel planner): l'utente avvia un prompt, l'app aggiunge resources, il modello chiama tools di server diversi.",
+                "È il host a orchestrare: i server non comunicano tra loro e ricevono solo ciò che serve, mentre il contesto completo resta nell'host.",
+                "Prima di inviare tools/call il client SHOULD mostrare all'utente gli input del tool (anti esfiltrazione) e chiedere conferma per le operazioni sensibili.",
+                "Il client SHOULD validare il risultato del tool (e structuredContent rispetto a outputSchema) prima di passarlo all'LLM."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-10",
+              "title": "Estensioni: negoziazione e lifecycle",
+              "notes": "notes/02-architecture-components.md#6-estensioni-architettura",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/versioning.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning#extension-negotiation"
+                },
+                {
+                  "local": "sources/extensions/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/overview"
+                }
+              ],
+              "key_facts": [
+                "Identificatore {vendor-prefix}/{extension-name} con prefisso obbligatorio.",
+                "Negoziate in capabilities.extensions; {} indica supporto senza impostazioni.",
+                "Se l'altra parte non supporta l'estensione: tornare al core o rifiutare con errore.",
+                "Lifecycle: Experimental, Beta, Stable (o promozione nel core)."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D2-11",
+              "title": "Server instructions",
+              "notes": "notes/02-architecture-components.md#31-server-instructions",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/discover.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
+                },
+                {
+                  "local": "sources/blog/2025-11-03-using-server-instructions.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2025-11-03-using-server-instructions/"
+                }
+              ],
+              "key_facts": [
+                "instructions è un campo opzionale di server/discover (prima nell'InitializeResult) con indicazioni in linguaggio naturale per l'LLM su come usare il server.",
+                "Contenuti adatti: relazioni e ordine tra i tool, vincoli (rate limit), fallback; non ripetere le descrizioni dei tool.",
+                "Il host di solito inietta le instructions nel system prompt.",
+                "Le instructions non garantiscono il comportamento: mai usarle per controlli critici di sicurezza o privacy (servono regole deterministiche o hook).",
+                "Client: mostrare all'utente le instructions iniettate e permettere di rivederle o disabilitarle."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            },
+            {
+              "id": "D2-12",
+              "title": "Modello di interazione utente per primitiva",
+              "notes": "notes/02-architecture-components.md#32-modello-di-interazione-utente-per-primitiva",
+              "sources": [
+                {
+                  "local": "sources/docs/learn/server-concepts.md",
+                  "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
+                }
+              ],
+              "key_facts": [
+                "Tools: dialog di approvazione per singola esecuzione, permessi per pre-approvare operazioni sicure, activity log delle esecuzioni.",
+                "Resources: picker ad albero o lista, ricerca e filtri, inclusione automatica; la spec non impone una UI.",
+                "Prompts: invocazione esplicita dell'utente, ad esempio slash command o command palette; il template deve essere visibile.",
+                "Elicitation: il server chiede, l'utente risponde con accept, decline o cancel."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        }
+      ],
+      "coverage_score_10": 9,
+      "difficulty_multiplier": 1.1,
+      "study_weight_pct": 15,
+      "study_note": "molte novità 2026-07-28 (header, discover, x-mcp-header)"
+    },
+    {
+      "id": "D3",
+      "name": "Interactions & Execution",
+      "weight": 26,
+      "notes": "notes/03-interactions-execution.md",
+      "competencies": [
+        {
+          "name": "Interaction Patterns & Response Handling",
+          "topics": [
+            {
+              "id": "D3-01",
+              "title": "Tipi di messaggi JSON-RPC",
+              "notes": "notes/03-interactions-execution.md#1-messaggi-json-rpc-20-basicindexmd-messages",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#messages"
+                }
+              ],
+              "key_facts": [
+                "Le request vanno solo dal client al server; il server non inizia richieste.",
+                "L'id della request non può essere null e non va riusato tra richieste pendenti.",
+                "Le notification non hanno id e non ricevono risposta.",
+                "Ogni result deve contenere resultType."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-02",
+              "title": "Statelessness e _meta per richiesta",
+              "notes": "notes/03-interactions-execution.md#12-statelessness-basicindexmd-statelessness",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#statelessness"
+                }
+              ],
+              "key_facts": [
+                "protocolVersion e clientCapabilities sono obbligatori in ogni richiesta; clientInfo è SHOULD.",
+                "Campo obbligatorio mancante → -32602 (HTTP 400).",
+                "Capability necessaria non dichiarata → MissingRequiredClientCapabilityError -32021.",
+                "Una connessione stdio aperta non è una sessione.",
+                "Lo stato tra richieste si riferisce con identificatori espliciti."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-03",
+              "title": "Versioning per richiesta e retrocompatibilità",
+              "notes": "notes/03-interactions-execution.md#13-campi-_meta-per-richiesta-obbligatori",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/versioning.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
+                }
+              ],
+              "key_facts": [
+                "Versione non supportata → UnsupportedProtocolVersionError -32022 con data.supported.",
+                "Il client sceglie una versione dall'elenco supported e riprova.",
+                "Un errore modern riconosciuto identifica un server modern: non fare fallback a initialize.",
+                "L'era si memorizza per processo (stdio) o origin (HTTP)."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-04",
+              "title": "Multi Round-Trip Requests",
+              "notes": "notes/03-interactions-execution.md#3-multi-round-trip-requests--mrtr-basicpatternsmrtrmd-sep-2322--novità",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/patterns/mrtr.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr"
+                }
+              ],
+              "key_facts": [
+                "MRTR sostituisce le richieste server→client (elicitation, sampling, roots).",
+                "InputRequiredResult ha resultType input_required, inputRequests e/o requestState (almeno uno).",
+                "Ammesso solo su tools/call, resources/read, prompts/get.",
+                "Il retry usa un nuovo id JSON-RPC, inputResponses con le stesse chiavi e requestState identico.",
+                "Il server non può chiedere input per capability non dichiarate dal client.",
+                "Se mancano dati nel retry, il server risponde con un nuovo InputRequiredResult invece di un errore.",
+                "I risultati dei retry MRTR non vanno messi in cache."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-05",
+              "title": "Subscriptions",
+              "notes": "notes/03-interactions-execution.md#4-subscriptions-basicpatternssubscriptionsmd--novità",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/patterns/subscriptions.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
+                }
+              ],
+              "key_facts": [
+                "subscriptions/listen sostituisce resources/subscribe e il GET endpoint.",
+                "Filtro: toolsListChanged, promptsListChanged, resourcesListChanged, resourceSubscriptions.",
+                "Il primo messaggio è notifications/subscriptions/acknowledged con il sottoinsieme accettato.",
+                "subscriptionId è l'id JSON-RPC della richiesta subscriptions/listen.",
+                "progress e message non passano dallo stream di listen.",
+                "Su stdio, dopo riconnessione, il client deve ri-inviare subscriptions/listen."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-06",
+              "title": "Progress, cancellation e timeout",
+              "notes": "notes/03-interactions-execution.md#5-progress-e-cancellation",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/patterns/progress.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/basic/patterns/cancellation.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation"
+                }
+              ],
+              "key_facts": [
+                "progressToken (string o integer) va in _meta ed è unico tra le richieste attive.",
+                "Il valore progress deve aumentare a ogni notifica.",
+                "Su HTTP la cancellazione è la chiusura dello stream; su stdio notifications/cancelled.",
+                "Dopo la cancellazione il server non invia risposta.",
+                "Timeout SHOULD su tutte le richieste, con un massimo assoluto anche se arrivano progress."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-07",
+              "title": "Caching e pagination",
+              "notes": "notes/03-interactions-execution.md#65-utility",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/utilities/caching.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/utilities/pagination.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination"
+                }
+              ],
+              "key_facts": [
+                "ttlMs e cacheScope sono obbligatori sui result complete di discover, tools/prompts/resources list, templates list, resources/read.",
+                "ttlMs assente o negativo equivale a 0.",
+                "public = condivisibile tra utenti; private = solo stesso contesto di autorizzazione.",
+                "Una notifica list_changed invalida la cache.",
+                "Il TTL non è un intervallo di polling.",
+                "Il cursore è opaco; una stringa vuota è un cursore valido; nextCursor assente = fine.",
+                "Cursore invalido → -32602."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        },
+        {
+          "name": "Error Handling",
+          "topics": [
+            {
+              "id": "D3-08",
+              "title": "Codici d'errore",
+              "notes": "notes/03-interactions-execution.md#71-codici",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#error-codes"
+                }
+              ],
+              "key_facts": [
+                "-32020 HeaderMismatch, -32021 MissingRequiredClientCapability, -32022 UnsupportedProtocolVersion.",
+                "-32000..-32019 legacy; -32020..-32099 riservati alla spec MCP.",
+                "Risorsa non trovata → -32602 (non più -32002).",
+                "-32042 (URL elicitation required) non va più emesso.",
+                "Metodo non trovato → -32601 (HTTP 404)."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-09",
+              "title": "Protocol error vs tool execution error",
+              "notes": "notes/03-interactions-execution.md#72-protocol-error-vs-tool-execution-error-domanda-classica",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#error-handling"
+                }
+              ],
+              "key_facts": [
+                "Tool sconosciuto o richiesta malformata → errore JSON-RPC.",
+                "Errori di validazione input, API, business logic → result con isError true.",
+                "I tool execution error andrebbero passati al modello per l'autocorrezione.",
+                "Protocol error: tool sconosciuto, richiesta malformata, errore del server; tool execution error: errori di API, validazione dell'input, logica di business.",
+                "Il client SHOULD passare i tool execution error al modello per l'autocorrezione; MAY passare anche i protocol error, ma è meno probabile che il modello si riprenda."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-10",
+              "title": "Status HTTP",
+              "notes": "notes/03-interactions-execution.md#73-status-http-da-ricordare",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/streamable-http.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/streamable-http.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+                }
+              ],
+              "key_facts": [
+                "202 notifica accettata; 400 errori di validazione/versione/capability; 401 token; 403 Origin o scope; 404 metodo; 405 GET/DELETE.",
+                "202 Accepted senza body: notifica JSON-RPC accettata dal server; nella 2026-07-28 il client MUST NOT inviare risposte JSON-RPC nel POST.",
+                "400 Bad Request: HeaderMismatch (-32020), versione non supportata (-32022), capability mancante (-32021), header obbligatorio assente.",
+                "404 Not Found con errore JSON-RPC -32601: metodo non implementato; un 404 senza body JSON-RPC suggerisce un server legacy HTTP+SSE.",
+                "405 Method Not Allowed: GET o DELETE sull'endpoint MCP di un server che supporta solo la 2026-07-28.",
+                "403 Forbidden: Origin non valido (protezione da DNS rebinding) oppure scope insufficienti; 401: token mancante, invalido o scaduto."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        },
+        {
+          "name": "Tool Invocation Lifecycle",
+          "topics": [
+            {
+              "id": "D3-11",
+              "title": "Tools: definizione, list e call",
+              "notes": "notes/03-interactions-execution.md#62-tools-servertoolsmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+                }
+              ],
+              "key_facts": [
+                "tools/list non deve variare per connessione ma può variare per autorizzazione.",
+                "Nomi tool: 1-128 caratteri, A-Z a-z 0-9 _ - ., case-sensitive.",
+                "Tool senza parametri: {type: object, additionalProperties: false} raccomandato.",
+                "Display name: title, poi annotations.title, poi name.",
+                "Content: text, image, audio, resource_link, resource.",
+                "tools/call può rispondere con InputRequiredResult."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-12",
+              "title": "Tool annotations",
+              "notes": "notes/03-interactions-execution.md#62-tools-servertoolsmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/schema.ts",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/schema#toolannotations"
+                }
+              ],
+              "key_facts": [
+                "readOnlyHint default false; destructiveHint default true; idempotentHint default false; openWorldHint default true.",
+                "destructiveHint e idempotentHint hanno senso solo se readOnlyHint è false.",
+                "Le annotations sono untrusted salvo server fidati."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-13",
+              "title": "Stateful tools con handle",
+              "notes": "notes/03-interactions-execution.md#62-tools-servertoolsmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#stateful-tools"
+                }
+              ],
+              "key_facts": [
+                "Senza sessioni, lo stato si gestisce con handle restituiti da un tool di creazione e passati come argomenti.",
+                "Gli handle devono essere opachi, con durata dichiarata nella description.",
+                "Handle scaduto → tool execution error."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-14",
+              "title": "Estensione Tasks",
+              "notes": "notes/03-interactions-execution.md#9-estensione-tasks",
+              "sources": [
+                {
+                  "local": "sources/extensions/tasks/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
+                }
+              ],
+              "key_facts": [
+                "ID io.modelcontextprotocol/tasks, stage Beta verso Core.",
+                "CreateTaskResult ha resultType task.",
+                "Stati: working, input_required, completed, failed, cancelled.",
+                "tasks/get per polling, tasks/update per input, tasks/cancel cooperativo.",
+                "Rimossi tasks/result e tasks/list."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        },
+        {
+          "name": "Protocol Primitives",
+          "topics": [
+            {
+              "id": "D3-15",
+              "title": "Resources",
+              "notes": "notes/03-interactions-execution.md#63-resources-serverresourcesmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/resources.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
+                }
+              ],
+              "key_facts": [
+                "Capability resources con subscribe e listChanged indipendenti.",
+                "resources/templates/list usa URI template RFC 6570.",
+                "Contenuto text o blob base64; annotations audience, priority 0-1, lastModified.",
+                "https:// solo se il client può fare fetch da solo.",
+                "Mai contents vuoto per risorsa inesistente."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-16",
+              "title": "Prompts",
+              "notes": "notes/03-interactions-execution.md#64-prompts-serverpromptsmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/prompts.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
+                }
+              ],
+              "key_facts": [
+                "prompts/get restituisce messages con role user o assistant.",
+                "Nome invalido o argomenti mancanti → -32602.",
+                "prompts/get può rispondere con InputRequiredResult."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-17",
+              "title": "Completion",
+              "notes": "notes/03-interactions-execution.md#65-utility",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/utilities/completion.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion"
+                }
+              ],
+              "key_facts": [
+                "Riferimenti ref/prompt e ref/resource.",
+                "Massimo 100 valori per risposta, total e hasMore opzionali.",
+                "context.arguments contiene gli argomenti già risolti."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D3-18",
+              "title": "Elicitation",
+              "notes": "notes/03-interactions-execution.md#66-client-feature-elicitation-clientelicitationmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/client/elicitation.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
+                }
+              ],
+              "key_facts": [
+                "elicitation: {} equivale al solo form mode.",
+                "mode omesso = form.",
+                "Form: requestedSchema piatto di primitive; formati email, uri, date, date-time.",
+                "Azioni: accept, decline, cancel.",
+                "URL mode: accept indica solo consenso, l'esito si scopre al retry."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D3-19",
+              "title": "Feature deprecate: sampling, roots, logging",
+              "notes": "notes/03-interactions-execution.md#67-client-feature-deprecate-funzionano-ancora-via-mrtr",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/deprecated.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/client/sampling.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
+                }
+              ],
+              "key_facts": [
+                "Sampling, roots e logging sono deprecati ma funzionanti (≥12 mesi).",
+                "toolChoice: auto (default), required, none; richiede sampling.tools.",
+                "Roots usano URI file://.",
+                "Logging: notifications/message solo se la richiesta contiene _meta logLevel; livelli syslog RFC 5424."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        }
+      ],
+      "coverage_score_10": 9.5,
+      "difficulty_multiplier": 1.2,
+      "study_weight_pct": 29,
+      "study_note": "il dominio più pesante e più nuovo (MRTR, subscriptions, errori, caching)"
+    },
+    {
+      "id": "D4",
+      "name": "Security & Governance",
+      "weight": 24,
+      "notes": "notes/04-security-governance.md",
+      "competencies": [
+        {
+          "name": "Trust Boundaries",
+          "topics": [
+            {
+              "id": "D4-01",
+              "title": "Principi di sicurezza e confini di fiducia",
+              "notes": "notes/04-security-governance.md#1-principi-di-sicurezza-della-spec-spec-indexmd-security-and-trust--safety",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28#security-and-trust-%26-safety"
+                }
+              ],
+              "key_facts": [
+                "Principi: user consent and control, data privacy, tool safety.",
+                "MCP non può imporre la sicurezza a livello di protocollo.",
+                "I tool rappresentano esecuzione arbitraria di codice.",
+                "I server non devono vedere l'intera conversazione né altri server."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-02",
+              "title": "Ruoli OAuth e ambito dell'autorizzazione",
+              "notes": "notes/04-security-governance.md#2-authorization--quadro-generale-basicauthorizationindexmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+                }
+              ],
+              "key_facts": [
+                "Autorizzazione OPTIONAL; HTTP SHOULD conformarsi; stdio SHOULD NOT (credenziali dall'ambiente).",
+                "Server MCP = OAuth 2.1 resource server; client = OAuth 2.1 client.",
+                "Standard: OAuth 2.1, RFC 6750, 8414, 7591, 8707, 9728, 9207, CIMD, OIDC Discovery."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-03",
+              "title": "Token audience e token passthrough",
+              "notes": "notes/04-security-governance.md#62-token-passthrough-anti-pattern-esplicitamente-vietato",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/security-considerations.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+                },
+                {
+                  "local": "sources/docs/tutorials/security/security_best_practices.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices#token-passthrough"
+                }
+              ],
+              "key_facts": [
+                "Il server deve accettare solo token emessi per sé (audience).",
+                "Il server non deve inoltrare a valle il token ricevuto dal client.",
+                "Verso API upstream il server usa un token separato come OAuth client.",
+                "Il passthrough distrugge audit trail e accountability."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-18",
+              "title": "Threat model dei server locali e provenienza",
+              "notes": "notes/04-security-governance.md#65b-modello-di-minaccia-dei-server-locali",
+              "sources": [
+                {
+                  "local": "sources/docs/tutorials/security/local-server-security.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
+                }
+              ],
+              "key_facts": [
+                "Tra client e server stdio non c'è un confine di sicurezza: il transport stdio non è una sandbox e gli SDK assumono piena fiducia tra i peer.",
+                "Le decisioni di sicurezza per i server locali avvengono prima del lancio: provenienza (cosa installi) e isolamento (come lo esegui).",
+                "Il trust domain è cumulativo: ogni server condivide il contesto del modello e può influenzare l'uso dei tool degli altri.",
+                "Minacce: server malevolo (typosquatting), server che raccoglie troppo, dipendenza compromessa, catalogo di tool avvelenato, bridge vulnerabile.",
+                "Nessun controllo prova cosa farà un server: firme, SBOM e listing curati dicono di chi ti fidi, non che la fiducia sia meritata.",
+                "Il pin con npx/uvx copre solo il pacchetto top-level; un'immagine container pinnata per digest congela tutto l'albero delle dipendenze.",
+                "Se il server non ha bisogno della macchina locale, preferire la versione remota (Streamable HTTP + OAuth)."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Permissions & Consent",
+          "topics": [
+            {
+              "id": "D4-04",
+              "title": "Discovery PRM e AS metadata",
+              "notes": "notes/04-security-governance.md#31-discovery-del-protected-resource-metadata-authorization-server-discoverymd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
+                }
+              ],
+              "key_facts": [
+                "Il server deve implementare RFC 9728 con authorization_servers (≥1).",
+                "Discovery PRM: WWW-Authenticate resource_metadata, altrimenti well-known path-specific poi root.",
+                "Il client deve supportare RFC 8414 e OIDC Discovery; ordine: OAuth path insertion, OIDC path insertion, OIDC path appending.",
+                "L'issuer del metadata deve coincidere con quello usato per costruire l'URL."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-05",
+              "title": "Scope selection e step-up",
+              "notes": "notes/04-security-governance.md#33-scope-selection-strategy",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization#scope-selection-strategy"
+                }
+              ],
+              "key_facts": [
+                "Priorità: scope dal WWW-Authenticate, altrimenti tutti gli scopes_supported.",
+                "Scope insufficienti a runtime: 403 con error=insufficient_scope.",
+                "Il server elenca tutti gli scope necessari in una challenge; il client fa l'unione con quelli precedenti.",
+                "Il server deve rispettare le gerarchie di scope.",
+                "offline_access: il client MAY richiederlo, il server SHOULD NOT pubblicizzarlo."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-06",
+              "title": "Client registration: CIMD, pre-registration, DCR",
+              "notes": "notes/04-security-governance.md#4-client-registration-client-registrationmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/client-registration.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
+                }
+              ],
+              "key_facts": [
+                "Priorità: pre-registrato, CIMD, DCR, input utente.",
+                "CIMD: client_id è un URL HTTPS con path; documento con client_id, client_name, redirect_uris.",
+                "client_id_metadata_document_supported segnala il supporto CIMD.",
+                "DCR deprecata; application_type obbligatorio (native o web).",
+                "Credenziali legate all'issuer; ri-registrazione se cambia AS; CIMD portabile."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-07",
+              "title": "Consenso nelle feature (tools, elicitation)",
+              "notes": "notes/04-security-governance.md#8-consenso-e-controllo-umano-nelle-feature",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#user-interaction-model"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/client/elicitation.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation#security-considerations"
+                }
+              ],
+              "key_facts": [
+                "Human in the loop SHOULD sempre poter negare un tool.",
+                "Il client dovrebbe mostrare gli input del tool prima della chiamata.",
+                "Form elicitation non può chiedere segreti; per i segreti si usa URL mode.",
+                "URL mode: niente pre-fetch, consenso esplicito, URL completo visibile, apertura non ispezionabile.",
+                "Il server deve verificare che chi apre l'URL sia lo stesso utente (anti phishing).",
+                "Consenso one-click per server locali: comando completo visibile e approvazione esplicita."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            }
+          ]
+        },
+        {
+          "name": "Risk & Safety Controls",
+          "topics": [
+            {
+              "id": "D4-08",
+              "title": "PKCE, iss (RFC 9207), resource (RFC 8707)",
+              "notes": "notes/04-security-governance.md#5-authorization-security-considerations-security-considerationsmd",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/security-considerations.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization#authorization-response-validation"
+                }
+              ],
+              "key_facts": [
+                "PKCE obbligatorio con S256; senza code_challenge_methods_supported il client non procede.",
+                "Il client registra l'issuer atteso con il code_verifier e valida iss prima del token exchange.",
+                "Con authorization_response_iss_parameter_supported true e iss assente la risposta va rifiutata.",
+                "resource va in authorization e token request con il canonical URI, anche se l'AS non lo supporta.",
+                "Canonical URI senza fragment, con scheme; preferibilmente senza trailing slash.",
+                "PKCE non protegge dal mix-up."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-09",
+              "title": "Token handling e refresh",
+              "notes": "notes/04-security-governance.md#36-uso-dellaccess-token",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/authorization/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization#access-token-usage"
+                }
+              ],
+              "key_facts": [
+                "Authorization: Bearer in ogni richiesta HTTP; mai token in query string.",
+                "Token invalido o scaduto → 401.",
+                "AS SHOULD emettere token short-lived; refresh token ruotati per client public.",
+                "Endpoint AS su HTTPS; redirect URI localhost o HTTPS."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-10",
+              "title": "Attacchi: confused deputy, SSRF, state handle hijacking",
+              "notes": "notes/04-security-governance.md#6-attacchi-e-mitigazioni--security-best-practices-docstutorialssecuritysecurity_best_practicesmd",
+              "sources": [
+                {
+                  "local": "sources/docs/tutorials/security/security_best_practices.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
+                }
+              ],
+              "key_facts": [
+                "Confused deputy: proxy con client ID statico + consent cookie; mitigazione consenso per-client.",
+                "SSRF: bloccare IP privati, 169.254.169.254, richiedere HTTPS, egress proxy.",
+                "State handle hijacking: il possesso di un handle non è autenticazione; legare handle all'utente.",
+                "Authorization URL: solo http(s), mai aprire URL via shell."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-11",
+              "title": "Local server compromise e sicurezza transport",
+              "notes": "notes/04-security-governance.md#65-local-mcp-server-compromise",
+              "sources": [
+                {
+                  "local": "sources/docs/tutorials/security/security_best_practices.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices#local-mcp-server-compromise"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/basic/transports/streamable-http.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http#security-%26-endpoint"
+                }
+              ],
+              "key_facts": [
+                "Validare Origin (403 se invalido) contro DNS rebinding.",
+                "Server locali HTTP: bind su 127.0.0.1.",
+                "Sandbox e privilegi minimi per i server locali.",
+                "Preferire stdio per server locali."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-12",
+              "title": "requestState e cacheScope come rischi",
+              "notes": "notes/04-security-governance.md#9-rischi-di-protocollo-specifici-della-2026-07-28",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/patterns/mrtr.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr#security-considerations"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/utilities/caching.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching#security-considerations"
+                }
+              ],
+              "key_facts": [
+                "requestState è attacker-controlled: HMAC/AEAD se influenza autorizzazione o logica.",
+                "Anti-replay: principal, TTL breve, id della richiesta originale; single-use solo server-side.",
+                "cacheScope non è un controllo d'accesso."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "alta"
+            },
+            {
+              "id": "D4-16",
+              "title": "Tool poisoning, rug pull e lethal trifecta",
+              "notes": "notes/04-security-governance.md#68-tool-poisoning-rug-pull-lethal-trifecta-e-limiti-delle-annotations",
+              "sources": [
+                {
+                  "local": "sources/docs/tutorials/security/local-server-security.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
+                },
+                {
+                  "local": "sources/blog/2026-03-16-tool-annotations.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/"
+                }
+              ],
+              "key_facts": [
+                "Tool poisoning: nomi e descrizioni dei tool sono istruzioni lette dal modello e possono contenere direttive nascoste.",
+                "Un tool avvelenato può influenzare l'agente anche senza essere mai invocato, e può prendere di mira i tool di altri server (tool shadowing).",
+                "Rug pull: il server cambia le definizioni dei tool dopo l'approvazione; consenso una tantum e pin del pacchetto non bastano.",
+                "Lethal trifecta: accesso a dati privati + contenuti non fidati + capacità di comunicare all'esterno = rischio di esfiltrazione via prompt injection.",
+                "Il rischio è una proprietà della sessione (combinazione di tool di più server), non del singolo server.",
+                "Trattare l'output dei tool open-world come contenuto non fidato."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta",
+              "added_in": "fase1.2"
+            },
+            {
+              "id": "D4-17",
+              "title": "Tool annotations: cosa possono e non possono fare",
+              "notes": "notes/04-security-governance.md#68-tool-poisoning-rug-pull-lethal-trifecta-e-limiti-delle-annotations",
+              "sources": [
+                {
+                  "local": "sources/blog/2026-03-16-tool-annotations.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+                }
+              ],
+              "key_facts": [
+                "Default pessimisti: readOnlyHint false, destructiveHint true, idempotentHint false, openWorldHint true.",
+                "destructiveHint e idempotentHint sono significativi solo se readOnlyHint è false.",
+                "Le annotations possono guidare le conferme, la fiducia graduata, la UX e i policy engine.",
+                "Le annotations non fanno enforcement e non proteggono dalla prompt injection; per garanzie servono sandbox o controlli di rete.",
+                "Un server non fidato può mentire nelle annotations: i client devono trattarle come non fidate, salvo server fidati."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "alta",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Auditability & Observability",
+          "topics": [
+            {
+              "id": "D4-13",
+              "title": "Osservabilità e audit",
+              "notes": "notes/04-security-governance.md#10-auditability--observability",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/basic/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic#_meta"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/utilities/logging.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/logging"
+                },
+                {
+                  "local": "sources/spec-2026-07-28/server/tools.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+                }
+              ],
+              "key_facts": [
+                "traceparent, tracestate, baggage per OpenTelemetry nel _meta.",
+                "Logging di protocollo deprecato: stderr e OpenTelemetry.",
+                "I log non devono contenere credenziali o PII.",
+                "Il client dovrebbe loggare l'uso dei tool per audit.",
+                "Header Mcp-Method/Mcp-Name permettono a gateway di misurare e autorizzare.",
+                "Il client SHOULD registrare l'uso dei tool per audit; il host dovrebbe offrire un activity log delle esecuzioni.",
+                "Per l'audit bisogna poter dire quale agente ha agito e per conto di quale utente; il token dovrebbe essere legato al server (audience).",
+                "Trace context W3C (traceparent, tracestate, baggage) in _meta per correlare host, client, server e sistemi a valle."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D4-14",
+              "title": "Estensioni di autorizzazione",
+              "notes": "notes/04-security-governance.md#11-estensioni-di-autorizzazione-sourcesextensionsauth",
+              "sources": [
+                {
+                  "local": "sources/extensions/auth/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/auth/overview"
+                }
+              ],
+              "key_facts": [
+                "OAuth Client Credentials per M2M; JWT bearer assertion (RFC 7523) raccomandata.",
+                "Enterprise-Managed Authorization: IdP aziendale, ID-JAG, policy e revoca centralizzate.",
+                "Entrambe Stable e mai attive di default."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D4-15",
+              "title": "Governance del progetto",
+              "notes": "notes/04-security-governance.md#12-governance-nel-senso-di-processo-del-progetto",
+              "sources": [
+                {
+                  "local": "sources/community/governance.md",
+                  "url": "https://modelcontextprotocol.io/community/governance"
+                },
+                {
+                  "local": "sources/community/feature-lifecycle.md",
+                  "url": "https://modelcontextprotocol.io/community/feature-lifecycle"
+                }
+              ],
+              "key_facts": [
+                "Lead Maintainers (BDFL), Core Maintainers, Maintainers, Contributors.",
+                "Le modifiche alla spec passano per SEP.",
+                "Feature lifecycle: Active, Deprecated (≥12 mesi), Removed."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            }
+          ]
+        }
+      ],
+      "coverage_score_10": 9,
+      "difficulty_multiplier": 1.2,
+      "study_weight_pct": 27,
+      "study_note": "denso di dettagli OAuth, MUST vs SHOULD, attacchi"
+    },
+    {
+      "id": "D5",
+      "name": "Use Cases & Ecosystem",
+      "weight": 20,
+      "notes": "notes/05-use-cases-ecosystem.md",
+      "competencies": [
+        {
+          "name": "Roles, Responsibilities & Adoption",
+          "topics": [
+            {
+              "id": "D5-01",
+              "title": "Responsabilità degli attori",
+              "notes": "notes/05-use-cases-ecosystem.md#11-ruoli-tecnici-nel-protocollo",
+              "sources": [
+                {
+                  "local": "sources/spec-2026-07-28/architecture/index.md",
+                  "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
+                }
+              ],
+              "key_facts": [
+                "L'host gestisce consenso, contesto e disambiguazione dei tool.",
+                "Il server author valida input, applica access control e rate limit.",
+                "L'authorization server emette token e valida redirect URI esatti.",
+                "Il server author implementa PRM e la validazione dei token (ruolo di resource server); il host gestisce consenso, contesto e approvazioni.",
+                "L'utente finale approva tool e accessi; l'operatore o il security team si occupa di sandbox, gateway, egress e IdP aziendale.",
+                "Il publisher sul registry possiede server.json (nome, versione, pacchetti); gli aggregatori fanno curation e scansioni di sicurezza."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-02",
+              "title": "AAIF, governance e adozione",
+              "notes": "notes/05-use-cases-ecosystem.md#12-ruoli-nel-progetto-open-source-communitygovernancemd",
+              "sources": [
+                {
+                  "local": "sources/blog/2025-12-09-mcp-joins-agentic-ai-foundation.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/"
+                },
+                {
+                  "local": "sources/community/governance.md",
+                  "url": "https://modelcontextprotocol.io/community/governance"
+                }
+              ],
+              "key_facts": [
+                "Anthropic ha donato MCP all'Agentic AI Foundation (Linux Foundation) nel dicembre 2025.",
+                "AAIF co-fondata da Anthropic, Block, OpenAI; progetti fondatori MCP, goose, AGENTS.md.",
+                "MCP mantiene autonomia tecnica.",
+                "Membership di governance individuale, non aziendale.",
+                "Codice e spec Apache 2.0, documentazione CC-BY 4.0."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            }
+          ]
+        },
+        {
+          "name": "Operational Use Cases",
+          "topics": [
+            {
+              "id": "D5-03",
+              "title": "Server locali vs remoti",
+              "notes": "notes/05-use-cases-ecosystem.md#22-locale-vs-remoto",
+              "sources": [
+                {
+                  "local": "sources/docs/develop/connect-local-servers.md",
+                  "url": "https://modelcontextprotocol.io/docs/develop/connect-local-servers"
+                },
+                {
+                  "local": "sources/docs/develop/connect-remote-servers.md",
+                  "url": "https://modelcontextprotocol.io/docs/develop/connect-remote-servers"
+                },
+                {
+                  "local": "sources/docs/tutorials/security/local-server-security.md",
+                  "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
+                }
+              ],
+              "key_facts": [
+                "Locale: stdio, credenziali dall'ambiente, sandbox.",
+                "Remoto: Streamable HTTP, OAuth 2.1.",
+                "Esempi: filesystem server locale, Sentry remoto."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-04",
+              "title": "Pattern operativi della 2026-07-28",
+              "notes": "notes/05-use-cases-ecosystem.md#23-pattern-operativi-dalla-2026-07-28",
+              "sources": [
+                {
+                  "local": "sources/blog/2026-07-28-spec-ga/index.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+                }
+              ],
+              "key_facts": [
+                "Stateless: qualsiasi istanza dietro un load balancer round-robin.",
+                "Gateway instradano su Mcp-Method/Mcp-Name.",
+                "Cache dei cataloghi tool e prompt cache stabili.",
+                "Operazioni lunghe con Tasks; M2M con client credentials; eventi con Events."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-05",
+              "title": "Progressive discovery e code mode",
+              "notes": "notes/05-use-cases-ecosystem.md#24-best-practice-lato-client-per-grandi-cataloghi-developclientsclient-best-practicesmd",
+              "sources": [
+                {
+                  "local": "sources/docs/develop/clients/client-best-practices.md",
+                  "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
+                }
+              ],
+              "key_facts": [
+                "Progressive discovery: meta-tool search_tools, soglia 1-5% della context window.",
+                "Pattern Catalog, Inspect, Execute.",
+                "Code mode: il modello scrive codice che chiama i tool in una sandbox."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-10",
+              "title": "Quale estensione per quale caso d'uso",
+              "notes": "notes/05-use-cases-ecosystem.md#23b-quando-usare-quale-estensione",
+              "sources": [
+                {
+                  "local": "sources/extensions/apps/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/apps/overview"
+                },
+                {
+                  "local": "sources/extensions/auth/oauth-client-credentials.md",
+                  "url": "https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials"
+                },
+                {
+                  "local": "sources/extensions/auth/enterprise-managed-authorization.md",
+                  "url": "https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization"
+                },
+                {
+                  "local": "sources/extensions/events/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/events/overview"
+                }
+              ],
+              "key_facts": [
+                "MCP Apps: dati complessi da esplorare, configurazioni con molte opzioni, media ricchi, monitoraggio in tempo reale, workflow a più passi.",
+                "Le MCP Apps girano in un iframe sandbox senza accesso a DOM, cookie o storage del host; comunicano solo via postMessage e il host limita le capability.",
+                "OAuth Client Credentials: servizi in background, CI/CD, integrazioni server-to-server, daemon; JWT bearer assertion raccomandata rispetto al client secret.",
+                "Se c'è un utente che deve autorizzare l'accesso si usa il flusso di autorizzazione standard, non client credentials.",
+                "Enterprise-Managed Authorization: IT che gestisce gli accessi, policy organizzative, revoca centralizzata, compliance, SSO aziendale.",
+                "Events per reagire ad attività upstream o svegliare agenti non presidiati; Tasks per il risultato di un'operazione lunga avviata dal client."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            },
+            {
+              "id": "D5-11",
+              "title": "Events: modalità di consegna e garanzie",
+              "notes": "notes/05-use-cases-ecosystem.md#23b-quando-usare-quale-estensione",
+              "sources": [
+                {
+                  "local": "sources/extensions/events/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/events/overview"
+                }
+              ],
+              "key_facts": [
+                "Le notifiche esistenti non bastano: niente parametri né payload, serve una connessione aperta, nessuna ripresa dopo una disconnessione.",
+                "Tre modalità di consegna, nessuna obbligatoria: poll (events/poll), push (events/stream), webhook (events/subscribe con callback https firmata e TTL).",
+                "Poll è adatto a server serverless, push a server stdio, webhook a server remoti con client che non mantengono una connessione.",
+                "I cursori opachi danno una consegna at-least-once; eventId stabile per la deduplicazione; maxAgeMs limita il replay.",
+                "Ordine garantito per poll e push all'interno di una subscription; best-effort per webhook. Le subscription appartengono al client."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            },
+            {
+              "id": "D5-14",
+              "title": "Pattern enterprise: scala, gateway, audit, settori regolati",
+              "notes": "notes/05-use-cases-ecosystem.md#23c-pattern-enterprise-e-responsabilità",
+              "sources": [
+                {
+                  "local": "sources/blog/aaif/README.md",
+                  "url": "https://aaif.io/projects/model-context-protocol/"
+                },
+                {
+                  "local": "sources/community/interest-groups/enterprise (online)",
+                  "url": "https://modelcontextprotocol.io/community/interest-groups/enterprise"
+                }
+              ],
+              "key_facts": [
+                "In azienda il problema di scala è operativo: ownership, governance, deploy e osservabilità di molti server.",
+                "Server con cataloghi di tool molto ampi aumentano consumo di token, latenza e superficie d'attacco; meglio tool stretti e contestuali.",
+                "Il gateway che filtra su Mcp-Method e Mcp-Name è un controllo grossolano; l'autorizzazione fine resta nel server, a ogni chiamata.",
+                "Gli handle di stato sono capability: vanno autorizzati a ogni chiamata e devono avere scope e scadenza.",
+                "Il trace context W3C correla i passaggi ma non è un audit trail: serve un record durevole per richiesta (utente, agente, tool, autorizzazione).",
+                "Nei settori regolati i dati sensibili vanno tenuti fuori dal contesto del modello quando possibile, con correlation ID end-to-end e policy nei servizi interni.",
+                "Con la 2026-07-28 i server possono stare dietro load balancer standard senza sticky session.",
+                "L'Enterprise Interest Group raccoglie requisiti aziendali e li passa ai Working Group; non scrive SEP."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        },
+        {
+          "name": "Ecosystem & Portability",
+          "topics": [
+            {
+              "id": "D5-06",
+              "title": "SDK ufficiali e tier",
+              "notes": "notes/05-use-cases-ecosystem.md#31-sdk-ufficiali-docssdkmd-communitysdk-tiersmd",
+              "sources": [
+                {
+                  "local": "sources/docs/sdk.md",
+                  "url": "https://modelcontextprotocol.io/docs/sdk"
+                },
+                {
+                  "local": "sources/community/sdk-tiers.md",
+                  "url": "https://modelcontextprotocol.io/community/sdk-tiers"
+                }
+              ],
+              "key_facts": [
+                "Tier 1: TypeScript, Python, C#, Go, Rust, Ruby. Tier 2: Java. Tier 3: Swift, PHP, Kotlin.",
+                "Conformance: Tier 1 100%, Tier 2 80%.",
+                "Tier 1 implementa le nuove feature prima del rilascio della spec; Tier 2 entro 6 mesi.",
+                "Decide lo SDK Working Group."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-07",
+              "title": "MCP Registry",
+              "notes": "notes/05-use-cases-ecosystem.md#32-mcp-registry-sourcesregistry",
+              "sources": [
+                {
+                  "local": "sources/registry/about.md",
+                  "url": "https://modelcontextprotocol.io/registry/about"
+                },
+                {
+                  "local": "sources/registry/package-types.md",
+                  "url": "https://modelcontextprotocol.io/registry/package-types"
+                }
+              ],
+              "key_facts": [
+                "Registry ufficiale di metadata per server pubblici, in preview.",
+                "server.json con name in reverse DNS, version unica e immutabile, packages e remotes.",
+                "Namespace verificati via GitHub, DNS o HTTP.",
+                "Non supporta server privati; consumato da aggregatori; OpenAPI per subregistry.",
+                "Range di versione vietati.",
+                "Verifica di proprietà dei pacchetti: npm con mcpName in package.json, PyPI con 'mcp-name:' nel README, OCI con la label io.modelcontextprotocol.server.name.",
+                "Per i server remoti il registry verifica il namespace del nome, non il controllo dell'URL remoto; più nomi possono puntare allo stesso URL.",
+                "I consumatori identificano i record per nome e versione, non per URL.",
+                "Remotes: type streamable-http (raccomandato) o sse (deprecato, solo per client esistenti).",
+                "I metadata sono immutabili tranne status (deprecated, deleted); deleted indica di solito una violazione della moderation policy.",
+                "Moderation permissiva: rimuove illegale, malware, spam e server non funzionanti; non rimuove server buggy o con vulnerabilità.",
+                "Un subregistry implementa l'OpenAPI del registry e può aggiungere metadata in _meta (rating, download, scansioni di sicurezza)."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-08",
+              "title": "Estensioni ufficiali",
+              "notes": "notes/05-use-cases-ecosystem.md#33-estensioni-ufficiali-sourcesextensionsoverviewmd-repo-ext-",
+              "sources": [
+                {
+                  "local": "sources/extensions/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/overview"
+                }
+              ],
+              "key_facts": [
+                "MCP Apps (io.modelcontextprotocol/ui): UI in iframe sandbox, resource ui://.",
+                "Skills over MCP: skills/list, skills/get, resources/read.",
+                "Events: events/list, events/poll, cursori.",
+                "Repo ufficiali con prefisso ext-."
+              ],
+              "new_in_2026_07_28": true,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-09",
+              "title": "Strumenti e portabilità",
+              "notes": "notes/05-use-cases-ecosystem.md#34-strumenti",
+              "sources": [
+                {
+                  "local": "sources/docs/tools/inspector.md",
+                  "url": "https://modelcontextprotocol.io/docs/tools/inspector"
+                },
+                {
+                  "local": "sources/docs/tools/debugging.md",
+                  "url": "https://modelcontextprotocol.io/docs/tools/debugging"
+                }
+              ],
+              "key_facts": [
+                "MCP Inspector: web, --cli, --tui.",
+                "Server stdio: log su stderr, mai su stdout.",
+                "Dual-era per servire client legacy e modern."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale"
+            },
+            {
+              "id": "D5-12",
+              "title": "MCP Bundles (MCPB)",
+              "notes": "notes/05-use-cases-ecosystem.md#36-mcp-bundles-mcpb",
+              "sources": [
+                {
+                  "local": "sources/blog/2025-11-20-adopting-mcpb.md",
+                  "url": "https://blog.modelcontextprotocol.io/posts/2025-11-20-adopting-mcpb/"
+                }
+              ],
+              "key_facts": [
+                "Un MCPB è un archivio ZIP (.mcpb) con un server MCP locale e un manifest.json obbligatorio, per l'installazione one-click.",
+                "Nato da Anthropic come DXT per Claude Desktop, poi spostato nel progetto MCP per la portabilità cross-client.",
+                "Supporta server Node.js, Python e binari; pubblicabile sul registry con registryType mcpb."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            },
+            {
+              "id": "D5-13",
+              "title": "Skills over MCP",
+              "notes": "notes/05-use-cases-ecosystem.md#23b-quando-usare-quale-estensione",
+              "sources": [
+                {
+                  "local": "sources/extensions/skills/overview.md",
+                  "url": "https://modelcontextprotocol.io/extensions/skills/overview"
+                }
+              ],
+              "key_facts": [
+                "Una skill è una directory con SKILL.md e file di supporto, esposta tramite il primitive Resources.",
+                "Il server MUST dichiarare la capability resources e l'estensione io.modelcontextprotocol/skills in server/discover.",
+                "skills/list fornisce per ogni file URI (schema skill:// raccomandato), digest SHA-256 e dimensione, per verificarne l'integrità.",
+                "Leggere SKILL.md con resources/read non attiva la skill: il host la carica dopo verifica ed eventuale approvazione."
+              ],
+              "new_in_2026_07_28": false,
+              "priority": "normale",
+              "added_in": "fase1.2"
+            }
+          ]
+        }
+      ],
+      "coverage_score_10": 8,
+      "difficulty_multiplier": 0.9,
+      "study_weight_pct": 17,
+      "study_note": "meno materiale normativo: domande di scenario; integrato con blog AAIF"
+    }
+  ],
+  "stats": {
+    "topics": 74,
+    "key_facts": 364
+  },
+  "coverage_check": {
+    "date": "2026-11-22",
+    "target_question_bank": 400,
+    "note": "Verifica di completezza per dominio: vedi notes/14-copertura-domini.md"
+  }
+}

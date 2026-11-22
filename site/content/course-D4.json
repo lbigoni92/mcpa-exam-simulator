@@ -1,0 +1,585 @@
+{
+ "domain": "D4",
+ "topics": [
+  {
+   "id": "D4-01",
+   "title": {
+    "it": "Principi di sicurezza e confini di fiducia",
+    "en": "Security principles and trust boundaries"
+   },
+   "summary": {
+    "it": "La spec indica tre principi chiave: consenso e controllo dell'utente, privacy dei dati, sicurezza dei tool. MCP non può imporli a livello di protocollo: devono applicarli gli implementatori.",
+    "en": "The spec sets three key principles: user consent and control, data privacy, tool safety. MCP cannot enforce them at the protocol level: implementers must apply them."
+   },
+   "points": {
+    "it": [
+     "L'utente deve acconsentire esplicitamente a ogni accesso ai dati e alle operazioni, e capirle.",
+     "L'host deve ottenere il consenso esplicito prima di esporre dati dell'utente ai server e prima di invocare qualsiasi tool.",
+     "I tool rappresentano esecuzione arbitraria di codice: trattarli con cautela, descrizioni comprese.",
+     "I server non vedono l'intera conversazione né gli altri server.",
+     "clientInfo e serverInfo non sono verificati: mai base per decisioni di sicurezza.",
+     "Contenuti non fidati che arrivano al modello: nome, descrizione, icone e annotations dei tool, risultati, contenuti delle risorse, instructions.",
+     "Un'istruzione contenuta nell'output di un server non giustifica da sola una chiamata ai tool di un altro server."
+    ],
+    "en": [
+     "Users must explicitly consent to, and understand, all data access and operations.",
+     "The host must get explicit consent before exposing user data to servers and before invoking any tool.",
+     "Tools represent arbitrary code execution: treat them with caution, descriptions included.",
+     "Servers do not see the whole conversation or other servers.",
+     "clientInfo and serverInfo are unverified: never the basis for security decisions.",
+     "Untrusted content reaching the model: tool names, descriptions, icons and annotations, results, resource contents, instructions.",
+     "An instruction inside one server's output does not by itself justify a call to another server's tools."
+    ]
+   },
+   "source": {
+    "label": "Spec · Security and Trust & Safety",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28"
+   }
+  },
+  {
+   "id": "D4-02",
+   "title": {
+    "it": "Autorizzazione: ruoli e ambito",
+    "en": "Authorization: roles and scope"
+   },
+   "summary": {
+    "it": "L'autorizzazione MCP si basa su OAuth 2.1. Il server MCP è un resource server, il client è un client OAuth, e l'authorization server emette i token.",
+    "en": "MCP authorization is based on OAuth 2.1. The MCP server is a resource server, the client is an OAuth client, and the authorization server issues tokens."
+   },
+   "points": {
+    "it": [
+     "Autorizzazione OPTIONAL in generale; i transport HTTP SHOULD conformarsi alla spec.",
+     "stdio SHOULD NOT usare questa spec: le credenziali arrivano dall'ambiente.",
+     "L'authorization server può essere separato dal server MCP o coincidere.",
+     "Standard: OAuth 2.1, RFC 8414, RFC 9728 (PRM), RFC 8707 (resource), RFC 9207 (iss), CIMD, OIDC Discovery; RFC 7591 (DCR) deprecata."
+    ],
+    "en": [
+     "Authorization is OPTIONAL overall; HTTP transports SHOULD conform to the spec.",
+     "stdio SHOULD NOT use this spec: credentials come from the environment.",
+     "The authorization server can be separate from the MCP server or the same.",
+     "Standards: OAuth 2.1, RFC 8414, RFC 9728 (PRM), RFC 8707 (resource), RFC 9207 (iss), CIMD, OIDC Discovery; RFC 7591 (DCR) deprecated."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+   }
+  },
+  {
+   "id": "D4-03",
+   "title": {
+    "it": "Audience dei token e token passthrough",
+    "en": "Token audience and token passthrough"
+   },
+   "summary": {
+    "it": "Un server MCP deve accettare solo token emessi per sé. Inoltrare a valle il token ricevuto dal client (token passthrough) è vietato.",
+    "en": "An MCP server must accept only tokens issued for itself. Forwarding the client's token downstream (token passthrough) is forbidden."
+   },
+   "points": {
+    "it": [
+     "Il server MUST validare l'audience del token.",
+     "Verso API upstream il server agisce come client OAuth separato con un suo token.",
+     "Il passthrough aggira controlli (rate limit, validazione), rompe i trust boundary e cancella audit trail e accountability.",
+     "Un token valido ma emesso per un'altra risorsa va rifiutato."
+    ],
+    "en": [
+     "The server MUST validate the token audience.",
+     "Towards upstream APIs the server acts as a separate OAuth client with its own token.",
+     "Passthrough bypasses controls (rate limits, validation), breaks trust boundaries and destroys audit trail and accountability.",
+     "A valid token issued for another resource must be rejected."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization · Security considerations",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
+   }
+  },
+  {
+   "id": "D4-18",
+   "title": {
+    "it": "Server locali: modello di minaccia",
+    "en": "Local servers: threat model"
+   },
+   "summary": {
+    "it": "Tra client e server stdio non c'è un confine di sicurezza: il server ha già esecuzione di codice sulla macchina. Le decisioni vere si prendono prima del lancio: cosa installi e come lo isoli.",
+    "en": "There is no security boundary between a stdio client and server: the server already has code execution on the machine. The real decisions happen before launch: what you install and how you isolate it."
+   },
+   "points": {
+    "it": [
+     "Il transport stdio non è una sandbox; gli SDK assumono piena fiducia tra i peer.",
+     "Il trust domain è cumulativo: ogni server condivide il contesto del modello.",
+     "Minacce: server malevolo (typosquatting), server che raccoglie troppo, dipendenza compromessa, catalogo di tool avvelenato, bridge vulnerabile.",
+     "Firme, SBOM e listing curati dicono di chi ti fidi, non che la fiducia sia meritata.",
+     "Pin con npx/uvx = solo il pacchetto top-level; immagine container per digest = tutto l'albero.",
+     "Se il server non ha bisogno della macchina locale, preferire la versione remota."
+    ],
+    "en": [
+     "The stdio transport is not a sandbox; SDKs assume full trust between peers.",
+     "The trust domain is cumulative: every server shares the model's context.",
+     "Threats: malicious server (typosquatting), over-collecting server, compromised dependency, poisoned tool catalog, vulnerable bridge.",
+     "Signatures, SBOMs and curated listings tell you whom you trust, not that the trust is deserved.",
+     "Pinning with npx/uvx = top-level package only; a container image by digest = the whole tree.",
+     "If the server does not need the local machine, prefer the remote version."
+    ]
+   },
+   "source": {
+    "label": "Docs · Local server security",
+    "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
+   }
+  },
+  {
+   "id": "D4-04",
+   "title": {
+    "it": "Discovery: PRM e metadata dell'AS",
+    "en": "Discovery: PRM and AS metadata"
+   },
+   "summary": {
+    "it": "Il client scopre l'authorization server partendo dal server MCP: legge il Protected Resource Metadata (RFC 9728), poi i metadata dell'AS (RFC 8414 o OIDC Discovery).",
+    "en": "The client discovers the authorization server starting from the MCP server: it reads the Protected Resource Metadata (RFC 9728), then the AS metadata (RFC 8414 or OIDC Discovery)."
+   },
+   "points": {
+    "it": [
+     "Il server MUST pubblicare il PRM con authorization_servers (almeno uno).",
+     "Discovery del PRM: resource_metadata nel WWW-Authenticate del 401; altrimenti well-known specifico del path, poi quello alla radice.",
+     "Il client MUST supportare sia RFC 8414 sia OIDC Discovery; l'AS ne implementa almeno uno.",
+     "L'issuer nei metadata deve coincidere con quello usato per costruire l'URL.",
+     "Issuer con path (https://auth.example.com/tenant1): 1) /.well-known/oauth-authorization-server/tenant1, 2) /.well-known/openid-configuration/tenant1, 3) /tenant1/.well-known/openid-configuration.",
+     "Issuer senza path: prima /.well-known/oauth-authorization-server, poi /.well-known/openid-configuration. Se l'issuer del documento non coincide, MUST NOT usarlo."
+    ],
+    "en": [
+     "The server MUST publish PRM with authorization_servers (at least one).",
+     "PRM discovery: resource_metadata in the 401's WWW-Authenticate; otherwise the path-specific well-known, then the root one.",
+     "The client MUST support both RFC 8414 and OIDC Discovery; the AS implements at least one.",
+     "The issuer in the metadata must match the one used to build the URL.",
+     "Issuer with a path (https://auth.example.com/tenant1): 1) /.well-known/oauth-authorization-server/tenant1, 2) /.well-known/openid-configuration/tenant1, 3) /tenant1/.well-known/openid-configuration.",
+     "Issuer with no path: first /.well-known/oauth-authorization-server, then /.well-known/openid-configuration. If the document's issuer does not match, it MUST NOT be used."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization server discovery",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
+   }
+  },
+  {
+   "id": "D4-05",
+   "title": {
+    "it": "Scope e step-up",
+    "en": "Scopes and step-up"
+   },
+   "summary": {
+    "it": "Il client chiede gli scope indicati dal server; se a runtime servono permessi in più, il server risponde 403 insufficient_scope e il client si riautorizza con l'unione degli scope.",
+    "en": "The client requests the scopes indicated by the server; if more permissions are needed at runtime, the server replies 403 insufficient_scope and the client re-authorizes with the union of scopes."
+   },
+   "points": {
+    "it": [
+     "Priorità: scope dal WWW-Authenticate, altrimenti scopes_supported del PRM.",
+     "Il server elenca in una volta tutti gli scope necessari per l'operazione.",
+     "L'unione con gli scope già ottenuti la fa il client.",
+     "offline_access: il client MAY chiederlo se l'AS lo supporta; il server SHOULD NOT pubblicizzarlo.",
+     "Minimizzare gli scope: partire da pochi, elevare quando serve, evitare scope omnibus.",
+     "Il client SHOULD limitare i tentativi di step-up e tracciarli, per evitare cicli infiniti.",
+     "Una lista di tool che dipende dagli scope del chiamante va in cache come private."
+    ],
+    "en": [
+     "Priority: scopes from WWW-Authenticate, otherwise the PRM's scopes_supported.",
+     "The server lists all scopes needed for the operation at once.",
+     "The client computes the union with scopes already granted.",
+     "offline_access: the client MAY request it if the AS supports it; the server SHOULD NOT advertise it.",
+     "Minimize scopes: start small, step up when needed, avoid catch-all scopes.",
+     "The client SHOULD limit and track step-up attempts to avoid infinite loops.",
+     "A tool list that depends on the caller's scopes is cached as private."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization · Scope challenge",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+   }
+  },
+  {
+   "id": "D4-06",
+   "title": {
+    "it": "Registrazione del client: CIMD, pre-registrazione, DCR",
+    "en": "Client registration: CIMD, pre-registration, DCR"
+   },
+   "summary": {
+    "it": "Il client si fa conoscere dall'authorization server. Il metodo raccomandato nella 2026-07-28 è CIMD (Client ID Metadata Document); DCR è deprecata.",
+    "en": "The client makes itself known to the authorization server. The recommended method in 2026-07-28 is CIMD (Client ID Metadata Document); DCR is deprecated."
+   },
+   "points": {
+    "it": [
+     "Ordine: credenziali pre-registrate, poi CIMD, poi DCR, poi input dell'utente.",
+     "CIMD: il client_id è un URL HTTPS (con path) che punta a un JSON con client_id, client_name, redirect_uris.",
+     "Supporto CIMD segnalato da client_id_metadata_document_supported nei metadata dell'AS.",
+     "DCR deprecata; se usata, application_type (native o web) è obbligatorio.",
+     "Credenziali legate all'issuer: se cambia AS bisogna registrarsi di nuovo; CIMD è portabile.",
+     "Il client_id nel documento CIMD deve coincidere esattamente con l'URL da cui è stato scaricato; l'AS deve proteggersi da SSRF quando lo scarica.",
+     "DCR application_type: native per app desktop, mobile, CLI e app locali su localhost; web per app nel browser. Serve perché gli AS che assumevano web rifiutavano i redirect localhost (SEP-837)."
+    ],
+    "en": [
+     "Order: pre-registered credentials, then CIMD, then DCR, then user input.",
+     "CIMD: the client_id is an HTTPS URL (with a path) pointing to a JSON with client_id, client_name, redirect_uris.",
+     "CIMD support is signaled by client_id_metadata_document_supported in the AS metadata.",
+     "DCR is deprecated; if used, application_type (native or web) is required.",
+     "Credentials are bound to the issuer: a new AS requires re-registration; CIMD is portable.",
+     "The client_id in the CIMD must exactly match the URL it was fetched from; the AS must guard against SSRF when fetching it.",
+     "DCR application_type: native for desktop, mobile, CLI and localhost apps; web for browser apps. It exists because ASs defaulting to web rejected localhost redirects (SEP-837)."
+    ]
+   },
+   "source": {
+    "label": "Spec · Client registration",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
+   }
+  },
+  {
+   "id": "D4-07",
+   "title": {
+    "it": "Consenso nelle feature",
+    "en": "Consent in features"
+   },
+   "summary": {
+    "it": "Ogni feature ha requisiti di consenso. Per i tool serve un umano che possa negare l'esecuzione; per l'elicitation conta la modalità.",
+    "en": "Each feature has consent requirements. Tools need a human able to deny execution; for elicitation the mode matters."
+   },
+   "points": {
+    "it": [
+     "Tools: SHOULD esserci sempre un human in the loop che può negare; mostrare gli input prima della chiamata.",
+     "Form elicitation MUST NOT chiedere segreti; per credenziali verso terze parti si usa URL mode.",
+     "URL mode: niente pre-fetch dell'URL, URL completo visibile, consenso esplicito, apertura in un contesto non ispezionabile dal client.",
+     "Il server deve verificare che chi completa il flusso URL sia lo stesso utente (anti phishing).",
+     "Configurazione one-click di server locali: mostrare il comando completo e chiedere approvazione esplicita."
+    ],
+    "en": [
+     "Tools: there SHOULD always be a human in the loop able to deny; show inputs before the call.",
+     "Form elicitation MUST NOT request secrets; third-party credentials go through URL mode.",
+     "URL mode: no URL pre-fetch, full URL visible, explicit consent, opened in a context the client cannot inspect.",
+     "The server must verify that whoever completes the URL flow is the same user (anti-phishing).",
+     "One-click local server setup: show the full command and require explicit approval."
+    ]
+   },
+   "source": {
+    "label": "Spec · Elicitation · Security",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
+   }
+  },
+  {
+   "id": "D4-08",
+   "title": {
+    "it": "PKCE, iss (RFC 9207) e resource (RFC 8707)",
+    "en": "PKCE, iss (RFC 9207) and resource (RFC 8707)"
+   },
+   "summary": {
+    "it": "Tre protezioni del flusso authorization code: PKCE contro l'intercettazione del codice, iss contro il mix-up tra authorization server, resource per legare il token al server MCP giusto.",
+    "en": "Three protections in the authorization code flow: PKCE against code interception, iss against mix-up between authorization servers, resource to bind the token to the right MCP server."
+   },
+   "points": {
+    "it": [
+     "PKCE obbligatorio con S256; se l'AS non pubblica code_challenge_methods_supported il client non procede.",
+     "Novità 2026-07-28: l'AS SHOULD inviare iss; il client MUST validarlo prima dello scambio del codice.",
+     "Se l'AS dichiara authorization_response_iss_parameter_supported e iss manca, la risposta va rifiutata.",
+     "resource (canonical URI del server MCP) va sia nella authorization request sia nella token request, anche se l'AS non lo supporta.",
+     "PKCE non protegge dal mix-up: serve iss.",
+     "La verifica di iss vale anche per le risposte di errore: se non coincide, il client MUST NOT usare né mostrare error, error_description o error_uri.",
+     "URI canonico per resource: scheme e host minuscoli, senza fragment (es. https://mcp.example.com/mcp); per robustezza si accettano anche maiuscole."
+    ],
+    "en": [
+     "PKCE is required with S256; if the AS does not publish code_challenge_methods_supported the client stops.",
+     "New in 2026-07-28: the AS SHOULD send iss; the client MUST validate it before the code exchange.",
+     "If the AS declares authorization_response_iss_parameter_supported and iss is missing, the response must be rejected.",
+     "resource (the MCP server's canonical URI) goes in both the authorization and the token request, even if the AS does not support it.",
+     "PKCE does not protect against mix-up: iss does.",
+     "The iss check also applies to error responses: on mismatch the client MUST NOT act on or display error, error_description or error_uri.",
+     "Canonical URI for resource: lowercase scheme and host, no fragment (e.g. https://mcp.example.com/mcp); uppercase is accepted for robustness."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+   }
+  },
+  {
+   "id": "D4-09",
+   "title": {
+    "it": "Gestione dei token e refresh",
+    "en": "Token handling and refresh"
+   },
+   "summary": {
+    "it": "L'access token viaggia nell'header Authorization di ogni richiesta HTTP. I token devono essere a breve durata e i refresh token protetti.",
+    "en": "The access token travels in the Authorization header of every HTTP request. Tokens should be short-lived and refresh tokens protected."
+   },
+   "points": {
+    "it": [
+     "Authorization: Bearer <token> su ogni richiesta, anche nella stessa connessione logica.",
+     "Mai token nella query string.",
+     "Token invalido o scaduto: 401.",
+     "L'AS SHOULD emettere token di breve durata; per i client pubblici i refresh token vanno ruotati.",
+     "Endpoint dell'AS su HTTPS; redirect URI localhost o HTTPS.",
+     "Un token valido e non scaduto ma emesso per un'altra audience va rifiutato con 401."
+    ],
+    "en": [
+     "Authorization: Bearer <token> on every request, even within the same logical connection.",
+     "Never put tokens in the query string.",
+     "Invalid or expired token: 401.",
+     "The AS SHOULD issue short-lived tokens; for public clients refresh tokens must be rotated.",
+     "AS endpoints over HTTPS; redirect URIs localhost or HTTPS.",
+     "A valid, unexpired token issued for another audience is rejected with 401."
+    ]
+   },
+   "source": {
+    "label": "Spec · Authorization · Access token usage",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
+   }
+  },
+  {
+   "id": "D4-10",
+   "title": {
+    "it": "Attacchi: confused deputy, SSRF, handle hijacking",
+    "en": "Attacks: confused deputy, SSRF, handle hijacking"
+   },
+   "summary": {
+    "it": "Le Security Best Practices descrivono gli attacchi tipici e le mitigazioni.",
+    "en": "The Security Best Practices describe typical attacks and their mitigations."
+   },
+   "points": {
+    "it": [
+     "Confused deputy: proxy MCP con client ID statico verso un AS di terzi + cookie di consenso → mitigazione: consenso per singolo client prima di inoltrare.",
+     "SSRF durante la discovery OAuth: bloccare IP privati e 169.254.169.254, richiedere HTTPS, usare un egress proxy.",
+     "State handle hijacking: possedere un handle non è autenticazione; legarlo all'utente e verificarlo a ogni uso.",
+     "Authorization URL: solo http(s), rifiutare javascript: e simili, mai aprire l'URL tramite shell."
+    ],
+    "en": [
+     "Confused deputy: MCP proxy with a static client ID towards a third-party AS + consent cookie → mitigation: per-client consent before forwarding.",
+     "SSRF during OAuth discovery: block private IPs and 169.254.169.254, require HTTPS, use an egress proxy.",
+     "State handle hijacking: holding a handle is not authentication; bind it to the user and check it on every use.",
+     "Authorization URL: http(s) only, reject javascript: and the like, never open the URL through a shell."
+    ]
+   },
+   "source": {
+    "label": "Docs · Security best practices",
+    "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
+   }
+  },
+  {
+   "id": "D4-11",
+   "title": {
+    "it": "Sicurezza del transport e server locali",
+    "en": "Transport security and local servers"
+   },
+   "summary": {
+    "it": "Su HTTP il server deve proteggersi dal DNS rebinding; i server locali vanno eseguiti con privilegi minimi.",
+    "en": "Over HTTP the server must protect itself against DNS rebinding; local servers should run with minimal privileges."
+   },
+   "points": {
+    "it": [
+     "Validare l'header Origin; se non valido: 403 (MUST).",
+     "Server HTTP locali: bind su 127.0.0.1 (SHOULD), non su tutte le interfacce.",
+     "Per i server locali preferire stdio; se HTTP, usare autenticazione o socket con accesso ristretto.",
+     "Sandbox e privilegi minimi per i server locali."
+    ],
+    "en": [
+     "Validate the Origin header; if invalid: 403 (MUST).",
+     "Local HTTP servers: bind to 127.0.0.1 (SHOULD), not to all interfaces.",
+     "Prefer stdio for local servers; if HTTP, use authentication or a restricted socket.",
+     "Sandbox and least privilege for local servers."
+    ]
+   },
+   "source": {
+    "label": "Spec · Streamable HTTP · Security",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
+   }
+  },
+  {
+   "id": "D4-12",
+   "title": {
+    "it": "requestState e cacheScope come rischi",
+    "en": "requestState and cacheScope as risks"
+   },
+   "summary": {
+    "it": "Due novità della 2026-07-28 introducono rischi specifici: requestState passa dal client ed è quindi controllabile da un attaccante; cacheScope sbagliato può far vedere dati di un utente a un altro.",
+    "en": "Two 2026-07-28 features bring specific risks: requestState passes through the client and is therefore attacker-controlled; a wrong cacheScope can leak one user's data to another."
+   },
+   "points": {
+    "it": [
+     "requestState va protetto con HMAC o AEAD se influenza autorizzazione o logica.",
+     "Anti-replay: legarlo al principal, TTL breve, id della richiesta originale; single-use solo lato server.",
+     "cacheScope non è un controllo d'accesso: dati per utente o tenant → private.",
+     "Una tools/list personalizzata marcata public può finire nella cache di altri utenti.",
+     "requestState va legato a tre cose, verificate a ogni retry: principal autenticato (non clientInfo), scadenza breve, e metodo più digest dei parametri della richiesta originale.",
+     "Firma e scadenza non bastano contro il replay di un token ancora valido: l'uso singolo va imposto lato server."
+    ],
+    "en": [
+     "requestState must be protected with HMAC or AEAD if it affects authorization or logic.",
+     "Anti-replay: bind it to the principal, short TTL, original request id; single-use only server-side.",
+     "cacheScope is not access control: per-user or per-tenant data → private.",
+     "A personalized tools/list marked public can end up in other users' caches.",
+     "requestState is bound to three things, checked on every retry: the authenticated principal (not clientInfo), a short expiry, and the method plus a digest of the original request's parameters.",
+     "Signature and expiry alone do not stop replay of a still-valid token: single use must be enforced server-side."
+    ]
+   },
+   "source": {
+    "label": "Spec · MRTR · Security",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr"
+   }
+  },
+  {
+   "id": "D4-16",
+   "title": {
+    "it": "Tool poisoning, rug pull e lethal trifecta",
+    "en": "Tool poisoning, rug pull and lethal trifecta"
+   },
+   "summary": {
+    "it": "Le descrizioni dei tool sono istruzioni lette dal modello: un server malevolo può nasconderci direttive. Il rischio dipende dalla combinazione di tool presenti nella sessione.",
+    "en": "Tool descriptions are instructions read by the model: a malicious server can hide directives in them. The risk depends on the combination of tools in the session."
+   },
+   "points": {
+    "it": [
+     "Tool poisoning: direttive nascoste in nomi e descrizioni; agiscono anche se il tool non viene mai chiamato.",
+     "Tool shadowing: un tool avvelenato prende di mira i tool di altri server.",
+     "Rug pull: le definizioni cambiano dopo l'approvazione; consenso una tantum e pin non bastano.",
+     "Lethal trifecta: dati privati + contenuti non fidati + comunicazione esterna = rischio di esfiltrazione via prompt injection.",
+     "Il rischio è una proprietà della sessione, non del singolo server; l'output dei tool open-world va trattato come non fidato."
+    ],
+    "en": [
+     "Tool poisoning: directives hidden in names and descriptions; they act even if the tool is never called.",
+     "Tool shadowing: a poisoned tool targets other servers' tools.",
+     "Rug pull: definitions change after approval; one-time consent and pinning are not enough.",
+     "Lethal trifecta: private data + untrusted content + external communication = exfiltration risk via prompt injection.",
+     "Risk is a property of the session, not of a single server; output of open-world tools should be treated as untrusted."
+    ]
+   },
+   "source": {
+    "label": "Docs · Local server security",
+    "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
+   }
+  },
+  {
+   "id": "D4-17",
+   "title": {
+    "it": "Cosa possono e non possono fare le annotations",
+    "en": "What annotations can and cannot do"
+   },
+   "summary": {
+    "it": "Le annotations aiutano a decidere quando chiedere conferma, ma non sono un meccanismo di sicurezza: un server non fidato può mentire.",
+    "en": "Annotations help decide when to ask for confirmation, but they are not a security mechanism: an untrusted server can lie."
+   },
+   "points": {
+    "it": [
+     "Possono: guidare le conferme, la fiducia graduata (server interni vs esterni), la UX, i policy engine.",
+     "Non possono: fare enforcement, proteggere dalla prompt injection, descrivere il rischio di combinazioni di tool.",
+     "Per garanzie servono sandbox o controlli di rete, non hint booleani.",
+     "Default pessimisti: senza annotations il tool è considerato distruttivo e open-world."
+    ],
+    "en": [
+     "They can: drive confirmations, graduated trust (internal vs external servers), UX, policy engines.",
+     "They cannot: enforce anything, protect against prompt injection, describe the risk of tool combinations.",
+     "Guarantees need sandboxing or network controls, not boolean hints.",
+     "Pessimistic defaults: without annotations a tool is assumed destructive and open-world."
+    ]
+   },
+   "source": {
+    "label": "Blog · Tool annotations",
+    "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/"
+   }
+  },
+  {
+   "id": "D4-13",
+   "title": {
+    "it": "Osservabilità e audit",
+    "en": "Observability and auditing"
+   },
+   "summary": {
+    "it": "Per ricostruire cosa è successo servono tracciamento end-to-end e log d'uso dei tool. Il logging di protocollo è deprecato a favore di stderr e OpenTelemetry.",
+    "en": "Reconstructing what happened requires end-to-end tracing and tool usage logs. Protocol logging is deprecated in favor of stderr and OpenTelemetry."
+   },
+   "points": {
+    "it": [
+     "traceparent, tracestate e baggage nel _meta per correlare host, client, server e sistemi a valle.",
+     "Il client SHOULD registrare l'uso dei tool per audit; l'host offre un activity log.",
+     "L'audit deve dire quale agente ha agito e per conto di quale utente.",
+     "I log non devono contenere credenziali o dati personali.",
+     "Il trace context correla, ma non sostituisce un record di audit durevole.",
+     "traceparent (W3C): versione (2 hex) - trace id (32 hex) - parent id (16 hex) - flags (2 hex); id tutti a zero non validi.",
+     "A ogni salto si mantiene il trace id e si genera un nuovo parent id: il trace id è il valore che collega i log di servizi diversi.",
+     "Un record di audit registra chi (principal autenticato), cosa (argomenti sensibili oscurati prima della scrittura), quando, esito (complete, isError o errore di protocollo) e correlazione."
+    ],
+    "en": [
+     "traceparent, tracestate and baggage in _meta to correlate host, client, server and downstream systems.",
+     "The client SHOULD log tool usage for auditing; the host provides an activity log.",
+     "The audit must show which agent acted and on behalf of which user.",
+     "Logs must not contain credentials or personal data.",
+     "Trace context correlates, but does not replace a durable audit record.",
+     "traceparent (W3C): version (2 hex) - trace id (32 hex) - parent id (16 hex) - flags (2 hex); all-zero ids are invalid.",
+     "At every hop the trace id is kept and a new parent id is minted: the trace id is what joins logs across services.",
+     "An audit record captures who (authenticated principal), what (sensitive arguments redacted before writing), when, outcome (complete, isError or protocol error) and correlation."
+    ]
+   },
+   "source": {
+    "label": "Spec · Basic · _meta (OpenTelemetry)",
+    "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
+   }
+  },
+  {
+   "id": "D4-14",
+   "title": {
+    "it": "Estensioni di autorizzazione",
+    "en": "Authorization extensions"
+   },
+   "summary": {
+    "it": "Due estensioni ufficiali coprono casi che il flusso standard non copre: macchine senza utente (Client Credentials) e aziende con identity provider centrale (Enterprise-Managed Authorization).",
+    "en": "Two official extensions cover cases the standard flow does not: machines without a user (Client Credentials) and enterprises with a central identity provider (Enterprise-Managed Authorization)."
+   },
+   "points": {
+    "it": [
+     "OAuth Client Credentials: machine-to-machine; JWT bearer assertion (RFC 7523) raccomandata rispetto al client secret.",
+     "Enterprise-Managed Authorization: l'IdP aziendale decide a quali server MCP si accede; usa ID-JAG; policy e revoca centralizzate.",
+     "Entrambe sono opt-in e non attive di default.",
+     "Se c'è un utente che deve autorizzare, si usa il flusso standard.",
+     "Flusso EMA: il client scambia l'ID token SSO con un ID-JAG presso l'IdP aziendale, poi scambia l'ID-JAG con un access token MCP presso l'AS del server."
+    ],
+    "en": [
+     "OAuth Client Credentials: machine-to-machine; JWT bearer assertion (RFC 7523) recommended over a client secret.",
+     "Enterprise-Managed Authorization: the enterprise IdP decides which MCP servers users can reach; uses ID-JAG; centralized policy and revocation.",
+     "Both are opt-in and not active by default.",
+     "If a user must authorize, use the standard flow.",
+     "EMA flow: the client exchanges the SSO ID token for an ID-JAG at the enterprise IdP, then exchanges the ID-JAG for an MCP access token at the server's AS."
+    ]
+   },
+   "source": {
+    "label": "Extensions · Auth",
+    "url": "https://modelcontextprotocol.io/extensions/auth/overview"
+   }
+  },
+  {
+   "id": "D4-15",
+   "title": {
+    "it": "Governance del progetto",
+    "en": "Project governance"
+   },
+   "summary": {
+    "it": "MCP è governato da maintainer con ruoli definiti; ogni modifica alla spec passa per una SEP. Le feature hanno un ciclo di vita con finestra di deprecazione minima.",
+    "en": "MCP is governed by maintainers with defined roles; every spec change goes through a SEP. Features have a lifecycle with a minimum deprecation window."
+   },
+   "points": {
+    "it": [
+     "Ruoli: Lead Maintainers, Core Maintainers, Maintainers, Contributors.",
+     "SEP (Specification Enhancement Proposal): file markdown in seps/, numero = numero della PR, serve uno sponsor.",
+     "Feature lifecycle: Active → Deprecated (almeno 12 mesi) → Removed.",
+     "Interest Group identificano problemi; Working Group producono soluzioni.",
+     "Quattro tipi di SEP: Standards Track, Informational, Process, Extensions Track.",
+     "Stati SEP: draft, in-review, accepted, final; altri esiti rejected, withdrawn, dormant, superseded. Final richiede testo della spec, implementazione di riferimento e test di conformità."
+    ],
+    "en": [
+     "Roles: Lead Maintainers, Core Maintainers, Maintainers, Contributors.",
+     "SEP (Specification Enhancement Proposal): markdown file in seps/, number = PR number, needs a sponsor.",
+     "Feature lifecycle: Active → Deprecated (at least 12 months) → Removed.",
+     "Interest Groups identify problems; Working Groups produce solutions.",
+     "Four SEP types: Standards Track, Informational, Process, Extensions Track.",
+     "SEP states: draft, in-review, accepted, final; other outcomes rejected, withdrawn, dormant, superseded. Final requires spec text, a reference implementation and conformance tests."
+    ]
+   },
+   "source": {
+    "label": "Community · Governance",
+    "url": "https://modelcontextprotocol.io/community/governance"
+   }
+  }
+ ]
+}

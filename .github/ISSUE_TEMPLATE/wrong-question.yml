@@ -1,0 +1,32 @@
+name: Wrong or outdated question
+description: Report a question, answer or explanation that contradicts the MCP spec 2026-07-28
+labels: ["question-error"]
+body:
+  - type: input
+    id: qid
+    attributes:
+      label: Question id
+      description: For example o-D3-10 or ext-rg-mcpa-f-m1-051 (shown under each answered question)
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Which option or sentence is incorrect, and what the correct version should be
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Spec reference
+      description: Link to the section of the MCP specification 2026-07-28 (or official docs) that proves it
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Rules
+      options:
+        - label: This report does not contain real exam questions or content from exam dumps
+          required: true

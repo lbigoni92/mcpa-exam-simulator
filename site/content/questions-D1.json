@@ -1,0 +1,844 @@
+[
+ {
+  "id": "o-D1-01",
+  "t": "D1-01",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Un product manager chiede che cosa definisce esattamente MCP. Quale risposta è corretta?",
+   "en": "A product manager asks what exactly MCP defines. Which answer is correct?"
+  },
+  "o": [
+   {
+    "it": "Come l'applicazione AI sceglie il modello e gestisce la finestra di contesto",
+    "en": "How the AI application picks a model and manages its context window"
+   },
+   {
+    "it": "Un protocollo per lo scambio di contesto tra applicazioni AI e sistemi esterni",
+    "en": "A protocol for exchanging context between AI applications and external systems"
+   },
+   {
+    "it": "Un formato di fine-tuning per insegnare ai modelli a usare i tool",
+    "en": "A fine-tuning format that teaches models to use tools"
+   },
+   {
+    "it": "Un runtime che esegue gli agenti al posto dell'host",
+    "en": "A runtime that executes agents instead of the host"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "MCP standardizza solo lo scambio di contesto (tools, resources, prompts) tra host/client e server. Non dice come l'applicazione usa l'LLM o gestisce il contesto ricevuto.",
+   "en": "MCP only standardizes context exchange (tools, resources, prompts) between host/client and server. It does not say how the application uses the LLM or manages the context it receives."
+  }
+ },
+ {
+  "id": "o-D1-02",
+  "t": "D1-01",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Quale protocollo ha ispirato dichiaratamente il design di MCP?",
+   "en": "Which protocol explicitly inspired MCP's design?"
+  },
+  "o": [
+   {
+    "it": "gRPC (Google Remote Procedure Call)",
+    "en": "gRPC (Google Remote Procedure Call)"
+   },
+   {
+    "it": "GraphQL, il linguaggio di query per API",
+    "en": "GraphQL, the API query language"
+   },
+   {
+    "it": "Language Server Protocol (LSP)",
+    "en": "Language Server Protocol (LSP)"
+   },
+   {
+    "it": "La specifica OpenAPI per le REST API",
+    "en": "The OpenAPI specification for REST APIs"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "La spec cita l'LSP: come l'LSP ha standardizzato il supporto dei linguaggi negli strumenti di sviluppo, MCP standardizza l'integrazione di contesto e tool nelle applicazioni AI.",
+   "en": "The spec cites LSP: just as LSP standardized language support across developer tools, MCP standardizes integrating context and tools into AI applications."
+  }
+ },
+ {
+  "id": "o-D1-03",
+  "t": "D1-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Durante una review, due sviluppatori discutono se schema.json o schema.ts sia la fonte di verità della spec. Chi ha ragione?",
+   "en": "During a review, two developers argue whether schema.json or schema.ts is the spec's source of truth. Who is right?"
+  },
+  "o": [
+   {
+    "it": "schema.json, perché è il formato letto dagli SDK",
+    "en": "schema.json, because it is the format SDKs read"
+   },
+   {
+    "it": "Nessuno dei due: fa fede solo la prosa della spec",
+    "en": "Neither: only the spec prose is authoritative"
+   },
+   {
+    "it": "Entrambi hanno lo stesso valore e si aggiornano a mano",
+    "en": "Both carry equal weight and are updated by hand"
+   },
+   {
+    "it": "schema.ts; schema.json è generato da esso",
+    "en": "schema.ts; schema.json is generated from it"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "La spec dichiara che i requisiti autorevoli si basano sullo schema TypeScript (schema.ts); schema.json ne è derivato.",
+   "en": "The spec states that the authoritative requirements are based on the TypeScript schema (schema.ts); schema.json is derived from it."
+  }
+ },
+ {
+  "id": "o-D1-04",
+  "t": "D1-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Nella revisione 2026-07-28, quale delle seguenti è l'unica client feature attiva (non deprecata)?",
+   "en": "In the 2026-07-28 revision, which of these is the only active (non-deprecated) client feature?"
+  },
+  "o": [
+   {
+    "it": "Elicitation",
+    "en": "Elicitation"
+   },
+   {
+    "it": "Sampling",
+    "en": "Sampling"
+   },
+   {
+    "it": "Roots",
+    "en": "Roots"
+   },
+   {
+    "it": "Logging",
+    "en": "Logging"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Sampling e roots sono deprecati (SEP-2577); logging è una capability del server, anch'essa deprecata. Resta attiva l'elicitation, usata via MRTR.",
+   "en": "Sampling and roots are deprecated (SEP-2577); logging is a server capability, also deprecated. Elicitation remains active, used via MRTR."
+  }
+ },
+ {
+  "id": "o-D1-05",
+  "t": "D1-10",
+  "d": 2,
+  "type": "multiple",
+  "q": {
+   "it": "Quali due affermazioni descrivono il base protocol della 2026-07-28? (Selezionane due)",
+   "en": "Which two statements describe the 2026-07-28 base protocol? (Select two)"
+  },
+  "o": [
+   {
+    "it": "Le richieste sono stateless e autocontenute",
+    "en": "Requests are stateless and self-contained"
+   },
+   {
+    "it": "Le capability si negoziano una volta all'avvio della sessione",
+    "en": "Capabilities are negotiated once at session start"
+   },
+   {
+    "it": "La capability negotiation avviene per singola richiesta",
+    "en": "Capability negotiation happens per request"
+   },
+   {
+    "it": "I messaggi possono essere raggruppati in batch JSON-RPC",
+    "en": "Messages can be grouped into JSON-RPC batches"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il base protocol 2026-07-28 prevede richieste stateless e capability per richiesta. Non c'è più una sessione con handshake e il batching è stato rimosso nella 2025-06-18.",
+   "en": "The 2026-07-28 base protocol has stateless requests and per-request capabilities. There is no session handshake anymore, and batching was removed in 2025-06-18."
+  }
+ },
+ {
+  "id": "o-D1-06",
+  "t": "D1-02",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Un'applicazione desktop si collega a un server GitHub e a un server per il filesystem. Quanti client MCP crea l'host?",
+   "en": "A desktop app connects to a GitHub server and a filesystem server. How many MCP clients does the host create?"
+  },
+  "o": [
+   {
+    "it": "Uno, condiviso tra i due server",
+    "en": "One, shared between both servers"
+   },
+   {
+    "it": "Due, uno per server",
+    "en": "Two, one per server"
+   },
+   {
+    "it": "Nessuno: l'host parla direttamente con i server",
+    "en": "None: the host talks to the servers directly"
+   },
+   {
+    "it": "Dipende da quanti tool espongono i server",
+    "en": "It depends on how many tools the servers expose"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Ogni client mantiene una connessione con un solo server: due server richiedono due client dentro l'host.",
+   "en": "Each client keeps a connection to exactly one server: two servers require two clients inside the host."
+  }
+ },
+ {
+  "id": "o-D1-07",
+  "t": "D1-02",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale componente è responsabile di chiedere il consenso dell'utente e di aggregare il contesto di più server?",
+   "en": "Which component is responsible for asking for user consent and aggregating context from several servers?"
+  },
+  "o": [
+   {
+    "it": "Il server MCP più privilegiato",
+    "en": "The most privileged MCP server"
+   },
+   {
+    "it": "Il client MCP collegato al primo server",
+    "en": "The MCP client connected to the first server"
+   },
+   {
+    "it": "L'host",
+    "en": "The host"
+   },
+   {
+    "it": "L'authorization server",
+    "en": "The authorization server"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "L'host gestisce i client, applica le policy di consenso e sicurezza e combina il contesto. I server restano isolati tra loro.",
+   "en": "The host manages clients, enforces consent and security policies and combines context. Servers stay isolated from each other."
+  }
+ },
+ {
+  "id": "o-D1-08",
+  "t": "D1-03",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "In quale livello di MCP rientra l'autorizzazione OAuth di un server remoto?",
+   "en": "Which MCP layer does OAuth authorization of a remote server belong to?"
+  },
+  "o": [
+   {
+    "it": "Transport layer",
+    "en": "Transport layer"
+   },
+   {
+    "it": "Data layer",
+    "en": "Data layer"
+   },
+   {
+    "it": "Primitive layer",
+    "en": "Primitive layer"
+   },
+   {
+    "it": "Non rientra in MCP",
+    "en": "It is not part of MCP"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Il transport layer gestisce connessione, framing e autorizzazione; il data layer definisce i messaggi JSON-RPC. L'autorizzazione OAuth si applica al transport HTTP.",
+   "en": "The transport layer handles connection, framing and authorization; the data layer defines the JSON-RPC messages. OAuth authorization applies to the HTTP transport."
+  }
+ },
+ {
+  "id": "o-D1-09",
+  "t": "D1-04",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Un team vuole offrire un workflow \"/riassumi-incidente\" che l'utente lancia esplicitamente da un menu. Quale primitiva è la più adatta?",
+   "en": "A team wants to offer a \"/summarize-incident\" workflow that the user explicitly launches from a menu. Which primitive fits best?"
+  },
+  "o": [
+   {
+    "it": "Tool",
+    "en": "Tool"
+   },
+   {
+    "it": "Resource",
+    "en": "Resource"
+   },
+   {
+    "it": "Elicitation",
+    "en": "Elicitation"
+   },
+   {
+    "it": "Prompt",
+    "en": "Prompt"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "I prompts sono user-controlled: template che l'utente sceglie esplicitamente, spesso come slash command. I tools sono invece scelti dal modello.",
+   "en": "Prompts are user-controlled: templates the user picks explicitly, often as slash commands. Tools are chosen by the model instead."
+  }
+ },
+ {
+  "id": "o-D1-10",
+  "t": "D1-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale abbinamento primitiva → chi la controlla è corretto?",
+   "en": "Which primitive → controller pairing is correct?"
+  },
+  "o": [
+   {
+    "it": "Resources → modello; tools → applicazione",
+    "en": "Resources → model; tools → application"
+   },
+   {
+    "it": "Tools → modello; resources → applicazione; prompts → utente",
+    "en": "Tools → model; resources → application; prompts → user"
+   },
+   {
+    "it": "Prompts → modello; tools → utente",
+    "en": "Prompts → model; tools → user"
+   },
+   {
+    "it": "Tutte e tre sono controllate dal server",
+    "en": "All three are controlled by the server"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "La gerarchia di controllo della spec: tools model-controlled, resources application-controlled, prompts user-controlled.",
+   "en": "The spec's control hierarchy: tools are model-controlled, resources application-controlled, prompts user-controlled."
+  }
+ },
+ {
+  "id": "o-D1-11",
+  "t": "D1-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server deve esporre i file di configurazione di molti progetti, ognuno con un proprio percorso. Qual è l'approccio più adatto?",
+   "en": "A server must expose configuration files for many projects, each with its own path. What is the best approach?"
+  },
+  "o": [
+   {
+    "it": "Un tool distinto per ogni file",
+    "en": "A separate tool for each file"
+   },
+   {
+    "it": "Un prompt con l'elenco dei file",
+    "en": "A prompt listing the files"
+   },
+   {
+    "it": "Un resource template con URI parametrico (RFC 6570)",
+    "en": "A resource template with a parameterized URI (RFC 6570)"
+   },
+   {
+    "it": "Una richiesta di elicitation per ogni file",
+    "en": "An elicitation request for each file"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "I resource template usano URI template RFC 6570 per esporre famiglie di risorse con parametri, senza elencarle una per una.",
+   "en": "Resource templates use RFC 6570 URI templates to expose families of resources with parameters, without listing them one by one."
+  }
+ },
+ {
+  "id": "o-D1-12",
+  "t": "D1-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Secondo i design principles architetturali della spec, cosa NON deve poter fare un server MCP?",
+   "en": "According to the spec's architectural design principles, what must an MCP server NOT be able to do?"
+  },
+  "o": [
+   {
+    "it": "Leggere l'intera conversazione o vedere dentro altri server",
+    "en": "Read the whole conversation or see into other servers"
+   },
+   {
+    "it": "Esporre più di un tool nello stesso catalogo",
+    "en": "Expose more than one tool in the same catalog"
+   },
+   {
+    "it": "Dichiarare le proprie capability nel risultato di discover",
+    "en": "Declare its own capabilities in the discover result"
+   },
+   {
+    "it": "Restituire contenuti strutturati insieme al testo",
+    "en": "Return structured content alongside text"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "I server ricevono solo il contesto necessario; la conversazione completa resta nell'host e ogni server è isolato dagli altri.",
+   "en": "Servers receive only the context they need; the full conversation stays in the host and each server is isolated from the others."
+  }
+ },
+ {
+  "id": "o-D1-13",
+  "t": "D1-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Perché la spec chiede che i server siano \"estremamente facili da costruire\"?",
+   "en": "Why does the spec require servers to be \"extremely easy to build\"?"
+  },
+  "o": [
+   {
+    "it": "Perché i server non possono usare librerie esterne né SDK di terze parti",
+    "en": "Because servers cannot use external libraries or third-party SDKs"
+   },
+   {
+    "it": "Perché i server devono girare solo in locale, accanto all'host",
+    "en": "Because servers must only run locally, next to the host"
+   },
+   {
+    "it": "Perché la sicurezza è interamente a carico dell'host, non del server",
+    "en": "Because security is entirely the host's job, not the server's"
+   },
+   {
+    "it": "Perché l'orchestrazione sta nell'host e i server restano semplici",
+    "en": "Because orchestration lives in the host, so servers stay simple"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "L'host si fa carico dell'orchestrazione; i server offrono funzionalità specifiche e componibili. La sicurezza resta comunque responsabilità del server per la sua parte.",
+   "en": "The host takes on orchestration; servers provide specific, composable functionality. Security is still the server's responsibility for its own part."
+  }
+ },
+ {
+  "id": "o-D1-14",
+  "t": "D1-06",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Che cosa rappresenta la stringa di versione \"2026-07-28\"?",
+   "en": "What does the version string \"2026-07-28\" represent?"
+  },
+  "o": [
+   {
+    "it": "La data di rilascio dell'SDK di riferimento",
+    "en": "The release date of the reference SDK"
+   },
+   {
+    "it": "La data dell'ultima modifica non retrocompatibile del protocollo",
+    "en": "The date of the protocol's last backwards-incompatible change"
+   },
+   {
+    "it": "La scadenza del supporto della versione",
+    "en": "The end-of-support date of the version"
+   },
+   {
+    "it": "Un numero di versione semantica scritto come data",
+    "en": "A semantic version number written as a date"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le versioni MCP sono date YYYY-MM-DD che indicano l'ultima modifica incompatibile.",
+   "en": "MCP versions are YYYY-MM-DD dates marking the last incompatible change."
+  }
+ },
+ {
+  "id": "o-D1-15",
+  "t": "D1-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una feature viene marcata Deprecated nella revisione 2026-07-28. Quando può essere rimossa al più presto?",
+   "en": "A feature is marked Deprecated in the 2026-07-28 revision. When can it be removed at the earliest?"
+  },
+  "o": [
+   {
+    "it": "Nella prima revisione rilasciata almeno 12 mesi dopo",
+    "en": "In the first revision released at least 12 months later"
+   },
+   {
+    "it": "Nella revisione successiva, qualunque sia la data",
+    "en": "In the very next revision, whatever its date"
+   },
+   {
+    "it": "Dopo 3 mesi, se nessuno la usa",
+    "en": "After 3 months, if nobody uses it"
+   },
+   {
+    "it": "Mai: le feature deprecate restano per sempre",
+    "en": "Never: deprecated features stay forever"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "La feature lifecycle policy prevede almeno 12 mesi tra deprecazione e rimozione: per la 2026-07-28 la rimozione è possibile solo da una revisione del 2027-07-28 o successiva.",
+   "en": "The feature lifecycle policy requires at least 12 months between deprecation and removal: for 2026-07-28, removal is possible only in a revision dated 2027-07-28 or later."
+  }
+ },
+ {
+  "id": "o-D1-16",
+  "t": "D1-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Come si chiama un'implementazione che supporta sia i client con handshake initialize sia quelli 2026-07-28?",
+   "en": "What is an implementation called that supports both initialize-handshake clients and 2026-07-28 clients?"
+  },
+  "o": [
+   {
+    "it": "Legacy",
+    "en": "Legacy"
+   },
+   {
+    "it": "Hybrid-session",
+    "en": "Hybrid-session"
+   },
+   {
+    "it": "Dual-era",
+    "en": "Dual-era"
+   },
+   {
+    "it": "Transitional",
+    "en": "Transitional"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "La spec definisce tre termini: Modern (≥ 2026-07-28), Legacy (≤ 2025-11-25 con initialize) e Dual-era (entrambe).",
+   "en": "The spec defines three terms: Modern (≥ 2026-07-28), Legacy (≤ 2025-11-25 with initialize) and Dual-era (both)."
+  }
+ },
+ {
+  "id": "o-D1-17",
+  "t": "D1-09",
+  "d": 3,
+  "type": "single",
+  "q": {
+   "it": "Una SEP propone un nuovo tipo di messaggio per un caso che si può già costruire con tools e resources. Quale principio di design del progetto pesa contro la proposta?",
+   "en": "A SEP proposes a new message type for a case that can already be built with tools and resources. Which project design principle weighs against it?"
+  },
+  "o": [
+   {
+    "it": "Demonstration over deliberation",
+    "en": "Demonstration over deliberation"
+   },
+   {
+    "it": "Pragmatism over purity",
+    "en": "Pragmatism over purity"
+   },
+   {
+    "it": "Capability over compensation",
+    "en": "Capability over compensation"
+   },
+   {
+    "it": "Composability over specificity",
+    "en": "Composability over specificity"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Composability over specificity: MCP non aggiunge feature per casi costruibili con le primitive esistenti; i pattern emergenti diventano estensioni.",
+   "en": "Composability over specificity: MCP does not add features for cases that can be built from existing primitives; emerging patterns become extensions."
+  }
+ },
+ {
+  "id": "o-D1-18",
+  "t": "D1-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Cosa serve, tra l'altro, perché una SEP venga accettata secondo il principio \"Demonstration over deliberation\"?",
+   "en": "What does a SEP need, among other things, to be accepted under \"Demonstration over deliberation\"?"
+  },
+  "o": [
+   {
+    "it": "L'approvazione di almeno tre aziende membri",
+    "en": "Approval from at least three member companies"
+   },
+   {
+    "it": "Un prototipo funzionante",
+    "en": "A working prototype"
+   },
+   {
+    "it": "Una votazione pubblica della community",
+    "en": "A public community vote"
+   },
+   {
+    "it": "Un SDK Tier 1 che l'abbia già rilasciata",
+    "en": "A Tier 1 SDK that has already shipped it"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "MCP privilegia implementazioni funzionanti rispetto ai dibattiti teorici: una SEP richiede un prototipo prima di essere accettata.",
+   "en": "MCP favors working implementations over theoretical debate: a SEP needs a prototype before it can be accepted."
+  }
+ },
+ {
+  "id": "o-D1-19",
+  "t": "D1-07",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Un'azienda ha 5 applicazioni AI e 8 sistemi interni. Senza uno standard servono circa 40 connettori. Cosa cambia con MCP?",
+   "en": "A company has 5 AI applications and 8 internal systems. Without a standard it needs about 40 connectors. What changes with MCP?"
+  },
+  "o": [
+   {
+    "it": "Servono comunque 40 connettori, ma più veloci",
+    "en": "It still needs 40 connectors, just faster ones"
+   },
+   {
+    "it": "Basta un unico connettore centrale",
+    "en": "A single central connector is enough"
+   },
+   {
+    "it": "Ogni parte implementa MCP una volta: circa 5 + 8 implementazioni",
+    "en": "Each side implements MCP once: about 5 + 8 implementations"
+   },
+   {
+    "it": "Il numero di connettori raddoppia per la sicurezza",
+    "en": "The number of connectors doubles for security"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "MCP trasforma il problema N×M in N+M: ogni applicazione e ogni sistema implementano il protocollo una sola volta.",
+   "en": "MCP turns the N×M problem into N+M: each application and each system implements the protocol once."
+  }
+ },
+ {
+  "id": "o-D1-20",
+  "t": "D1-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Che cosa permette a un client e a un server di diversa maturità di funzionare insieme?",
+   "en": "What lets a client and a server of different maturity work together?"
+  },
+  "o": [
+   {
+    "it": "Capability negotiation ed estensioni opt-in con fallback al core",
+    "en": "Capability negotiation and opt-in extensions with fallback to core"
+   },
+   {
+    "it": "Un handshake obbligatorio che fissa le feature per la sessione",
+    "en": "A mandatory handshake that fixes features for the session"
+   },
+   {
+    "it": "Lo stesso SDK ufficiale, alla stessa versione, da entrambe le parti",
+    "en": "The same official SDK, at the same version, on both sides"
+   },
+   {
+    "it": "Un registro centrale che traduce i messaggi tra versioni",
+    "en": "A central registry that translates messages between versions"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Le parti dichiarano cosa supportano e il protocollo si adatta; le estensioni non supportate ricadono sul core. Non serve lo stesso SDK.",
+   "en": "Each side declares what it supports and the protocol adapts; unsupported extensions fall back to the core. The same SDK is not required."
+  }
+ },
+ {
+  "id": "o-D1-21",
+  "t": "D1-07",
+  "d": 1,
+  "type": "single",
+  "q": {
+   "it": "Chi governa oggi il progetto MCP?",
+   "en": "Who governs the MCP project today?"
+  },
+  "o": [
+   {
+    "it": "Anthropic da sola, tramite il proprio team interno",
+    "en": "Anthropic alone, through its internal team"
+   },
+   {
+    "it": "Il W3C, tramite un Community Group dedicato",
+    "en": "The W3C, through a dedicated Community Group"
+   },
+   {
+    "it": "La IETF, tramite un working group OAuth",
+    "en": "The IETF, through an OAuth working group"
+   },
+   {
+    "it": "La Agentic AI Foundation, sotto la Linux Foundation",
+    "en": "The Agentic AI Foundation, under the Linux Foundation"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Nel dicembre 2025 Anthropic ha donato MCP all'Agentic AI Foundation, fondo della Linux Foundation. MCP mantiene autonomia tecnica.",
+   "en": "In December 2025 Anthropic donated MCP to the Agentic AI Foundation, a Linux Foundation fund. MCP keeps technical autonomy."
+  }
+ },
+ {
+  "id": "o-D1-22",
+  "t": "D1-08",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "In quale revisione è stato rimosso il batching JSON-RPC?",
+   "en": "In which revision was JSON-RPC batching removed?"
+  },
+  "o": [
+   {
+    "it": "2025-03-26",
+    "en": "2025-03-26"
+   },
+   {
+    "it": "2025-06-18",
+    "en": "2025-06-18"
+   },
+   {
+    "it": "2025-11-25",
+    "en": "2025-11-25"
+   },
+   {
+    "it": "2026-07-28",
+    "en": "2026-07-28"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "La 2025-06-18 ha rimosso il batching e introdotto structured output ed elicitation.",
+   "en": "2025-06-18 removed batching and introduced structured output and elicitation."
+  }
+ },
+ {
+  "id": "o-D1-23",
+  "t": "D1-08",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale novità NON appartiene alla revisione 2026-07-28?",
+   "en": "Which change does NOT belong to the 2026-07-28 revision?"
+  },
+  "o": [
+   {
+    "it": "server/discover",
+    "en": "server/discover"
+   },
+   {
+    "it": "Multi Round-Trip Requests",
+    "en": "Multi Round-Trip Requests"
+   },
+   {
+    "it": "URL mode elicitation",
+    "en": "URL mode elicitation"
+   },
+   {
+    "it": "subscriptions/listen",
+    "en": "subscriptions/listen"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "L'URL mode elicitation è stata introdotta nella 2025-11-25 (SEP-1036). Le altre tre sono novità della 2026-07-28.",
+   "en": "URL mode elicitation was introduced in 2025-11-25 (SEP-1036). The other three are new in 2026-07-28."
+  }
+ },
+ {
+  "id": "o-D1-24",
+  "t": "D1-08",
+  "d": 3,
+  "type": "multiple",
+  "q": {
+   "it": "Quali due elementi sono stati introdotti nella 2025-03-26? (Selezionane due)",
+   "en": "Which two items were introduced in 2025-03-26? (Select two)"
+  },
+  "o": [
+   {
+    "it": "Transport Streamable HTTP",
+    "en": "Streamable HTTP transport"
+   },
+   {
+    "it": "Client ID Metadata Documents",
+    "en": "Client ID Metadata Documents"
+   },
+   {
+    "it": "Framework di autorizzazione OAuth 2.1",
+    "en": "OAuth 2.1 authorization framework"
+   },
+   {
+    "it": "Header Mcp-Method",
+    "en": "Mcp-Method header"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "La 2025-03-26 ha introdotto Streamable HTTP e il framework OAuth 2.1 (oltre alle tool annotations). CIMD è della 2025-11-25, Mcp-Method della 2026-07-28.",
+   "en": "2025-03-26 introduced Streamable HTTP and the OAuth 2.1 framework (plus tool annotations). CIMD is from 2025-11-25, Mcp-Method from 2026-07-28."
+  }
+ }
+]

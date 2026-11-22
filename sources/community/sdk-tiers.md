@@ -1,0 +1,107 @@
+---
+title: SDK Tiers
+description: What each SDK tier requires, how conformance is measured, how an SDK moves between tiers, and the issue labels SDK repositories must use.
+---
+
+This page defines the three SDK tiers, what each requires, how an SDK moves between them, and the issue labels SDK repositories must use. The tiers were adopted by [SEP-1730](/seps/1730), a Specification Enhancement Proposal (SEP), and are changed by a Process SEP. The [SDK Working Group](/community/working-groups/sdk) operates them, and each SDK's current tier is shown on the [SDKs page](/docs/sdk).
+
+## Tier requirements
+
+Tier 1 SDKs are fully supported and implement every non-experimental feature, including optional capabilities such as sampling and elicitation. SDKs in Tier 2 are actively maintained and working toward full specification support, and those in Tier 3 are experimental, partially implemented, or specialized. Experimental features and protocol extensions (such as Tasks and MCP Apps) are not required for any tier.
+
+| Requirement                 | Tier 1: Fully Supported                                                                  | Tier 2: Commitment to Full Support                               | Tier 3: Experimental   |
+| --------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------- |
+| **Conformance Tests**       | 100% pass rate                                                                           | 80% pass rate                                                    | No minimum             |
+| **New Protocol Features**   | Before new spec version release, timeline agreed per release based on feature complexity | Within 6 months                                                  | No timeline commitment |
+| **Issue Triage**            | Within 2 business days                                                                   | Within a month                                                   | No requirement         |
+| **Critical Bug Resolution** | Within 7 days                                                                            | Within two weeks                                                 | No requirement         |
+| **Stable Release**          | Required with clear versioning                                                           | At least one stable release                                      | Not required           |
+| **Documentation**           | Comprehensive with examples for all features                                             | Basic documentation covering core features                       | No minimum             |
+| **Dependency Policy**       | Published update policy                                                                  | Published update policy                                          | Not required           |
+| **Roadmap**                 | Published roadmap                                                                        | Published plan toward Tier 1 or explanation for remaining Tier 2 | Not required           |
+
+**Issue Triage** means labeling an issue and determining whether it is valid, not resolving it.
+
+**Critical Bug** means a `P0` issue as defined under [Priority labels](#priority-only-if-actionable).
+
+**Stable Release** means a published version explicitly marked as production-ready, for example version `1.0.0` or higher without a pre-release identifier such as `-alpha`, `-beta`, or `-rc`.
+
+**Clear Versioning** means following idiomatic versioning patterns with a documented breaking-change policy.
+
+**Roadmap** means a published set of concrete steps and work items tracking implementation of the required specification components (non-experimental features and optional capabilities, as scoped under [Conformance testing](#conformance-testing)).
+
+## Conformance testing
+
+Conformance is measured with the [conformance test suite](https://github.com/modelcontextprotocol/conformance). Each official SDK runs the suite against its default branch and publishes the results.
+
+The pass rates in the matrix are calculated against applicable required tests only:
+
+- Tests for the specification version the SDK targets
+- Excluding tests marked as pending or skipped
+- Excluding tests for experimental features
+- Excluding legacy backward-compatibility tests (unless the SDK claims legacy support)
+- Excluding tests labeled `disputed` in the conformance repository, until the dispute is resolved
+
+Sustained test failures are handled under [Tier relegation](#tier-relegation).
+
+## Tier advancement
+
+To request a higher tier, an SDK's maintainers:
+
+1. Self-assess the SDK against the [tier requirements](#tier-requirements).
+2. Open an issue in the [modelcontextprotocol/modelcontextprotocol](https://github.com/modelcontextprotocol/modelcontextprotocol) repository with the supporting evidence.
+3. Pass the conformance threshold for the requested tier on the latest stable release.
+4. Obtain approval from the SDK Working Group.
+
+The SDK Working Group makes the final tier assignment and records the decision and rationale as set out in its [charter](/community/working-groups/sdk).
+
+## Tier relegation
+
+An SDK may be moved to a lower tier if existing conformance tests on its latest stable release fail continuously for 4 weeks:
+
+- **Tier 1 to Tier 2**: any conformance test fails.
+- **Tier 2 to Tier 3**: more than 20% of conformance tests fail.
+
+An SDK may also be relegated if issues remain unaddressed for two months.
+
+The SDK Working Group may likewise relegate a Tier 1 SDK that consistently fails to surface specification deprecations as required by [Tier 1 SDK Obligations](/community/feature-lifecycle#tier-1-sdk-obligations). The group decides each relegation and records it with its rationale.
+
+## Issue triage labels
+
+SDK repositories must use the labels below. Two tier metrics are computed from them: triage response time (issue creation to first label) and critical bug resolution time (`P0` label to close).
+
+### Type (pick one)
+
+| Label         | Description                   |
+| ------------- | ----------------------------- |
+| `bug`         | Something isn't working       |
+| `enhancement` | Request for new feature       |
+| `question`    | Further information requested |
+
+Repositories using [GitHub's native issue types](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-types-in-an-organization) satisfy this requirement without type labels.
+
+### Status (pick one)
+
+Use these exact label names in every repository.
+
+| Label                | Description                                             |
+| -------------------- | ------------------------------------------------------- |
+| `needs confirmation` | Unclear if still relevant                               |
+| `needs repro`        | Insufficient information to reproduce                   |
+| `ready for work`     | Has enough information to start                         |
+| `good first issue`   | Good for newcomers                                      |
+| `help wanted`        | Contributions welcome from those familiar with codebase |
+
+### Priority (only if actionable)
+
+| Label | Description                                                     |
+| ----- | --------------------------------------------------------------- |
+| `P0`  | Critical: core functionality failures or high-severity security |
+| `P1`  | Significant bug affecting many users                            |
+| `P2`  | Moderate issues, valuable feature requests                      |
+| `P3`  | Nice to haves, rare edge cases                                  |
+
+A `P0` issue is either:
+
+- A security vulnerability with a CVSS score of 7.0 or higher (High or Critical severity)
+- A core functionality failure that prevents basic MCP operations: connection establishment, message exchange, or use of the core primitives (tools, resources, prompts)
