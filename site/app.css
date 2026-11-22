@@ -304,3 +304,34 @@ kbd{font-family:ui-monospace,Consolas,monospace;font-size:.78em;border:1px solid
 .pager .k{display:block;font-size:.8rem;color:var(--muted)}
 .pager .next{text-align:right;grid-column:2}
 .topic-up{font-size:.85rem;text-decoration:none;color:var(--muted)}
+/* ---------- confidenza, ritmo, impostazioni, flashcard ---------- */
+.conf{margin-top:.8rem;padding-top:.7rem;border-top:1px dashed var(--line-2)}
+.conf-btns{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem}
+.conf-btns .btn{min-height:2.4rem;padding:.4rem .85rem}
+.conf-btns .btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.conf-chip{font-weight:650}
+.conf-chip.conf-sure{background:var(--ok-bg);color:var(--ok)}
+.conf-chip.conf-doubt{background:var(--warn-bg);color:var(--warn)}
+.conf-chip.conf-guess{background:var(--bad-bg);color:var(--bad)}
+.fb h4 .chip{margin-left:.35rem;vertical-align:middle}
+.chip.pace{font-variant-numeric:tabular-nums}
+.chip.pace.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.pace.warn{background:var(--bad-bg);color:var(--bad);font-weight:650}
+.settings{padding:0}
+.switch-row{display:flex;gap:1rem;align-items:flex-start;justify-content:space-between;padding:1rem 1.1rem;cursor:pointer}
+.switch-row+.switch-row{border-top:1px solid var(--line)}
+.switch-row>span{display:flex;flex-direction:column;gap:.2rem;max-width:62ch}
+input.switch{appearance:none;-webkit-appearance:none;flex:none;width:2.7rem;height:1.55rem;border-radius:999px;background:var(--line-2);position:relative;cursor:pointer;margin:.1rem 0 0;transition:background .15s}
+input.switch::after{content:"";position:absolute;top:.18rem;left:.18rem;width:1.2rem;height:1.2rem;border-radius:50%;background:var(--panel);box-shadow:var(--shadow);transition:transform .15s}
+input.switch:checked{background:var(--accent)}
+input.switch:checked::after{transform:translateX(1.15rem)}
+.seg-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.seg-row select{width:auto;flex:1;min-width:12rem}
+.flashcard{min-height:11rem;display:flex;flex-direction:column;gap:.6rem}
+.fc-text{font-size:1.15rem;line-height:1.6;margin:.4rem 0}
+.blank{display:inline-block;min-width:4em;border-bottom:2px solid var(--accent);background:var(--accent-soft);border-radius:4px 4px 0 0;vertical-align:baseline}
+.flashcard mark,.fc-miss mark{background:var(--ok-bg);color:var(--ok);font-weight:700;border-radius:3px;padding:0 .15em}
+.fc-miss{padding-left:1.1rem}.fc-miss li{margin:.45rem 0}
+.tbar{position:relative;overflow:visible}
+.tbar b{position:absolute;left:50%;top:-3px;bottom:-3px;border-left:2px dashed var(--muted)}
+.presets button[data-preset=adaptive]{border-style:dashed}

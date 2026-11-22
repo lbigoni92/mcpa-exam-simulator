@@ -9,7 +9,8 @@ A free, open-source **practice exam simulator and study course for the MCPA cert
 - **641 practice questions** with explanations, including 60-question / 90-minute **mock exams** weighted by the official exam domains.
 - **Course** with 75 topics across the 5 MCPA domains, in **English and Italian**, each linked to the official MCP documentation.
 - **Wrong answer? You get the theory** for that topic right away, with a link to the full course page.
-- **Progress tracking** in a local SQLite database: score history, per-domain trends, weakest topics, spaced review of mistakes.
+- **Progress tracking** in a local SQLite database: score history, per-domain trends, weakest topics, spaced review of mistakes, confidence and timing analysis.
+- **Adaptive exam and flashcards** built on your weak points; export and import of your progress from the Settings page.
 - Runs locally with **one Docker command** or plain **Python 3** (no dependencies, no account, no tracking).
 
 ![Simulator home page](docs/screenshots/home.png)
@@ -52,7 +53,12 @@ The database is not in the repository. On first start `server.py` creates it, ap
 | Study mode | Instant feedback, explanation and the theory of the topic after each answer |
 | Question sets | Original (EN/IT), hard scenario questions, rohitg00 MCPA mocks and lesson quizzes (MIT), Hugging Face MCP course (Apache 2.0) |
 | Filters and quick start | By domain, difficulty and set; one-click presets (full exam, 10 quick questions, Security & Governance only, hard only) |
-| Error review | Missed questions stay in a queue until answered correctly twice in a row |
+| Spaced review | Missed or guessed questions come back today, then after 1, 3 and 7 days, and leave the queue after four correct answers in a row (or two in a row with spaced review off) |
+| Answer confidence | After each answer you mark it sure, unsure or guessed: correct guesses still go to review, and Progress shows your accuracy per confidence level |
+| Timing and pace | During the exam a pace chip says how far ahead or behind you are against 90 s per question; Progress shows average time per domain and the slowest topics |
+| Adaptive exam | 60 questions with the official domain split, picked from questions due for review, recently missed, unseen and from your weakest topics |
+| Flashcards | 200 cards generated from the course points (error codes, headers, methods, fields, RFCs, MUST/SHOULD/MAY), starting from weak topics, with Leitner-style repetition |
+| Settings | Spaced review, confidence and timing can each be switched off (all on by default); export and import progress as a JSON file, also to move it between Docker and Python |
 | Progress | Score over time with the 75% line, per-domain trends, weakest topics, per-session detail with time per question |
 | Usability | Light/dark/auto theme, keyboard shortcuts (A–D, Enter, ← →, F), in-progress session survives a page reload, topic search, mobile layout |
 | Multi-select | 73 questions ask you to pick more than one answer and always say how many; only the exact combination scores |
@@ -62,6 +68,8 @@ The database is not in the repository. On first start `server.py` creates it, ap
 | ![Feedback with theory](docs/screenshots/study-feedback.png) | ![Exam with question map](docs/screenshots/exam-dark.png) |
 | **Progress charts** | **Course search** |
 | ![Progress charts](docs/screenshots/progress.png) | ![Topic search](docs/screenshots/course-search.png) |
+| **Flashcards** | **Settings and export** |
+| ![Flashcard on a weak topic](docs/screenshots/flashcards.png) | ![Settings with export and import](docs/screenshots/settings.png) |
 
 ## The MCPA exam in brief
 | | |

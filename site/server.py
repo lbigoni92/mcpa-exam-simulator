@@ -7,7 +7,7 @@ All'avvio applica le migrazioni (cartella migrations/) e importa bank.json se e'
 senza toccare sessioni e risposte. `python server.py --migrate` fa solo questo ed esce.
 """
 import hashlib, json, mimetypes, os, sqlite3, sys, threading, time, webbrowser
-from datetime import datetime
+from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 
@@ -173,29 +173,60 @@ def check_answer(c, qid, selected):
     return 1 if sorted(int(x) for x in selected) == corr and corr else 0
 
 
-def record_answer(c, sid, qid, selected, time_ms, review=True):
+SETTINGS_DEFAULT = {"srs": True, "confidence": True, "pacing": True}
+SRS_DAYS = [0, 1, 3, 7]   # box 0..3: giorni prima del prossimo ripasso; al box 4 la domanda esce dalla coda
+CARD_DAYS = [0, 1, 3, 7, 14, 30]
+
+
+def get_settings(c):
+    out = dict(SETTINGS_DEFAULT)
+    for r in c.execute("SELECT key, value FROM settings"):
+        if r["key"] in out:
+            out[r["key"]] = r["value"] == "1"
+    return out
+
+
+def later(days):
+    return (datetime.now() + timedelta(days=days)).isoformat(timespec="seconds")
+
+
+def record_answer(c, sid, qid, selected, time_ms, review=True, confidence=None):
     q = c.execute("SELECT domain_id FROM questions WHERE id=?", (qid,)).fetchone()
     if not q:
         raise ValueError("domanda sconosciuta")
+    if confidence not in ("sure", "doubt", "guess"):
+        confidence = None
     ok = check_answer(c, qid, selected) if selected else 0
-    c.execute("""INSERT INTO answers (session_id,question_id,domain_id,selected_json,correct,time_ms,answered_at)
-                 VALUES (?,?,?,?,?,?,?) ON CONFLICT(session_id,question_id) DO UPDATE SET
+    c.execute("""INSERT INTO answers (session_id,question_id,domain_id,selected_json,correct,time_ms,answered_at,confidence)
+                 VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(session_id,question_id) DO UPDATE SET
                  selected_json=excluded.selected_json, correct=excluded.correct, time_ms=excluded.time_ms,
-                 answered_at=excluded.answered_at""",
-              (sid, qid, q["domain_id"], json.dumps(selected), ok, int(time_ms or 0), now()))
-    # coda di ripasso: errore -> dentro; due giuste di fila -> fuori
-    if not review:
-        return ok
-    if not ok:
-        c.execute("INSERT INTO review_queue VALUES (?,0,?) ON CONFLICT(question_id) DO UPDATE SET streak=0", (qid, now()))
-    else:
-        r = c.execute("SELECT streak FROM review_queue WHERE question_id=?", (qid,)).fetchone()
-        if r is not None:
-            if r[0] + 1 >= 2:
-                c.execute("DELETE FROM review_queue WHERE question_id=?", (qid,))
-            else:
-                c.execute("UPDATE review_queue SET streak=streak+1 WHERE question_id=?", (qid,))
+                 answered_at=excluded.answered_at, confidence=excluded.confidence""",
+              (sid, qid, q["domain_id"], json.dumps(selected), ok, int(time_ms or 0), now(), confidence))
+    if review:
+        update_review(c, qid, ok, confidence)
     return ok
+
+
+def update_review(c, qid, ok, confidence):
+    """Coda di ripasso. Errore o risposta giusta ma tirata a indovinare: la domanda entra (o torna) al box 0,
+    da ripassare subito. Con il ripasso dilazionato ogni risposta giusta la sposta al box successivo
+    (1, 3, 7 giorni) ed esce dopo il box 3; senza, esce dopo due risposte giuste di fila."""
+    srs = get_settings(c)["srs"]
+    r = c.execute("SELECT streak, box FROM review_queue WHERE question_id=?", (qid,)).fetchone()
+    if not ok or confidence == "guess":
+        reason = "wrong" if not ok else "guess"
+        c.execute("""INSERT INTO review_queue (question_id,streak,added_at,box,due_at,reason) VALUES (?,0,?,0,?,?)
+                     ON CONFLICT(question_id) DO UPDATE SET streak=0, box=0, due_at=excluded.due_at, reason=excluded.reason""",
+                  (qid, now(), now(), reason))
+        return
+    if r is None:
+        return
+    streak, box = (r["streak"] or 0) + 1, (r["box"] or 0) + 1
+    if (srs and box >= len(SRS_DAYS)) or (not srs and streak >= 2):
+        c.execute("DELETE FROM review_queue WHERE question_id=?", (qid,))
+    else:
+        c.execute("UPDATE review_queue SET streak=?, box=?, due_at=? WHERE question_id=?",
+                  (streak, box, later(SRS_DAYS[box]) if srs else now(), qid))
 
 
 def by_domain(c, sid):
@@ -253,17 +284,75 @@ def stats(c):
         """SELECT question_id, COUNT(*) n, SUM(correct) ok,
            (SELECT correct FROM answers a2 WHERE a2.question_id=a.question_id ORDER BY id DESC LIMIT 1) last
            FROM answers a GROUP BY question_id""")}
-    review = {r["question_id"]: r["streak"] for r in c.execute("SELECT * FROM review_queue")}
-    return {"sessions": sessions, "totals": totals, "recent": recent, "weakTopics": weak, "qstats": qstats, "review": review}
+    nowiso = now()
+    review = {r["question_id"]: {"streak": r["streak"] or 0, "box": r["box"] or 0, "due": (r["due_at"] or "") <= nowiso,
+                                 "dueAt": r["due_at"], "reason": r["reason"] or "wrong"} for r in c.execute("SELECT * FROM review_queue")}
+    topic_stats = {r["t"]: {"n": r["n"], "ok": r["ok"] or 0} for r in c.execute(
+        "SELECT q.topic_id t, COUNT(*) n, SUM(a.correct) ok FROM answers a JOIN questions q ON q.id=a.question_id GROUP BY q.topic_id")}
+    conf = {k: {"n": 0, "ok": 0} for k in ("sure", "doubt", "guess")}
+    for r in c.execute("SELECT confidence k, COUNT(*) n, SUM(correct) ok FROM answers WHERE confidence IS NOT NULL GROUP BY confidence"):
+        if r["k"] in conf:
+            conf[r["k"]] = {"n": r["n"], "ok": r["ok"] or 0}
+    timing = {"byDom": {}, "slowTopics": []}
+    for r in c.execute("""SELECT a.domain_id d, COUNT(*) n, AVG(a.time_ms) avg FROM answers a JOIN sessions s ON s.id=a.session_id
+                          WHERE a.time_ms > 0 AND s.mode IN ('exam','study') GROUP BY a.domain_id"""):
+        timing["byDom"][r["d"]] = {"n": r["n"], "avg": int(r["avg"] or 0)}
+    timing["slowTopics"] = [dict(r) for r in c.execute("""SELECT t.id, t.title_it, t.title_en, t.domain_id, COUNT(*) n, CAST(AVG(a.time_ms) AS INTEGER) avg
+        FROM answers a JOIN questions q ON q.id=a.question_id JOIN topics t ON t.id=q.topic_id JOIN sessions s ON s.id=a.session_id
+        WHERE a.time_ms > 0 AND s.mode IN ('exam','study') GROUP BY t.id HAVING n>=3 ORDER BY AVG(a.time_ms) DESC LIMIT 6""")]
+    cards = {r["card_id"]: {"box": r["box"] or 0, "due": (r["due_at"] or "") <= nowiso, "seen": r["seen"] or 0, "known": r["known"] or 0}
+             for r in c.execute("SELECT * FROM flashcards")}
+    return {"sessions": sessions, "totals": totals, "recent": recent, "weakTopics": weak, "qstats": qstats, "review": review,
+            "topicStats": topic_stats, "confidence": conf, "timing": timing, "cards": cards, "settings": get_settings(c)}
 
 
 def session_detail(c, sid):
     s = session_summary(c, sid)
     s["items"] = [dict(r) for r in c.execute(
-        """SELECT sq.position, sq.question_id, a.selected_json, a.correct, a.time_ms FROM session_questions sq
+        """SELECT sq.position, sq.question_id, a.selected_json, a.correct, a.time_ms, a.confidence FROM session_questions sq
            LEFT JOIN answers a ON a.session_id=sq.session_id AND a.question_id=sq.question_id
            WHERE sq.session_id=? ORDER BY sq.position""", (sid,))]
     return s
+
+
+EXPORT_TABLES = ["sessions", "session_questions", "answers", "review_queue", "flashcards", "settings"]
+
+
+def export_progress(c):
+    tables = {}
+    for t in EXPORT_TABLES:
+        tables[t] = [dict(r) for r in c.execute(f"SELECT * FROM {t}")]
+    return {"format": "mcpa-sim-progress", "version": 1, "exported_at": now(),
+            "migrations": [r[0] for r in c.execute("SELECT name FROM schema_migrations ORDER BY version")], "tables": tables}
+
+
+def import_progress(c, data):
+    """Sostituisce i progressi con quelli di un file esportato. Le colonne sconosciute vengono ignorate,
+    quelle mancanti prendono il valore predefinito: un export di una versione precedente resta valido."""
+    if not isinstance(data, dict) or data.get("format") != "mcpa-sim-progress" or not isinstance(data.get("tables"), dict):
+        raise ValueError("file non valido: non è un export dei progressi del simulatore MCPA")
+    counts, skipped = {}, 0
+    known = {r[0] for r in c.execute("SELECT id FROM questions")}
+    for t in reversed(EXPORT_TABLES):
+        c.execute(f"DELETE FROM {t}")
+    for t in EXPORT_TABLES:
+        rows = data["tables"].get(t) or []
+        cols = [r[1] for r in c.execute(f"PRAGMA table_info({t})")]
+        n = 0
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            # risposte a domande che qui non esistono (es. domande personali di site/local assenti): saltate
+            if "question_id" in row and row["question_id"] not in known:
+                skipped += 1
+                continue
+            keys = [k for k in row if k in cols]
+            if keys:
+                c.execute(f"INSERT OR REPLACE INTO {t} ({','.join(keys)}) VALUES ({','.join('?' * len(keys))})", [row[k] for k in keys])
+                n += 1
+        counts[t] = n
+    counts["skipped"] = skipped
+    return counts
 
 
 # ---------- HTTP ----------
@@ -307,6 +396,8 @@ class H(BaseHTTPRequestHandler):
                 with connect() as c: return self._json(get_data(c))
             if p == "/api/stats":
                 with connect() as c: return self._json(stats(c))
+            if p == "/api/export":
+                with connect() as c: return self._json(export_progress(c))
             if p.startswith("/api/sessions/"):
                 with connect() as c: return self._json(session_detail(c, int(p.rsplit("/", 1)[1])))
             name = "index.html" if p in ("/", "") else p.lstrip("/")
@@ -338,13 +429,30 @@ class H(BaseHTTPRequestHandler):
                     c.executemany("INSERT INTO session_questions VALUES (?,?,?)", [(sid, i, q) for i, q in enumerate(ids)])
                     return self._json({"id": sid})
                 if p == "/api/answers":
-                    ok = record_answer(c, int(body["session_id"]), body["question_id"], body.get("selected", []), body.get("time_ms"))
+                    ok = record_answer(c, int(body["session_id"]), body["question_id"], body.get("selected", []), body.get("time_ms"),
+                                       confidence=body.get("confidence"))
                     return self._json({"correct": ok})
                 if p.startswith("/api/sessions/") and p.endswith("/finish"):
                     sid = int(p.split("/")[3])
                     for a in body.get("answers", []):
-                        record_answer(c, sid, a["question_id"], a.get("selected", []), a.get("time_ms"))
+                        record_answer(c, sid, a["question_id"], a.get("selected", []), a.get("time_ms"), confidence=a.get("confidence"))
                     return self._json(finish_session(c, sid, bool(body.get("time_up"))))
+                if p == "/api/settings":
+                    for k, v in body.items():
+                        if k in SETTINGS_DEFAULT:
+                            c.execute("INSERT OR REPLACE INTO settings VALUES (?,?)", (k, "1" if v else "0"))
+                    return self._json(get_settings(c))
+                if p == "/api/flashcards":
+                    cid = str(body["card_id"])[:80]
+                    r = c.execute("SELECT box FROM flashcards WHERE card_id=?", (cid,)).fetchone()
+                    box = min((r["box"] if r else 0) + 1, len(CARD_DAYS) - 1) if body.get("known") else 0
+                    c.execute("""INSERT INTO flashcards (card_id,box,due_at,seen,known,last_at) VALUES (?,?,?,1,?,?)
+                                 ON CONFLICT(card_id) DO UPDATE SET box=excluded.box, due_at=excluded.due_at, seen=seen+1,
+                                 known=known+excluded.known, last_at=excluded.last_at""",
+                              (cid, box, later(CARD_DAYS[box]), 1 if body.get("known") else 0, now()))
+                    return self._json({"card_id": cid, "box": box})
+                if p == "/api/import":
+                    return self._json({"ok": True, "imported": import_progress(c, body.get("data"))})
                 if p.startswith("/api/sessions/") and p.endswith("/delete"):
                     c.execute("DELETE FROM sessions WHERE id=?", (int(p.split("/")[3]),))
                     return self._json({"ok": True})

@@ -57,7 +57,31 @@
       answeredN: "{a} di {n} risposte", flaggedN: "{n} segnate", qmap: "Mappa domande", legAns: "risposta data", legFlag: "segnata", availN: "{n} domande disponibili con questi filtri",
       kbdHint: "Tastiera: A–D o 1–4 per rispondere · Invio per confermare o andare avanti · ← → per spostarti · F per segnare (esame)",
       finishTitle: "Consegnare la prova?", finishUnans: "Hai {n} domande senza risposta: verranno contate come sbagliate.", finishFlag: "Hai {n} domande segnate da ricontrollare.", finishOk: "Hai risposto a tutte le domande.", finishGo: "Consegna", cancel: "Annulla",
-      searchPh: "Cerca un argomento (es. elicitation, OAuth, -32022)", searchNone: "Nessun argomento trovato.", searchN: "{n} argomenti trovati", selectedN: "selezionate {s} di {n}", backTop: "Torna su", deleteGo: "Elimina"
+      searchPh: "Cerca un argomento (es. elicitation, OAuth, -32022)", searchNone: "Nessun argomento trovato.", searchN: "{n} argomenti trovati", selectedN: "selezionate {s} di {n}", backTop: "Torna su", deleteGo: "Elimina",
+      conf_sure: "Sicuro", conf_doubt: "Dubbio", conf_guess: "Tirata a indovinare",
+      confAsk: "Quanto sei sicuro? La scelta conferma la risposta.", confAskExam: "Quanto sei sicuro? (facoltativo)",
+      confLucky: "Giusta, ma tirata a indovinare: la domanda va comunque nel ripasso.", confDoubtOk: "Giusta ma con un dubbio: rileggi la teoria qui sotto per fissarla.", confSureWrong: "Eri sicuro ma è sbagliata: è il tipo di errore più importante da correggere.",
+      navSettings: "Impostazioni", navFlash: "Flashcard",
+      setTitle: "Impostazioni", setIntro: "Le opzioni sono salvate nel database locale e valgono subito.",
+      setSrs: "Ripasso dilazionato degli errori", setSrsD: "Una domanda sbagliata o tirata a indovinare torna subito, poi dopo 1, 3 e 7 giorni; esce dal ripasso dopo quattro risposte giuste di fila. Se lo disattivi resta nel ripasso finché non rispondi giusto due volte di fila, senza attese.",
+      setConf: "Confidenza sulla risposta", setConfD: "Dopo aver scelto indichi se eri sicuro, in dubbio o se hai tirato a indovinare. Le risposte giuste tirate a indovinare finiscono nel ripasso e la pagina Progressi mostra quanto sei preciso per ogni livello.",
+      setPace: "Analisi dei tempi e ritmo d'esame", setPaceD: "Durante l'esame un indicatore dice se sei in anticipo o in ritardo rispetto a 90 secondi per domanda. La pagina Progressi mostra il tempo medio per dominio e gli argomenti più lenti.",
+      dataTitle: "Esporta e importa i progressi", dataIntro: "Il file contiene sessioni, risposte, ripasso, flashcard e impostazioni. Serve come backup e per spostare i progressi tra la versione Docker e quella Python.",
+      exportBtn: "Esporta i progressi", importBtn: "Importa da file", importTitle: "Importare i progressi?", importQ: "I progressi attuali verranno sostituiti con quelli del file (esportato il {d}, {n} risposte). Se ti servono, esportali prima.", importGo: "Importa e sostituisci",
+      importOk: "Progressi importati: {n} risposte.", importSkipped: "{n} righe saltate perché riferite a domande che qui non ci sono.", importBad: "Il file non è un export valido del simulatore.", exportOk: "File scaricato: {f}", saved: "Impostazione salvata.",
+      reviewIntroSrs: "Le domande sbagliate o tirate a indovinare tornano oggi, poi dopo 1, 3 e 7 giorni. Escono dal ripasso dopo quattro risposte giuste di fila.",
+      reviewDue: "Da ripassare oggi", reviewLater: "Prossimi ripassi", reviewNone: "Niente da ripassare oggi. Prossimo ripasso: {d}.", reasonGuess: "indovinata", reasonWrong: "sbagliata", boxN: "livello {n}/4", dueOn: "dal {d}",
+      paceAhead: "in anticipo di {m}", paceBehind: "in ritardo di {m}", paceOk: "ritmo giusto", paceTitle: "Ritmo rispetto a 90 secondi per domanda",
+      confTitle: "Confidenza e precisione", confIntro: "Quanto sei preciso quando sei sicuro, in dubbio o tiri a indovinare. Il segnale che sei pronto: quasi 100% sulle risposte date come sicure.", confNone: "Ancora nessuna risposta con la confidenza.",
+      luckyN: "{n} risposte giuste tirate a indovinare: sono finite nel ripasso.", sureWrongN: "{n} errori su risposte date come sicure: sono i punti da rivedere per primi.", answersN: "{n} risposte",
+      timeTitle: "Tempi di risposta", timeIntro: "Tempo medio per domanda nelle sessioni di studio e d'esame, rispetto ai 90 secondi disponibili in media all'esame.", avgTime: "Tempo medio", slowTitle: "Argomenti più lenti", timeNone: "Ancora nessun tempo registrato.",
+      presetAdaptive: "Esame adattivo", adaptiveCta: "Esame adattivo sui punti deboli", poolAdaptive: "Adattivo (punti deboli)",
+      adaptiveNote: "L'esame adattivo usa la distribuzione ufficiale per dominio e sceglie le domande da ripassare, quelle sbagliate di recente, quelle mai viste e quelle degli argomenti con la percentuale più bassa.",
+      flashTitle: "Flashcard", flashIntro: "Carte generate dai punti del corso: codici di errore, header, metodi, campi, RFC e parole chiave normative. Si parte dagli argomenti dove sbagli di più e le carte che non sapevi tornano prima.",
+      flashScopeWeak: "Punti deboli", flashScopeAll: "Tutto il corso", flashAllDoms: "Tutti i domini", flashDue: "da ripetere", flashNew: "nuove", flashStart: "Inizia ({n} carte)", flashShow: "Mostra la risposta", flashKnew: "Lo sapevo", flashNot: "Non lo sapevo",
+      flashDone: "Mazzo finito", flashResult: "Sapevi {k} carte su {n}.", flashAgain: "Altro giro", flashEmpty: "Nessuna carta da fare con questi filtri: torna domani per quelle da ripetere oppure scegli «Tutto il corso».", flashMiss: "Da rivedere",
+      flashWeakNote: "Punti deboli: argomenti sotto il 75%, con domande nel ripasso o con carte che non sapevi. Senza risposte date si parte dai domini con più peso all'esame.", flashKbd: "Tastiera: Spazio o Invio per girare la carta · 1 non lo sapevo · 2 lo sapevo", flashCardN: "Carta {i} di {n}", flashFill: "Completa il punto", flashTotal: "{n} carte nel corso",
+      kbdHintConf: "Tastiera: A–D o 1–4 per scegliere · Invio per confermare come «sicuro» · ← → per spostarti · F per segnare (esame)"
     },
     en: {
       navHome: "Home", navCourse: "Course", navQuiz: "Simulator", navReview: "Error review", navAbout: "Sources",
@@ -96,7 +120,31 @@
       answeredN: "{a} of {n} answered", flaggedN: "{n} flagged", qmap: "Question map", legAns: "answered", legFlag: "flagged", availN: "{n} questions available with these filters",
       kbdHint: "Keyboard: A–D or 1–4 to answer · Enter to confirm or move on · ← → to navigate · F to flag (exam)",
       finishTitle: "Submit the exam?", finishUnans: "You have {n} unanswered questions: they will count as wrong.", finishFlag: "You have {n} flagged questions to double-check.", finishOk: "You answered every question.", finishGo: "Submit", cancel: "Cancel",
-      searchPh: "Search a topic (e.g. elicitation, OAuth, -32022)", searchNone: "No topic found.", searchN: "{n} topics found", selectedN: "{s} of {n} selected", backTop: "Back to top", deleteGo: "Delete"
+      searchPh: "Search a topic (e.g. elicitation, OAuth, -32022)", searchNone: "No topic found.", searchN: "{n} topics found", selectedN: "{s} of {n} selected", backTop: "Back to top", deleteGo: "Delete",
+      conf_sure: "Sure", conf_doubt: "Unsure", conf_guess: "Guessed",
+      confAsk: "How sure are you? Your choice confirms the answer.", confAskExam: "How sure are you? (optional)",
+      confLucky: "Correct, but guessed: the question still goes to the review queue.", confDoubtOk: "Correct but unsure: reread the theory below to lock it in.", confSureWrong: "You were sure but it is wrong: this is the most important kind of mistake to fix.",
+      navSettings: "Settings", navFlash: "Flashcards",
+      setTitle: "Settings", setIntro: "Options are saved in the local database and apply right away.",
+      setSrs: "Spaced review of mistakes", setSrsD: "A missed or guessed question comes back right away, then after 1, 3 and 7 days; it leaves the queue after four correct answers in a row. When off, it stays until you answer correctly twice in a row, with no waiting.",
+      setConf: "Answer confidence", setConfD: "After choosing, you say whether you were sure, unsure or guessing. Correct guesses go to the review queue and the Progress page shows your accuracy at each level.",
+      setPace: "Timing analysis and exam pace", setPaceD: "During the exam an indicator tells you whether you are ahead of or behind 90 seconds per question. The Progress page shows the average time per domain and the slowest topics.",
+      dataTitle: "Export and import progress", dataIntro: "The file holds sessions, answers, review queue, flashcards and settings. Use it as a backup and to move progress between the Docker and the Python version.",
+      exportBtn: "Export progress", importBtn: "Import from file", importTitle: "Import progress?", importQ: "Your current progress will be replaced by the file's (exported {d}, {n} answers). Export it first if you need it.", importGo: "Import and replace",
+      importOk: "Progress imported: {n} answers.", importSkipped: "{n} rows skipped because they refer to questions that are not here.", importBad: "The file is not a valid simulator export.", exportOk: "File downloaded: {f}", saved: "Setting saved.",
+      reviewIntroSrs: "Missed or guessed questions come back today, then after 1, 3 and 7 days. They leave the queue after four correct answers in a row.",
+      reviewDue: "Due today", reviewLater: "Coming up", reviewNone: "Nothing due today. Next review: {d}.", reasonGuess: "guessed", reasonWrong: "missed", boxN: "level {n}/4", dueOn: "from {d}",
+      paceAhead: "{m} ahead", paceBehind: "{m} behind", paceOk: "on pace", paceTitle: "Pace against 90 seconds per question",
+      confTitle: "Confidence and accuracy", confIntro: "How accurate you are when sure, unsure or guessing. The sign you are ready: close to 100% on answers given as sure.", confNone: "No answers with confidence yet.",
+      luckyN: "{n} correct answers were guesses: they went to the review queue.", sureWrongN: "{n} mistakes on answers given as sure: review these first.", answersN: "{n} answers",
+      timeTitle: "Answer times", timeIntro: "Average time per question in study and exam sessions, against the 90 seconds available on average in the exam.", avgTime: "Average time", slowTitle: "Slowest topics", timeNone: "No times recorded yet.",
+      presetAdaptive: "Adaptive exam", adaptiveCta: "Adaptive exam on weak points", poolAdaptive: "Adaptive (weak points)",
+      adaptiveNote: "The adaptive exam uses the official domain distribution and picks questions due for review, recently missed, never seen and from the topics with the lowest score.",
+      flashTitle: "Flashcards", flashIntro: "Cards generated from the course points: error codes, headers, methods, fields, RFCs and normative keywords. They start from the topics where you miss most, and cards you did not know come back sooner.",
+      flashScopeWeak: "Weak points", flashScopeAll: "Whole course", flashAllDoms: "All domains", flashDue: "due", flashNew: "new", flashStart: "Start ({n} cards)", flashShow: "Show the answer", flashKnew: "I knew it", flashNot: "I didn't know",
+      flashDone: "Deck finished", flashResult: "You knew {k} of {n} cards.", flashAgain: "Another round", flashEmpty: "No cards to do with these filters: come back tomorrow for due cards or choose “Whole course”.", flashMiss: "To review",
+      flashWeakNote: "Weak points: topics below 75%, with questions in the review queue or cards you did not know. With no answers yet, it starts from the domains with the highest exam weight.", flashKbd: "Keyboard: Space or Enter to flip the card · 1 didn't know · 2 knew it", flashCardN: "Card {i} of {n}", flashFill: "Complete the point", flashTotal: "{n} cards in the course",
+      kbdHintConf: "Keyboard: A–D or 1–4 to choose · Enter to confirm as “sure” · ← → to navigate · F to flag (exam)"
     }
   };
   function tn(k, n, vars) { vars = vars || {}; vars.n = n; return t(n === 1 && T[S.lang][k + "1"] ? k + "1" : k, vars); }
@@ -117,26 +165,32 @@
   function domTag(d) { return '<span class="dom ' + d + '">' + d + "</span>"; }
 
   // ---------- stats ----------
-  function record(q, ok) {
+  function setting(k) { return !STATS.settings || STATS.settings[k] !== false; }
+  function inReview(id) { return STATS.review.hasOwnProperty(id); }
+  function dueIds() { return Object.keys(STATS.review).filter(function (id) { return QBYID[id] && (STATS.review[id].due || !setting("srs")); }); }
+  function record(q, ok, conf) {
     var s = STATS.qstats[q.id] || { n: 0, ok: 0, last: 0 };
     s.n++; if (ok) s.ok++; s.last = ok ? 1 : 0; STATS.qstats[q.id] = s;
-    if (!ok) STATS.review[q.id] = 0;
-    else if (STATS.review.hasOwnProperty(q.id)) { STATS.review[q.id]++; if (STATS.review[q.id] >= 2) delete STATS.review[q.id]; }
+    if (!ok || conf === "guess") STATS.review[q.id] = { streak: 0, box: 0, due: true, reason: ok ? "guess" : "wrong" };
     [STATS.totals, STATS.recent].forEach(function (b) { var x = b[q.dom] || (b[q.dom] = { n: 0, ok: 0 }); x.n++; if (ok) x.ok++; });
+    var ts = STATS.topicStats[q.t] || (STATS.topicStats[q.t] = { n: 0, ok: 0 }); ts.n++; if (ok) ts.ok++;
   }
-  function refreshStats() { return api("/api/stats").then(function (x) { STATS = x; }).catch(function () {}); }
+  function refreshStats() { return api("/api/stats").then(function (x) { STATS = x; updateBadge(); }).catch(function () {}); }
   // domande chiave del corso: una sessione "course" per visita, creata alla prima risposta
   var courseSid = null;
   function persistCourse(st) {
-    var send = function () { return api("/api/answers", { session_id: courseSid, question_id: st.q.id, selected: st.sel, time_ms: 0 }); };
+    var send = function () { return api("/api/answers", { session_id: courseSid, question_id: st.q.id, selected: st.sel, time_ms: 0, confidence: st.conf || null }).then(refreshStats); };
     if (courseSid) return send().catch(function () {});
     api("/api/sessions", { mode: "course", pool: "course", questions: [st.q.id] }).then(function (r) { courseSid = r.id; return send(); }).catch(function () {});
   }
 
   // ---------- question widget ----------
-  // opts: {mode:'instant'|'exam', onAnswer(ok), state:{order, sel, done}}
-  function prepare(q) { return { q: q, order: shuffle(q.o.map(function (_, i) { return i; })), sel: [], done: false }; }
+  // opts: {mode:'instant'|'exam', onAnswer(ok), persist(st, ok)}
+  var CONF = ["sure", "doubt", "guess"], CONF_ICON = { sure: "✓", doubt: "?", guess: "~" };
+  function prepare(q) { return { q: q, order: shuffle(q.o.map(function (_, i) { return i; })), sel: [], done: false, conf: null }; }
   function isCorrect(st) { var c = st.q.c.slice().sort().join(","); return st.sel.slice().sort().join(",") === c; }
+  function complete(st) { return st.sel.length === st.q.c.length; }
+  function confLabel(k) { return t("conf_" + k); }
 
   function theoryHtml(q) {
     var tp = TOPIC[q.t]; if (!tp) return "";
@@ -149,13 +203,13 @@
   }
 
   function qHtml(st, opt) {
-    var q = st.q, multi = q.c.length > 1, show = st.done && opt.mode !== "exam";
+    var q = st.q, multi = q.c.length > 1, show = st.done && opt.mode !== "exam", useConf = setting("confidence") && !opt.readonly;
     var h = '<div class="q">';
     h += '<div class="row small muted">' + domTag(q.dom) + (q.src === "original" ? ' <span class="chip">' + (q.set === "hard" ? t("hardLabel") : q.set === "utente" ? t("userLabel") : t("origLabel")) + "</span>" : ' <span class="chip">' + esc(q.src) + " · " + esc(q.set) + "</span>") +
-      (STATS.review.hasOwnProperty(q.id) ? ' <span class="chip">' + t("inReview") + "</span>" : "") + (show ? ' <span class="small muted" style="margin-left:auto" title="id">' + esc(q.id) + "</span>" : "") + "</div>";
+      (inReview(q.id) ? ' <span class="chip">' + t("inReview") + "</span>" : "") + (show ? ' <span class="small muted" style="margin-left:auto" title="id">' + esc(q.id) + "</span>" : "") + "</div>";
     if (!hasLang(q.q) && S.lang === "it") h += '<div class="note">' + t("enOnly") + "</div>";
     h += '<div class="stem">' + fmt(L(q.q)) + "</div>";
-    if (multi) h += '<div class="hint"><b>' + t("chooseN", { n: q.c.length }) + "</b>" + (st.done && opt.mode !== "exam" ? "" : " · " + t("selectedN", { s: st.sel.length, n: q.c.length })) + "</div>";
+    if (multi) h += '<div class="hint"><b>' + t("chooseN", { n: q.c.length }) + "</b>" + (show ? "" : " · " + t("selectedN", { s: st.sel.length, n: q.c.length })) + "</div>";
     st.order.forEach(function (oi, pos) {
       var cls = "opt";
       if (st.sel.indexOf(oi) >= 0) cls += " sel";
@@ -163,17 +217,29 @@
       if (multi) cls += " multi";
       h += '<button type="button" class="' + cls + '" data-oi="' + oi + '"' + (show ? " disabled" : "") + '><span class="k">' + "ABCDEFG"[pos] + "</span><span>" + fmt(L(q.o[oi])) + "</span></button>";
     });
-    if (multi && !st.done && opt.mode !== "exam") h += '<button type="button" class="btn" data-act="confirm"' + (st.sel.length !== q.c.length ? " disabled" : "") + ">" + t("confirm") + "</button>";
+    if (!show && opt.mode !== "exam" && useConf) {
+      // studio: la scelta della confidenza conferma la risposta
+      h += '<div class="conf"><span class="hint">' + t("confAsk") + '</span><div class="conf-btns">' + CONF.map(function (k) {
+        return '<button type="button" class="btn ghost conf-' + k + '" data-conf="' + k + '"' + (complete(st) ? "" : " disabled") + ">" + CONF_ICON[k] + " " + confLabel(k) + "</button>"; }).join("") + "</div></div>";
+    } else if (!show && opt.mode === "exam" && useConf) {
+      h += '<div class="conf"><span class="hint">' + t("confAskExam") + '</span><div class="conf-btns">' + CONF.map(function (k) {
+        return '<button type="button" class="btn ghost conf-' + k + (st.conf === k ? " on" : "") + '" data-conf="' + k + '" aria-pressed="' + (st.conf === k) + '">' + CONF_ICON[k] + " " + confLabel(k) + "</button>"; }).join("") + "</div></div>";
+    } else if (multi && !st.done && opt.mode !== "exam") h += '<button type="button" class="btn" data-act="confirm"' + (complete(st) ? "" : " disabled") + ">" + t("confirm") + "</button>";
     if (show) h += feedbackHtml(st);
     return h + "</div>";
   }
   function feedbackHtml(st) {
     var q = st.q, ok = isCorrect(st);
     var right = st.order.filter(function (oi) { return q.c.indexOf(oi) >= 0; }).map(function (oi) { return "ABCDEFG"[st.order.indexOf(oi)]; }).join(", ");
-    var h = '<div class="fb ' + (ok ? "ok" : "bad") + '"><h4>' + (ok ? "✓ " + t("correct") : "✗ " + t("wrong") + " · " + t("rightIs") + ": " + right) + "</h4>";
+    var h = '<div class="fb ' + (ok ? "ok" : "bad") + '"><h4>' + (ok ? "✓ " + t("correct") : "✗ " + t("wrong") + " · " + t("rightIs") + ": " + right) +
+      (st.conf ? ' <span class="chip conf-chip conf-' + st.conf + '">' + CONF_ICON[st.conf] + " " + confLabel(st.conf) + "</span>" : "") +
+      (st.ms >= 1000 && setting("pacing") ? ' <span class="chip">⏱ ' + Math.round(st.ms / 1000) + " s</span>" : "") + "</h4>";
+    if (st.conf && ok && st.conf === "guess") h += '<div class="note">' + t("confLucky") + "</div>";
+    else if (st.conf && ok && st.conf === "doubt") h += '<div class="note">' + t("confDoubtOk") + "</div>";
+    else if (st.conf && !ok && st.conf === "sure") h += '<div class="note">' + t("confSureWrong") + "</div>";
     h += "<div>" + fmt(L(q.x)) + "</div>";
     if (q.review) h += '<div class="note"><b>' + t("reviewNote") + ":</b> " + esc(q.review.note || q.review.status) + "</div>";
-    if (!ok) h += theoryHtml(q);
+    if (!ok || st.conf === "guess" || st.conf === "doubt") h += theoryHtml(q);
     else if (TOPIC[q.t]) h += '<div class="small" style="margin-top:.4rem"><a href="#t/' + q.t + '">' + t("theory") + ": " + esc(L(TOPIC[q.t].title)) + " →</a></div>";
     return h + "</div>";
   }
@@ -182,14 +248,19 @@
     el.onclick = function (ev) {
       var b = ev.target.closest("button"); if (!b || b.disabled) return;
       if (b.dataset.act === "confirm") { finishQ(st, opt); rerender(); return; }
+      if (b.dataset.conf) {
+        if (opt.mode === "exam") st.conf = st.conf === b.dataset.conf ? null : b.dataset.conf;
+        else { st.conf = b.dataset.conf; finishQ(st, opt); }
+        rerender(); return;
+      }
       if (b.dataset.oi === undefined || (st.done && opt.mode !== "exam")) return;
-      var oi = +b.dataset.oi, multi = st.q.c.length > 1;
+      var oi = +b.dataset.oi, multi = st.q.c.length > 1, useConf = setting("confidence");
       if (multi) { var i = st.sel.indexOf(oi); if (i >= 0) st.sel.splice(i, 1); else if (st.sel.length < st.q.c.length || opt.mode === "exam") st.sel.push(oi); }
-      else { st.sel = [oi]; if (opt.mode !== "exam") finishQ(st, opt); }
+      else { st.sel = [oi]; if (opt.mode !== "exam" && !useConf) finishQ(st, opt); }
       rerender();
     };
   }
-  function finishQ(st, opt) { if (st.done) return; st.done = true; var ok = isCorrect(st); record(st.q, ok); if (opt.persist) opt.persist(st, ok); if (opt.onAnswer) opt.onAnswer(ok); }
+  function finishQ(st, opt) { if (st.done) return; st.done = true; var ok = isCorrect(st); record(st.q, ok, st.conf); if (opt.persist) opt.persist(st, ok); if (opt.onAnswer) opt.onAnswer(ok); }
 
   // ---------- pages ----------
   function pct(x) { return x && x.n ? Math.round(100 * x.ok / x.n) : null; }
@@ -197,7 +268,7 @@
   function fmtDate(iso) { return iso ? iso.replace("T", " ").slice(0, 16) : ""; }
   function modeLabel(m) { return m === "exam" ? t("modeExamShort") : t("modeStudyShort"); }
   function poolLabel(p) {
-    var m = { orig: t("poolOrig"), hard: t("poolHard"), all: t("poolAll"), "rg-quiz": t("poolRgQuiz"), hf: "Hugging Face", review: t("navReview"), "mcpa-f-diagnostic": t("poolRgDiag") };
+    var m = { orig: t("poolOrig"), hard: t("poolHard"), all: t("poolAll"), "rg-quiz": t("poolRgQuiz"), hf: "Hugging Face", review: t("navReview"), adaptive: t("poolAdaptive"), "mcpa-f-diagnostic": t("poolRgDiag") };
     return m[p] || (/^mcpa-f-mock/.test(p) ? t("poolRgMock") + " " + p.slice(-2) : p);
   }
   function sessionsOf(mode) { return STATS.sessions.filter(function (x) { return x.mode === mode; }); }
@@ -216,7 +287,7 @@
   }
 
   function pageHome() {
-    var rv = Object.keys(STATS.review).length;
+    var rv = dueIds().length;
     var totN = 0, totOk = 0; DOMS.forEach(function (d) { var x = STATS.totals[d]; if (x) { totN += x.n; totOk += x.ok; } });
     var done = STATS.sessions.filter(function (x) { return x.mode === "exam" || x.mode === "study"; }).length;
     // stima esame: % delle ultime 30 risposte per dominio pesata con i pesi ufficiali, solo se ogni dominio ha almeno 5 risposte
@@ -227,6 +298,7 @@
     if (session && !session.over) h += resumeHtml();
     h += '<section class="hero"><h1>' + t("welcome") + '</h1><p class="lead">' + t("intro") + "</p>" +
       '<div class="row"><a class="btn lg" href="#quiz/exam">' + t("examCta") + '</a><a class="btn ghost lg" href="#quiz">' + t("studyCta") + "</a>" +
+      (totN ? '<button type="button" class="btn ghost lg" id="adaptBtn">' + t("adaptiveCta") + "</button>" : "") +
       (rv ? '<a class="btn ghost lg" href="#review">' + t("reviewCta") + " (" + rv + ")</a>" : "") + "</div>" +
       '<div class="stats">' +
       stat(totN, t("statAnswered")) +
@@ -245,6 +317,7 @@
     });
     h += "</div><h2>" + t("lastExams") + "</h2>" + sessionsTable(STATS.sessions.slice(-8).reverse());
     app.innerHTML = h;
+    var ab = document.getElementById("adaptBtn"); if (ab) ab.onclick = startAdaptive;
   }
   function stat(v, l, cls, title) { return '<div class="stat"' + (title ? ' title="' + esc(title) + '"' : "") + '><div class="v ' + (cls || "") + '">' + v + '</div><div class="l">' + esc(l) + (title ? " ⓘ" : "") + "</div></div>"; }
   function resumeHtml() {
@@ -308,6 +381,7 @@
         return '<li>' + domTag(w.domain_id) + ' <a href="#t/' + w.id + '">' + esc(S.lang === "it" ? w.title_it : w.title_en) + "</a> · " + Math.round(100 * w.ok / w.n) + "% (" + w.ok + "/" + w.n + ")</li>";
       }).join("") + "</ul></div>";
     }
+    h += confSection() + timeSection();
     h += "<h2>" + t("allSessions") + "</h2>" + sessionsTable(all.slice().reverse());
     app.innerHTML = h;
   }
@@ -324,7 +398,7 @@
       app.innerHTML = h;
       s.items.forEach(function (it, i) {
         var q = QBYID[it.question_id], el = app.querySelector('[data-i="' + i + '"]'); if (!q) { el.textContent = it.question_id; return; }
-        var st = { q: q, order: q.o.map(function (_, k) { return k; }), sel: it.selected_json ? JSON.parse(it.selected_json) : [], done: true };
+        var st = { q: q, order: q.o.map(function (_, k) { return k; }), sel: it.selected_json ? JSON.parse(it.selected_json) : [], done: true, conf: it.confidence, ms: it.time_ms };
         el.innerHTML = (it.selected_json === null || !st.sel.length ? '<div class="note">' + t("unanswered") + "</div>" : "") + qHtml(st, { mode: "instant" });
       });
       document.getElementById("del").onclick = function () {
@@ -414,7 +488,7 @@
     if (key === "hard") return all.filter(function (q) { return q.set === "hard"; });
     return all.filter(function (q) { return q.set === key; });
   }
-  function priority(q) { var s = STATS.qstats[q.id]; if (STATS.review.hasOwnProperty(q.id)) return 0; if (!s) return 1; if (!s.last) return 0; return 2; }
+  function priority(q) { var s = STATS.qstats[q.id], r = STATS.review[q.id]; if (r && (r.due || !setting("srs"))) return 0; if (!s) return 1; if (!s.last) return 0; return 2; }
   function pick(pool, n, doms, onlyNew) {
     pool = shuffle(pool.filter(function (q) { return doms.indexOf(q.dom) >= 0; }));
     if (onlyNew) pool.sort(function (a, b) { return priority(a) - priority(b); });
@@ -435,7 +509,7 @@
     if (session && !session.over) h += resumeHtml();
     h += '<div class="presets" aria-label="' + esc(t("quickStart")) + '"><span class="small muted" style="align-self:center">' + t("quickStart") + ':</span>' +
       '<button type="button" data-preset="exam">' + t("presetExam") + '</button><button type="button" data-preset="quick">' + t("presetQuick") + '</button>' +
-      '<button type="button" data-preset="sec">' + t("presetSec") + '</button><button type="button" data-preset="hard">' + t("presetHard") + "</button></div>";
+      '<button type="button" data-preset="sec">' + t("presetSec") + '</button><button type="button" data-preset="hard">' + t("presetHard") + '</button><button type="button" data-preset="adaptive" title="' + esc(t("adaptiveNote")) + '">' + t("presetAdaptive") + "</button></div>";
     h += '<div class="card"><form id="setup">';
     h += '<label class="f">' + t("mode") + '</label><div class="choice">' +
       '<label><input type="radio" name="mode" value="study"' + (presetExam ? "" : " checked") + "><span><b>" + t("modeStudyT") + '</b><span class="small muted">' + t("modeStudyD") + "</span></span></label>" +
@@ -447,7 +521,7 @@
     h += '<label class="f" for="n">' + t("count") + '</label><div class="row"><input type="number" id="n" name="n" min="1" max="200" value="20" style="width:7rem"><span class="small muted" id="avail"></span></div>';
     h += '<div class="checks" style="margin-top:.7rem"><label><input type="checkbox" name="onlyNew" checked> ' + t("onlyNew") + "</label></div></div>";
     h += '<label class="f" for="diff">' + t("difficulty") + '</label><select id="diff" name="diff"><option value="all">' + t("diffAll") + '</option><option value="hard">' + t("diffHard") + "</option></select>";
-    h += '<p class="small muted" id="examNote" style="margin:.9rem 0 0">' + t("examNote") + '</p><div class="form-actions"><button class="btn lg" type="submit">' + t("start") + ' →</button></div></form></div>';
+    h += '<p class="small muted" id="examNote" style="margin:.9rem 0 0">' + t("examNote") + " " + t("adaptiveNote") + '</p><div class="form-actions"><button class="btn lg" type="submit">' + t("start") + ' →</button></div></form></div>';
     app.innerHTML = h;
     var f = document.getElementById("setup");
     function filtered() {
@@ -465,6 +539,7 @@
     app.querySelectorAll("[data-preset]").forEach(function (b) {
       b.onclick = function () {
         var p = b.dataset.preset;
+        if (p === "adaptive") return startAdaptive();
         f.pool.value = p === "hard" ? "hard" : "orig"; f.diff.value = "all";
         f.mode.value = p === "exam" ? "exam" : "study";
         f.querySelectorAll("input[name=dom]").forEach(function (x) { x.checked = p !== "sec" || x.value === "D4"; });
@@ -508,7 +583,7 @@
       if (!session || session.over) { localStorage.removeItem(SESS_KEY); return; }
       var s = session;
       localStorage.setItem(SESS_KEY, JSON.stringify({ id: s.id, mode: s.mode, label: s.label, i: s.i, flags: s.flags, start: s.start, end: s.end,
-        items: s.items.map(function (x) { return { q: x.q.id, o: x.order, s: x.sel, d: x.done, ms: x.ms }; }) }));
+        items: s.items.map(function (x) { return { q: x.q.id, o: x.order, s: x.sel, d: x.done, ms: x.ms, c: x.conf || null }; }) }));
     } catch (e) {}
   }
   function restoreSession() {
@@ -516,7 +591,7 @@
       var o = JSON.parse(localStorage.getItem(SESS_KEY) || "null"); if (!o || !o.items) return;
       if (o.items.some(function (x) { return !QBYID[x.q]; })) { localStorage.removeItem(SESS_KEY); return; }
       session = { id: o.id, mode: o.mode, label: o.label, i: o.i || 0, flags: o.flags || {}, start: o.start, end: o.end, over: false, viewAt: Date.now(),
-        items: o.items.map(function (x) { return { q: QBYID[x.q], order: x.o, sel: x.s || [], done: !!x.d, ms: x.ms || 0 }; }) };
+        items: o.items.map(function (x) { return { q: QBYID[x.q], order: x.o, sel: x.s || [], done: !!x.d, ms: x.ms || 0, conf: x.c || null }; }) };
     } catch (e) {}
   }
 
@@ -541,7 +616,7 @@
     var s = session, st = s.items[s.i], exam = s.mode === "exam", last = s.i === s.items.length - 1;
     var nAns = s.items.filter(function (x) { return exam ? x.sel.length : x.done; }).length, nFlag = Object.keys(s.flags).filter(function (k) { return s.flags[k]; }).length;
     var h = '<div class="runbar"><span class="count">' + t("q") + " <b>" + (s.i + 1) + "</b> " + t("of") + " " + s.items.length + '</span><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + s.items.length + '" aria-valuenow="' + nAns + '"><i style="width:' + (100 * nAns / s.items.length) + '%"></i></div>' +
-      (exam ? '<span class="timer" id="timer" aria-label="' + t("time") + '">' + fmtTime(s.end - Date.now()) + "</span>" : '<span class="chip">' + esc(modeLabel(s.mode)) + "</span>") + "</div>";
+      (exam ? paceHtml(s) + '<span class="timer" id="timer" aria-label="' + t("time") + '">' + fmtTime(s.end - Date.now()) + "</span>" : '<span class="chip">' + esc(modeLabel(s.mode)) + "</span>") + "</div>";
     if (exam) {
       h += '<details class="qmap"' + (window.innerWidth > 720 && s.items.length <= 60 ? " open" : "") + "><summary><b>" + t("qmap") + '</b><span class="small muted" id="mapAns">' + t("answeredN", { a: nAns, n: s.items.length }) + "</span>" +
         (nFlag ? '<span class="chip warn">' + tn("flaggedN", nFlag) + "</span>" : "") + '</summary><div class="qnav">' +
@@ -553,10 +628,10 @@
       (exam ? '<button type="button" class="btn ghost" data-flag="1" aria-pressed="' + !!s.flags[s.i] + '" aria-label="' + (s.flags[s.i] ? t("unflag") : t("flag")) + '">' + (s.flags[s.i] ? "★" : "☆") + '<span class="hide-sm"> ' + (s.flags[s.i] ? t("unflag") : t("flag")) + "</span></button>" : "") + "</div>" +
       '<div class="row">' + (!last ? '<button type="button" class="btn" data-nav="1">' + t("next") + " →</button>" : "") +
       ((exam || last) ? '<button type="button" class="btn' + (!last ? " ghost" : "") + '" data-finish="1"><span class="hide-sm">' + t("finish") + '</span><span class="show-sm">' + t("finishGo") + "</span></button>" : "") + "</div></div>" +
-      '<p class="small muted kbd-hint" style="margin-top:1rem">' + t("kbdHint") + "</p>";
+      '<p class="small muted kbd-hint" style="margin-top:1rem">' + t(setting("confidence") ? "kbdHintConf" : "kbdHint") + "</p>";
     app.innerHTML = h;
     var box = document.getElementById("qbox"), opt = { mode: exam ? "exam" : "instant", persist: exam ? null : function (st2) {
-      tick(); api("/api/answers", { session_id: s.id, question_id: st2.q.id, selected: st2.sel, time_ms: st2.ms }).catch(function () { alertBox(t("saveError")); });
+      tick(); api("/api/answers", { session_id: s.id, question_id: st2.q.id, selected: st2.sel, time_ms: st2.ms, confidence: st2.conf || null }).then(updateBadgeLater).catch(function () { alertBox(t("saveError")); });
     } };
     var rr = function () {
       box.innerHTML = qHtml(st, opt);
@@ -590,7 +665,7 @@
       var pos = /^[1-7]$/.test(k) ? +k - 1 : /^[a-gA-G]$/.test(k) && !(k === "f" || k === "F") ? k.toUpperCase().charCodeAt(0) - 65 : -1;
       if (pos >= 0 && pos < st.order.length) { var b = box.querySelector('[data-oi="' + st.order[pos] + '"]'); if (b && !b.disabled) b.click(); return true; }
       if (k === "Enter") {
-        if (!exam && multi && !st.done) { var c = box.querySelector("[data-act=confirm]"); if (c && !c.disabled) c.click(); return true; }
+        if (!exam && !st.done) { var c = box.querySelector(setting("confidence") ? "[data-conf=sure]" : "[data-act=confirm]"); if (c && !c.disabled) c.click(); return true; }
         if (exam || st.done) { if (!last) go(function () { s.i++; }); else askFinish(); return true; }
       }
       if (k === "ArrowRight" && !last && (exam || st.done)) { go(function () { s.i++; }); return true; }
@@ -603,6 +678,7 @@
       var el = document.getElementById("timer"), left = s.end - Date.now();
       if (left <= 0) { s.timeUp = true; finishSession(); return; }
       if (el) { el.textContent = fmtTime(left); el.classList.toggle("low", left < 5 * 60000); }
+      var pc = document.getElementById("pace"); if (pc && Math.floor(left / 1000) % 15 === 0) pc.outerHTML = paceHtml(s);
     }, 1000);
   }
 
@@ -610,7 +686,7 @@
     var s = session; stopTimer(); if (!s || s.over || s.finishing) return;
     s.finishing = true; tick();
     var answers = [];
-    if (s.mode === "exam") s.items.forEach(function (st) { st.done = true; record(st.q, isCorrect(st)); if (st.sel.length) answers.push({ question_id: st.q.id, selected: st.sel, time_ms: st.ms }); });
+    if (s.mode === "exam") s.items.forEach(function (st) { st.done = true; record(st.q, isCorrect(st), st.conf); if (st.sel.length) answers.push({ question_id: st.q.id, selected: st.sel, time_ms: st.ms, confidence: st.conf || null }); });
     api("/api/sessions/" + s.id + "/finish", { answers: answers, time_up: !!s.timeUp }).then(function (r) {
       s.over = true; saveSession();
       s.score = { ok: r.n_correct, n: r.n_questions, pct: Math.round(r.score_pct), byDom: r.byDom, dur: r.duration_s };
@@ -647,18 +723,246 @@
 
   function pageReview() {
     stopTimer();
-    var ids = Object.keys(STATS.review).filter(function (id) { return QBYID[id]; });
-    var h = "<h1>" + t("reviewTitle") + '</h1><p class="muted">' + t("reviewIntro") + "</p>";
-    if (!ids.length) { app.innerHTML = h + "<p>" + t("reviewEmpty") + "</p>"; return; }
-    h += '<p><button type="button" class="btn" id="go">' + t("reviewStart", { n: ids.length }) + "</button></p>";
-    var byDom = {}; ids.forEach(function (id) { var q = QBYID[id]; (byDom[q.dom] = byDom[q.dom] || []).push(q); });
-    DOMS.forEach(function (d) {
-      if (!byDom[d]) return;
-      h += '<div class="card"><h3>' + domTag(d) + " " + esc(L(DOMAIN[d].title)) + ' <span class="chip">' + byDom[d].length + '</span></h3><ul class="small" style="padding-left:1.1rem">' +
-        byDom[d].map(function (q) { var tp = TOPIC[q.t]; return "<li>" + fmt(L(q.q)).slice(0, 400) + ' <span class="muted">· ' + t("streakNote", { n: STATS.review[q.id] }) + "</span>" + (tp ? ' · <a href="#t/' + tp.id + '">' + esc(L(tp.title)) + "</a>" : "") + "</li>"; }).join("") + "</ul></div>";
-    });
+    var srs = setting("srs"), all = Object.keys(STATS.review).filter(function (id) { return QBYID[id]; }), due = dueIds();
+    var later = all.filter(function (id) { return due.indexOf(id) < 0; }).sort(function (a, b) { return (STATS.review[a].dueAt || "").localeCompare(STATS.review[b].dueAt || ""); });
+    var h = "<h1>" + t("reviewTitle") + '</h1><p class="muted">' + t(srs ? "reviewIntroSrs" : "reviewIntro") + "</p>";
+    if (!all.length) { app.innerHTML = h + "<p>" + t("reviewEmpty") + "</p>"; return; }
+    if (due.length) h += '<p><button type="button" class="btn" id="go">' + t("reviewStart", { n: due.length }) + "</button></p>";
+    else h += '<p class="note">' + t("reviewNone", { d: fmtDate(STATS.review[later[0]].dueAt).slice(0, 10) }) + "</p>";
+    function item(q, showDate) {
+      var r = STATS.review[q.id], tp = TOPIC[q.t];
+      return "<li>" + fmt(L(q.q)).slice(0, 400) + ' <span class="muted">· ' + t(r.reason === "guess" ? "reasonGuess" : "reasonWrong") + " · " + (srs ? t("boxN", { n: r.box }) : t("streakNote", { n: r.streak })) +
+        (showDate ? " · " + t("dueOn", { d: fmtDate(r.dueAt).slice(0, 10) }) : "") + "</span>" + (tp ? ' · <a href="#t/' + tp.id + '">' + esc(L(tp.title)) + "</a>" : "") + "</li>";
+    }
+    if (due.length) {
+      h += "<h2>" + t("reviewDue") + "</h2>";
+      var byDom = {}; due.forEach(function (id) { var q = QBYID[id]; (byDom[q.dom] = byDom[q.dom] || []).push(q); });
+      DOMS.forEach(function (d) {
+        if (!byDom[d]) return;
+        h += '<div class="card"><h3>' + domTag(d) + " " + esc(L(DOMAIN[d].title)) + ' <span class="chip">' + byDom[d].length + '</span></h3><ul class="small" style="padding-left:1.1rem">' +
+          byDom[d].map(function (q) { return item(q, false); }).join("") + "</ul></div>";
+      });
+    }
+    if (later.length) h += "<h2>" + t("reviewLater") + ' <span class="chip">' + later.length + '</span></h2><div class="card"><ul class="small" style="padding-left:1.1rem">' + later.map(function (id) { return item(QBYID[id], true); }).join("") + "</ul></div>";
     app.innerHTML = h;
-    document.getElementById("go").onclick = function () { startSession("study", shuffle(ids.map(function (id) { return QBYID[id]; })), "review"); };
+    var go = document.getElementById("go"); if (go) go.onclick = function () { startSession("study", shuffle(due.map(function (id) { return QBYID[id]; })), "review"); };
+  }
+
+  // ---------- impostazioni ed esportazione ----------
+  function pageSettings() {
+    var opts = [["srs", "setSrs", "setSrsD"], ["confidence", "setConf", "setConfD"], ["pacing", "setPace", "setPaceD"]];
+    var h = "<h1>" + t("setTitle") + '</h1><p class="muted">' + t("setIntro") + '</p><div class="card settings">' +
+      opts.map(function (o) {
+        return '<label class="switch-row"><span><b>' + t(o[1]) + '</b><span class="small muted">' + t(o[2]) + '</span></span><input type="checkbox" class="switch" data-set="' + o[0] + '"' + (setting(o[0]) ? " checked" : "") + "></label>";
+      }).join("") + "</div>";
+    h += "<h2>" + t("dataTitle") + '</h2><div class="card"><p class="muted" style="margin-top:0">' + t("dataIntro") + '</p><div class="row">' +
+      '<button type="button" class="btn" id="expBtn">' + t("exportBtn") + '</button><label class="btn ghost" for="impFile">' + t("importBtn") + '</label><input type="file" id="impFile" accept=".json,application/json" hidden></div></div>';
+    app.innerHTML = h;
+    app.querySelectorAll("[data-set]").forEach(function (el) {
+      el.onchange = function () {
+        var body = {}; body[el.dataset.set] = el.checked;
+        api("/api/settings", body).then(function (s) { STATS.settings = s; return refreshStats(); }).then(function () { alertBox(t("saved")); })
+          .catch(function (e) { el.checked = !el.checked; alertBox(t("saveError") + " " + e.message); });
+      };
+    });
+    document.getElementById("expBtn").onclick = function () {
+      api("/api/export").then(function (data) {
+        var f = "mcpa-progressi-" + new Date().toISOString().slice(0, 10) + ".json";
+        var url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type: "application/json" }));
+        var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        alertBox(t("exportOk", { f: f }));
+      }).catch(function (e) { alertBox(t("saveError") + " " + e.message); });
+    };
+    var inp = document.getElementById("impFile");
+    inp.onchange = function () {
+      var file = inp.files[0]; inp.value = ""; if (!file) return;
+      file.text().then(function (txt) {
+        var data; try { data = JSON.parse(txt); } catch (e) { data = null; }
+        if (!data || data.format !== "mcpa-sim-progress" || !data.tables) { alertBox(t("importBad")); return; }
+        var n = (data.tables.answers || []).length;
+        modal(t("importTitle"), "<p>" + esc(t("importQ", { d: fmtDate(data.exported_at || ""), n: n })) + "</p>", t("importGo"), function () {
+          api("/api/import", { data: data }).then(function (r) {
+            var im = r.imported || {}; alertBox(t("importOk", { n: im.answers || 0 }) + (im.skipped ? " " + t("importSkipped", { n: im.skipped }) : ""));
+            return refreshStats();
+          }).then(function () { render(); }).catch(function (e) { alertBox(t("importBad") + " (" + e.message + ")"); });
+        }, true);
+      });
+    };
+  }
+
+  // ---------- esame adattivo ----------
+  function weakness(q) {
+    var s = STATS.qstats[q.id], r = STATS.review[q.id], ts = STATS.topicStats[q.t], w = Math.random();
+    if (r) w += r.due ? 4 : 1.5;
+    if (!s) w += 1.5; else if (!s.last) w += 2.5; else if (s.n >= 2 && s.ok === s.n) w -= 1;
+    w += ts && ts.n ? 3 * (1 - ts.ok / ts.n) : 1;
+    return w;
+  }
+  function pickAdaptive(pool) {
+    var out = [];
+    DOMS.forEach(function (d) {
+      out = out.concat(pool.filter(function (q) { return q.dom === d; }).map(function (q) { return { q: q, w: weakness(q) }; })
+        .sort(function (a, b) { return b.w - a.w; }).slice(0, EXAM_DIST[d]).map(function (x) { return x.q; }));
+    });
+    return shuffle(out);
+  }
+  function startAdaptive() { startSession("exam", pickAdaptive(poolOf("all")), "adaptive"); }
+
+  // ---------- flashcard ----------
+  // il termine nascosto è il primo token "da ricordare" del punto in inglese, presente anche nel punto in italiano
+  var CARD_RX = [
+    /(?<![\w-])-32\d{3}\b/,
+    /\b(?:MCP|Mcp)-[A-Z][A-Za-z-]+\b|\bWWW-Authenticate\b|\bLast-Event-ID\b/,
+    /(?<![\w.\/-])[a-z]+(?:\/[a-zA-Z_]+)+\b/,
+    /\b_meta\b|\b[a-z]+[A-Z][A-Za-z]+\b/,
+    /\bRFC ?\d{3,4}\b|\bSEP-\d+\b/,
+    /\b[45]\d\d\b/,
+    /MUST NOT|SHOULD NOT|\bMUST\b|\bSHOULD\b|\bMAY\b/
+  ];
+  function cardToken(en, it) {
+    for (var i = 0; i < CARD_RX.length; i++) {
+      var re = new RegExp(CARD_RX[i].source, "g"), m;
+      while ((m = re.exec(en))) { var tk = m[0]; if (/^(and\/or|e\/o)$/i.test(tk)) continue; if (!it || it.indexOf(tk) >= 0) return tk; }
+    }
+    return null;
+  }
+  var CARDS = null;
+  function allCards() {
+    if (CARDS) return CARDS;
+    CARDS = [];
+    DATA.course.forEach(function (d) { d.topics.forEach(function (tp) {
+      var en = tp.points.en || [], it = tp.points.it || [];
+      en.forEach(function (p, i) { var tk = cardToken(p, it[i]); if (tk) CARDS.push({ id: tp.id + ":" + i, tp: tp, i: i, tok: tk }); });
+    }); });
+    return CARDS;
+  }
+  // debolezza di un argomento: 0 = forte, valori alti = da studiare; null = nessun dato
+  function topicWeak() {
+    var w = {};
+    function add(id, v) { w[id] = (w[id] || 0) + v; }
+    Object.keys(STATS.topicStats).forEach(function (id) { var s = STATS.topicStats[id]; if (s.n && s.ok / s.n < 0.75) add(id, 1 + 2 * (1 - s.ok / s.n)); });
+    Object.keys(STATS.review).forEach(function (id) { var q = QBYID[id]; if (q) add(q.t, 1); });
+    Object.keys(STATS.cards || {}).forEach(function (cid) { var c = STATS.cards[cid]; if (c.seen > c.known) add(cid.split(":")[0], 0.5); });
+    return w;
+  }
+  var FL = { scope: "weak", dom: "", deck: null };
+  function buildDeck() {
+    var cards = allCards().filter(function (c) { return !FL.dom || c.tp.dom === FL.dom; }), w = topicWeak(), noData = !Object.keys(w).length;
+    var wt = {}; DATA.course.forEach(function (d) { wt[d.id] = d.weight; });
+    var due = [], fresh = [];
+    cards.forEach(function (c) {
+      var s = (STATS.cards || {})[c.id];
+      if (s) { if (s.due) due.push(c); return; }
+      if (FL.scope === "all" || noData || w[c.tp.id]) fresh.push(c);
+    });
+    due.sort(function (a, b) { return STATS.cards[a.id].box - STATS.cards[b.id].box; });
+    fresh = shuffle(fresh).sort(function (a, b) { return noData ? wt[b.tp.dom] - wt[a.tp.dom] : (w[b.tp.id] || 0) - (w[a.tp.id] || 0); });
+    return { due: due, fresh: fresh, list: due.concat(fresh).slice(0, 20) };
+  }
+  function cardText(c, reveal) {
+    var p = (c.tp.points[S.lang] || [])[c.i] || c.tp.points.en[c.i], h = fmt(p), tk = esc(c.tok), i = h.indexOf(tk);
+    if (i < 0) return h;
+    return h.slice(0, i) + (reveal ? "<mark>" + tk + "</mark>" : '<span class="blank" aria-label="?">' + " ".repeat(Math.min(12, Math.max(4, c.tok.length))) + "</span>") + h.slice(i + tk.length);
+  }
+  var flashKey = null;
+  function pageFlash() {
+    var dk = buildDeck(), nAll = allCards().length;
+    var h = "<h1>" + t("flashTitle") + '</h1><p class="muted">' + t("flashIntro") + "</p>";
+    h += '<div class="card"><div class="seg-row"><div class="seg" role="group">' +
+      ["weak", "all"].map(function (k) { return '<button type="button" data-scope="' + k + '" class="' + (FL.scope === k ? "on" : "") + '" aria-pressed="' + (FL.scope === k) + '">' + t(k === "weak" ? "flashScopeWeak" : "flashScopeAll") + "</button>"; }).join("") +
+      '</div><select id="flDom" aria-label="' + esc(t("domains")) + '"><option value="">' + t("flashAllDoms") + "</option>" +
+      DOMS.map(function (d) { return '<option value="' + d + '"' + (FL.dom === d ? " selected" : "") + ">" + d + " · " + esc(L(DOMAIN[d].title)) + "</option>"; }).join("") + "</select></div>" +
+      '<p class="small muted">' + tn("flashTotal", nAll) + " · <b>" + dk.due.length + "</b> " + t("flashDue") + " · <b>" + dk.fresh.length + "</b> " + t("flashNew") + "</p>" +
+      (FL.scope === "weak" ? '<p class="small muted" style="margin-bottom:0">' + t("flashWeakNote") + "</p>" : "") +
+      '<div class="form-actions"><button type="button" class="btn lg" id="flGo"' + (dk.list.length ? "" : " disabled") + ">" + t("flashStart", { n: dk.list.length }) + " →</button></div>" +
+      (dk.list.length ? "" : '<p class="note">' + t("flashEmpty") + "</p>") + "</div>";
+    app.innerHTML = h;
+    app.querySelectorAll("[data-scope]").forEach(function (b) { b.onclick = function () { FL.scope = b.dataset.scope; pageFlash(); }; });
+    document.getElementById("flDom").onchange = function () { FL.dom = this.value; pageFlash(); };
+    document.getElementById("flGo").onclick = function () { FL.deck = { list: dk.list, i: 0, shown: false, known: 0, miss: [] }; flashRun(); };
+  }
+  function flashRun() {
+    var d = FL.deck, c = d.list[d.i];
+    if (!c) return flashDone();
+    var h = '<div class="runbar"><span class="count">' + t("flashCardN", { i: d.i + 1, n: d.list.length }) + '</span><div class="bar"><i style="width:' + (100 * d.i / d.list.length) + '%"></i></div><button type="button" class="btn ghost" id="flQuit">✕</button></div>';
+    h += '<div class="card flashcard' + (d.shown ? " shown" : "") + '"><div class="spread small muted"><span>' + domTag(c.tp.dom) + " " + esc(L(c.tp.title)) + "</span><span>" + t("flashFill") + "</span></div>" +
+      '<p class="fc-text">' + cardText(c, d.shown) + "</p>" +
+      (d.shown ? '<div class="small"><a href="#t/' + c.tp.id + '" target="_blank" rel="noopener">' + t("openTheory") + " →</a></div>" : "") + "</div>";
+    h += '<div class="actions">' + (d.shown ?
+      '<div class="row"><button type="button" class="btn ghost" data-known="0">1 · ' + t("flashNot") + '</button></div><div class="row"><button type="button" class="btn" data-known="1">2 · ' + t("flashKnew") + "</button></div>" :
+      '<div></div><div class="row"><button type="button" class="btn" id="flShow">' + t("flashShow") + "</button></div>") + "</div>";
+    h += '<p class="small muted kbd-hint" style="margin-top:1rem">' + t("flashKbd") + "</p>";
+    app.innerHTML = h;
+    document.getElementById("flQuit").onclick = function () { FL.deck = null; flashKey = null; pageFlash(); };
+    var show = document.getElementById("flShow"); if (show) { show.onclick = function () { d.shown = true; flashRun(); }; show.focus(); }
+    app.querySelectorAll("[data-known]").forEach(function (b) {
+      b.onclick = function () {
+        var k = b.dataset.known === "1"; if (k) d.known++; else d.miss.push(c);
+        api("/api/flashcards", { card_id: c.id, known: k }).then(function (r) { STATS.cards = STATS.cards || {}; var o = STATS.cards[c.id] || { seen: 0, known: 0 }; STATS.cards[c.id] = { box: r.box, due: r.box === 0, seen: o.seen + 1, known: o.known + (k ? 1 : 0) }; }).catch(function () { alertBox(t("saveError")); });
+        d.i++; d.shown = false; flashRun(); window.scrollTo(0, 0);
+      };
+    });
+    flashKey = function (e) {
+      if (!d.shown && (e.key === " " || e.key === "Enter")) { d.shown = true; flashRun(); return true; }
+      if (d.shown && (e.key === "1" || e.key === "2")) { var b = app.querySelector('[data-known="' + (e.key === "2" ? 1 : 0) + '"]'); if (b) b.click(); return true; }
+      return false;
+    };
+  }
+  function flashDone() {
+    var d = FL.deck; flashKey = null; FL.deck = null;
+    var h = "<h1>" + t("flashDone") + '</h1><div class="card"><div class="big ' + (d.known / d.list.length >= 0.75 ? "pass" : "fail") + '">' + d.known + " / " + d.list.length + '</div><p class="muted">' + t("flashResult", { k: d.known, n: d.list.length }) + "</p>" +
+      '<div class="row"><button type="button" class="btn" id="flAgain">' + t("flashAgain") + "</button></div></div>";
+    if (d.miss.length) h += "<h2>" + t("flashMiss") + '</h2><div class="card"><ul class="fc-miss">' + d.miss.map(function (c) { return "<li>" + domTag(c.tp.dom) + " " + cardText(c, true) + ' <a href="#t/' + c.tp.id + '">' + esc(L(c.tp.title)) + " →</a></li>"; }).join("") + "</ul></div>";
+    app.innerHTML = h;
+    document.getElementById("flAgain").onclick = function () { pageFlash(); };
+  }
+  document.addEventListener("keydown", function (e) {
+    if (!flashKey || modalOpen || e.ctrlKey || e.metaKey || e.altKey || location.hash.indexOf("#flash") !== 0) return;
+    var tg = e.target; if (tg && (tg.tagName === "INPUT" || tg.tagName === "SELECT" || tg.tagName === "TEXTAREA")) return;
+    if (e.key === "Enter" && tg && tg.tagName === "BUTTON" && tg.id !== "flShow") return;
+    if (flashKey(e)) e.preventDefault();
+  });
+
+  // ---------- analisi su confidenza e tempi (pagina Progressi) ----------
+  function confSection() {
+    if (!setting("confidence")) return "";
+    var c = STATS.confidence || {}, tot = CONF.reduce(function (s, k) { return s + ((c[k] || {}).n || 0); }, 0);
+    var h = "<h2>" + t("confTitle") + '</h2><div class="card"><p class="small muted" style="margin-top:0">' + t("confIntro") + "</p>";
+    if (!tot) return h + '<p class="muted">' + t("confNone") + "</p></div>";
+    h += "<table>" + CONF.map(function (k) {
+      var x = c[k] || { n: 0, ok: 0 }, p = pct(x);
+      return '<tr><td style="white-space:nowrap"><span class="chip conf-chip conf-' + k + '">' + CONF_ICON[k] + " " + confLabel(k) + '</span></td><td class="barcol" style="width:45%;vertical-align:middle"><div class="bar ' + (p === null ? "" : p >= 75 ? "ok" : "bad") + '"><i style="width:' + (p || 0) + '%"></i></div></td><td style="white-space:nowrap">' + (p === null ? "–" : p + "%") + ' <span class="small muted">' + t("answersN", { n: x.n }) + "</span></td></tr>";
+    }).join("") + "</table>";
+    var lucky = (c.guess || {}).ok || 0, sw = ((c.sure || {}).n || 0) - ((c.sure || {}).ok || 0);
+    if (lucky) h += '<p class="small" style="margin-bottom:0">' + t("luckyN", { n: lucky }) + "</p>";
+    if (sw) h += '<p class="small fail" style="margin-bottom:0">' + t("sureWrongN", { n: sw }) + "</p>";
+    return h + "</div>";
+  }
+  function timeSection() {
+    if (!setting("pacing")) return "";
+    var tm = STATS.timing || { byDom: {}, slowTopics: [] }, any = Object.keys(tm.byDom).length;
+    var h = "<h2>" + t("timeTitle") + '</h2><div class="card"><p class="small muted" style="margin-top:0">' + t("timeIntro") + "</p>";
+    if (!any) return h + '<p class="muted">' + t("timeNone") + "</p></div>";
+    h += "<table><tr><th>" + t("domain") + "</th><th class=\"barcol\"></th><th>" + t("avgTime") + "</th></tr>" + DOMS.map(function (d) {
+      var x = tm.byDom[d]; if (!x) return "";
+      var s = Math.round(x.avg / 1000);
+      return "<tr><td>" + domTag(d) + " " + esc(L(DOMAIN[d].title)) + '</td><td class="barcol" style="width:35%;vertical-align:middle"><div class="bar tbar ' + (s > 90 ? "bad" : "ok") + '"><i style="width:' + Math.min(100, s / 1.8) + '%"></i><b></b></div></td><td style="white-space:nowrap">' + s + ' s <span class="small muted">(' + x.n + ")</span></td></tr>";
+    }).join("") + "</table>";
+    if (tm.slowTopics.length) h += "<h3 style=\"margin-top:1rem\">" + t("slowTitle") + '</h3><ul class="small">' + tm.slowTopics.map(function (w) {
+      return "<li>" + domTag(w.domain_id) + ' <a href="#t/' + w.id + '">' + esc(S.lang === "it" ? w.title_it : w.title_en) + "</a> · " + Math.round(w.avg / 1000) + " s (" + w.n + ")</li>";
+    }).join("") + "</ul>";
+    return h + "</div>";
+  }
+  // ritmo d'esame: differenza tra il tempo "guadagnato" (domande risposte × tempo medio disponibile) e quello trascorso
+  function paceHtml(s) {
+    if (!setting("pacing") || s.mode !== "exam" || !s.end) return "";
+    var per = (s.end - s.start) / s.items.length, el = Date.now() - s.start;
+    if (el < 60000) return '<span class="chip pace" id="pace" title="' + esc(t("paceTitle")) + '">⏱ ' + t("paceOk") + "</span>";
+    var a = s.items.filter(function (x) { return x.sel.length; }).length, delta = a * per - el, m = Math.round(Math.abs(delta) / 60000) + " min";
+    var cls = Math.abs(delta) < 60000 ? "" : delta > 0 ? " ok" : delta < -180000 ? " warn" : "";
+    var txt = Math.abs(delta) < 60000 ? t("paceOk") : delta > 0 ? t("paceAhead", { m: m }) : t("paceBehind", { m: m });
+    return '<span class="chip pace' + cls + '" id="pace" title="' + esc(t("paceTitle")) + '">⏱ ' + txt + "</span>";
   }
 
   function pageAbout() {
@@ -695,7 +999,8 @@
   }
   var themeBtn = document.getElementById("themeBtn");
   if (themeBtn) themeBtn.onclick = function () { var v = getTheme(); applyTheme(v === "auto" ? "light" : v === "light" ? "dark" : "auto"); };
-  function updateBadge() { var b = document.getElementById("rvBadge"), d = document.getElementById("rvDot"); if (!b) return; var n = Object.keys(STATS.review).filter(function (id) { return QBYID[id]; }).length; b.style.display = n ? "" : "none"; b.textContent = n; if (d) d.style.display = n ? "" : "none"; }
+  var badgeT = null; function updateBadgeLater() { clearTimeout(badgeT); badgeT = setTimeout(refreshStats, 300); }
+  function updateBadge() { var b = document.getElementById("rvBadge"), d = document.getElementById("rvDot"); if (!b) return; var n = dueIds().length; b.style.display = n ? "" : "none"; b.textContent = n; if (d) d.style.display = n ? "" : "none"; }
   document.addEventListener("keydown", function (e) {
     if (!keyCtx || modalOpen || e.ctrlKey || e.metaKey || e.altKey || location.hash !== "#run") return;
     var tg = e.target; if (tg && (tg.tagName === "INPUT" || tg.tagName === "SELECT" || tg.tagName === "TEXTAREA")) return;
@@ -713,6 +1018,8 @@
     review: SVG('<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/>'),
     progress: SVG('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
     about: SVG('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/>'),
+    flash: SVG('<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><path d="M7 13h6"/>'),
+    settings: SVG('<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'),
     resume: SVG('<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor"/>')
   };
   var CARET = SVG('<path d="M9 6l6 6-6 6"/>');
@@ -731,8 +1038,8 @@
       '<button type="button" class="exp" id="expCourse" aria-expanded="' + open + '" aria-label="' + esc(t("navDomains")) + '">' + CARET.replace("<svg", '<svg class="caret"') + '</button></div><div class="nav-sub">' +
       DATA.course.map(function (d) { return '<a href="#course/' + d.id + '" data-dom="' + d.id + '" title="' + esc(L(d.title)) + '"' + (d.id === dom ? ' class="on" aria-current="page"' : "") + '><span class="dot" style="background:var(--' + d.id.toLowerCase() + ')"></span><span class="t">' + d.id + " · " + esc(L(d.title)) + "</span></a>"; }).join("") + "</div></div>";
     h += '<div class="side-sec">' + t("secPractice") + "</div>" + navItem("quiz", "#quiz", t("navQuiz")) +
-      navItem("review", "#review", t("navReview"), '<span class="badge" id="rvBadge"></span><span class="dotbadge" id="rvDot"></span>') + navItem("progress", "#progress", t("navProgress"));
-    h += '<div class="side-sec">' + t("secInfo") + "</div>" + navItem("about", "#about", t("navAbout"));
+      navItem("review", "#review", t("navReview"), '<span class="badge" id="rvBadge"></span><span class="dotbadge" id="rvDot"></span>') + navItem("flash", "#flash", t("navFlash")) + navItem("progress", "#progress", t("navProgress"));
+    h += '<div class="side-sec">' + t("secInfo") + "</div>" + navItem("settings", "#settings", t("navSettings")) + navItem("about", "#about", t("navAbout"));
     nav.innerHTML = h;
     nav.querySelectorAll(".nav-item[data-nav]").forEach(function (el) {
       var n = el.dataset.nav, on = n === sec || (n === "course" && sec === "t" && !dom) || (n === "course" && sec === "course" && !dom) || (n === "quiz" && sec === "run") || (n === "progress" && sec === "session");
@@ -763,6 +1070,8 @@
     if (sec === "progress") return [H, [t("navProgress")]];
     if (sec === "session") return [H, P, [t("sessionN", { n: parts[1] })]];
     if (sec === "about") return [H, [t("navAbout")]];
+    if (sec === "settings") return [H, [t("navSettings")]];
+    if (sec === "flash") return [H, [t("navFlash")]];
     return [[t("navHome")]];
   }
   function setSide(open) {
@@ -791,6 +1100,7 @@
     var dom = sec === "course" && DOMAIN[parts[1]] ? parts[1] : sec === "t" && TOPIC[parts[1]] ? TOPIC[parts[1]].dom : null;
     buildSide(sec, dom); crumbs(crumbsFor(sec, parts)); setSide(false);
     if (sec !== "run") { stopTimer(); keyCtx = null; }
+    if (sec !== "flash") { flashKey = null; FL.deck = null; }
     applyTheme(getTheme()); updateBadge();
     if (sec === "course" && parts[1]) pageDomain(parts[1]);
     else if (sec === "course") pageCourse();
@@ -799,6 +1109,8 @@
     else if (sec === "run") pageRun();
     else if (sec === "review") pageReview();
     else if (sec === "about") pageAbout();
+    else if (sec === "settings") pageSettings();
+    else if (sec === "flash") pageFlash();
     else if (sec === "progress") pageProgress();
     else if (sec === "session" && parts[1]) pageSession(+parts[1]);
     else pageHome();

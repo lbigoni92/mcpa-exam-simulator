@@ -74,11 +74,17 @@ Dettagli e fonti: [`sources/exam/lf-exam-page.md`](sources/exam/lf-exam-page.md)
   - **esame:** 60 domande in 90 minuti, distribuite per peso di dominio, correzione alla fine, soglia 75%;
   - **studio:** feedback immediato. Quando sbagli compare la teoria del topic, con il link alla pagina di spiegazione.
 - **Filtri:** set di domande (originali, difficili, rohitg00, Hugging Face, tutte), difficoltà e domini.
-- **Ripasso errori:** le domande sbagliate entrano in una coda ed escono dopo due risposte giuste consecutive.
+- **Ripasso dilazionato:** le domande sbagliate o tirate a indovinare tornano oggi, poi dopo 1, 3 e 7 giorni, ed escono dopo quattro risposte giuste di fila (due, se il ripasso dilazionato è disattivato).
+- **Confidenza:** dopo ogni risposta indichi se eri sicuro, in dubbio o se hai tirato a indovinare. Le risposte giuste ma indovinate vanno comunque nel ripasso.
+- **Tempi e ritmo:** durante l'esame un indicatore dice quanto sei in anticipo o in ritardo rispetto a 90 secondi per domanda.
+- **Esame adattivo:** 60 domande con la distribuzione ufficiale per dominio, scelte tra quelle da ripassare, sbagliate di recente, mai viste e degli argomenti più deboli.
+- **Flashcard:** 200 carte generate dai punti del corso (codici di errore, header, metodi, campi, RFC, MUST/SHOULD/MAY), a partire dai punti deboli, con ripetizione a scatole (Leitner).
+- **Impostazioni:** ripasso dilazionato, confidenza e analisi dei tempi si possono disattivare (di default sono attivi). Da qui si esportano e importano i progressi in un file JSON, utile anche per passare da Docker a Python e viceversa.
 - **Progressi:**
   - andamento nel tempo di esami e sessioni di studio, con la linea del 75%;
   - trend per dominio e topic più deboli;
-  - dettaglio di ogni sessione, con il tempo impiegato per domanda.
+  - precisione per livello di confidenza, tempo medio per dominio e argomenti più lenti;
+  - dettaglio di ogni sessione, con tempo e confidenza per domanda.
 - **Lingue:** interfaccia, corso e domande originali in **italiano e inglese**, con cambio lingua in alto a destra. I termini tecnici e i nomi dei metodi della spec restano in inglese.
 - **Interfaccia:**
   - tema chiaro, scuro o automatico, con il pulsante in alto a destra;
@@ -97,6 +103,8 @@ Dettagli e fonti: [`sources/exam/lf-exam-page.md`](sources/exam/lf-exam-page.md)
 | ![Feedback con teoria](docs/screenshots/study-feedback.png) | ![Esame con mappa delle domande](docs/screenshots/exam-dark.png) |
 | **Progressi** | **Ricerca nel corso** |
 | ![Grafici dei progressi](docs/screenshots/progress.png) | ![Ricerca tra i topic](docs/screenshots/course-search.png) |
+| **Flashcard** | **Impostazioni ed esportazione** |
+| ![Flashcard su un punto debole](docs/screenshots/flashcards.png) | ![Impostazioni con esportazione e importazione](docs/screenshots/settings.png) |
 
 ### Domande (641)
 | Set | Numero | Lingua | Licenza / origine |
@@ -121,7 +129,7 @@ browser ──HTTP──► server.py (Python standard library: http.server + sq
 ```
 - **Frontend:** single-page app in JavaScript vanilla, senza build né dipendenze. I grafici sono SVG generati a mano.
 - **Backend:** `server.py`, solo libreria standard. Ascolta su `127.0.0.1` e controlla gli header `Host` e `Origin` contro il DNS rebinding. La correttezza delle risposte è calcolata dal server.
-- **Database:** tabelle `domains`, `topics`, `questions`, `options` (contenuti) e `sessions`, `session_questions`, `answers`, `review_queue` (progressi), più `meta` e `schema_migrations`.
+- **Database:** tabelle `domains`, `topics`, `questions`, `options` (contenuti) e `sessions`, `session_questions`, `answers`, `review_queue`, `flashcards`, `settings` (progressi), più `meta` e `schema_migrations`.
 - **Configurazione tramite variabili d'ambiente:** `MCPA_PORT` (default 8765), `MCPA_BIND` (default 127.0.0.1; `0.0.0.0` in Docker), `MCPA_DB` (percorso del database), `MCPA_NO_BROWSER`.
 
 ### Contenuti e pipeline di build
