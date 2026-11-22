@@ -482,9 +482,11 @@ class H(BaseHTTPRequestHandler):
         self._send(200, LOGIN_HTML.replace("__ERR__", msg).encode())
 
     def _login(self):
-        # Fly-Client-IP lo imposta Fly; in X-Forwarded-For l'ultimo indirizzo è quello aggiunto dal proxy di Render,
-        # i precedenti li può scrivere chiunque e non servono per il limite
-        fwd = (self.headers.get("Fly-Client-IP") or (self.headers.get("X-Forwarded-For") or "").split(",")[-1].strip()) if PUBLIC_HOSTS else ""
+        # Fly-Client-IP lo imposta Fly; davanti a Render c'è Cloudflare, che sovrascrive CF-Connecting-IP con
+        # l'indirizzo reale. X-Forwarded-For Render lo allunga senza ripulirlo: il primo valore lo può scrivere
+        # chiunque, quindi resta solo come ultima risorsa (ultimo valore). In locale conta la connessione.
+        fwd = (self.headers.get("Fly-Client-IP") or self.headers.get("CF-Connecting-IP")
+               or (self.headers.get("X-Forwarded-For") or "").split(",")[-1]).strip() if PUBLIC_HOSTS else ""
         ip = fwd or self.client_address[0]
         t = time.time()
         with _lock:
