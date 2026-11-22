@@ -1,0 +1,709 @@
+{
+ "ext-rg-mcpa-f-diag-004": {
+  "src": "spec-2026-07-28/index.md",
+  "find": "The key words \\\"MUST\\\""
+ },
+ "ext-rg-mcpa-f-diag-005": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "Requests MUST include a string or integer ID"
+ },
+ "ext-rg-mcpa-f-diag-006": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-mcpa-f-m2-016": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-mcpa-f-m2-035": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-mcpa-f-m3-018": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-quiz-09-02": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-quiz-11-04": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-quiz-10-02": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "ext-rg-mcpa-f-diag-009": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Clients SHOULD provide tool execution errors"
+ },
+ "ext-rg-mcpa-f-diag-010": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "new (JSON-RPC )?(request )?id|new `id`|independent request"
+ },
+ "ext-rg-mcpa-f-m2-024": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "new (JSON-RPC )?(request )?id|new `id`|independent request"
+ },
+ "ext-rg-mcpa-f-m3-019": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "new (JSON-RPC )?(request )?id|new `id`|independent request"
+ },
+ "ext-rg-quiz-14-02": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "new (JSON-RPC )?(request )?id|new `id`|independent request"
+ },
+ "ext-rg-quiz-33-04": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "new (JSON-RPC )?(request )?id|new `id`|independent request"
+ },
+ "ext-rg-mcpa-f-diag-011": {
+  "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
+  "find": "MUST send `?notifications/subscriptions/acknowledged`? as the first message"
+ },
+ "ext-rg-mcpa-f-diag-012": {
+  "src": "extensions/tasks/overview.md",
+  "find": "Cancellation is cooperative"
+ },
+ "ext-rg-mcpa-f-diag-022": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-diag-024": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-diag-028": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-diag-030": {
+  "src": "community/sdk-tiers.md",
+  "find": "Tier 1 SDKs are fully supported"
+ },
+ "ext-rg-mcpa-f-m1-007": {
+  "src": "spec-2026-07-28/index.md",
+  "find": "Language Server Protocol"
+ },
+ "ext-rg-mcpa-f-m1-009": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m1-012": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Servers MUST provide structured results that conform"
+ },
+ "ext-rg-mcpa-f-m1-025": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix: Unknown tool; Malformed requests; Server errors. They are returned as standard JSON-RPC errors (example: code -32602, \"Unknown tool: invalid_tool_name\")."
+ },
+ "ext-rg-mcpa-f-m1-028": {
+  "src": "spec-2026-07-28/server/utilities/caching.md",
+  "find": "notification invalidates the cached response"
+ },
+ "ext-rg-mcpa-f-m1-030": {
+  "src": "spec-2026-07-28/basic/patterns/cancellation.md",
+  "find": "race conditions"
+ },
+ "ext-rg-mcpa-f-m1-031": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "inputResponses"
+ },
+ "ext-rg-mcpa-f-m1-034": {
+  "src": "extensions/tasks/overview.md",
+  "find": "`input_required`, `completed`, `failed`, `cancelled`"
+ },
+ "ext-rg-mcpa-f-m1-037": {
+  "src": "spec-2026-07-28/basic/authorization/client-registration.md",
+  "find": "application_type: \\\"native\\\""
+ },
+ "ext-rg-mcpa-f-m1-043": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Servers MUST: Validate all tool inputs; Implement proper access controls; Rate limit tool invocations; Sanitize tool outputs."
+ },
+ "ext-rg-mcpa-f-m1-044": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m1-047": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "tool poisoning"
+ },
+ "ext-rg-mcpa-f-m1-048": {
+  "src": "spec-2026-07-28/basic/authorization/index.md",
+  "find": "MUST use the Authorization request header"
+ },
+ "ext-rg-mcpa-f-m1-052": {
+  "src": "extensions/apps/overview.md",
+  "find": "request additional capabilities"
+ },
+ "ext-rg-mcpa-f-m1-054": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m1-056": {
+  "src": "community/sdk-tiers.md",
+  "find": "100% pass rate"
+ },
+ "ext-rg-mcpa-f-m1-057": {
+  "src": "extensions/overview.md",
+  "find": "experimental-ext-` prefix"
+ },
+ "ext-rg-mcpa-f-m1-059": {
+  "src": "seps/1865-mcp-apps-interactive-user-interfaces-for-mcp.md",
+  "find": "focuses on HTML content"
+ },
+ "ext-rg-mcpa-f-m2-003": {
+  "src": "docs/learn/versioning.md",
+  "find": "at least twelve months"
+ },
+ "ext-rg-mcpa-f-m2-018": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m2-021": {
+  "src": "spec-2026-07-28/server/resources.md",
+  "find": "If the requested resource does not exist"
+ },
+ "ext-rg-mcpa-f-m2-023": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "at least one of"
+ },
+ "ext-rg-mcpa-f-m2-031": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "`Mcp-Name` \\| `params.name`"
+ },
+ "ext-rg-mcpa-f-m2-036": {
+  "src": "spec-2026-07-28/server/discover.md",
+  "find": "`instructions`: Optional natural-language guidance"
+ },
+ "ext-rg-mcpa-f-m2-044": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "MUST protect its integrity"
+ },
+ "ext-rg-mcpa-f-m3-020": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "Clients MUST NOT inspect, parse, modify"
+ },
+ "ext-rg-quiz-14-03": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "Clients MUST NOT inspect, parse, modify"
+ },
+ "ext-rg-mcpa-f-m2-051": {
+  "src": "extensions/tasks/overview.md",
+  "find": "Not every tool call returns instantly"
+ },
+ "ext-rg-mcpa-f-m2-052": {
+  "src": "spec-2026-07-28/server/resources.md",
+  "find": "application-driven"
+ },
+ "ext-rg-mcpa-f-m2-053": {
+  "src": "seps/2133-extensions.md",
+  "find": "revert to core protocol behavior"
+ },
+ "ext-rg-mcpa-f-m3-004": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-009": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-010": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-023": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "Request-scoped notifications like"
+ },
+ "ext-rg-mcpa-f-m3-031": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tools use two error reporting mechanisms: Protocol Errors (unknown tool, malformed requests, server errors) are returned as standard JSON-RPC errors; Tool Execution Errors (API failures, input validation errors, business logic errors) are reported in tool results with isError: true."
+ },
+ "ext-rg-mcpa-f-m3-034": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-035": {
+  "src": "spec-2026-07-28/index.md",
+  "find": "descriptions of tool behavior such as annotations"
+ },
+ "ext-rg-mcpa-f-m3-036": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-041": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "authenticated principal, rejecting"
+ },
+ "ext-rg-quiz-14-05": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "authenticated principal, rejecting"
+ },
+ "ext-rg-mcpa-f-m3-042": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "`io.modelcontextprotocol/clientInfo` and `io.modelcontextprotocol/serverInfo` are self-reported"
+ },
+ "ext-rg-mcpa-f-m3-044": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-045": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-046": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-050": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-051": {
+  "src": "community/sdk-tiers.md",
+  "find": "Tier 3"
+ },
+ "ext-rg-mcpa-f-m3-053": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-057": {
+  "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m3-059": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-02": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-03": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-04": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-05": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-00-06": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-01-06": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-02-01": {
+  "src": "docs/getting-started/intro.md",
+  "find": "open-source standard for connecting AI applications"
+ },
+ "ext-rg-quiz-02-03": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix: Unknown tool; Malformed requests; Server errors. They are returned as standard JSON-RPC errors (example: code -32602, \"Unknown tool: invalid_tool_name\")."
+ },
+ "ext-rg-quiz-02-05": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-02-06": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-03-01": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "Notifications MUST NOT include an ID"
+ },
+ "ext-rg-quiz-03-06": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "body of the HTTP POST MUST be a single JSON-RPC"
+ },
+ "ext-rg-quiz-08-03": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Servers MUST provide structured results that conform"
+ },
+ "ext-rg-quiz-08-04": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-09-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-09-06": {
+  "src": "spec-2026-07-28/server/discover.md",
+  "find": "`instructions`: Optional natural-language guidance"
+ },
+ "ext-rg-quiz-10-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-10-03": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-10-05": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Clients MAY provide protocol errors"
+ },
+ "ext-rg-quiz-11-01": {
+  "src": "spec-2026-07-28/server/utilities/pagination.md",
+  "find": "empty string is a valid cursor"
+ },
+ "ext-rg-quiz-20-03": {
+  "src": "spec-2026-07-28/server/utilities/pagination.md",
+  "find": "empty string is a valid cursor"
+ },
+ "ext-rg-mcpa-f-m2-033": {
+  "src": "spec-2026-07-28/server/utilities/pagination.md",
+  "find": "empty string is a valid cursor"
+ },
+ "ext-rg-quiz-11-02": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "CallToolResult.isError: Whether the tool use resulted in an error. If true, the content typically describes the error that occurred. Default: false"
+ },
+ "ext-rg-quiz-11-03": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix: Unknown tool; Malformed requests; Server errors. They are returned as standard JSON-RPC errors (example: code -32602, \"Unknown tool: invalid_tool_name\")."
+ },
+ "ext-rg-quiz-17-02": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix: Unknown tool; Malformed requests; Server errors. They are returned as standard JSON-RPC errors (example: code -32602, \"Unknown tool: invalid_tool_name\")."
+ },
+ "ext-rg-quiz-18-01": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix: Unknown tool; Malformed requests; Server errors. They are returned as standard JSON-RPC errors (example: code -32602, \"Unknown tool: invalid_tool_name\")."
+ },
+ "ext-rg-quiz-11-05": {
+  "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
+  "find": "`toolsListChanged`"
+ },
+ "ext-rg-quiz-11-06": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "A tool MAY return links to Resources"
+ },
+ "ext-rg-quiz-13-02": {
+  "src": "spec-2026-07-28/server/prompts.md",
+  "find": "Missing required arguments"
+ },
+ "ext-rg-quiz-13-03": {
+  "src": "spec-2026-07-28/server/utilities/completion.md",
+  "find": "Maximum 100 items per response"
+ },
+ "ext-rg-quiz-13-06": {
+  "src": "spec-2026-07-28/server/utilities/pagination.md",
+  "find": "Invalid cursors SHOULD result in an error"
+ },
+ "ext-rg-quiz-14-04": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "find": "MUST NOT send `?InputRequiredResult`? responses on any other"
+ },
+ "ext-rg-quiz-15-03": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "A server MUST NOT rely on capabilities the client has not declared"
+ },
+ "ext-rg-quiz-16-03": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "Request-scoped notifications like"
+ },
+ "ext-rg-quiz-16-04": {
+  "src": "spec-2026-07-28/basic/transports/stdio.md",
+  "find": "client MUST send a `?notifications/cancelled"
+ },
+ "ext-rg-quiz-16-06": {
+  "src": "spec-2026-07-28/basic/transports/stdio.md",
+  "find": "must also be re-established after restart"
+ },
+ "ext-rg-quiz-17-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-17-03": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-18-04": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-26-05": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tool Execution Errors contain actionable feedback that language models can use to self-correct and retry with adjusted parameters: API failures; Input validation errors (e.g., date in wrong format, value out of range); Business logic errors. They are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-33-01": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "text": "Tools use two error reporting mechanisms: Protocol Errors (unknown tool, malformed requests, server errors) are returned as standard JSON-RPC errors; Tool Execution Errors (API failures, input validation errors, business logic errors) are reported in tool results with isError: true."
+ },
+ "ext-rg-quiz-17-04": {
+  "src": "spec-2026-07-28/basic/patterns/cancellation.md",
+  "find": "SHOULD cancel the request and stop"
+ },
+ "ext-rg-quiz-19-06": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "202 Accepted"
+ },
+ "ext-rg-quiz-20-01": {
+  "src": "spec-2026-07-28/server/utilities/caching.md",
+  "find": "Cacheable Results in MCP use two fields"
+ },
+ "ext-rg-quiz-20-02": {
+  "src": "spec-2026-07-28/server/utilities/caching.md",
+  "find": "Caches MUST NOT be shared across aut"
+ },
+ "ext-rg-quiz-32-05": {
+  "src": "spec-2026-07-28/server/utilities/caching.md",
+  "find": "Caches MUST NOT be shared across aut"
+ },
+ "ext-rg-quiz-29-04": {
+  "src": "spec-2026-07-28/server/utilities/caching.md",
+  "find": "Caches MUST NOT be shared across aut"
+ },
+ "ext-rg-quiz-21-02": {
+  "src": "extensions/tasks/overview.md",
+  "find": "clientCapabilities|extensions"
+ },
+ "ext-rg-quiz-21-06": {
+  "src": "extensions/tasks/overview.md",
+  "find": "solve problems that blocking cannot|Not every tool call returns instantly"
+ },
+ "ext-rg-quiz-22-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-22-05": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-23-01": {
+  "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
+  "find": "respond appropriately to `?HTTP 401"
+ },
+ "ext-rg-quiz-25-04": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-26-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-26-02": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-27-04": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-27-05": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-27-06": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-28-01": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-28-03": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-28-05": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-29-05": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-33-06": {
+  "lvl": "blog"
+ },
+ "ext-rg-quiz-27-03": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "keys `traceparent`, `tracestate`, and `baggage` are reserved"
+ },
+ "ext-rg-quiz-28-06": {
+  "src": "community/sdk-tiers.md",
+  "find": "Tier 1 SDKs are fully supported"
+ },
+ "ext-rg-quiz-30-02": {
+  "src": "extensions/client-matrix.md",
+  "find": "Declare support in the `extensions` field"
+ },
+ "ext-rg-quiz-31-02": {
+  "src": "extensions/client-matrix.md",
+  "find": "Declare support in the `extensions` field"
+ },
+ "ext-rg-quiz-32-01": {
+  "src": "registry/about.md",
+  "find": "metadata"
+ },
+ "ext-rg-quiz-32-04": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "Intermediaries that enforce policy based on mirrored headers"
+ },
+ "ext-rg-quiz-33-03": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "A server MUST NOT rely on capabilities the client has not declared"
+ },
+ "ext-rg-quiz-33-05": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "A server MUST NOT rely on capabilities the client has not declared"
+ },
+ "ext-rg-quiz-07-05": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "A server MUST NOT rely on capabilities the client has not declared"
+ },
+ "ext-rg-quiz-06-06": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Tool name uniqueness is scoped to a single server"
+ },
+ "o-D2-19": {
+  "src": "spec-2026-07-28/server/discover.md",
+  "find": "`instructions`: Optional natural-language guidance"
+ },
+ "o-D3-31": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "ToolAnnotations: readOnlyHint (Default: false); destructiveHint: If true, the tool may perform destructive updates to its environment (Default: true); idempotentHint (Default: false); openWorldHint (Default: true)."
+ },
+ "o-D3-32": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "destructiveHint: If true, the tool may perform destructive updates to its environment. If false, the tool performs only additive updates. (This property is meaningful only when readOnlyHint == false) Default: true"
+ },
+ "o-D4-31": {
+  "src": "spec-2026-07-28/schema.ts",
+  "text": "NOTE: all properties in ToolAnnotations are hints. They are not guaranteed to provide a faithful description of tool behavior (including descriptive properties like title). Clients should never make tool use decisions based on ToolAnnotations received from untrusted servers."
+ },
+ "o-D5-08": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "A server processes each request independently"
+ },
+ "o-H-D5-08": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "MCP has no protocol-level session"
+ },
+ "o-D1-19": {
+  "src": "docs/getting-started/intro.md",
+  "find": "open-source standard for connecting AI applications"
+ },
+ "o-D1-22": {
+  "src": "spec-older-changelogs/2025-06-18-changelog.md",
+  "find": "Remove support for JSON-RPC batching"
+ },
+ "o-H-D1-04": {
+  "src": "spec-2025-11-25/changelog.md",
+  "find": "Client ID Metadata Documents as a recommended"
+ },
+ "o-D2-18": {
+  "lvl": "blog"
+ },
+ "o-D3-01": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "Notifications MUST NOT include an ID"
+ },
+ "o-D3-02": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "MUST treat an absent `resultType` as"
+ },
+ "o-D3-13": {
+  "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
+  "find": "MUST send `?notifications/subscriptions/acknowledged`? as the first message"
+ },
+ "o-D3-24": {
+  "src": "spec-2026-07-28/basic/index.md",
+  "find": "-32020` to `-32099` — reserved for the MCP specification"
+ },
+ "o-D3-26": {
+  "src": "spec-2026-07-28/server/resources.md",
+  "find": "If the requested resource does not exist"
+ },
+ "o-D3-33": {
+  "src": "spec-2026-07-28/server/tools.md",
+  "find": "Expiry errors"
+ },
+ "o-D3-35": {
+  "src": "extensions/tasks/overview.md",
+  "find": "tasks/get"
+ },
+ "o-D4-16": {
+  "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
+  "find": "If `code_challenge_methods_supported` is absent"
+ },
+ "o-D4-25": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "bind only to localhost"
+ },
+ "o-D4-28": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "tool poisoning"
+ },
+ "o-D4-29": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "rug pull"
+ },
+ "o-H-D4-09": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "rug pull"
+ },
+ "o-D4-32": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "by digest"
+ },
+ "o-G-D4-01": {
+  "src": "docs/tutorials/security/local-server-security.md",
+  "find": "by digest"
+ },
+ "o-G-D3-01": {
+  "src": "spec-2026-07-28/basic/transports/streamable-http.md",
+  "find": "202 Accepted"
+ },
+ "o-H-D3-03": {
+  "src": "spec-2026-07-28/basic/patterns/mrtr.md",
+  "text": "Note that these measures bound the replay window and prevent cross-user and cross-request reuse, but do not by themselves guarantee single-use. Servers for which a given requestState must be consumed at most once (e.g., one-time redemptions) MUST enforce that invariant server-side."
+ },
+ "o-D5-17": {
+  "lvl": "blog"
+ },
+ "o-H-D5-10": {
+  "lvl": "blog"
+ },
+ "o-D5-18": {
+  "lvl": "blog"
+ },
+ "o-H-D4-13": {
+  "lvl": "blog"
+ },
+ "o-H-D1-03": {
+  "lvl": "blog"
+ },
+ "o-D5-02": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q1": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q2": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q3": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q4": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q5": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz1-q6": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q1": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q3": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q4": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q5": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q6": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit3_1-quiz2-q7": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit1-quiz1-q2": {
+  "src": "docs/getting-started/intro.md",
+  "find": "open-source standard for connecting AI applications"
+ },
+ "ext-hf-unit1-quiz1-q5": {
+  "src": "docs/getting-started/intro.md",
+  "find": "open-source standard for connecting AI applications"
+ },
+ "ext-hf-unit1-quiz2-q2": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit1-quiz2-q3": {
+  "lvl": "blog"
+ },
+ "ext-hf-unit1-quiz2-q4": {
+  "lvl": "blog"
+ }
+}

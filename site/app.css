@@ -335,3 +335,9 @@ input.switch:checked::after{transform:translateX(1.15rem)}
 .tbar{position:relative;overflow:visible}
 .tbar b{position:absolute;left:50%;top:-3px;bottom:-3px;border-left:2px dashed var(--muted)}
 .presets button[data-preset=adaptive]{border-style:dashed}
+
+.cite{border-left:3px solid var(--line-2);margin:.5rem 0;padding:.3rem .7rem;font-style:normal;overflow-wrap:anywhere}
+.cite a{margin-left:.2rem}
+.chip.lvl-spec{background:var(--ok-bg)}
+.chip.lvl-docs{background:var(--chip)}
+.chip.lvl-blog{background:var(--warn-bg)}

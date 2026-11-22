@@ -33,13 +33,13 @@
       setup: "Imposta la sessione", mode: "Modalità", modeExam: "Esame: timer 90 min, correzione alla fine", modeStudy: "Studio: feedback dopo ogni domanda",
       pool: "Domande", poolOrig: "Originali IT/EN (questo corso)", poolAll: "Tutte le fonti", poolRgMock: "rohitg00 · mock", poolRgDiag: "rohitg00 · diagnostico (30)", poolRgQuiz: "rohitg00 · quiz di lezione", poolHf: "Hugging Face MCP Course (generale, non 2026-07-28)",
       domains: "Domini", count: "Numero di domande", onlyNew: "Prima quelle mai viste o sbagliate", start: "Inizia",
-      examNote: "In modalità esame vengono estratte 60 domande con la distribuzione 10/8/16/14/12 (D1…D5). Un mock rohitg00 si usa intero.",
+      examNote: "In modalità esame vengono estratte 60 domande con la distribuzione 10/8/16/14/12 (D1…D5). Un mock rohitg00 si usa intero. Le domande senza una frase di spec o documentazione ufficiale che le sostenga (fonte solo blog) restano nella pratica ma non entrano negli esami.",
       enOnly: "Questa domanda è disponibile solo in inglese.", timeUp: "Tempo scaduto: la prova è stata consegnata.",
       result: "Risultato", passLine: "Soglia indicativa 75%", passed: "Superato", failed: "Non superato", byDomain: "Per dominio",
       wrongList: "Domande sbagliate", noneWrong: "Nessun errore. Ottimo lavoro.", again: "Nuova sessione", toReview: "Gli errori sono stati aggiunti al ripasso.",
       reviewTitle: "Ripasso errori", reviewIntro: "Le domande sbagliate restano qui finché non rispondi correttamente due volte di fila.", reviewEmpty: "Il ripasso è vuoto.", reviewStart: "Ripassa ora ({n})",
       inReview: "da ripassare", streakNote: "corrette di fila: {n}/2", unanswered: "Senza risposta", score: "Punteggio",
-      reviewNote: "Nota di revisione", origLabel: "Originale", sessionDone: "Sessione completata", reset: "Azzera statistiche", resetQ: "Azzerare statistiche, ripasso e storico?",
+      reviewNote: "Nota di revisione", citeLabel: "Fonte", lvl_spec: "specifica 2026-07-28", lvl_docs: "documentazione ufficiale", lvl_blog: "solo blog o materiale non normativo: esclusa dagli esami", citeNone: "nessuna frase normativa la sostiene", origLabel: "Originale", sessionDone: "Sessione completata", reset: "Azzera statistiche", resetQ: "Azzerare statistiche, ripasso e storico?",
       approx: "collegamento automatico", of: "di", q: "Domanda", time: "Tempo",
       aboutTitle: "Fonti e licenze", resume: "Riprendi la sessione",
       navProgress: "Progressi", progressTitle: "I tuoi progressi", progressIntro: "Ogni sessione di studio o d'esame è salvata nel database locale. Qui vedi come cambia il punteggio nel tempo, in totale e per dominio.",
@@ -98,13 +98,13 @@
       setup: "Set up the session", mode: "Mode", modeExam: "Exam: 90-minute timer, scored at the end", modeStudy: "Study: feedback after each question",
       pool: "Questions", poolOrig: "Original IT/EN (this course)", poolAll: "All sources", poolRgMock: "rohitg00 · mock", poolRgDiag: "rohitg00 · diagnostic (30)", poolRgQuiz: "rohitg00 · lesson quizzes", poolHf: "Hugging Face MCP Course (general, not 2026-07-28)",
       domains: "Domains", count: "Number of questions", onlyNew: "Unseen or missed questions first", start: "Start",
-      examNote: "Exam mode draws 60 questions with the 10/8/16/14/12 distribution (D1…D5). A rohitg00 mock is used in full.",
+      examNote: "Exam mode draws 60 questions with the 10/8/16/14/12 distribution (D1…D5). A rohitg00 mock is used in full. Questions that no official spec or docs sentence supports (blog-only source) stay in practice but never enter an exam.",
       enOnly: "", timeUp: "Time is up: the exam has been submitted.",
       result: "Result", passLine: "Indicative pass mark 75%", passed: "Passed", failed: "Not passed", byDomain: "By domain",
       wrongList: "Missed questions", noneWrong: "No mistakes. Well done.", again: "New session", toReview: "Mistakes were added to the review queue.",
       reviewTitle: "Error review", reviewIntro: "Missed questions stay here until you answer them correctly twice in a row.", reviewEmpty: "The review queue is empty.", reviewStart: "Review now ({n})",
       inReview: "to review", streakNote: "correct in a row: {n}/2", unanswered: "Unanswered", score: "Score",
-      reviewNote: "Review note", origLabel: "Original", sessionDone: "Session complete", reset: "Reset statistics", resetQ: "Reset statistics, review queue and history?",
+      reviewNote: "Review note", citeLabel: "Source", lvl_spec: "specification 2026-07-28", lvl_docs: "official documentation", lvl_blog: "blog or non-normative material only: excluded from exams", citeNone: "no normative sentence supports it", origLabel: "Original", sessionDone: "Session complete", reset: "Reset statistics", resetQ: "Reset statistics, review queue and history?",
       approx: "automatic link", of: "of", q: "Question", time: "Time",
       aboutTitle: "Sources and licenses", resume: "Resume session",
       navProgress: "Progress", progressTitle: "Your progress", progressIntro: "Every study or exam session is saved in the local database. Here you can see how your score changes over time, overall and per domain.",
@@ -232,6 +232,15 @@
     if (show) h += feedbackHtml(st);
     return h + "</div>";
   }
+  // frase ufficiale che giustifica la risposta corretta (site/build/cite.py) con il livello della fonte
+  function citeHtml(q) {
+    if (!q.lvl) return "";
+    var lvl = '<span class="chip lvl-' + q.lvl + '">' + esc(t("lvl_" + q.lvl)) + "</span>";
+    if (!q.cite) return '<div class="cite small muted"><b>' + t("citeLabel") + ":</b> " + t("citeNone") + " " + lvl + "</div>";
+    var u = /^https:\/\/(blog\.)?modelcontextprotocol\.io\//.test(q.cite.url || "") ? q.cite.url : "";
+    return '<blockquote class="cite small"><b>' + t("citeLabel") + ":</b> «" + esc(q.cite.text) + "» " +
+      (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(u.replace(/^https:\/\//, "")) + "</a> " : "") + lvl + "</blockquote>";
+  }
   function feedbackHtml(st) {
     var q = st.q, ok = isCorrect(st);
     var right = st.order.filter(function (oi) { return q.c.indexOf(oi) >= 0; }).map(function (oi) { return "ABCDEFG"[st.order.indexOf(oi)]; }).join(", ");
@@ -243,6 +252,7 @@
     else if (st.conf && !ok && st.conf === "sure") h += '<div class="note">' + t("confSureWrong") + "</div>";
     h += "<div>" + fmt(L(q.x)) + "</div>";
     if (q.review) h += '<div class="note"><b>' + t("reviewNote") + ":</b> " + esc(q.review.note || q.review.status) + "</div>";
+    h += citeHtml(q);
     if (!ok || st.conf === "guess" || st.conf === "doubt") h += theoryHtml(q);
     else if (TOPIC[q.t]) h += '<div class="small" style="margin-top:.4rem"><a href="#t/' + q.t + '">' + t("theory") + ": " + esc(L(TOPIC[q.t].title)) + " →</a></div>";
     return h + "</div>";
@@ -815,7 +825,10 @@
   }
   function startAdaptive() { startSession("exam", pickAdaptive(examPool(poolOf("all"))), "adaptive"); }
   // prove d'esame: le domande a risposta multipla si possono escludere dalle Impostazioni
-  function examPool(pool) { return setting("examMulti") ? pool : pool.filter(function (q) { return q.c.length === 1; }); }
+  // esami: niente domande con fonte solo blog; senza "domande multiple" anche niente multi
+  function examPool(pool) {
+    return pool.filter(function (q) { return q.lvl !== "blog" && (setting("examMulti") || q.c.length === 1); });
+  }
 
   // ---------- flashcard ----------
   // il termine nascosto è il primo token "da ricordare" del punto in inglese, presente anche nel punto in italiano

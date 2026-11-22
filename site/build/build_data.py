@@ -47,6 +47,9 @@ OVERRIDE = json.load(open(os.path.join(os.path.dirname(__file__),"topic_override
 ERRATA = {
  "ext-rg-mcpa-f-m2-003": ({"stem": "The deprecated features registry lists Dynamic Client Registration as deprecated in the 2026-07-28 revision, with no removal date yet announced. What can a reader conclude about its earliest possible removal?"},
    "Testo corretto: l'originale attribuiva la deprecazione di DCR a SEP-2577, che invece depreca roots, sampling e logging. DCR è deprecata nella stessa revisione 2026-07-28 da un'altra modifica (PR #2858). / Fixed: the original attributed the DCR deprecation to SEP-2577, which deprecates roots, sampling and logging."),
+ "ext-rg-quiz-06-06": ({"options": {"C": "It disambiguates the collision, for example by prefixing the second search with a server identifier"},
+                        "explanation": "Tool name uniqueness is scoped to a single server, so collisions across servers are normal. The specification says aggregating clients SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier, and SHOULD NOT rely on serverInfo.name, which is not guaranteed unique. Merging, overwriting or dropping a tool would hide a real tool from the model."},
+   "Opzione C e spiegazione allineate alla spec: la spec chiede una strategia di disambiguazione (per esempio un prefisso con l'identificatore del server), non impone di tenere il primo nome come canonico. / Aligned with the spec: it asks for a disambiguation strategy such as a server-id prefix, it does not mandate keeping the first name canonical."),
  "ext-rg-quiz-18-01": ({"explanation": "An unknown tool is a protocol error reported as -32602 Invalid params; -32601 means the method itself was not found. -32002 (resource not found) is retired in 2026-07-28 itself, replaced by -32602 (SEP-2164)."},
    "Spiegazione corretta: -32002 è ritirato proprio nella 2026-07-28 (SEP-2164), non prima. / Fixed: -32002 is retired in 2026-07-28 itself, not before."),
  "ext-rg-quiz-18-03": ({"options": {"D": "-32002 and -32042, both codes from earlier revisions"},
@@ -105,6 +108,15 @@ def ext(path):
 ext("practice-questions/open-licensed/rohitg00-mcpa/normalizzate.json")
 ext("practice-questions/open-licensed/huggingface-mcp-course/normalizzate.json")
 assert len({q["id"] for q in qs})==len(qs)
+# livello di fonte e citazione (site/build/cite.py -> citations.json): "blog" = nessuna frase di spec o docs
+# ufficiali la sostiene, quindi la domanda resta nella pratica ma esce dalle simulazioni d'esame
+_cp=os.path.join(ROOT,"site","build","citations.json")
+_cites=json.load(open(_cp,encoding="utf-8")) if os.path.exists(_cp) else {}
+for q in qs:
+    r=_cites.get(q["id"])
+    if r:
+        q["lvl"]=r["lvl"]
+        if r.get("text"): q["cite"]={"text":r["text"],"url":r.get("url","")}
 data={"generated":__import__("datetime").date.today().isoformat(),"spec":"2026-07-28","course":course,"questions":qs}
 json.dump(data, open(os.path.join(ROOT,"site","bank.json"),"w"), ensure_ascii=False, separators=(",",":"))
 print("questions", Counter(q["src"] for q in qs), "topics", len(topics))

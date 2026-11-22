@@ -176,16 +176,18 @@ def import_bank(force=False):
         c.execute("UPDATE questions SET active=0")
         for q in bank["questions"]:
             c.execute("""INSERT INTO questions (id,topic_id,domain_id,source,set_name,set_title,difficulty,type,
-                         stem_it,stem_en,explanation_it,explanation_en,review_json,active)
-                         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1)
+                         stem_it,stem_en,explanation_it,explanation_en,review_json,source_level,cite_json,active)
+                         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)
                          ON CONFLICT(id) DO UPDATE SET topic_id=excluded.topic_id, domain_id=excluded.domain_id,
                          source=excluded.source, set_name=excluded.set_name, set_title=excluded.set_title,
                          difficulty=excluded.difficulty, type=excluded.type, stem_it=excluded.stem_it,
                          stem_en=excluded.stem_en, explanation_it=excluded.explanation_it,
-                         explanation_en=excluded.explanation_en, review_json=excluded.review_json, active=1""",
+                         explanation_en=excluded.explanation_en, review_json=excluded.review_json,
+                         source_level=excluded.source_level, cite_json=excluded.cite_json, active=1""",
                       (q["id"], q["t"], q["dom"], q["src"], q["set"], q.get("setTitle", ""), q.get("d"), q["type"],
                        q["q"].get("it"), q["q"].get("en"), q["x"].get("it"), q["x"].get("en"),
-                       json.dumps(q["review"], ensure_ascii=False) if q.get("review") else None))
+                       json.dumps(q["review"], ensure_ascii=False) if q.get("review") else None,
+                       q.get("lvl"), json.dumps(q["cite"], ensure_ascii=False) if q.get("cite") else None))
             c.execute("DELETE FROM options WHERE question_id=?", (q["id"],))
             for i, o in enumerate(q["o"]):
                 c.execute("INSERT INTO options VALUES (?,?,?,?,?)",
@@ -218,6 +220,10 @@ def get_data(c):
                 "c": [o["idx"] for o in os_ if o["is_correct"]]}
         if q["review_json"]:
             item["review"] = json.loads(q["review_json"])
+        if q["source_level"]:
+            item["lvl"] = q["source_level"]
+        if q["cite_json"]:
+            item["cite"] = json.loads(q["cite_json"])
         qs.append(item)
     return {"spec": meta(c, "spec"), "course": course, "questions": qs}
 
