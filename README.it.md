@@ -2,7 +2,7 @@
 
 [English](README.md) · **Italiano**
 
-![Licenza MIT](https://img.shields.io/badge/licenza-MIT-green) ![Spec MCP 2026-07-28](https://img.shields.io/badge/spec%20MCP-2026--07--28-2f5bd3) ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776ab) ![Docker](https://img.shields.io/badge/docker-compose-2496ed) ![641 domande](https://img.shields.io/badge/domande-641-orange)
+![Licenza MIT](https://img.shields.io/badge/licenza-MIT-green) ![Spec MCP 2026-07-28](https://img.shields.io/badge/spec%20MCP-2026--07--28-2f5bd3) ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776ab) ![Docker](https://img.shields.io/badge/docker-compose-2496ed) ![672 domande](https://img.shields.io/badge/domande-672-orange)
 
 Progetto di studio per l'esame **MCPA (Model Context Protocol Associate)** della Linux Foundation / Agentic AI Foundation, allineato alla specifica **MCP 2026-07-28**.
 
@@ -10,7 +10,7 @@ Contiene tre cose:
 
 1. una **base di conoscenza** costruita solo su fonti ufficiali (spec, documentazione, SEP, pagine d'esame LF);
 2. un **corso** in italiano e inglese, diviso per i 5 domini d'esame;
-3. un **simulatore d'esame** web locale con 641 domande, prove a tempo, ripasso degli errori e storico dei progressi su SQLite.
+3. un **simulatore d'esame** web locale con 672 domande, prove a tempo, ripasso degli errori e storico dei progressi su SQLite.
 
 > Materiale di studio **non ufficiale**, non affiliato a Linux Foundation, AAIF o Anthropic. In caso di dubbio vale la spec. Nessuna domanda d'esame reale o "dump" è stata cercata o usata: lo vieta il LF Certification & Confidentiality Agreement.
 
@@ -106,11 +106,12 @@ Dettagli e fonti: [`sources/exam/lf-exam-page.md`](sources/exam/lf-exam-page.md)
 | **Flashcard** | **Impostazioni ed esportazione** |
 | ![Flashcard su un punto debole](docs/screenshots/flashcards.png) | ![Impostazioni con esportazione e importazione](docs/screenshots/settings.png) |
 
-### Domande (641)
+### Domande (672)
 | Set | Numero | Lingua | Licenza / origine |
 |---|---|---|---|
 | Originali | 154 | IT + EN | questo progetto |
 | Difficili (scenari, 18 a risposta multipla) | 50 | IT + EN | questo progetto |
+| Lacune di copertura (fatti della spec non ancora coperti, 8 a risposta multipla) | 31 | IT + EN | questo progetto |
 | rohitg00 / ai-engineering-from-scratch | 414 | EN | MIT: 34 quiz di lezione, diagnostico, 3 mock da 60 |
 | Hugging Face MCP course | 23 | EN | Apache 2.0, precedenti alla 2026-07-28 ed esclusi dalle prove d'esame |
 

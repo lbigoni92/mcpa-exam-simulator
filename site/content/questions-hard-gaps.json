@@ -1,0 +1,1095 @@
+[
+ {
+  "id": "o-G-D1-01",
+  "t": "D1-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una SEP propone un secondo meccanismo di autorizzazione, alternativo a quello esistente, \"per dare più scelta agli implementatori\". Quale principio di design del progetto gioca contro?",
+   "en": "A SEP proposes a second authorization mechanism, alternative to the existing one, \"to give implementers more choice\". Which project design principle argues against it?"
+  },
+  "o": [
+   {
+    "it": "Pragmatism over purity",
+    "en": "Pragmatism over purity"
+   },
+   {
+    "it": "Demonstration over deliberation",
+    "en": "Demonstration over deliberation"
+   },
+   {
+    "it": "Convergence over choice",
+    "en": "Convergence over choice"
+   },
+   {
+    "it": "Capability over compensation",
+    "en": "Capability over compensation"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Convergence over choice: in MCP ci dovrebbe essere un solo modo di risolvere un problema; più approcci paralleli frammentano l'ecosistema. Le estensioni sono il posto dove si mette alla prova la convergenza, la spec dove la si consolida.",
+   "en": "Convergence over choice: there should be one way to solve a problem in MCP; several parallel approaches fragment the ecosystem. Extensions are where convergence gets tested, the specification is where it gets committed."
+  }
+ },
+ {
+  "id": "o-G-D1-02",
+  "t": "D1-09",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Perché, secondo i design principles del progetto, un \"no\" a una nuova feature è spesso preferibile a un \"sì\"?",
+   "en": "Why, according to the project design principles, is a \"no\" to a new feature often preferable to a \"yes\"?"
+  },
+  "o": [
+   {
+    "it": "Ogni aggiunta è un impegno permanente, mentre un no lascia la porta aperta",
+    "en": "Every addition is a permanent commitment, while a no leaves the door open"
+   },
+   {
+    "it": "Le feature nuove devono prima passare 12 mesi nello stato Deprecated",
+    "en": "New features must first spend 12 months in the Deprecated state"
+   },
+   {
+    "it": "Solo l'AAIF può approvare feature nuove, i maintainer possono solo rifiutare",
+    "en": "Only AAIF can approve new features, maintainers can only reject"
+   },
+   {
+    "it": "Le feature nuove rompono sempre la retrocompatibilità con la Current",
+    "en": "New features always break backward compatibility with the Current revision"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Stability over velocity: aggiungere a un protocollo molto adottato è facile, togliere è quasi impossibile. Ogni aggiunta è permanente e ha un costo per chi implementa i client; le rimozioni seguono la Feature Lifecycle policy.",
+   "en": "Stability over velocity: adding to a widely adopted protocol is easy, removing is nearly impossible. Every addition is permanent and costs client implementers; removals follow the Feature Lifecycle policy."
+  }
+ },
+ {
+  "id": "o-G-D1-03",
+  "t": "D1-09",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali affermazioni sui design principles del progetto MCP sono corrette? (scegli 2)",
+   "en": "Which statements about the MCP project design principles are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Quando due principi sono in conflitto si bilanciano, non c'è una gerarchia",
+    "en": "When two principles conflict they are weighed, there is no ranking"
+   },
+   {
+    "it": "Sono gli stessi design principles architetturali descritti nella spec",
+    "en": "They are the same architectural design principles described in the spec"
+   },
+   {
+    "it": "I pattern nuovi conviene sperimentarli prima nelle estensioni",
+    "en": "New patterns are best tried in extensions first"
+   },
+   {
+    "it": "Valgono per i server, non per le SEP o le estensioni",
+    "en": "They apply to servers, not to SEPs or extensions"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "I principi guidano la valutazione di SEP ed estensioni, sono distinti dai design principles architetturali della spec e in caso di conflitto si bilanciano senza ordine. Standardization over innovation: si standardizzano pattern già provati, quelli nuovi si provano nelle estensioni.",
+   "en": "The principles guide how SEPs and extensions are evaluated, are distinct from the spec's architectural design principles, and when they conflict they are weighed, not ranked. Standardization over innovation: proven patterns get standardized, new ones are tried in extensions."
+  }
+ },
+ {
+  "id": "o-G-D1-04",
+  "t": "D1-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Nel testo della spec una frase dice che il client \"should retry later\", in minuscolo. Che valore normativo ha?",
+   "en": "A sentence in the spec text says the client \"should retry later\", in lowercase. What normative weight does it have?"
+  },
+  "o": [
+   {
+    "it": "È equivalente a SHOULD secondo RFC 2119",
+    "en": "It is equivalent to SHOULD under RFC 2119"
+   },
+   {
+    "it": "È equivalente a MAY, perché è in minuscolo",
+    "en": "It is equivalent to MAY, because it is lowercase"
+   },
+   {
+    "it": "È un MUST implicito, perché riguarda il client",
+    "en": "It is an implicit MUST, because it concerns the client"
+   },
+   {
+    "it": "Nessuno: le parole chiave BCP 14 valgono solo in maiuscolo",
+    "en": "None: BCP 14 keywords only apply in all capitals"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "La spec interpreta MUST, SHOULD, MAY e simili come in BCP 14 (RFC 2119 e RFC 8174) solo quando sono scritte tutte in maiuscolo. In minuscolo sono parole normali.",
+   "en": "The spec interprets MUST, SHOULD, MAY and the like as in BCP 14 (RFC 2119 and RFC 8174) only when they appear in all capitals. In lowercase they are ordinary words."
+  }
+ },
+ {
+  "id": "o-G-D1-05",
+  "t": "D1-06",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una revisione della spec è descritta come \"passata, completa, non verrà più modificata\". In che stato si trova?",
+   "en": "A spec revision is described as \"past, complete, will not be changed\". Which state is it in?"
+  },
+  "o": [
+   {
+    "it": "Draft",
+    "en": "Draft"
+   },
+   {
+    "it": "Final",
+    "en": "Final"
+   },
+   {
+    "it": "Current",
+    "en": "Current"
+   },
+   {
+    "it": "Deprecated",
+    "en": "Deprecated"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Le revisioni hanno tre stati: Draft (in lavorazione, non pronta), Current (la versione in uso, può ricevere modifiche retrocompatibili) e Final (passata e completa, non cambia più). Deprecated è uno stato delle feature, non delle revisioni.",
+   "en": "Revisions have three states: Draft (in progress, not ready), Current (in use, may receive backward-compatible changes) and Final (past and complete, never changes). Deprecated is a feature state, not a revision state."
+  }
+ },
+ {
+  "id": "o-G-D1-06",
+  "t": "D1-03",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali di questi aspetti appartengono al transport layer di MCP? (scegli 2)",
+   "en": "Which of these belong to MCP's transport layer? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Il framing dei messaggi sul canale",
+    "en": "Message framing on the channel"
+   },
+   {
+    "it": "La discovery di capability e versione",
+    "en": "Capability and version discovery"
+   },
+   {
+    "it": "L'autorizzazione della connessione",
+    "en": "Authorization of the connection"
+   },
+   {
+    "it": "Le primitive tools, resources e prompts",
+    "en": "The tools, resources and prompts primitives"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il data layer (strato interno) definisce il protocollo JSON-RPC: discovery di capability e versione, primitive e notifiche. Il transport layer (strato esterno) definisce canali, framing dei messaggi e autorizzazione.",
+   "en": "The data layer (inner) defines the JSON-RPC protocol: capability and version discovery, primitives and notifications. The transport layer (outer) defines channels, message framing and authorization."
+  }
+ },
+ {
+  "id": "o-G-D2-01",
+  "t": "D2-05",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali valori devono essere inviati in un header Mcp-Param-* con la codifica =?base64?...?=? (scegli 2)",
+   "en": "Which values must be sent in an Mcp-Param-* header with the =?base64?...?= encoding? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "La stringa \"us-west1\"",
+    "en": "The string \"us-west1\""
+   },
+   {
+    "it": "La stringa \"Città di Milano\"",
+    "en": "The string \"Città di Milano\""
+   },
+   {
+    "it": "La stringa \" padded \" con spazi iniziali e finali",
+    "en": "The string \" padded \" with leading and trailing spaces"
+   },
+   {
+    "it": "Il numero intero 42",
+    "en": "The integer 42"
+   }
+  ],
+  "c": [
+   1,
+   2
+  ],
+  "x": {
+   "it": "Vanno codificati in Base64 i valori non sicuri per un header: caratteri non ASCII, spazi iniziali o finali, caratteri di controllo come i newline, e anche un testo ASCII che somiglia al marcatore =?base64?...?=. \"us-west1\" e 42 passano in chiaro.",
+   "en": "Values unsafe for a header must be Base64-encoded: non-ASCII characters, leading or trailing spaces, control characters such as newlines, and also ASCII text that looks like the =?base64?...?= marker. \"us-west1\" and 42 go in plain text."
+  }
+ },
+ {
+  "id": "o-G-D2-02",
+  "t": "D2-05",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server riceve Mcp-Name: =?base64?Y2VyY2E=?= e nel corpo params.name vale \"cerca\". Cosa deve fare?",
+   "en": "A server receives Mcp-Name: =?base64?Y2VyY2E=?= and params.name in the body is \"cerca\". What must it do?"
+  },
+  "o": [
+   {
+    "it": "Rispondere 400 HeaderMismatch, perché le due stringhe sono diverse",
+    "en": "Answer 400 HeaderMismatch, because the two strings differ"
+   },
+   {
+    "it": "Decodificare l'header e poi confrontarlo con il corpo: qui coincidono",
+    "en": "Decode the header and then compare it with the body: here they match"
+   },
+   {
+    "it": "Ignorare l'header, perché i nomi dei tool non vanno mai codificati",
+    "en": "Ignore the header, because tool names are never encoded"
+   },
+   {
+    "it": "Rispondere 400, perché il marcatore deve essere in maiuscolo",
+    "en": "Answer 400, because the marker must be uppercase"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il server MUST decodificare un Mcp-Name o Mcp-Param-* codificato prima di confrontarlo con il valore nel corpo. I marcatori =?base64? e ?= sono case-sensitive e vanno in minuscolo. Y2VyY2E= è \"cerca\", quindi non c'è mismatch.",
+   "en": "The server MUST decode an encoded Mcp-Name or Mcp-Param-* before comparing it with the body value. The =?base64? and ?= markers are case-sensitive and lowercase. Y2VyY2E= is \"cerca\", so there is no mismatch."
+  }
+ },
+ {
+  "id": "o-G-D2-03",
+  "t": "D2-04",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Che cosa deve contenere l'header Accept di un POST JSON-RPC su Streamable HTTP?",
+   "en": "What must the Accept header of a JSON-RPC POST over Streamable HTTP contain?"
+  },
+  "o": [
+   {
+    "it": "Solo application/json, perché la risposta è un singolo oggetto",
+    "en": "Only application/json, because the response is a single object"
+   },
+   {
+    "it": "Solo text/event-stream, perché ogni risposta è uno stream SSE",
+    "en": "Only text/event-stream, because every response is an SSE stream"
+   },
+   {
+    "it": "application/json e text/event-stream, e il client deve gestirli entrambi",
+    "en": "application/json and text/event-stream, and the client must handle both"
+   },
+   {
+    "it": "application/json-rpc, il tipo registrato per MCP",
+    "en": "application/json-rpc, the type registered for MCP"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Il client MUST elencare sia application/json sia text/event-stream. Per una richiesta il server sceglie se rispondere con un singolo oggetto JSON o con uno stream SSE dedicato a quella richiesta, e il client MUST supportare entrambi.",
+   "en": "The client MUST list both application/json and text/event-stream. For a request the server chooses between a single JSON object and an SSE stream scoped to that request, and the client MUST support both."
+  }
+ },
+ {
+  "id": "o-G-D2-04",
+  "t": "D2-13",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale di questi nomi di tool rispetta tutte le raccomandazioni (SHOULD) della spec?",
+   "en": "Which of these tool names follows all the spec's recommendations (SHOULD)?"
+  },
+  "o": [
+   {
+    "it": "get user",
+    "en": "get user"
+   },
+   {
+    "it": "export,csv",
+    "en": "export,csv"
+   },
+   {
+    "it": "admin.tools.list",
+    "en": "admin.tools.list"
+   },
+   {
+    "it": "ricerca-città",
+    "en": "ricerca-città"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Nomi da 1 a 128 caratteri, case-sensitive, solo lettere ASCII, cifre, underscore, trattino e punto; niente spazi, virgole o altri caratteri speciali. \"admin.tools.list\" è proprio uno degli esempi validi della spec; \"à\" non è ASCII.",
+   "en": "Names of 1 to 128 characters, case-sensitive, only ASCII letters, digits, underscore, hyphen and dot; no spaces, commas or other special characters. \"admin.tools.list\" is one of the spec's valid examples; \"à\" is not ASCII."
+  }
+ },
+ {
+  "id": "o-G-D2-05",
+  "t": "D2-01",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Secondo l'architettura della spec, chi gestisce le decisioni di autorizzazione dell'utente e aggrega il contesto tra più server?",
+   "en": "According to the spec architecture, who handles the user's authorization decisions and aggregates context across servers?"
+  },
+  "o": [
+   {
+    "it": "Ogni client, per il proprio server",
+    "en": "Each client, for its own server"
+   },
+   {
+    "it": "L'host",
+    "en": "The host"
+   },
+   {
+    "it": "Il server più privilegiato tra quelli collegati",
+    "en": "The most privileged connected server"
+   },
+   {
+    "it": "L'authorization server OAuth",
+    "en": "The OAuth authorization server"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "L'host crea e gestisce i client, applica le policy di sicurezza e di consenso, gestisce le decisioni di autorizzazione dell'utente, coordina l'LLM e aggrega il contesto. Ogni client parla con un solo server, allega versione e capability a ogni richiesta e mantiene i confini tra server.",
+   "en": "The host creates and manages clients, enforces security and consent policies, handles the user's authorization decisions, coordinates the LLM and aggregates context. Each client talks to exactly one server, attaches version and capabilities to every request and keeps boundaries between servers."
+  }
+ },
+ {
+  "id": "o-G-D2-06",
+  "t": "D2-12",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali meccanismi suggerisce la documentazione MCP per mantenere il controllo umano sui tools? (scegli 2)",
+   "en": "Which mechanisms does the MCP documentation suggest to keep human control over tools? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Un dialog di approvazione per la singola esecuzione",
+    "en": "An approval dialog for each individual execution"
+   },
+   {
+    "it": "Un activity log con tutte le esecuzioni e i loro risultati",
+    "en": "An activity log with all executions and their results"
+   },
+   {
+    "it": "Un picker ad albero obbligatorio imposto dal protocollo",
+    "en": "A mandatory tree picker imposed by the protocol"
+   },
+   {
+    "it": "La sostituzione del modello con un elenco statico di tool",
+    "en": "Replacing the model with a static list of tools"
+   }
+  ],
+  "c": [
+   0,
+   1
+  ],
+  "x": {
+   "it": "I tools sono controllati dal modello, ma l'applicazione può offrire: scelta dei tool disponibili, dialog di approvazione per singola esecuzione, permessi per pre-approvare operazioni sicure e activity log. Il protocollo non impone una UI specifica.",
+   "en": "Tools are model-controlled, but the application can offer: choosing which tools are available, approval dialogs per execution, permissions to pre-approve safe operations and activity logs. The protocol does not mandate a specific UI."
+  }
+ },
+ {
+  "id": "o-G-D3-01",
+  "t": "D3-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client invia una notifica JSON-RPC via POST e il server la accetta. Cosa risponde il server?",
+   "en": "A client sends a JSON-RPC notification via POST and the server accepts it. What does the server answer?"
+  },
+  "o": [
+   {
+    "it": "200 OK con una risposta JSON-RPC vuota",
+    "en": "200 OK with an empty JSON-RPC response"
+   },
+   {
+    "it": "204 No Content",
+    "en": "204 No Content"
+   },
+   {
+    "it": "200 OK con uno stream SSE aperto",
+    "en": "200 OK with an open SSE stream"
+   },
+   {
+    "it": "202 Accepted senza body",
+    "en": "202 Accepted with no body"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Per una notifica accettata il server MUST rispondere 202 Accepted senza body. Le notifiche non hanno risposta JSON-RPC.",
+   "en": "For an accepted notification the server MUST answer 202 Accepted with no body. Notifications have no JSON-RPC response."
+  }
+ },
+ {
+  "id": "o-G-D3-02",
+  "t": "D3-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Il server non può accettare una notifica ricevuta via POST. Quale risposta è conforme?",
+   "en": "The server cannot accept a notification received via POST. Which answer complies?"
+  },
+  "o": [
+   {
+    "it": "Uno status di errore HTTP, ad esempio 400, con un eventuale errore JSON-RPC senza id",
+    "en": "An HTTP error status, e.g. 400, optionally with a JSON-RPC error that has no id"
+   },
+   {
+    "it": "202 Accepted subito, e poi l'errore inviato più tardi su un nuovo stream GET dedicato",
+    "en": "202 Accepted right away, then the error sent later on a new dedicated GET stream"
+   },
+   {
+    "it": "200 OK con un errore JSON-RPC che riporta l'id della notifica",
+    "en": "200 OK with a JSON-RPC error carrying the notification's id"
+   },
+   {
+    "it": "Nessuna risposta HTTP: le notifiche rifiutate si scartano in silenzio senza status",
+    "en": "No HTTP response: rejected notifications are silently dropped with no status"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Se non accetta la notifica, il server MUST restituire uno status di errore HTTP (ad esempio 400). Il body MAY contenere una risposta di errore JSON-RPC senza id, perché le notifiche non hanno id. Nella 2026-07-28 non esistono stream GET.",
+   "en": "If it cannot accept the notification, the server MUST return an HTTP error status (e.g. 400). The body MAY contain a JSON-RPC error response with no id, because notifications have no id. In 2026-07-28 there are no GET streams."
+  }
+ },
+ {
+  "id": "o-G-D3-03",
+  "t": "D3-17",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un client chiede suggerimenti per l'argomento di un prompt chiamato code_review. Quale riferimento usa in completion/complete?",
+   "en": "A client asks for suggestions for an argument of a prompt named code_review. Which reference does it use in completion/complete?"
+  },
+  "o": [
+   {
+    "it": "{\"type\": \"ref/tool\", \"name\": \"code_review\"}",
+    "en": "{\"type\": \"ref/tool\", \"name\": \"code_review\"}"
+   },
+   {
+    "it": "{\"type\": \"ref/prompt\", \"name\": \"code_review\"}",
+    "en": "{\"type\": \"ref/prompt\", \"name\": \"code_review\"}"
+   },
+   {
+    "it": "{\"type\": \"ref/resource\", \"name\": \"code_review\"}",
+    "en": "{\"type\": \"ref/resource\", \"name\": \"code_review\"}"
+   },
+   {
+    "it": "{\"type\": \"ref/argument\", \"uri\": \"code_review\"}",
+    "en": "{\"type\": \"ref/argument\", \"uri\": \"code_review\"}"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Esistono due tipi di riferimento: ref/prompt (un prompt per nome) e ref/resource (un URI o un URI template). La completion non si applica ai tool.",
+   "en": "There are two reference types: ref/prompt (a prompt by name) and ref/resource (a URI or URI template). Completion does not apply to tools."
+  }
+ },
+ {
+  "id": "o-G-D3-04",
+  "t": "D3-17",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Per un argomento ci sono 350 valori possibili. Cosa restituisce al massimo il server in una risposta di completion?",
+   "en": "An argument has 350 possible values. What does the server return at most in one completion response?"
+  },
+  "o": [
+   {
+    "it": "Tutti i 350 valori, ordinati per rilevanza",
+    "en": "All 350 values, ranked by relevance"
+   },
+   {
+    "it": "Un cursor per paginare i valori con completion/list",
+    "en": "A cursor to page through values with completion/list"
+   },
+   {
+    "it": "Fino a 100 valori, con il totale opzionale e un flag di altri risultati",
+    "en": "Up to 100 values, with an optional total and a more-results flag"
+   },
+   {
+    "it": "Solo il valore più probabile, come fa l'autocompletamento",
+    "en": "Only the most likely value, like autocomplete"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "La risposta contiene un array di valori ordinati per rilevanza, con un massimo di 100 elementi, il numero totale opzionale e un booleano che indica se ci sono altri risultati.",
+   "en": "The response contains an array of values ranked by relevance, at most 100 items, an optional total and a boolean saying whether more results exist."
+  }
+ },
+ {
+  "id": "o-G-D3-05",
+  "t": "D3-18",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Durante una elicitation l'utente chiude il dialog con Esc senza scegliere. Quale action restituisce il client?",
+   "en": "During an elicitation the user closes the dialog with Escape without choosing. Which action does the client return?"
+  },
+  "o": [
+   {
+    "it": "decline, con content vuoto",
+    "en": "decline, with empty content"
+   },
+   {
+    "it": "accept, con i valori di default dello schema",
+    "en": "accept, with the schema's default values"
+   },
+   {
+    "it": "Un errore JSON-RPC -32800",
+    "en": "A JSON-RPC error -32800"
+   },
+   {
+    "it": "cancel, di solito senza content",
+    "en": "cancel, usually without content"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Tre azioni: accept (l'utente approva e invia i dati), decline (rifiuta esplicitamente, es. \"No\") e cancel (chiude senza una scelta esplicita: Esc, clic fuori, dialog chiuso). Il server dovrebbe gestire cancel ad esempio richiedendo più tardi.",
+   "en": "Three actions: accept (the user approves and submits data), decline (explicitly rejects, e.g. \"No\") and cancel (dismisses without an explicit choice: Escape, click outside, dialog closed). The server should handle cancel e.g. by asking again later."
+  }
+ },
+ {
+  "id": "o-G-D3-06",
+  "t": "D3-18",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali formati può avere una proprietà string nel requestedSchema di una elicitation in form mode? (scegli 2)",
+   "en": "Which formats can a string property have in a form-mode elicitation requestedSchema? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "email",
+    "en": "email"
+   },
+   {
+    "it": "phone",
+    "en": "phone"
+   },
+   {
+    "it": "date-time",
+    "en": "date-time"
+   },
+   {
+    "it": "ipv4",
+    "en": "ipv4"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Per le stringhe la spec ammette i formati email, uri, date e date-time. Lo schema è piatto e contiene solo primitive.",
+   "en": "For strings the spec allows the email, uri, date and date-time formats. The schema is flat and contains only primitives."
+  }
+ },
+ {
+  "id": "o-G-D3-07",
+  "t": "D3-18",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una richiesta di elicitation non specifica il campo mode. Come va interpretata?",
+   "en": "An elicitation request does not set the mode field. How should it be interpreted?"
+  },
+  "o": [
+   {
+    "it": "Come form mode",
+    "en": "As form mode"
+   },
+   {
+    "it": "Come url mode",
+    "en": "As url mode"
+   },
+   {
+    "it": "Come richiesta non valida: mode è obbligatorio",
+    "en": "As an invalid request: mode is required"
+   },
+   {
+    "it": "Il client sceglie liberamente il mode",
+    "en": "The client freely picks the mode"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "mode vale form o url ed è opzionale per il form mode: se manca vale \"form\". Allo stesso modo, la capability elicitation: {} equivale al supporto del solo form mode.",
+   "en": "mode is form or url and is optional for form mode: when omitted it defaults to \"form\". Likewise, the elicitation: {} capability means form mode only."
+  }
+ },
+ {
+  "id": "o-G-D3-08",
+  "t": "D3-11",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un tool ha name \"db_query\", annotations.title \"Query DB\" e title \"Esegui query\". Quale nome dovrebbe mostrare il client all'utente?",
+   "en": "A tool has name \"db_query\", annotations.title \"Query DB\" and title \"Run query\". Which name should the client show the user?"
+  },
+  "o": [
+   {
+    "it": "db_query, perché name è l'identificativo stabile e va sempre mostrato",
+    "en": "db_query, because name is the stable identifier and must always be shown"
+   },
+   {
+    "it": "Query DB, perché le annotations hanno la precedenza",
+    "en": "Query DB, because annotations take precedence"
+   },
+   {
+    "it": "Esegui query, perché title viene prima di annotations.title e di name",
+    "en": "Run query, because title comes before annotations.title and name"
+   },
+   {
+    "it": "Tutti e tre insieme, separati da una barra, perché nessuno ha la precedenza",
+    "en": "All three together, separated by a slash, because none takes precedence"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "L'ordine di precedenza per il display name dei tool è: title, poi annotations.title, poi name. name resta l'identificativo usato in tools/call.",
+   "en": "The display name precedence for tools is: title, then annotations.title, then name. name remains the identifier used in tools/call."
+  }
+ },
+ {
+  "id": "o-G-D3-09",
+  "t": "D3-15",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una resource ha annotations audience [\"user\"] e priority 1.0. Cosa comunica?",
+   "en": "A resource has annotations audience [\"user\"] and priority 1.0. What does it convey?"
+  },
+  "o": [
+   {
+    "it": "È destinata all'utente ed è la più importante, in pratica necessaria",
+    "en": "It is meant for the user and is the most important, effectively required"
+   },
+   {
+    "it": "È destinata al modello e va inclusa sempre nel prompt",
+    "en": "It is meant for the model and must always be in the prompt"
+   },
+   {
+    "it": "Può essere letta solo da utenti autenticati con priorità alta",
+    "en": "Only authenticated users with high priority can read it"
+   },
+   {
+    "it": "Il server la invierà per prima nelle notifiche di aggiornamento",
+    "en": "The server will send it first in update notifications"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "Le annotations sono suggerimenti per il client: audience indica a chi serve (user, assistant o entrambi), priority va da 0 (del tutto opzionale) a 1 (la più importante, in pratica necessaria), lastModified è un timestamp ISO 8601. Non sono controlli di accesso.",
+   "en": "Annotations are hints for the client: audience says who it is for (user, assistant or both), priority goes from 0 (entirely optional) to 1 (most important, effectively required), lastModified is an ISO 8601 timestamp. They are not access controls."
+  }
+ },
+ {
+  "id": "o-G-D4-01",
+  "t": "D4-18",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "L'autore di un server locale è onesto, ma un pacchetto nel suo albero di dipendenze viene compromesso. Quale contromisura protegge davvero da questo caso?",
+   "en": "A local server's author is honest, but a package in its dependency tree gets compromised. Which countermeasure really protects against this case?"
+  },
+  "o": [
+   {
+    "it": "Fissare la versione del pacchetto principale con npx o uvx",
+    "en": "Pinning the top-level package version with npx or uvx"
+   },
+   {
+    "it": "Fissare l'immagine container per digest (image@sha256:...)",
+    "en": "Pinning the container image by digest (image@sha256:...)"
+   },
+   {
+    "it": "Controllare che il nome del pacchetto non sia un typosquat",
+    "en": "Checking that the package name is not a typosquat"
+   },
+   {
+    "it": "Approvare il server una sola volta al primo avvio",
+    "en": "Approving the server once at first launch"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Con npx o uvx il pin fissa solo il pacchetto principale: le dipendenze transitive si risolvono di nuovo all'installazione, ed è lì che arriva una dipendenza compromessa. Un'immagine fissata per digest congela tutto l'albero.",
+   "en": "With npx or uvx the pin fixes only the top-level package: transitive dependencies are resolved fresh at install time, which is exactly where a compromised dependency arrives. An image pinned by digest freezes the whole tree."
+  }
+ },
+ {
+  "id": "o-G-D4-02",
+  "t": "D4-18",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un server locale ha firme verificate, un SBOM e compare in un catalogo curato. Cosa garantiscono questi segnali?",
+   "en": "A local server has verified signatures, an SBOM and appears in a curated catalog. What do these signals guarantee?"
+  },
+  "o": [
+   {
+    "it": "Che il server non esfiltrerà dati",
+    "en": "That the server will not exfiltrate data"
+   },
+   {
+    "it": "Che il catalogo si assume la responsabilità di ciò che esegui",
+    "en": "That the catalog takes responsibility for what you run"
+   },
+   {
+    "it": "Che si può saltare la sandbox",
+    "en": "That the sandbox can be skipped"
+   },
+   {
+    "it": "Di chi ti stai fidando, non che la fiducia sia meritata",
+    "en": "Who you are trusting, not that the trust is warranted"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "Nessun controllo prova cosa farà un server. Provenienza (repository, firme, SBOM, listing curati) dice di chi ti fidi; il contenimento (privilegi minimi, sandbox) decide quanto costa una scelta sbagliata. I cataloghi curati descrivono il loro vetting come best-effort.",
+   "en": "No check proves what a server will do. Provenance (repository, signatures, SBOM, curated listings) tells you who you are trusting; containment (least privilege, sandbox) decides what a bad choice costs. Curated catalogs describe their vetting as best-effort."
+  }
+ },
+ {
+  "id": "o-G-D4-03",
+  "t": "D4-16",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "La descrizione di un tool del server A contiene istruzioni nascoste su come usare il tool send_email del server B. Il tool di A non viene mai chiamato. Quali affermazioni sono corrette? (scegli 2)",
+   "en": "A tool description on server A hides instructions on how to use server B's send_email tool. A's tool is never called. Which statements are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "L'attacco può funzionare anche se il tool di A non viene mai invocato",
+    "en": "The attack can work even though A's tool is never invoked"
+   },
+   {
+    "it": "Non è un rischio: i server sono isolati e non vedono i tool degli altri",
+    "en": "It is not a risk: servers are isolated and cannot see each other's tools"
+   },
+   {
+    "it": "È un caso di tool shadowing, una forma di tool poisoning",
+    "en": "It is a case of tool shadowing, a form of tool poisoning"
+   },
+   {
+    "it": "Un pin della versione del server A lo impedisce in modo definitivo",
+    "en": "Pinning server A's version prevents it for good"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Nomi e descrizioni dei tool sono istruzioni lette dal modello: un catalogo avvelenato orienta l'agente senza che il tool venga chiamato, anche sui tool di altri server (tool shadowing). Tutti i server condividono il contesto del modello, e le definizioni possono cambiare dopo l'approvazione (rug pull), quindi pin e consenso iniziale non bastano.",
+   "en": "Tool names and descriptions are instructions the model reads: a poisoned catalog steers the agent without the tool being called, including on other servers' tools (tool shadowing). All servers share the model context, and definitions can change after approval (rug pull), so pinning and one-time consent are not enough."
+  }
+ },
+ {
+  "id": "o-G-D4-04",
+  "t": "D4-08",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Quale valore del parametro resource identifica correttamente un server MCP secondo la spec?",
+   "en": "Which resource parameter value correctly identifies an MCP server according to the spec?"
+  },
+  "o": [
+   {
+    "it": "mcp.example.com/mcp",
+    "en": "mcp.example.com/mcp"
+   },
+   {
+    "it": "https://mcp.example.com/mcp",
+    "en": "https://mcp.example.com/mcp"
+   },
+   {
+    "it": "https://mcp.example.com/mcp#tools",
+    "en": "https://mcp.example.com/mcp#tools"
+   },
+   {
+    "it": "mcp://mcp.example.com/mcp",
+    "en": "mcp://mcp.example.com/mcp"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Il canonical URI (RFC 8707) deve avere lo scheme e non può contenere un fragment; meglio senza slash finale, salvo che sia significativo. Un path è ammesso quando serve a identificare il server.",
+   "en": "The canonical URI (RFC 8707) must have a scheme and cannot contain a fragment; preferably without a trailing slash unless it is meaningful. A path is allowed when it is needed to identify the server."
+  }
+ },
+ {
+  "id": "o-G-D4-05",
+  "t": "D4-09",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali comportamenti di un client MCP sui refresh token sono corretti? (scegli 2)",
+   "en": "Which MCP client behaviors around refresh tokens are correct? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Tenere i refresh token riservati in transito e a riposo",
+    "en": "Keeping refresh tokens confidential in transit and at rest"
+   },
+   {
+    "it": "Dare per scontato che l'AS emetta sempre un refresh token",
+    "en": "Assuming the AS always issues a refresh token"
+   },
+   {
+    "it": "Inviare il refresh token al server MCP insieme all'access token",
+    "en": "Sending the refresh token to the MCP server along with the access token"
+   },
+   {
+    "it": "Non contare sul refresh token: l'AS decide se emetterlo",
+    "en": "Not relying on a refresh token: the AS decides whether to issue it"
+   }
+  ],
+  "c": [
+   0,
+   3
+  ],
+  "x": {
+   "it": "Il client MUST tenere i refresh token riservati, SHOULD dichiarare refresh_token nei grant_types, MAY chiedere offline_access se l'AS lo supporta e MUST NOT dare per scontato di riceverli. Il server MCP riceve solo l'access token.",
+   "en": "The client MUST keep refresh tokens confidential, SHOULD declare refresh_token in grant_types, MAY request offline_access if the AS supports it and MUST NOT assume it will receive them. The MCP server only receives the access token."
+  }
+ },
+ {
+  "id": "o-G-D5-01",
+  "t": "D5-07",
+  "d": 3,
+  "type": "multi",
+  "q": {
+   "it": "Quali server vengono rimossi dal registry ufficiale MCP secondo la moderation policy? (scegli 2)",
+   "en": "Which servers does the official MCP registry remove under its moderation policy? (choose 2)"
+  },
+  "o": [
+   {
+    "it": "Un server che contiene malware, anche se a scopo di ricerca",
+    "en": "A server containing malware, even for research purposes"
+   },
+   {
+    "it": "Un server con una vulnerabilità di sicurezza nota",
+    "en": "A server with a known security vulnerability"
+   },
+   {
+    "it": "Lo stesso server pubblicato più volte con nomi diversi",
+    "en": "The same server published several times under different names"
+   },
+   {
+    "it": "Un server che fa la stessa cosa di un altro già presente",
+    "en": "A server that does the same as one already listed"
+   }
+  ],
+  "c": [
+   0,
+   2
+  ],
+  "x": {
+   "it": "Il registry è volutamente permissivo: rimuove contenuti illegali, malware, spam (come duplicati con nomi diversi) e server non funzionanti. Non rimuove server di bassa qualità, con vulnerabilità o duplicati funzionali: la moderazione più fine spetta ai subregistry.",
+   "en": "The registry is permissive on purpose: it removes illegal content, malware, spam (such as duplicates under different names) and non-functioning servers. It does not remove low-quality, vulnerable or functionally duplicate servers: finer moderation belongs to subregistries."
+  }
+ },
+ {
+  "id": "o-G-D5-02",
+  "t": "D5-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Un publisher vuole pubblicare nel registry un server remoto. Quale scelta per remotes[].type è corretta?",
+   "en": "A publisher wants to list a remote server in the registry. Which choice for remotes[].type is correct?"
+  },
+  "o": [
+   {
+    "it": "Solo \"sse\", perché è il transport più diffuso",
+    "en": "Only \"sse\", because it is the most widespread transport"
+   },
+   {
+    "it": "\"stdio\", indicando l'URL nel campo command",
+    "en": "\"stdio\", with the URL in the command field"
+   },
+   {
+    "it": "\"websocket\", per avere comunicazione bidirezionale",
+    "en": "\"websocket\", for bidirectional communication"
+   },
+   {
+    "it": "\"streamable-http\"; \"sse\" solo per supportare client esistenti",
+    "en": "\"streamable-http\"; \"sse\" only to support existing clients"
+   }
+  ],
+  "c": [
+   3
+  ],
+  "x": {
+   "it": "I server remoti dovrebbero usare Streamable HTTP. Il transport SSE è deprecato: si pubblica un remote \"sse\" solo per i client esistenti, eventualmente in parallelo su un URL diverso.",
+   "en": "Remote servers should use Streamable HTTP. The SSE transport is deprecated: publish an \"sse\" remote only for existing clients, possibly side by side at a different URL."
+  }
+ },
+ {
+  "id": "o-G-D5-03",
+  "t": "D5-07",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Il registry rimuove un server per malware. Che cosa succede ai suoi metadata?",
+   "en": "The registry removes a server for malware. What happens to its metadata?"
+  },
+  "o": [
+   {
+    "it": "Vengono cancellati subito e l'API risponde 404",
+    "en": "They are deleted at once and the API answers 404"
+   },
+   {
+    "it": "Lo status diventa \"deleted\", ma restano leggibili dall'API",
+    "en": "The status becomes \"deleted\", but they stay readable via the API"
+   },
+   {
+    "it": "Passano a un subregistry di quarantena",
+    "en": "They move to a quarantine subregistry"
+   },
+   {
+    "it": "Restano invariati: decide il package registry upstream",
+    "en": "They stay unchanged: the upstream package registry decides"
+   }
+  ],
+  "c": [
+   1
+  ],
+  "x": {
+   "it": "Alla rimozione lo status del server diventa \"deleted\", ma i metadata restano accessibili dall'API del registry; gli aggregatori possono poi toglierlo dai loro indici. Solo in casi estremi (metadata illeciti) vengono sovrascritti o cancellati.",
+   "en": "On removal the server's status becomes \"deleted\", but its metadata stays accessible via the registry API; aggregators may then drop it from their indexes. Only in extreme cases (unlawful metadata) is it overwritten or erased."
+  }
+ },
+ {
+  "id": "o-G-D5-04",
+  "t": "D5-15",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Perché un host può mostrare una MCP App di un server di terze parti senza fidarsi del tutto del suo autore?",
+   "en": "Why can a host render a third-party server's MCP App without fully trusting its author?"
+  },
+  "o": [
+   {
+    "it": "Perché il registry ufficiale verifica il codice di ogni MCP App pubblicata",
+    "en": "Because the official registry verifies the code of every published MCP App"
+   },
+   {
+    "it": "Perché le MCP App girano solo su server locali stdio, mai su server remoti",
+    "en": "Because MCP Apps only run on local stdio servers, never on remote ones"
+   },
+   {
+    "it": "Perché gira in un iframe sandbox: niente accesso alla pagina host o ai cookie",
+    "en": "Because it runs in a sandboxed iframe: no access to the host page or cookies"
+   },
+   {
+    "it": "Perché l'app non può chiamare i tool del server né ricevere dati dall'host",
+    "en": "Because the app cannot call the server's tools or receive data from the host"
+   }
+  ],
+  "c": [
+   2
+  ],
+  "x": {
+   "it": "Le MCP App girano in un iframe sandbox controllato dall'host, con CSP deny-by-default: non accedono alla pagina padre, non rubano cookie e non escono dal contenitore. Possono comunque chiamare i tool del server e delegare azioni all'host, con il consenso dell'utente.",
+   "en": "MCP Apps run in a host-controlled sandboxed iframe with a deny-by-default CSP: they cannot access the parent page, steal cookies or escape their container. They can still call the server's tools and delegate actions to the host, with user consent."
+  }
+ },
+ {
+  "id": "o-G-D5-05",
+  "t": "D5-10",
+  "d": 2,
+  "type": "single",
+  "q": {
+   "it": "Una pipeline CI notturna deve chiamare tool MCP senza nessun utente presente. Quale soluzione indica la documentazione ufficiale?",
+   "en": "A nightly CI pipeline must call MCP tools with no user present. Which solution does the official documentation point to?"
+  },
+  "o": [
+   {
+    "it": "L'estensione OAuth Client Credentials, preferibilmente con JWT bearer assertion",
+    "en": "The OAuth Client Credentials extension, preferably with a JWT bearer assertion"
+   },
+   {
+    "it": "Il flusso authorization code con PKCE, salvando il token dell'ultimo utente",
+    "en": "The authorization code flow with PKCE, storing the last user's token"
+   },
+   {
+    "it": "Disattivare l'autorizzazione per gli IP della pipeline",
+    "en": "Disabling authorization for the pipeline's IPs"
+   },
+   {
+    "it": "Un token personale di uno sviluppatore passato come variabile",
+    "en": "A developer's personal token passed as a variable"
+   }
+  ],
+  "c": [
+   0
+  ],
+  "x": {
+   "it": "OAuth Client Credentials serve per servizi in background, CI/CD, integrazioni server-to-server e daemon: il client si autentica con credenziali dell'applicazione (JWT bearer assertion, RFC 7523, raccomandata, oppure client secret). Se c'è un utente che deve autorizzare, si usa il flusso standard.",
+   "en": "OAuth Client Credentials is for background services, CI/CD, server-to-server integrations and daemons: the client authenticates with application credentials (a JWT bearer assertion, RFC 7523, recommended, or a client secret). If a user must authorize, use the standard flow."
+  }
+ }
+]

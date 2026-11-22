@@ -2,11 +2,11 @@
 
 **English** · [Italiano](README.it.md)
 
-![MIT license](https://img.shields.io/badge/license-MIT-green) ![MCP spec 2026-07-28](https://img.shields.io/badge/MCP%20spec-2026--07--28-2f5bd3) ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776ab) ![Docker](https://img.shields.io/badge/docker-compose-2496ed) ![641 questions](https://img.shields.io/badge/questions-641-orange)
+![MIT license](https://img.shields.io/badge/license-MIT-green) ![MCP spec 2026-07-28](https://img.shields.io/badge/MCP%20spec-2026--07--28-2f5bd3) ![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776ab) ![Docker](https://img.shields.io/badge/docker-compose-2496ed) ![672 questions](https://img.shields.io/badge/questions-672-orange)
 
 A free, open-source **practice exam simulator and study course for the MCPA certification (Model Context Protocol Associate)** from the Linux Foundation and the Agentic AI Foundation (AAIF). It is aligned with the **MCP specification 2026-07-28** (stateless protocol, MRTR, subscriptions/listen, Tasks extension, OAuth authorization).
 
-- **641 practice questions** with explanations, including 60-question / 90-minute **mock exams** weighted by the official exam domains.
+- **672 practice questions** with explanations, including 60-question / 90-minute **mock exams** weighted by the official exam domains.
 - **Course** with 75 topics across the 5 MCPA domains, in **English and Italian**, each linked to the official MCP documentation.
 - **Wrong answer? You get the theory** for that topic right away, with a link to the full course page.
 - **Progress tracking** in a local SQLite database: score history, per-domain trends, weakest topics, spaced review of mistakes, confidence and timing analysis.
