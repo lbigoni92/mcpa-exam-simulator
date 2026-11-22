@@ -8,6 +8,7 @@ A free, open-source **practice exam simulator and study course for the MCPA cert
 
 - **672 practice questions** with explanations, including 60-question / 90-minute **mock exams** weighted by the official exam domains.
 - **Course** with 75 topics across the 5 MCPA domains, in **English and Italian**, each linked to the official MCP documentation.
+- **Every answer cites its source:** the exact sentence of the 2026-07-28 specification or the official docs that justifies it, with a link and a source level (spec, docs, blog). Questions only a blog post supports stay in practice but never enter a mock exam.
 - **Wrong answer? You get the theory** for that topic right away, with a link to the full course page.
 - **Progress tracking** in a local SQLite database: score history, per-domain trends, weakest topics, spaced review of mistakes, confidence and timing analysis.
 - **Adaptive exam and flashcards** built on your weak points; export and import of your progress from the Settings page.
@@ -102,7 +103,7 @@ browser ──HTTP──► server.py (Python standard library: http.server + sq
 ```
 - **Frontend:** vanilla JavaScript single-page app, no build step, hand-made SVG charts.
 - **Backend:** `server.py`, standard library only, listens on `127.0.0.1`, checks `Host` and `Origin` against DNS rebinding, scores answers server-side, optional password login when deployed online.
-- **Content pipeline:** course and questions in `site/content/*.json` → `python site/build/build_data.py` → `site/bank.json`. Run `python site/build/check_consistency.py` to validate structure, EN/IT parity and the database import.
+- **Content pipeline:** course and questions in `site/content/*.json` → `python site/build/build_data.py` → `site/bank.json`. Citations: `python site/build/cite.py` (then `build_data.py` again), manual fixes in `site/build/citation_overrides.json`. `python site/build/check_sources.py` compares `sources/` with the official repositories. Run `python site/build/check_consistency.py` to validate structure, EN/IT parity and the database import.
 - **Environment variables:** `MCPA_PORT` (8765), `MCPA_BIND` (127.0.0.1), `MCPA_DB`, `MCPA_NO_BROWSER`; for a private online copy `MCPA_PASSWORD` (enables the login) and `MCPA_PUBLIC_HOST`.
 - **Online, just for you (optional):** password-protected deploy to Fly.io (`site/fly.toml`) or Render free (`render.yaml`, kept awake by an UptimeRobot check on `/healthz`; save progress with export/import). Step-by-step guide (Italian) in [`DEPLOY.md`](DEPLOY.md). Local use stays password-free.
 

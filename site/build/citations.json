@@ -3,14 +3,14 @@
 "text": "MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem of development tools. In a similar way, MCP standardizes how to integrate additional context and tools into the ecosystem of AI applications.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 86.9,
+"score": 86.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "o-D1-02": {
 "text": "MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem of development tools. In a similar way, MCP standardizes how to integrate additional context and tools into the ecosystem of AI applications.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 103.2,
+"score": 103.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "o-D1-03": {
@@ -38,14 +38,14 @@
 "text": "Each client is created by the host and communicates with exactly one server:",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 55.6,
+"score": 54.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "o-D1-07": {
 "text": "Enforces security policies and consent requirements",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 58.7,
+"score": 58.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "o-D1-08": {
@@ -59,70 +59,70 @@
 "text": "Prompts | User-controlled | Interactive templates invoked by user choice | Slash commands, menu options",
 "src": "spec-2026-07-28/server/index.md",
 "lvl": "spec",
-"score": 78.8,
+"score": 78.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server"
 },
 "o-D1-10": {
 "text": "Tools in MCP are designed to be model-controlled, meaning that the language model can discover and invoke tools automatically based on its contextual understanding and the user's prompts.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 67.9,
+"score": 67.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D1-11": {
 "text": "Resource templates allow servers to expose parameterized resources using URI templates. Arguments may be auto-completed through the completion API. This operation supports pagination and caching.",
 "src": "spec-2026-07-28/server/resources.md",
 "lvl": "spec",
-"score": 88.9,
+"score": 88.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
 },
 "o-D1-12": {
 "text": "Servers should not be able to read the whole conversation, nor \"see into\" other servers - Servers receive only necessary contextual information - Full conversation history stays with the host - Each server maintains isolation - Cross-server interactions are controlled by the host - Host process enforces security boundaries",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 127.9,
+"score": 127.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "o-D1-13": {
 "text": "Servers should be extremely easy to build",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 50.8,
+"score": 51.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "o-D1-14": {
 "text": "The Model Context Protocol uses string-based version identifiers following the format `YYYY-MM-DD`, to indicate the last date backwards incompatible changes were made.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 72.4,
+"score": 72.3,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "o-D1-15": {
 "text": "Individual features of the specification may additionally be marked as Deprecated under the feature lifecycle and deprecation policy: the feature remains part of the specification, but is scheduled for removal. Deprecated features document a migration path (or state that none is required) and remain in the specification for at least twelve months, or at least ninety days under the policy's expedited-removal exception, before they become eligible for removal, after which they may be Removed in a future revision.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 97.8,
+"score": 97.7,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "o-D1-16": {
 "text": "Modern: protocol versions that convey version, identity, and capabilities as per-request metadata (revision `2026-07-28` and later). - Legacy: protocol versions that establish a session with an `initialize` handshake (`2025-11-25` and earlier). - Dual-era: an implementation that supports both modern and legacy versions.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 98.7,
+"score": 98.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "o-D1-17": {
 "text": "MCP provides foundational primitives: resources, tools, and prompts. We don't add protocol features for use cases that can be constructed from these existing building blocks. This keeps the surface area small and implementations simple. Extensions like MCP Apps and Tasks capture the patterns that emerge.",
 "src": "community/design-principles.md",
 "lvl": "docs",
-"score": 73.2,
+"score": 73.0,
 "url": "https://modelcontextprotocol.io/community/design-principles"
 },
 "o-D1-18": {
 "text": "MCP values working implementations over theoretical debates, and evidence from real usage over hypothetical arguments. We encourage contributors to prototype rather than design by committee. A SEP needs a working prototype before it can be accepted.",
 "src": "community/design-principles.md",
 "lvl": "docs",
-"score": 86.1,
+"score": 86.0,
 "url": "https://modelcontextprotocol.io/community/design-principles"
 },
 "o-D1-19": {
@@ -157,7 +157,7 @@
 "text": "*New feature: URL mode elicitation is introduced in the `2025-11-25` version of the MCP specification. Its design and implementation may change in future protocol revisions.",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 69.4,
+"score": 69.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-D1-24": {
@@ -178,7 +178,7 @@
 "text": "Make MCP stateless: remove the `initialize`/`notifications/initialized` handshake. Every request now carries its protocol version and client capabilities in `_meta` (`io.modelcontextprotocol/protocolVersion`, `io.modelcontextprotocol/clientCapabilities`). Clients SHOULD identify themselves on each request (`io.modelcontextprotocol/clientInfo`), and servers SHOULD identify themselves in each result's `_meta` (`io.modelcontextprotocol/serverInfo`). Version mismatches return `UnsupportedProtocolVersionError` (SEP-2575).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 66.5,
+"score": 66.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "o-D2-03": {
@@ -192,35 +192,35 @@
 "text": "`supportedVersions`: Protocol versions the server supports. The client should choose one of these for subsequent requests. - `capabilities`: Capabilities the server supports (tools, resources, prompts, etc.) - `_meta['io.modelcontextprotocol/serverInfo']`: Name and version of the server software. Servers SHOULD include this field. - `instructions`: Optional natural-language guidance for LLMs on how to use this server effectively",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 57.2,
+"score": 57.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "o-D2-05": {
 "text": "*For STDIO-based servers: Never write to stdout. Writing to stdout will corrupt the JSON-RPC messages and break your server. The `print()` function writes to stdout by default, so keep it out of a STDIO server entirely.",
 "src": "docs/develop/build-server.md",
 "lvl": "docs",
-"score": 76.5,
+"score": 76.4,
 "url": "https://modelcontextprotocol.io/docs/develop/build-server"
 },
 "o-D2-06": {
 "text": "The client cancels it — close the SSE stream (HTTP) or send `notifications/cancelled` referencing the `subscriptions/listen` request ID (stdio). - The server tears it down (e.g., during shutdown) — it SHOULD send a successful `subscriptions/listen` response to signal a graceful end (see Graceful Closure), then close the stream. - The underlying transport closes (HTTP timeout, TCP disconnect, stdio process exit).",
 "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
 "lvl": "spec",
-"score": 73.2,
+"score": 73.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
 },
 "o-D2-07": {
 "text": "Every POST request to the MCP endpoint MUST include an `MCP-Protocol-Version` header.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 70.3,
+"score": 70.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D2-08": {
 "text": "HTTP GET or DELETE to the MCP endpoint: respond with `405 Method Not Allowed`. - An `Mcp-Session-Id` header on a request: ignore it, and do not mint or echo session IDs. - A `Last-Event-ID` header: ignore it; streams are not resumable.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 112.2,
+"score": 112.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D2-09": {
@@ -234,7 +234,7 @@
 "text": "A required standard header (`MCP-Protocol-Version`, `Mcp-Method`, `Mcp-Name`) is missing. - A header value does not match the corresponding request body value. For headers that permit the Base64 sentinel encoding (`Mcp-Name` and `Mcp-Param-{Name}`), servers MUST decode encoded values (see Value Encoding) before comparing them to the body value. - A header value contains invalid characters.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 87.9,
+"score": 88.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D2-11": {
@@ -248,42 +248,42 @@
 "text": "Tool name uniqueness is scoped to a single server. Clients or proxies that aggregate tools from multiple servers MAY encounter naming collisions (for example, two servers each exposing a `search` tool) and SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 84.7,
+"score": 84.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D2-13": {
 "text": "Default dialect: When a schema does not include a `$schema` field, it defaults to JSON Schema 2020-12",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 77.9,
+"score": 78.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D2-14": {
 "text": "JSON Schema 2020-12 permits `$ref` to point at an absolute URI. Implementations MUST NOT automatically dereference `$ref` values that resolve to a network URI.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 83.0,
+"score": 82.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D2-15": {
 "text": "However, `com.example.mcp/` is NOT reserved, as the second label is `example`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 100.2,
+"score": 99.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D2-16": {
 "text": "`serverInfo` is self-reported by the server and is not verified by the protocol. It is intended for display, logging, and debugging. Clients SHOULD NOT use it to change their behavior, and SHOULD NOT rely on it for security decisions.",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 79.0,
+"score": 78.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "o-D2-17": {
 "text": "For backwards compatibility, a tool that returns structured content SHOULD also return the serialized JSON in a TextContent block.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 66.5,
+"score": 66.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D2-18": {
@@ -304,21 +304,21 @@
 "text": "For a skill whose entry carries `resources`, the host already holds a complete manifest of the skill's files (Resources); a directory read tells it nothing about that skill's contents that the entry did not. Directory reading earns its place elsewhere: for dynamically generated skills, whose `resources` is `\"dynamic\"`; for resource trees that are not skills at all; and for obtaining the server's current view of a directory without first refreshing the entry. When a host acting on a skill with a manifest wants to know what `templates/` contains, it MAY answer from the entry alone.",
 "src": "seps/2640-skills-extension.md",
 "lvl": "docs",
-"score": 58.5,
+"score": 58.2,
 "url": "https://modelcontextprotocol.io/seps/2640-skills-extension"
 },
 "o-D2-21": {
 "text": "If one side supports an extension but the other doesn't, the supporting side needs to either fall back to core protocol behavior or reject the request with an appropriate error if the extension is mandatory.",
 "src": "extensions/overview.md",
 "lvl": "docs",
-"score": 98.5,
+"score": 98.4,
 "url": "https://modelcontextprotocol.io/extensions/overview"
 },
 "o-D2-22": {
 "text": "Prompts | User-controlled | Interactive templates invoked by user choice | Slash commands, menu options",
 "src": "spec-2026-07-28/server/index.md",
 "lvl": "spec",
-"score": 78.1,
+"score": 78.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server"
 },
 "o-D3-01": {
@@ -346,7 +346,7 @@
 "text": "For brevity, the request examples on this page omit the `_meta` request metadata (`io.modelcontextprotocol/protocolVersion`, `io.modelcontextprotocol/clientInfo`, and `io.modelcontextprotocol/clientCapabilities`). Every request MUST include the required `_meta` fields; see `_meta`.",
 "src": "spec-2026-07-28/server/prompts.md",
 "lvl": "spec",
-"score": 65.3,
+"score": 65.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "o-D3-05": {
@@ -360,28 +360,28 @@
 "text": "MCP has no protocol-level session, so a server cannot rely on implicit per-connection state to relate one tool call to the next. Servers that need to maintain state across calls — a shopping cart, an open browser context, a database transaction — should do so by returning an explicit handle from a creation tool and accepting that handle as an argument on subsequent calls.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 79.3,
+"score": 79.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D3-07": {
 "text": "In both cases, a recognized modern JSON-RPC error (such as `UnsupportedProtocolVersionError`) identifies a modern server: the client retries with a supported version rather than falling back. Anything else identifies a legacy server.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 112.9,
+"score": 113.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "o-D3-08": {
 "text": "Dual-era | Legacy | Works. stdio: the probe returns a non-modern error or times out, and the client falls back to `initialize`. HTTP: the modern request returns a `4xx` without a recognized modern error body, and the client falls back to `initialize` (and possibly further to the deprecated HTTP+SSE transport).",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 113.7,
+"score": 113.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "o-D3-09": {
 "text": "`Mcp-Name` | `params.name` or `params.uri` | `tools/call`, `resources/read`, `prompts/get` requests",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 61.8,
+"score": 61.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D3-10": {
@@ -402,7 +402,7 @@
 "text": "Servers MUST NOT send an `inputRequests` that the client has not declared support for in its capabilities. For example, if a client does not declare support for `elicitation`, the server MUST NOT include any `elicitation/create` requests in the `inputRequests` field.",
 "src": "spec-2026-07-28/basic/patterns/mrtr.md",
 "lvl": "spec",
-"score": 91.3,
+"score": 91.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr"
 },
 "o-D3-13": {
@@ -416,7 +416,7 @@
 "text": "Long-lived notification streams are obtained by sending a [`subscriptions/listen`][subscriptions-listen] request. The server's response is itself an SSE stream that stays open and delivers the change notifications the client opted in to (such as `notifications/tools/list_changed` or `notifications/resources/updated`). Request-scoped notifications like `notifications/progress` and `notifications/message` are not delivered on the listen stream — they flow only on the response stream of the request they relate to.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 68.1,
+"score": 68.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D3-15": {
@@ -437,7 +437,7 @@
 "text": "The `progress` value MUST increase with each notification, even if the total is unknown. - The `progress` and the `total` values MAY be floating point. - The `message` field SHOULD provide relevant human readable progress information.",
 "src": "spec-2026-07-28/basic/patterns/progress.md",
 "lvl": "spec",
-"score": 105.4,
+"score": 105.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress"
 },
 "o-D3-18": {
@@ -451,35 +451,35 @@
 "text": "`\"private\"` | The response contains private data that is not meant to be shared between callers. Cached responses MAY be reused for the same authorization context. Caches MUST NOT be shared across authorization contexts (e.g. a different access token requires a different cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 62.4,
+"score": 62.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "o-D3-20": {
 "text": "Each primitive type has associated methods for discovery (`*/list`), and for either retrieval (`resources/read`, `prompts/get`) or execution (`tools/call`). MCP clients will use the `*/list` methods to discover available primitives. For example, a client can list the available tools (`tools/list`), provide them to a model, and execute the ones that the model calls (`tools/call`). This design allows listings to be dynamic.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 56.2,
+"score": 55.9,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "o-D3-21": {
 "text": "Treat a missing `nextCursor` as the end of results",
 "src": "spec-2026-07-28/server/utilities/pagination.md",
 "lvl": "spec",
-"score": 60.9,
+"score": 61.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination"
 },
 "o-D3-22": {
 "text": "`-32002` — resource not found (2025-11-25 and earlier; replaced by `-32602`). Clients SHOULD still accept `-32002` from servers implementing earlier versions. - `-32042` — URL elicitation required (2025-11-25 only).",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 79.1,
+"score": 79.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D3-23": {
 "text": "`-32020` | `HeaderMismatch` | The HTTP headers do not match the corresponding values in the request body, or required headers are missing/malformed.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 54.9,
+"score": 55.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D3-24": {
@@ -493,7 +493,7 @@
 "text": "MCP tool errors arrive as a successful response with `isError: true` rather than a transport failure. Generated wrappers should convert this into a thrown exception so model-authored code can use `try`/`catch`. If an uncaught error terminates the script, surface it as the script's result so the model can self-correct; the model is responsible for reporting any partial side effects already committed.",
 "src": "docs/develop/clients/client-best-practices.md",
 "lvl": "docs",
-"score": 70.9,
+"score": 70.7,
 "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
 },
 "o-D3-26": {
@@ -507,7 +507,7 @@
 "text": "If the server does not implement the requested RPC method, it MUST respond with `404 Not Found` and a JSON-RPC error with code `-32601` (`Method not found`). The JSON-RPC error body distinguishes this case from a `404` returned by a legacy [HTTP+SSE][http-sse] server that does not host the modern MCP endpoint (see Backward Compatibility).",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 190.5,
+"score": 190.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D3-28": {
@@ -521,14 +521,14 @@
 "text": "Servers SHOULD return tools in a deterministic order (i.e., the same ordering across requests when the underlying set of tools has not changed). Deterministic ordering enables clients to reliably cache the tool list and improves LLM prompt cache hit rates when tools are included in model context.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 71.9,
+"score": 71.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D3-30": {
 "text": "*Structured content is returned as a JSON value in the `structuredContent` field of a result. This can be any JSON value (object, array, string, number, boolean, or null) that conforms to the tool's `outputSchema` if one is defined.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 64.1,
+"score": 63.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-D3-31": {
@@ -556,7 +556,7 @@
 "text": "Before returning a `CreateTaskResult`, verify that the client included the extension in its per-request capabilities. Never return a task to a client that did not declare support.",
 "src": "extensions/tasks/overview.md",
 "lvl": "docs",
-"score": 50.7,
+"score": 50.8,
 "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
 },
 "o-D3-35": {
@@ -570,14 +570,14 @@
 "text": "`resources/templates/list` - List resource templates",
 "src": "spec-2026-07-28/server/utilities/pagination.md",
 "lvl": "spec",
-"score": 48.2,
+"score": 48.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination"
 },
 "o-D3-37": {
 "text": "Missing required arguments: `-32602` (Invalid params)",
 "src": "spec-2026-07-28/server/prompts.md",
 "lvl": "spec",
-"score": 94.7,
+"score": 94.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "o-D3-38": {
@@ -591,7 +591,7 @@
 "text": "Credentials obtained via URL mode elicitation are distinct from the MCP server credentials used by the MCP client. The MCP server MUST NOT transmit credentials obtained through URL mode elicitation to the MCP client.",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 81.2,
+"score": 81.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-D3-40": {
@@ -605,7 +605,7 @@
 "text": "Sampling | SEP-2577 | `2026-07-28` | Integrate directly with LLM provider APIs | First revision released on or after 2027-07-28",
 "src": "spec-2026-07-28/deprecated.md",
 "lvl": "spec",
-"score": 84.4,
+"score": 84.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated"
 },
 "o-D3-42": {
@@ -619,21 +619,21 @@
 "text": "Tool Safety - Tools represent arbitrary code execution and must be treated with appropriate caution. - In particular, descriptions of tool behavior such as annotations should be considered untrusted, unless obtained from a trusted server. - Hosts must obtain explicit user consent before invoking any tool - Users should understand what each tool does before authorizing its use",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 165.7,
+"score": 165.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "o-D4-02": {
 "text": "Tool Safety - Tools represent arbitrary code execution and must be treated with appropriate caution. - In particular, descriptions of tool behavior such as annotations should be considered untrusted, unless obtained from a trusted server. - Hosts must obtain explicit user consent before invoking any tool - Users should understand what each tool does before authorizing its use",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 109.8,
+"score": 109.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "o-D4-03": {
 "text": "MCP provides an Authorization framework for use with HTTP. Implementations using an HTTP-based transport SHOULD conform to this specification, whereas implementations using STDIO transport SHOULD NOT follow this specification, and instead retrieve credentials from the environment.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 63.1,
+"score": 63.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D4-04": {
@@ -647,22 +647,22 @@
 "text": "Audience. Your MCP server must reject tokens that weren't issued for it. The `resource` value from the client should become the token's audience, which is the `aud` claim in a JWT. Some products need a setting for this, or let you configure the audience on a scope instead. Others always use their own identifier. In that case, compare the audience with that identifier, and keep your server's URL as the PRM `resource`. The identifier must belong to this MCP server only, so don't share one application registration between servers.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 69.2,
+"score": 69.3,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "o-D4-06": {
 "text": "The Security Best Practices document outlines why token audience validation is crucial and why token passthrough is explicitly forbidden.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 76.7,
+"score": 76.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "o-D4-07": {
-"text": "MCP servers MUST implement the OAuth 2.0 Protected Resource Metadata (RFC9728) specification to indicate the locations of authorization servers. The Protected Resource Metadata document returned by the MCP server MUST include the `authorization_servers` field containing at least one authorization server.",
-"src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
-"lvl": "spec",
-"score": 94.8,
-"url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
+"text": "The `resource_metadata` URL from the `WWW-Authenticate` header 2. The `authorization_servers` URLs from the Protected Resource Metadata document 3. The `token_endpoint`, `authorization_endpoint`, and other URLs from Authorization Server Metadata",
+"src": "docs/tutorials/security/security_best_practices.md",
+"lvl": "docs",
+"score": 94.7,
+"url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "o-D4-08": {
 "text": "The discovery approach is based on RFC 8414 Section 3.1 \"Authorization Server Metadata Request\" for OAuth 2.0 Authorization Server Metadata discovery and RFC 8414 Section 5 \"Compatibility Notes\" for OpenID Connect Discovery 1.0 interoperability.",
@@ -703,7 +703,7 @@
 "text": "Clients that use pre-registered credentials, or persist client credentials obtained via Dynamic Client Registration, MUST associate those credentials with the specific authorization server that issued them, keyed by the authorization server's `issuer` identifier. When the authorization server changes (detected via updated protected resource metadata), clients MUST NOT reuse client credentials from a different authorization server and MUST re-register with the new authorization server.",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 61.0,
+"score": 61.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "o-D4-14": {
@@ -731,21 +731,21 @@
 "text": "An attacker that controls one of the authorization servers an MCP client interacts with may attempt to have the client send it an authorization code or token issued by a different, honest authorization server (a mix-up attack, described in RFC9207 Section 1). Authorization Response Validation specifies the required mitigation.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 75.6,
+"score": 75.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "o-D4-18": {
 "text": "For the purposes of this specification, the canonical URI of an MCP server is defined as the resource identifier as specified in RFC 8707 Section 2 and aligns with the `resource` parameter in RFC 9728.",
 "src": "spec-2026-07-28/basic/authorization/index.md",
 "lvl": "spec",
-"score": 76.1,
+"score": 75.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
 },
 "o-D4-19": {
 "text": "The client sends the access token in the `Authorization` header of every HTTP request, and never in the URL:",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 70.8,
+"score": 71.0,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "o-D4-20": {
@@ -759,21 +759,21 @@
 "text": "MCP proxy server uses a static client ID with a third-party authorization server - MCP proxy server allows MCP clients to dynamically register (each getting their own client_id) - The third-party authorization server sets a consent cookie after the first authorization - MCP proxy server does not implement proper per-client consent before forwarding to third-party authorization",
 "src": "docs/tutorials/security/security_best_practices.md",
 "lvl": "docs",
-"score": 111.0,
+"score": 110.7,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "o-D4-22": {
 "text": "The mitigations described above, such as blocking private IP ranges and using egress proxies, apply equally to authorization servers fetching client metadata documents. See Server Side Request Forgery (SSRF) Attacks in the Client ID Metadata Document specification for further guidance.",
 "src": "docs/tutorials/security/security_best_practices.md",
 "lvl": "docs",
-"score": 55.7,
+"score": 55.6,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "o-D4-23": {
 "text": "Important: URL mode elicitation is *not* for authorizing the MCP client's access to the MCP server (that's handled by MCP authorization). Instead, it's used when the MCP server needs to obtain sensitive information or third-party authorization on behalf of the user. The MCP client's bearer token remains unchanged. The client's only responsibility is to provide the user with context about the elicitation URL the server wants them to open.",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 45.7,
+"score": 45.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-D4-24": {
@@ -822,7 +822,7 @@
 "text": "Simon Willison's lethal trifecta names three capabilities that, when combined, create the conditions for data theft: access to private data, exposure to untrusted content, and the ability to externally communicate. The attack is simple: LLMs follow instructions in content, and they can't reliably tell a user's instructions apart from ones an attacker embedded in a web page, email, or calendar event. If the agent has all three capabilities, an attacker who controls one piece of untrusted content can trick the model into reading private data and sending it out.",
 "src": "blog/2026-03-16-tool-annotations.md",
 "lvl": "blog",
-"score": 65.1,
+"score": 64.7,
 "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/"
 },
 "o-D4-31": {
@@ -843,14 +843,14 @@
 "text": "Your real security decisions happen before launch: what you install (provenance) and how you run it (isolation). The stdio transport is not a sandbox. - If you run a server at reduced privilege, that boundary is yours to enforce — a container, sandbox, or VM, as described below.",
 "src": "docs/tutorials/security/local-server-security.md",
 "lvl": "docs",
-"score": 62.3,
+"score": 60.9,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
 },
 "o-D4-34": {
 "text": "As an exception to the prefix requirement above, the keys `traceparent`, `tracestate`, and `baggage` are reserved for OpenTelemetry trace context propagation. When present, their values MUST follow W3C Trace Context and W3C Baggage formats respectively.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 93.2,
+"score": 93.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-D4-35": {
@@ -864,21 +864,21 @@
 "text": "Deprecated: The Sampling feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to integrating directly with LLM provider APIs. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 65.2,
+"score": 65.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "o-D4-37": {
 "text": "Formalize PR-based SEP workflow with markdown files in `seps/` directory, PR-derived numbering, sponsor responsibilities, and status management via PR labels (SEP-1850).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 54.4,
+"score": 54.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "o-D5-01": {
 "text": "Audience. Your MCP server must reject tokens that weren't issued for it. The `resource` value from the client should become the token's audience, which is the `aud` claim in a JWT. Some products need a setting for this, or let you configure the audience on a scope instead. Others always use their own identifier. In that case, compare the audience with that identifier, and keep your server's URL as the PRM `resource`. The identifier must belong to this MCP server only, so don't share one application registration between servers.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 55.1,
+"score": 55.2,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "o-D5-02": {
@@ -892,14 +892,14 @@
 "text": "Enterprise-Managed Authorization solves this by introducing the organization's IdP as the authoritative decision-maker. The IdP controls which MCP servers employees can access, and under what conditions. Employees authenticate with their corporate identity — the same credentials they use for email, Slack, and other work tools — and the IdP grants or denies MCP server access based on organizational policy.",
 "src": "extensions/auth/enterprise-managed-authorization.md",
 "lvl": "docs",
-"score": 68.5,
+"score": 68.6,
 "url": "https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization"
 },
 "o-D5-04": {
 "text": "MCP will be a founding project of the newly created Agentic AI Foundation (AAIF), a directed fund under the Linux Foundation, co-founded by Anthropic, Block and OpenAI, with support from Google, Microsoft, AWS, Cloudflare and Bloomberg to advance open-source innovation in agentic AI.",
 "src": "blog/2025-12-09-mcp-joins-agentic-ai-foundation.md",
 "lvl": "blog",
-"score": 107.1,
+"score": 106.8,
 "url": "https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/"
 },
 "o-D5-05": {
@@ -913,7 +913,7 @@
 "text": "*Remote Streamable HTTP is the default for anything wrapping a cloud API. Zero install friction, one deployment serves all users, and OAuth flows work properly because the server can handle redirects and token storage. The reference skill includes scaffolds for Cloudflare Workers and portable Express/FastMCP setups.",
 "src": "docs/develop/build-with-agent-skills.md",
 "lvl": "docs",
-"score": 61.5,
+"score": 61.4,
 "url": "https://modelcontextprotocol.io/docs/develop/build-with-agent-skills"
 },
 "o-D5-07": {
@@ -941,28 +941,28 @@
 "text": "This walks one concrete topology from the upstream source to the agent's reaction, using webhook delivery through a forward proxy. The MCP server wraps the GitHub API. It receives pull request activity from GitHub through GitHub's native repository webhooks, which is the _upstream_ channel and is outside this extension, and delivers it to a forward proxy through an MCP webhook (`events/subscribe`). The proxy buffers events and serves them to the client over poll or push. When an event arrives, the client SDK wakes the LLM agent.",
 "src": "seps/3415-events-extension.md",
 "lvl": "docs",
-"score": 58.8,
+"score": 58.7,
 "url": "https://modelcontextprotocol.io/seps/3415-events-extension"
 },
 "o-D5-11": {
 "text": "Progressive discovery is best used when tool definitions take large parts of the context window. For a small set of tools with tool definitions taking up a small part of the context window, loading all tools is fine. Once the tool definitions take up a significant part of the available context window, clients should switch to progressive discovery. We recommend that clients implement thresholds to determine when to switch:",
 "src": "docs/develop/clients/client-best-practices.md",
 "lvl": "docs",
-"score": 66.6,
+"score": 66.3,
 "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
 },
 "o-D5-12": {
 "text": "*Step 2: The model writes code against these APIs. Rather than making separate tool calls with full results flowing through context between them, the model writes a single script. Consider a task like \"find all error logs from the past hour and file a ticket for each unique error.\" With direct tool calling, thousands of log entries would flow through the model's context. With code, the model filters in the sandbox:",
 "src": "docs/develop/clients/client-best-practices.md",
 "lvl": "docs",
-"score": 61.6,
+"score": 61.0,
 "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
 },
 "o-D5-13": {
 "text": "MCP Apps | `io.modelcontextprotocol/ui` | Interactive HTML interfaces rendered inline in the conversation",
 "src": "extensions/client-matrix.md",
 "lvl": "docs",
-"score": 42.9,
+"score": 42.0,
 "url": "https://modelcontextprotocol.io/extensions/client-matrix"
 },
 "o-D5-14": {
@@ -976,14 +976,14 @@
 "text": "Poll | `events/poll` | The client asks for new events at the interval the server recommends. The server holds no per-client state. | Stateless and serverless servers, simple clients",
 "src": "extensions/events/overview.md",
 "lvl": "docs",
-"score": 71.8,
+"score": 71.9,
 "url": "https://modelcontextprotocol.io/extensions/events/overview"
 },
 "o-D5-16": {
 "text": "Ordering per subscription. For poll and push, events within a single subscription are delivered in the order the server produces them. For webhook, delivery order is best-effort: each event is retried independently, so concurrent requests and retries can reorder arrivals. The safe-watermark cursor in each payload makes the cursor safe to persist regardless of arrival order. Clients that need ordering use the `timestamp` field. No ordering is guaranteed across subscriptions in any mode.",
 "src": "seps/3415-events-extension.md",
 "lvl": "docs",
-"score": 92.2,
+"score": 91.8,
 "url": "https://modelcontextprotocol.io/seps/3415-events-extension"
 },
 "o-D5-17": {
@@ -1004,21 +1004,21 @@
 "text": "This inconsistency means clients cannot reliably detect resource-not-found conditions across implementations. Of the 8 SDKs with built-in resource handling, four different error codes are used: `-32002` (C#, Rust, Java, Go, PHP), `-32602` (TypeScript), `-32603` (Kotlin), and `0` (Python). Ruby and Swift leave error handling to the server implementor. Clients that need to distinguish \"resource not found\" from other errors must handle all variants.",
 "src": "seps/2164-resource-not-found-error.md",
 "lvl": "docs",
-"score": 59.6,
+"score": 59.5,
 "url": "https://modelcontextprotocol.io/seps/2164-resource-not-found-error"
 },
 "o-D5-20": {
 "text": "Issue Triage | Within 2 business days | Within a month | No requirement",
 "src": "community/sdk-tiers.md",
 "lvl": "docs",
-"score": 69.0,
+"score": 69.1,
 "url": "https://modelcontextprotocol.io/community/sdk-tiers"
 },
 "o-D5-21": {
 "text": "Tier 1 to Tier 2: any conformance test fails.",
 "src": "community/sdk-tiers.md",
 "lvl": "docs",
-"score": 64.1,
+"score": 64.3,
 "url": "https://modelcontextprotocol.io/community/sdk-tiers"
 },
 "o-D5-22": {
@@ -1039,7 +1039,7 @@
 "text": "Server metadata is generally immutable, except for the `status` field which may be updated to, e.g., `\"deprecated\"` or `\"deleted\"`. We recommend that aggregators keep their copy of each server's `status` up to date.",
 "src": "registry/registry-aggregators.md",
 "lvl": "docs",
-"score": 68.2,
+"score": 68.1,
 "url": "https://modelcontextprotocol.io/registry/registry-aggregators"
 },
 "o-D5-25": {
@@ -1053,7 +1053,7 @@
 "text": "Reading `SKILL.md` through `resources/read` does not itself activate a skill. To load the skill, the host routes the read through its skill-loading path, which verifies the content and applies any required user approval before loading it into model context.",
 "src": "extensions/skills/overview.md",
 "lvl": "docs",
-"score": 68.2,
+"score": 67.6,
 "url": "https://modelcontextprotocol.io/extensions/skills/overview"
 },
 "o-D5-27": {
@@ -1067,7 +1067,7 @@
 "text": "This revision of the core protocol defines no client-to-server _notifications_ over Streamable HTTP. The only client-sent notification in the core protocol, `notifications/cancelled`, is used only on the stdio transport; on Streamable HTTP, closing the SSE response stream is itself the cancellation signal and no `notifications/cancelled` message is expected (see [Cancellation][cancellation]). The notification rules above describe the transport mechanics for a notification POST; header requirements for notification POSTs are not defined by this revision.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 95.3,
+"score": 95.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-D5-29": {
@@ -1081,42 +1081,42 @@
 "text": "Extensions are where convergence gets tested; the specification is where it gets committed.",
 "src": "community/design-principles.md",
 "lvl": "docs",
-"score": 101.9,
+"score": 102.1,
 "url": "https://modelcontextprotocol.io/community/design-principles"
 },
 "o-G-D1-02": {
 "text": "Adding to a protocol as widely adopted as MCP is easy. Removing from it is nearly impossible. Every addition is a permanent commitment and a cost for client implementers to support. We move deliberately, knowing that \"no\" today leaves the door open while \"yes\" closes it forever. We optimize for decades, not quarters. Removal, when it happens, follows Feature Lifecycle and Deprecation.",
 "src": "community/design-principles.md",
 "lvl": "docs",
-"score": 171.3,
+"score": 171.1,
 "url": "https://modelcontextprotocol.io/community/design-principles"
 },
 "o-G-D1-03": {
 "text": "These principles guide how we evaluate protocol proposals, weigh tradeoffs, and evolve MCP. They apply to Specification Enhancement Proposals (SEPs) and extensions, and are distinct from the specification's architectural design principles, which describe how servers and clients are built. Core Maintainers cite them when accepting or rejecting SEPs. A proposal that cuts against a principle should say so and argue why. When two principles conflict, they are weighed against each other, not ranked.",
 "src": "community/design-principles.md",
 "lvl": "docs",
-"score": 128.3,
+"score": 128.1,
 "url": "https://modelcontextprotocol.io/community/design-principles"
 },
 "o-G-D1-04": {
 "text": "The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"NOT RECOMMENDED\", \"MAY\", and \"OPTIONAL\" in this document are to be interpreted as described in BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all capitals, as shown here.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 114.0,
+"score": 113.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "o-G-D1-05": {
 "text": "Draft: in-progress specifications, not yet ready for consumption. - Current: the current protocol version, which is ready for use and may continue to receive backwards compatible changes. - Final: past, complete specifications that will not be changed.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 108.1,
+"score": 107.8,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "o-G-D1-06": {
 "text": "Transport layer: Defines the communication mechanisms and channels that enable data exchange between clients and servers, including transport-specific connection establishment, message framing, and authorization.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 100.3,
+"score": 100.2,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "o-G-D2-01": {
@@ -1130,7 +1130,7 @@
 "text": "The prefix `=?base64?` and suffix `?=` indicate that the value is Base64-encoded. These markers are case-sensitive and MUST appear exactly as shown (lowercase). Servers and intermediaries that need to inspect these values MUST decode them accordingly. In particular, servers MUST decode an encoded `Mcp-Name` or `Mcp-Param-{Name}` value before comparing it to the corresponding request body value during Server Validation.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 142.4,
+"score": 142.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-G-D2-03": {
@@ -1144,14 +1144,14 @@
 "text": "Tool names SHOULD be between 1 and 128 characters in length (inclusive). - Tool names SHOULD be considered case-sensitive. - The following SHOULD be the only allowed characters: uppercase and lowercase ASCII letters (A-Z, a-z), digits (0-9), underscore (\\_), hyphen (-), and dot (.) - Tool names SHOULD NOT contain spaces, commas, or other special characters. - Tool names SHOULD be unique within a server. - Example valid tool names: - `getUser` - `DATA_EXPORT_v2` - `admin.tools.list`",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 191.5,
+"score": 191.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-G-D2-05": {
 "text": "The Model Context Protocol (MCP) follows a client-host-server architecture where each host can run multiple client instances. MCP is a stateless protocol: every request is self-contained and carries its own protocol version and capabilities. This architecture enables users to integrate AI capabilities across applications while maintaining clear security boundaries and isolating concerns. Built on JSON-RPC, MCP provides a protocol focused on context exchange between clients and servers.",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 104.9,
+"score": 104.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "o-G-D2-06": {
@@ -1172,49 +1172,49 @@
 "text": "Intermediaries MUST return an appropriate HTTP error status (e.g., `400 Bad Request`) for validation failures but are not required to return a JSON-RPC error response.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 101.0,
+"score": 100.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-G-D3-03": {
 "text": "`ref/prompt` | References a prompt by name | `{\"type\": \"ref/prompt\", \"name\": \"code_review\"}`",
 "src": "spec-2026-07-28/server/utilities/completion.md",
 "lvl": "spec",
-"score": 108.7,
+"score": 108.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion"
 },
 "o-G-D3-04": {
 "text": "Servers return an array of completion values ranked by relevance, with:",
 "src": "spec-2026-07-28/server/utilities/completion.md",
 "lvl": "spec",
-"score": 81.7,
+"score": 81.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion"
 },
 "o-G-D3-05": {
 "text": "Cancel (`action: \"cancel\"`): User dismissed without making an explicit choice",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 82.9,
+"score": 83.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-G-D3-06": {
 "text": "Supported formats: `email`, `uri`, `date`, `date-time`",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 96.6,
+"score": 96.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-G-D3-07": {
 "text": "`mode` | string | `form`, `url` | The mode of the elicitation. Optional for form mode (defaults to `\"form\"` if omitted).",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 100.5,
+"score": 99.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-G-D3-08": {
 "text": "`title`: A human-readable display name for the tool that clients can show to users",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 62.3,
+"score": 62.1,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "o-G-D3-09": {
@@ -1235,14 +1235,14 @@
 "text": "Before the mitigations, one fact that shapes them all: no check proves what a server will do. The protocol cannot guarantee that a server is what it claims or does only what it promises. Provenance signals — a readable repository, signatures, an SBOM, a curated listing — tell you who you are trusting, not that the trust is warranted, and short of auditing and building every release yourself, you cannot verify behavior in advance.",
 "src": "docs/tutorials/security/local-server-security.md",
 "lvl": "docs",
-"score": 153.1,
+"score": 152.9,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
 },
 "o-G-D4-03": {
 "text": "Installing a server is not the last trust decision. At runtime, the server sends your client its tool names and descriptions, and the model reads them as instructions — an injection surface that install-time review does not cover.",
 "src": "docs/tutorials/security/local-server-security.md",
 "lvl": "docs",
-"score": 69.9,
+"score": 69.8,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/local-server-security"
 },
 "o-G-D4-04": {
@@ -1256,14 +1256,14 @@
 "text": "MUST keep refresh tokens confidential in transit and storage as specified in OAuth 2.1 Section 4.3",
 "src": "spec-2026-07-28/basic/authorization/index.md",
 "lvl": "spec",
-"score": 92.5,
+"score": 92.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
 },
 "o-G-D5-01": {
 "text": "*TL;DR: The MCP Registry is quite permissive! We only remove illegal content, malware, spam, and completely broken servers.",
 "src": "registry/moderation-policy.md",
 "lvl": "docs",
-"score": 99.6,
+"score": 99.5,
 "url": "https://modelcontextprotocol.io/registry/moderation-policy"
 },
 "o-G-D5-02": {
@@ -1277,14 +1277,14 @@
 "text": "When we remove a server, we set the server's `status` to `\"deleted\"`, but the server's metadata remains accessible via the MCP Registry API. Aggregators may then remove the server from their indexes.",
 "src": "registry/moderation-policy.md",
 "lvl": "docs",
-"score": 111.4,
+"score": 111.5,
 "url": "https://modelcontextprotocol.io/registry/moderation-policy"
 },
 "o-G-D5-04": {
 "text": "MCP Apps run in a sandboxed iframe, which provides strong isolation from the host application. The sandbox prevents your app from accessing the parent window's DOM, reading the host's cookies or local storage, navigating the parent page, or executing scripts in the parent context.",
 "src": "extensions/apps/overview.md",
 "lvl": "docs",
-"score": 98.7,
+"score": 97.0,
 "url": "https://modelcontextprotocol.io/extensions/apps/overview"
 },
 "o-G-D5-05": {
@@ -1298,7 +1298,7 @@
 "text": "Deprecated: The Roots feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to passing directories or files via tool parameters, resource URIs, or server configuration. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/roots.md",
 "lvl": "spec",
-"score": 107.9,
+"score": 107.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/roots"
 },
 "o-H-D1-02": {
@@ -1326,14 +1326,14 @@
 "text": "Clients using the Streamable HTTP transport MUST reject tool definitions where any `x-mcp-header` value violates these constraints. Rejection means the client MUST exclude the invalid tool from the result of `tools/list`. Clients SHOULD log a warning when rejecting a tool definition, including the tool name and the reason for rejection. This ensures that a single malformed tool definition does not prevent other valid tools from being used. Clients using other transports (e.g., stdio) MAY ignore `x-mcp-header` annotations entirely.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 141.4,
+"score": 141.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-H-D2-02": {
 "text": "`Mcp-Name` | `params.name` or `params.uri` | `tools/call`, `resources/read`, `prompts/get` requests",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 96.1,
+"score": 95.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "o-H-D2-03": {
@@ -1354,21 +1354,21 @@
 "text": "For backwards compatibility, a tool that returns structured content SHOULD also return the serialized JSON in a TextContent block.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 74.6,
+"score": 74.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-H-D2-06": {
 "text": "Tool name uniqueness is scoped to a single server. Clients or proxies that aggregate tools from multiple servers MAY encounter naming collisions (for example, two servers each exposing a `search` tool) and SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 115.9,
+"score": 115.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-H-D2-07": {
 "text": "JSON Schema 2020-12 permits `$ref` to point at an absolute URI. Implementations MUST NOT automatically dereference `$ref` values that resolve to a network URI.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 82.3,
+"score": 82.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "o-H-D3-01": {
@@ -1396,14 +1396,14 @@
 "text": "Interim results with `resultType: \"input_required\"` (see multi round-trip requests) are not cacheable and carry no caching hints.",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 102.1,
+"score": 102.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "o-H-D3-05": {
 "text": "A cached response is identified by the request method together with the request parameters that affect the result (for example, the `uri` for `resources/read`, or the `cursor` for paginated list requests). Clients MUST NOT serve a cached response for a request whose method or parameters differ from the request that produced it.",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 97.7,
+"score": 97.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "o-H-D3-06": {
@@ -1417,28 +1417,28 @@
 "text": "Due to network latency, cancellation notifications may arrive after request processing has completed, and potentially after a response has already been sent.",
 "src": "spec-2026-07-28/basic/patterns/cancellation.md",
 "lvl": "spec",
-"score": 81.9,
+"score": 81.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation"
 },
 "o-H-D3-08": {
 "text": "A server MUST send `notifications/cancelled` referencing a `subscriptions/listen` request ID when it tears down that subscription stream (see [Subscriptions][subscriptions]). Servers MUST NOT send `notifications/cancelled` for any other purpose.",
 "src": "spec-2026-07-28/basic/patterns/cancellation.md",
 "lvl": "spec",
-"score": 156.3,
+"score": 156.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/cancellation"
 },
 "o-H-D3-09": {
 "text": "The client sends a `subscriptions/listen` request with a `notifications` filter specifying which event types it wants to receive. The server MUST NOT send notification types the client has not explicitly requested.",
 "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
 "lvl": "spec",
-"score": 91.4,
+"score": 91.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
 },
 "o-H-D3-10": {
 "text": "Language models can learn from tool input validation error messages and retry a tools/call with corrected parameters accordingly, but only if they receive the error feedback in their context window. Protocol Errors are catch at the application level by the MCP Client. Only Tool Execution Errors are forwarded back to the model as JSON-RPC responses. With the current specifications, models cannot see these error messages and thus cannot self-correct, leading to repeated failures and poor user experiences.",
 "src": "seps/1303-input-validation-errors-as-tool-execution-errors.md",
 "lvl": "docs",
-"score": 85.3,
+"score": 85.0,
 "url": "https://modelcontextprotocol.io/seps/1303-input-validation-errors-as-tool-execution-errors"
 },
 "o-H-D3-11": {
@@ -1459,28 +1459,28 @@
 "text": "Mid-flight input. If the task moves to `input_required`, the `tasks/get` response includes an `inputRequests` map with elicitations or other server requests. The client fulfills these via `tasks/update`.",
 "src": "extensions/tasks/overview.md",
 "lvl": "docs",
-"score": 93.4,
+"score": 93.5,
 "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
 },
 "o-H-D3-14": {
 "text": "Remove `ping`, `logging/setLevel`, and `notifications/roots/list_changed`. Log level is now set per-request via `io.modelcontextprotocol/logLevel` in `_meta`; servers MUST NOT emit `notifications/message` for requests that did not include this field (SEP-2575).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 107.4,
+"score": 107.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "o-H-D3-15": {
 "text": "To simplify client user experience, form mode elicitation schemas are limited to flat objects with primitive properties only.",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 118.5,
+"score": 117.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "o-H-D4-01": {
 "text": "The client should then start a step-up authorization flow. It requests the scopes in the challenge together with the scopes it requested before, and it should limit how often it retries.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 80.6,
+"score": 80.7,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "o-H-D4-02": {
@@ -1494,14 +1494,14 @@
 "text": "OAuth 2.0 Authorization Server Metadata with path insertion: `https://auth.example.com/.well-known/oauth-authorization-server/tenant1` 2. OpenID Connect Discovery 1.0 with path insertion: `https://auth.example.com/.well-known/openid-configuration/tenant1` 3. OpenID Connect Discovery 1.0 path appending: `https://auth.example.com/tenant1/.well-known/openid-configuration`",
 "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
 "lvl": "spec",
-"score": 130.6,
+"score": 130.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
 },
 "o-H-D4-04": {
 "text": "After retrieving a metadata document, MCP clients MUST validate it as required by RFC8414 Section 3.3 or OpenID Connect Discovery Section 4.3: the `issuer` value in the document MUST be identical to the issuer identifier used to construct the well-known URL. If they differ, the client MUST NOT use the metadata. For example, a document fetched from `https://attacker.example/.well-known/oauth-authorization-server` that contains `\"issuer\": \"https://honest.example\"` MUST be rejected.",
 "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
 "lvl": "spec",
-"score": 160.2,
+"score": 160.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
 },
 "o-H-D4-05": {
@@ -1522,14 +1522,14 @@
 "text": "If the MCP server makes requests to upstream APIs, it may act as an OAuth client to them. The access token used at the upstream API is a separate token, issued by the upstream authorization server. The MCP server MUST NOT pass through the token it received from the MCP client.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 92.0,
+"score": 91.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "o-H-D4-08": {
 "text": "Simon Willison's lethal trifecta names three capabilities that, when combined, create the conditions for data theft: access to private data, exposure to untrusted content, and the ability to externally communicate. The attack is simple: LLMs follow instructions in content, and they can't reliably tell a user's instructions apart from ones an attacker embedded in a web page, email, or calendar event. If the agent has all three capabilities, an attacker who controls one piece of untrusted content can trick the model into reading private data and sending it out.",
 "src": "blog/2026-03-16-tool-annotations.md",
 "lvl": "blog",
-"score": 68.5,
+"score": 68.3,
 "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/"
 },
 "o-H-D4-09": {
@@ -1543,14 +1543,14 @@
 "text": "For trust & safety and security, clients MUST consider tool annotations to be untrusted unless they come from trusted servers.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 75.9,
+"score": 75.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "o-H-D4-11": {
 "text": "A `cacheScope` of `\"public\"` indicates that the response does not contain user-specific data and can be safely shared. Servers MUST be aware that responses with a `\"public\"` `cacheScope` may be shared between callers even if the Result is coming from an authenticated endpoint. For example, the Result from an authenticated `tools/list` call with a `\"public\"` `cacheScope` may be cached by a client and may be shared outside of the initial request's authorization context (i.e. different access tokens can leverage the same cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 122.0,
+"score": 121.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "o-H-D4-12": {
@@ -1578,14 +1578,14 @@
 "text": "The MCP Registry verifies ownership of npm packages by checking `mcpName` in `package.json`. The `mcpName` property MUST match the server name from `server.json`. For example:",
 "src": "registry/package-types.md",
 "lvl": "docs",
-"score": 91.6,
+"score": 91.7,
 "url": "https://modelcontextprotocol.io/registry/package-types"
 },
 "o-H-D5-02": {
 "text": "With any authentication method, the Registry verifies that you control the namespace in `name`; it does not verify that you control the remote URL. See Ownership Verification for details.",
 "src": "registry/quickstart.md",
 "lvl": "docs",
-"score": 92.8,
+"score": 92.9,
 "url": "https://modelcontextprotocol.io/registry/quickstart"
 },
 "o-H-D5-03": {
@@ -1599,28 +1599,28 @@
 "text": "Webhook | `events/subscribe` | The client registers an `https` callback URL, and the server POSTs signed events to it under a renewable TTL. | Remote servers, clients that can't hold a connection",
 "src": "extensions/events/overview.md",
 "lvl": "docs",
-"score": 122.4,
+"score": 122.5,
 "url": "https://modelcontextprotocol.io/extensions/events/overview"
 },
 "o-H-D5-05": {
 "text": "A manifest MUST include `SKILL.md` and every supporting file, with each file's URI, SHA-256 digest, and byte size. Each entry returned by `skills/list` is complete; clients do not need to call `skills/get` for additional metadata.",
 "src": "extensions/skills/overview.md",
 "lvl": "docs",
-"score": 86.5,
+"score": 86.2,
 "url": "https://modelcontextprotocol.io/extensions/skills/overview"
 },
 "o-H-D5-06": {
 "text": "If one party supports an extension but the other does not, the supporting party MUST either revert to core protocol behavior or reject the request with an appropriate error if the extension is mandatory. Extensions SHOULD document their expected fallback behavior. For example, a server offering UI-enhanced tools should still return meaningful text content for clients that do not support the UI extension, while a server requiring a specific authentication extension MAY reject connections from clients that do not support it.",
 "src": "seps/2133-extensions.md",
 "lvl": "docs",
-"score": 71.3,
+"score": 70.7,
 "url": "https://modelcontextprotocol.io/seps/2133-extensions"
 },
 "o-H-D5-07": {
 "text": "Progressive discovery and programmatic tool calling work well together. The model uses discovery tools to identify which tools it needs, loads their schemas, and then writes a single script that calls multiple tools in one execution pass. This combination minimizes both the token cost of tool definitions _and_ the token cost of tool results, keeping the model's context focused on reasoning rather than passing data through it.",
 "src": "docs/develop/clients/client-best-practices.md",
 "lvl": "docs",
-"score": 92.3,
+"score": 91.9,
 "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
 },
 "o-H-D5-08": {
@@ -1648,14 +1648,14 @@
 "text": "MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.",
 "src": "docs/getting-started/intro.md",
 "lvl": "docs",
-"score": 61.5,
+"score": 61.4,
 "url": "https://modelcontextprotocol.io/docs/getting-started/intro"
 },
 "ext-rg-mcpa-f-diag-002": {
 "text": "`_meta`: Carries the standard per-request fields: the protocol version and client capabilities that every MCP request must include, plus the client's identity, which clients should include unless configured not to.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 73.3,
+"score": 73.1,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-diag-003": {
@@ -1690,14 +1690,14 @@
 "text": "`{ \"type\": \"object\", \"additionalProperties\": false }` - accepts only empty objects `{}`",
 "src": "seps/1613-establish-json-schema-2020-12-as-default-dialect-f.md",
 "lvl": "docs",
-"score": 83.3,
+"score": 83.4,
 "url": "https://modelcontextprotocol.io/seps/1613-establish-json-schema-2020-12-as-default-dialect-f"
 },
 "ext-rg-mcpa-f-diag-008": {
 "text": "Tool name uniqueness is scoped to a single server. Clients or proxies that aggregate tools from multiple servers MAY encounter naming collisions (for example, two servers each exposing a `search` tool) and SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 91.9,
+"score": 91.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-diag-009": {
@@ -1760,35 +1760,35 @@
 "text": "A `cacheScope` of `\"public\"` indicates that the response does not contain user-specific data and can be safely shared. Servers MUST be aware that responses with a `\"public\"` `cacheScope` may be shared between callers even if the Result is coming from an authenticated endpoint. For example, the Result from an authenticated `tools/list` call with a `\"public\"` `cacheScope` may be cached by a client and may be shared outside of the initial request's authorization context (i.e. different access tokens can leverage the same cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 123.9,
+"score": 123.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-mcpa-f-diag-018": {
 "text": "`serverInfo` is self-reported by the server and is not verified by the protocol. It is intended for display, logging, and debugging. Clients SHOULD NOT use it to change their behavior, and SHOULD NOT rely on it for security decisions.",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 96.5,
+"score": 96.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "ext-rg-mcpa-f-diag-019": {
 "text": "OAuth 2.0 Authorization Server Metadata: If `code_challenge_methods_supported` is absent, the authorization server does not support PKCE and MCP clients MUST refuse to proceed.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 124.9,
+"score": 125.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "ext-rg-mcpa-f-diag-020": {
 "text": "MCP clients and authorization servers SHOULD support OAuth Client ID Metadata Documents as specified in OAuth Client ID Metadata Document for client registration.",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 102.6,
+"score": 102.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "ext-rg-mcpa-f-diag-021": {
 "text": "Step-up: the request needs scopes the current token doesn't carry. The Inspector re-authorizes for the union of the held and required scopes, so the new token covers everything the old one did plus the newly required scopes.",
 "src": "docs/tools/inspector/authorization.md",
 "lvl": "docs",
-"score": 92.2,
+"score": 92.3,
 "url": "https://modelcontextprotocol.io/docs/tools/inspector/authorization"
 },
 "ext-rg-mcpa-f-diag-022": {
@@ -1802,7 +1802,7 @@
 "text": "As an exception to the prefix requirement above, the keys `traceparent`, `tracestate`, and `baggage` are reserved for OpenTelemetry trace context propagation. When present, their values MUST follow W3C Trace Context and W3C Baggage formats respectively.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 76.5,
+"score": 76.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-diag-024": {
@@ -1816,7 +1816,7 @@
 "text": "After the minimum deprecation window has elapsed, Core Maintainers may remove the feature when preparing a release. The removal is recorded in `changelog.mdx` under the \"Removed\" heading and in the registry. Any change to the original deprecation or removal, such as extending or shortening the timeline (Expedited removal) or restoring the feature to Active (Feature states), requires a SEP. A feature may remain Deprecated indefinitely.",
 "src": "community/feature-lifecycle.md",
 "lvl": "docs",
-"score": 125.7,
+"score": 125.6,
 "url": "https://modelcontextprotocol.io/community/feature-lifecycle"
 },
 "ext-rg-mcpa-f-diag-026": {
@@ -1830,21 +1830,21 @@
 "text": "`cacheScope` = `\"private\"` | Only the requesting user's client MAY cache. Shared caches MUST NOT serve a cached copy to a different user.",
 "src": "seps/2549-TTL-for-list-results.md",
 "lvl": "docs",
-"score": 69.5,
+"score": 69.4,
 "url": "https://modelcontextprotocol.io/seps/2549-TTL-for-list-results"
 },
 "ext-rg-mcpa-f-diag-028": {
-"src": "",
-"text": "",
-"lvl": "blog",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "visibility defaults to [\"model\", \"app\"] if omitted. \"model\": Tool is visible to and callable by the agent. \"app\": Tool is callable by the app from the same server connection only.",
+"lvl": "docs",
 "score": 99,
-"url": ""
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-diag-029": {
 "text": "To prevent identifier collisions, the vendor prefix SHOULD be a reversed domain name that the extension author owns or controls (similar to Java package naming conventions). For example, a company owning `example.com` would use `com.example/` as their prefix.",
 "src": "seps/2133-extensions.md",
 "lvl": "docs",
-"score": 104.4,
+"score": 104.3,
 "url": "https://modelcontextprotocol.io/seps/2133-extensions"
 },
 "ext-rg-mcpa-f-diag-030": {
@@ -1858,28 +1858,28 @@
 "text": "Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 94.0,
+"score": 93.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-rg-mcpa-f-m1-002": {
 "text": "MCP is a stateless protocol. Every request carries the protocol version and the capabilities relevant to that request in its `_meta` field, so the server can process each request on its own. Clients should also identify themselves in the same field unless configured not to. Servers advertise their supported versions and capabilities through the mandatory `server/discover` request, which clients may send before any other request. Detailed information can be found in the specification, and the example showcases the per-request metadata and the discovery sequence.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 102.9,
+"score": 102.8,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m1-003": {
 "text": "Feature | Deprecation SEP | Deprecated in | Migration path | Earliest removal",
 "src": "spec-2026-07-28/deprecated.md",
 "lvl": "spec",
-"score": 107.4,
+"score": 107.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated"
 },
 "ext-rg-mcpa-f-m1-004": {
 "text": "MCP has no protocol-level session, so a server cannot rely on implicit per-connection state to relate one tool call to the next. Servers that need to maintain state across calls — a shopping cart, an open browser context, a database transaction — should do so by returning an explicit handle from a creation tool and accepting that handle as an argument on subsequent calls.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 106.4,
+"score": 106.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m1-005": {
@@ -1893,7 +1893,7 @@
 "text": "MCP follows a client-server architecture where an MCP host — an AI application like Claude Code or Claude Desktop — establishes connections to one or more MCP servers. The MCP host accomplishes this by creating one MCP client for each MCP server. Each MCP client maintains a dedicated connection with its corresponding MCP server.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 79.0,
+"score": 78.2,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m1-007": {
@@ -1907,7 +1907,7 @@
 "text": "The Model Context Protocol (MCP) follows a client-host-server architecture where each host can run multiple client instances. MCP is a stateless protocol: every request is self-contained and carries its own protocol version and capabilities. This architecture enables users to integrate AI capabilities across applications while maintaining clear security boundaries and isolating concerns. Built on JSON-RPC, MCP provides a protocol focused on context exchange between clients and servers.",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 78.3,
+"score": 77.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "ext-rg-mcpa-f-m1-009": {
@@ -1928,7 +1928,7 @@
 "text": "A server MUST NOT rely on capabilities the client has not declared. If processing a request requires a capability the client did not declare in its `clientCapabilities`, the server MUST return a JSON-RPC error specifying the missing capabilities. For HTTP, the response status code MUST be `400 Bad Request`.",
 "src": "seps/2575-stateless-mcp.md",
 "lvl": "docs",
-"score": 92.9,
+"score": 92.5,
 "url": "https://modelcontextprotocol.io/seps/2575-stateless-mcp"
 },
 "ext-rg-mcpa-f-m1-012": {
@@ -1942,14 +1942,14 @@
 "text": "`title`: A human-readable display name for the tool that clients can show to users",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 95.4,
+"score": 94.8,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m1-014": {
 "text": "Clients SHOULD: - Prompt for user confirmation on sensitive operations - Show tool inputs to the user before calling the server, to avoid malicious or accidental data exfiltration - Validate tool results before passing to LLM - Follow the `$ref` resolution requirements when validating tool inputs and outputs against `inputSchema` and `outputSchema` - Implement timeouts for tool calls - Log tool usage for audit purposes",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 70.2,
+"score": 70.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m1-015": {
@@ -1963,35 +1963,35 @@
 "text": "Clients that want to select a version up front can call `server/discover`, a mandatory RPC that returns the server's supported protocol versions, capabilities, and identity in a single request. Calling it is optional: a client is free to send any request directly and handle a version error if one comes back.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 125.6,
+"score": 125.4,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "ext-rg-mcpa-f-m1-017": {
 "text": "This SEP establishes JSON Schema 2020-12 as the default dialect for embedded schemas within MCP messages (tool `inputSchema`/`outputSchema` and elicitation `requestedSchema` fields). Schemas may explicitly declare alternative dialects via the `$schema` field. This resolves ambiguity that has caused compatibility issues between implementations.",
 "src": "seps/1613-establish-json-schema-2020-12-as-default-dialect-f.md",
 "lvl": "docs",
-"score": 99.2,
+"score": 99.0,
 "url": "https://modelcontextprotocol.io/seps/1613-establish-json-schema-2020-12-as-default-dialect-f"
 },
 "ext-rg-mcpa-f-m1-018": {
 "text": "Servers SHOULD return tools in a deterministic order (i.e., the same ordering across requests when the underlying set of tools has not changed). Deterministic ordering enables clients to reliably cache the tool list and improves LLM prompt cache hit rates when tools are included in model context.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 123.0,
+"score": 122.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m1-019": {
 "text": "Content Types: Each content object has a `type` field. In this example, `\"type\": \"text\"` indicates text content. Tool results can also contain images (`image`), audio (`audio`), resource links (`resource_link`), and embedded resources (`resource`). Not every model accepts all of these types, so clients may need to handle content that their model does not support.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 80.8,
+"score": 80.2,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m1-020": {
 "text": "Servers MUST validate all resource URIs 2. Access controls SHOULD be implemented for sensitive resources 3. Binary data MUST be properly encoded 4. Resource permissions SHOULD be checked before operations 5. Servers MUST sanitize file paths to prevent directory traversal attacks when serving `file://` resources",
 "src": "spec-2026-07-28/server/resources.md",
 "lvl": "spec",
-"score": 150.4,
+"score": 150.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
 },
 "ext-rg-mcpa-f-m1-021": {
@@ -2012,14 +2012,14 @@
 "text": "Sampling: Integrate directly with LLM provider APIs. The protocol does not define a replacement for requesting completions through the client.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 90.9,
+"score": 91.0,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m1-024": {
 "text": "If the server process exits unexpectedly, the client SHOULD restart it. Because the protocol is stateless, any in-flight requests are simply lost and the client can retry them against the fresh process. Active [`subscriptions/listen`][subscriptions-listen] streams must also be re-established after restart.",
 "src": "spec-2026-07-28/basic/transports/stdio.md",
 "lvl": "spec",
-"score": 102.0,
+"score": 102.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio"
 },
 "ext-rg-mcpa-f-m1-025": {
@@ -2033,14 +2033,14 @@
 "text": "Language models can learn from tool input validation error messages and retry a tools/call with corrected parameters accordingly, but only if they receive the error feedback in their context window. Protocol Errors are catch at the application level by the MCP Client. Only Tool Execution Errors are forwarded back to the model as JSON-RPC responses. With the current specifications, models cannot see these error messages and thus cannot self-correct, leading to repeated failures and poor user experiences.",
 "src": "seps/1303-input-validation-errors-as-tool-execution-errors.md",
 "lvl": "docs",
-"score": 101.1,
+"score": 100.8,
 "url": "https://modelcontextprotocol.io/seps/1303-input-validation-errors-as-tool-execution-errors"
 },
 "ext-rg-mcpa-f-m1-027": {
 "text": "Any server that processes the message body MUST validate that encoded header values, after decoding if Base64-encoded, match the corresponding values in the request body. Servers MUST reject requests with a `400 Bad Request` HTTP status and JSON-RPC error code `-32020` (`HeaderMismatch`) if any validation fails.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 136.6,
+"score": 136.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-mcpa-f-m1-028": {
@@ -2054,7 +2054,7 @@
 "text": "Not every tool call returns instantly. Some operations — CI pipelines, batch processing, human approvals — take seconds, minutes, or longer. MCP Tasks let servers return a durable handle instead of blocking, so clients can poll for progress, provide input when needed, and retrieve the final result after reconnecting.",
 "src": "extensions/tasks/overview.md",
 "lvl": "docs",
-"score": 78.8,
+"score": 78.7,
 "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
 },
 "ext-rg-mcpa-f-m1-030": {
@@ -2075,7 +2075,7 @@
 "text": "The server returns a `DiscoverResult`: the server is modern. Select a mutually supported version from `supportedVersions` and continue. - The server returns a recognized modern JSON-RPC error such as [`UnsupportedProtocolVersionError`][unsupported-version]: the server is modern but does not support the requested version. Use one of the versions in its advertised `supported` list. Do not fall back to `initialize`. - The server returns any other error, or does not respond within a reasonable timeout: the server is legacy. Fall back to the `initialize` handshake.",
 "src": "spec-2026-07-28/basic/transports/stdio.md",
 "lvl": "spec",
-"score": 152.8,
+"score": 152.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio"
 },
 "ext-rg-mcpa-f-m1-033": {
@@ -2096,14 +2096,14 @@
 "text": "Show the exact command that will be executed, without truncation (include arguments and parameters) - Clearly identify it as a potentially dangerous operation that executes code on the user's system - Require explicit user approval before proceeding - Allow users to cancel the configuration",
 "src": "docs/tutorials/security/security_best_practices.md",
 "lvl": "docs",
-"score": 163.5,
+"score": 163.2,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "ext-rg-mcpa-f-m1-036": {
 "text": "When a client sends a request without a valid token, your server responds with `401 Unauthorized`. The `WWW-Authenticate` header can point to the Protected Resource Metadata (PRM) document. It should also name the scopes needed to access the resource.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 107.6,
+"score": 107.5,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "ext-rg-mcpa-f-m1-037": {
@@ -2117,28 +2117,28 @@
 "text": "Per-call authorization: The broker is still the MCP host for spec purposes. Apply the same human-in-the-loop confirmation policy to sandbox-originated calls that you apply to direct calls (see Tools: Security). Approving the script does not grant blanket approval for every tool call it makes at runtime; hosts may grant categorical approval (for example, \"allow `ticketing_createIssue` for this script run\") rather than prompting per iteration, but the broker must still evaluate each call against that grant.",
 "src": "docs/develop/clients/client-best-practices.md",
 "lvl": "docs",
-"score": 81.1,
+"score": 81.0,
 "url": "https://modelcontextprotocol.io/docs/develop/clients/client-best-practices"
 },
 "ext-rg-mcpa-f-m1-039": {
 "text": "Ensure that the icon URI is either a HTTPS or `data:` URI. Clients MUST reject icon URIs that use unsafe schemes and redirects, such as `javascript:`, `file:`, `ftp:`, `ws:`, or local app URI schemes.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 163.8,
+"score": 163.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m1-040": {
 "text": "`traceparent`, `tracestate`, `baggage` | OpenTelemetry trace context propagation | OpenTelemetry trace context (below)",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 134.2,
+"score": 134.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m1-041": {
 "text": "Tool Safety - Tools represent arbitrary code execution and must be treated with appropriate caution. - In particular, descriptions of tool behavior such as annotations should be considered untrusted, unless obtained from a trusted server. - Hosts must obtain explicit user consent before invoking any tool - Users should understand what each tool does before authorizing its use",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 92.8,
+"score": 92.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-rg-mcpa-f-m1-042": {
@@ -2166,7 +2166,7 @@
 "text": "MCP proxy servers using static client IDs MUST obtain user consent for each dynamically registered client before forwarding to third-party authorization servers (which may require additional consent).",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 207.6,
+"score": 207.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "ext-rg-mcpa-f-m1-046": {
@@ -2194,35 +2194,35 @@
 "text": "MCP servers, acting in their role as an OAuth 2.1 resource server, MUST validate access tokens as described in OAuth 2.1 Section 5.2. MCP servers MUST validate that access tokens were issued specifically for them as the intended audience, according to RFC 8707 Section 2. If validation fails, servers MUST respond according to OAuth 2.1 Section 5.3 error handling requirements. Invalid or expired tokens MUST receive an HTTP 401 response.",
 "src": "spec-2026-07-28/basic/authorization/index.md",
 "lvl": "spec",
-"score": 82.9,
+"score": 82.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
 },
 "ext-rg-mcpa-f-m1-050": {
 "text": "`completion/complete` | Suggest argument values | Array of suggested values",
 "src": "docs/learn/server-concepts.md",
 "lvl": "docs",
-"score": 87.9,
+"score": 88.0,
 "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
 },
 "ext-rg-mcpa-f-m1-051": {
 "text": "Breaking changes keep the extension's identifier. A new identifier (e.g., `io.modelcontextprotocol/my-extension-v2`) is used only when old and new behavior must coexist under one protocol revision.",
 "src": "extensions/overview.md",
 "lvl": "docs",
-"score": 100.2,
+"score": 100.1,
 "url": "https://modelcontextprotocol.io/extensions/overview"
 },
 "ext-rg-mcpa-f-m1-052": {
-"src": "extensions/apps/overview.md",
-"text": "Sandboxed rendering: Web hosts typically render the HTML inside a sandboxed iframe within the conversation. The sandbox restricts the app's access to the parent page, ensuring security. The resource's `_meta.ui` object can include `permissions` to request additional capabilities (e.g., microphone, camera) and `csp` to control what external origins the app can load resources from.",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "Sandbox permissions requested by the UI. Servers declare which browser capabilities their UI needs. Hosts MAY honor these by setting appropriate iframe allow attributes. Apps SHOULD NOT assume permissions are granted; use JS feature detection as fallback.",
 "lvl": "docs",
 "score": 99,
-"url": "https://modelcontextprotocol.io/extensions/apps/overview"
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-m1-053": {
 "text": "Intermediaries that enforce policy based on mirrored headers (e.g., routing or rate-limiting by tenant) SHOULD verify that the `MCP-Protocol-Version` header indicates a version that requires header–body validation. If the version is older or the header is absent, the intermediary SHOULD reject the request rather than trusting unvalidated header values.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 101.8,
+"score": 101.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-mcpa-f-m1-054": {
@@ -2257,15 +2257,15 @@
 "text": "The MCP Registry is currently in preview. Breaking changes or data resets may occur before general availability. If you encounter any issues, please report them on GitHub.",
 "src": "registry/github-actions.md",
 "lvl": "docs",
-"score": 119.9,
+"score": 119.8,
 "url": "https://modelcontextprotocol.io/registry/github-actions"
 },
 "ext-rg-mcpa-f-m1-059": {
-"src": "seps/1865-mcp-apps-interactive-user-interfaces-for-mcp.md",
-"text": "This specification focuses on HTML content (`text/html;profile=mcp-app`) as the initial content type, with extensibility for future formats.",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "`mimeType` MUST be `text/html;profile=mcp-app` (other types reserved for future extensions)",
 "lvl": "docs",
 "score": 99,
-"url": "https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp"
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-m1-060": {
 "text": "Audience. Your MCP server must reject tokens that weren't issued for it. The `resource` value from the client should become the token's audience, which is the `aud` claim in a JWT. Some products need a setting for this, or let you configure the audience on a scope instead. Others always use their own identifier. In that case, compare the audience with that identifier, and keep your server's URL as the PRM `resource`. The identifier must belong to this MCP server only, so don't share one application registration between servers.",
@@ -2278,14 +2278,14 @@
 "text": "Requests MUST include a string or integer ID. - Unlike base JSON-RPC, the ID MUST NOT be `null`. - The request ID MUST NOT match the ID of any other request the sender has issued and not yet received a response for.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 114.0,
+"score": 113.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-002": {
 "text": "Notifications are sent from the client to the server or vice versa, as a one-way message. The receiver MUST NOT send a response.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 88.5,
+"score": 88.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-003": {
@@ -2306,21 +2306,21 @@
 "text": "If the body contains a recognized modern JSON-RPC error, the server speaks a modern version of MCP — retry using the advertised `supported` versions or correct the request, rather than falling back. - If the body is empty or is not a recognized modern JSON-RPC error, fall back to `initialize` and continue with the legacy version for subsequent requests.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 180.0,
+"score": 179.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-mcpa-f-m2-006": {
 "text": "MCP has no protocol-level session, so a server cannot rely on implicit per-connection state to relate one tool call to the next. Servers that need to maintain state across calls — a shopping cart, an open browser context, a database transaction — should do so by returning an explicit handle from a creation tool and accepting that handle as an argument on subsequent calls.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 117.9,
+"score": 117.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m2-007": {
 "text": "Modern: protocol versions that convey version, identity, and capabilities as per-request metadata (revision `2026-07-28` and later). - Legacy: protocol versions that establish a session with an `initialize` handshake (`2025-11-25` and earlier). - Dual-era: an implementation that supports both modern and legacy versions.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 113.9,
+"score": 113.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "ext-rg-mcpa-f-m2-008": {
@@ -2334,49 +2334,49 @@
 "text": "Any prefix where the second label is `modelcontextprotocol` or `mcp` is reserved for MCP use.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 113.6,
+"score": 113.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-010": {
 "text": "The client can discover available tools by sending a `tools/list` request. This request is fundamental to MCP's tool discovery mechanism: it allows clients to understand what tools are available on the server before attempting to use them.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 78.6,
+"score": 78.5,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m2-011": {
 "text": "`serverInfo` is self-reported by the server and is not verified by the protocol. It is intended for display, logging, and debugging. Clients SHOULD NOT use it to change their behavior, and SHOULD NOT rely on it for security decisions.",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 84.6,
+"score": 84.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "ext-rg-mcpa-f-m2-012": {
 "text": "The result is marked `\"resultType\": \"complete\"` and carries two caching fields. `ttlMs` is a freshness hint in milliseconds, so this tool list can be cached for five minutes. `cacheScope` indicates who may reuse the response. The specification's caching utility defines the full rules.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 90.3,
+"score": 90.1,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m2-013": {
 "text": "A server MUST NOT rely on capabilities the client has not declared. If processing a request requires a capability the client did not include in `io.modelcontextprotocol/clientCapabilities`, the server MUST return a `MissingRequiredClientCapabilityError` (`-32021`) whose `data.requiredCapabilities` lists the missing capabilities. On HTTP, the response status MUST be `400 Bad Request`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 106.6,
+"score": 106.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-014": {
 "text": "The `inputSchema` field retains the `type: \"object\"` requirement (since tool arguments are always objects), but now accepts any additional JSON Schema properties. This enables:",
 "src": "seps/2106-json-schema-2020-12.md",
 "lvl": "docs",
-"score": 125.3,
+"score": 124.9,
 "url": "https://modelcontextprotocol.io/seps/2106-json-schema-2020-12"
 },
 "ext-rg-mcpa-f-m2-015": {
 "text": "*Structured content is returned as a JSON value in the `structuredContent` field of a result. This can be any JSON value (object, array, string, number, boolean, or null) that conforms to the tool's `outputSchema` if one is defined.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 94.0,
+"score": 93.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m2-016": {
@@ -2390,7 +2390,7 @@
 "text": "Language models can learn from tool input validation error messages and retry a tools/call with corrected parameters accordingly, but only if they receive the error feedback in their context window. Protocol Errors are catch at the application level by the MCP Client. Only Tool Execution Errors are forwarded back to the model as JSON-RPC responses. With the current specifications, models cannot see these error messages and thus cannot self-correct, leading to repeated failures and poor user experiences.",
 "src": "seps/1303-input-validation-errors-as-tool-execution-errors.md",
 "lvl": "docs",
-"score": 89.8,
+"score": 89.5,
 "url": "https://modelcontextprotocol.io/seps/1303-input-validation-errors-as-tool-execution-errors"
 },
 "ext-rg-mcpa-f-m2-018": {
@@ -2404,14 +2404,14 @@
 "text": "Content Types: Each content object has a `type` field. In this example, `\"type\": \"text\"` indicates text content. Tool results can also contain images (`image`), audio (`audio`), resource links (`resource_link`), and embedded resources (`resource`). Not every model accepts all of these types, so clients may need to handle content that their model does not support.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 78.6,
+"score": 77.9,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m2-020": {
 "text": "Servers that declare the `tools` capability MUST respond to `tools/list` requests with the set of tools currently available to the requesting client. This set MAY be empty and MAY change over time (see List Changed Notification), but MUST NOT vary per-connection or as a side effect of other requests on the connection. The set MAY vary by the authorization presented on the request — for example, returning only the tools the caller's granted scopes permit — since credentials are per-request input, not connection state.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 169.2,
+"score": 168.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m2-021": {
@@ -2425,7 +2425,7 @@
 "text": "Optional total number of available matches",
 "src": "spec-2026-07-28/server/utilities/completion.md",
 "lvl": "spec",
-"score": 83.3,
+"score": 83.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/completion"
 },
 "ext-rg-mcpa-f-m2-023": {
@@ -2446,21 +2446,21 @@
 "text": "Deprecated: The Roots feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to passing directories or files via tool parameters, resource URIs, or server configuration. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/roots.md",
 "lvl": "spec",
-"score": 127.0,
+"score": 126.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/roots"
 },
 "ext-rg-mcpa-f-m2-026": {
 "text": "The server acknowledges the subscription with `notifications/subscriptions/acknowledged`, which is the first message carrying that subscription's ID in `_meta` (the server sends no other notification for that subscription before it). Its `notifications` field reflects the subset of the requested filter the server agreed to honor, with unsupported notification types omitted:",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 151.8,
+"score": 151.1,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m2-027": {
 "text": "The `progress` value MUST increase with each notification, even if the total is unknown. - The `progress` and the `total` values MAY be floating point. - The `message` field SHOULD provide relevant human readable progress information.",
 "src": "spec-2026-07-28/basic/patterns/progress.md",
 "lvl": "spec",
-"score": 122.4,
+"score": 122.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/progress"
 },
 "ext-rg-mcpa-f-m2-028": {
@@ -2474,14 +2474,14 @@
 "text": "New error codes for purposes not defined by this specification SHOULD be allocated outside the JSON-RPC reserved range (`-32768` to `-32000`); the remainder of the integer space is available for application-defined errors.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 137.8,
+"score": 137.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-030": {
 "text": "Any server that processes the message body MUST validate that encoded header values, after decoding if Base64-encoded, match the corresponding values in the request body. Servers MUST reject requests with a `400 Bad Request` HTTP status and JSON-RPC error code `-32020` (`HeaderMismatch`) if any validation fails.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 155.4,
+"score": 155.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-mcpa-f-m2-031": {
@@ -2530,7 +2530,7 @@
 "text": "When a client sends a request without a valid token, your server responds with `401 Unauthorized`. The `WWW-Authenticate` header can point to the Protected Resource Metadata (PRM) document. It should also name the scopes needed to access the resource.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 106.3,
+"score": 106.2,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "ext-rg-mcpa-f-m2-038": {
@@ -2544,35 +2544,35 @@
 "text": "MCP clients MUST implement and use the `resource` parameter as defined in RFC 8707 - Resource Indicators for OAuth 2.0 to explicitly specify the target resource for which the token is being requested. This requirement aligns with the recommendation in RFC 9728 Section 7.4. This ensures that access tokens are bound to their intended resources and cannot be misused across different services.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 116.5,
+"score": 116.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "ext-rg-mcpa-f-m2-040": {
 "text": "After retrieving a metadata document, MCP clients MUST validate it as required by RFC8414 Section 3.3 or OpenID Connect Discovery Section 4.3: the `issuer` value in the document MUST be identical to the issuer identifier used to construct the well-known URL. If they differ, the client MUST NOT use the metadata. For example, a document fetched from `https://attacker.example/.well-known/oauth-authorization-server` that contains `\"issuer\": \"https://honest.example\"` MUST be rejected.",
 "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
 "lvl": "spec",
-"score": 108.1,
+"score": 108.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
 },
 "ext-rg-mcpa-f-m2-041": {
 "text": "Dynamic Client Registration is deprecated. New implementations should use Client ID Metadata Documents instead. This option remains available for backwards compatibility with authorization servers that do not support Client ID Metadata Documents.",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 133.3,
+"score": 133.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "ext-rg-mcpa-f-m2-042": {
 "text": "Scope accumulation across operations is a client-side responsibility. Clients SHOULD compute the union of previously requested scopes and newly challenged scopes when initiating re-authorization, as described in Step-Up Authorization Flow. This allows servers to remain stateless with respect to client scope sets while ensuring clients do not lose previously granted permissions.",
 "src": "docs/tutorials/security/security_best_practices.md",
 "lvl": "docs",
-"score": 106.7,
+"score": 106.6,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "ext-rg-mcpa-f-m2-043": {
 "text": "Decline (`action: \"decline\"`): User explicitly declined the request",
 "src": "spec-2026-07-28/client/elicitation.md",
 "lvl": "spec",
-"score": 75.4,
+"score": 74.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/elicitation"
 },
 "ext-rg-mcpa-f-m2-044": {
@@ -2586,42 +2586,42 @@
 "text": "JSON Schema 2020-12 permits `$ref` to point at an absolute URI. Implementations MUST NOT automatically dereference `$ref` values that resolve to a network URI.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 94.3,
+"score": 94.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-046": {
 "text": "Server developers SHOULD NOT mark sensitive parameters (passwords, API keys, tokens, PII) with `x-mcp-header`, as header values are visible to network intermediaries.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 166.9,
+"score": 166.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m2-047": {
 "text": "As an exception to the prefix requirement above, the keys `traceparent`, `tracestate`, and `baggage` are reserved for OpenTelemetry trace context propagation. When present, their values MUST follow W3C Trace Context and W3C Baggage formats respectively.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 195.1,
+"score": 194.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-048": {
 "text": "As an exception to the prefix requirement above, the keys `traceparent`, `tracestate`, and `baggage` are reserved for OpenTelemetry trace context propagation. When present, their values MUST follow W3C Trace Context and W3C Baggage formats respectively.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 102.0,
+"score": 101.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-049": {
 "text": "As an error prevention mechanism, the MCP Registry prohibits version strings that appear to refer to ranges of versions.",
 "src": "registry/versioning.md",
 "lvl": "docs",
-"score": 66.9,
+"score": 67.0,
 "url": "https://modelcontextprotocol.io/registry/versioning"
 },
 "ext-rg-mcpa-f-m2-050": {
 "text": "Before a SEP can reach \"Final\" status, the reference implementation must be complete and any required conformance test merged. Include links to the implementation and test results as they become available.",
 "src": "seps/TEMPLATE.md",
 "lvl": "docs",
-"score": 102.0,
+"score": 102.1,
 "url": "https://modelcontextprotocol.io/seps/TEMPLATE"
 },
 "ext-rg-mcpa-f-m2-051": {
@@ -2653,18 +2653,18 @@
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m2-055": {
-"text": "This specification focuses on HTML content (`text/html;profile=mcp-app`) as the initial content type, with extensibility for future formats.",
-"src": "seps/1865-mcp-apps-interactive-user-interfaces-for-mcp.md",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "`mimeType` MUST be `text/html;profile=mcp-app` (other types reserved for future extensions)",
 "lvl": "docs",
-"score": 90.1,
-"url": "https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp"
+"score": 99,
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-m2-056": {
-"text": "The server registers the tool and serves the UI resource. The UI resource will eventually be rendered in a secure iframe with deny-by-default CSP configuration. If your app has CSS and JS assets, you will need to configure CSP, or you can bundle your assets into the HTML with a tool like `vite-plugin-singlefile`, which is what we will do in this tutorial.",
-"src": "extensions/apps/build.md",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "_meta.ui.csp is an object: connectDomains (origins for network requests: fetch/XHR/WebSocket), resourceDomains (origins for static resources), frameDomains (origins for nested iframes, frame-src directive), baseUriDomains (allowed base URIs, base-uri directive).",
 "lvl": "docs",
-"score": 66.2,
-"url": "https://modelcontextprotocol.io/extensions/apps/build"
+"score": 99,
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-m2-057": {
 "text": "The MCP Registry uses namespace authentication to ensure that servers come from their claimed sources. Server names follow a reverse DNS format (like `io.github.username/server` or `com.example/server`) that ties them to verified GitHub accounts or domains.",
@@ -2684,7 +2684,7 @@
 "text": "A request carrying modern per-request `_meta` is served statelessly according to this revision. - An `initialize` request selects legacy semantics, scoped to the stdio process (stdio) or the session (HTTP), as specified by the negotiated legacy protocol version.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 88.3,
+"score": 88.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "ext-rg-mcpa-f-m2-060": {
@@ -2698,7 +2698,7 @@
 "text": "MCP has no protocol-level session, so a server cannot rely on implicit per-connection state to relate one tool call to the next. Servers that need to maintain state across calls — a shopping cart, an open browser context, a database transaction — should do so by returning an explicit handle from a creation tool and accepting that handle as an argument on subsequent calls.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 125.0,
+"score": 124.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m3-002": {
@@ -2712,7 +2712,7 @@
 "text": "The Model Context Protocol uses string-based version identifiers following the format `YYYY-MM-DD`, to indicate the last date backwards incompatible changes were made.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 116.6,
+"score": 116.5,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "ext-rg-mcpa-f-m3-004": {
@@ -2726,21 +2726,21 @@
 "text": "This SEP defines a lifecycle for individual features within the Model Context Protocol specification, separate from the revision lifecycle of the specification document itself. It introduces three feature states (Active, Deprecated, Removed), the criteria and procedure for moving between them, a minimum window between deprecation and removal, and the documentation required at each transition. The goal is a predictable timeline that SDK authors and implementers can plan migrations against when protocol surface area is retired.",
 "src": "seps/2596-spec-feature-lifecycle-and-deprecation.md",
 "lvl": "docs",
-"score": 108.7,
+"score": 108.6,
 "url": "https://modelcontextprotocol.io/seps/2596-spec-feature-lifecycle-and-deprecation"
 },
 "ext-rg-mcpa-f-m3-006": {
 "text": "The `includeContext` parameter values `\"thisServer\"` and `\"allServers\"` are deprecated under the feature lifecycle policy (SEP-2596); they will be removed no later than the Sampling feature itself. Servers SHOULD avoid using these values (e.g. can just omit `includeContext` since it defaults to `\"none\"`), and SHOULD NOT use them unless the client declares `sampling.context` capability. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 97.2,
+"score": 97.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "ext-rg-mcpa-f-m3-007": {
 "text": "HTTP+SSE transport | SEP-2596 | `2025-03-26` | Streamable HTTP | Three months after SEP-2596 reaches Final",
 "src": "spec-2026-07-28/deprecated.md",
 "lvl": "spec",
-"score": 155.3,
+"score": 155.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/deprecated"
 },
 "ext-rg-mcpa-f-m3-008": {
@@ -2768,49 +2768,49 @@
 "text": "The Model Context Protocol (MCP) follows a client-host-server architecture where each host can run multiple client instances. MCP is a stateless protocol: every request is self-contained and carries its own protocol version and capabilities. This architecture enables users to integrate AI capabilities across applications while maintaining clear security boundaries and isolating concerns. Built on JSON-RPC, MCP provides a protocol focused on context exchange between clients and servers.",
 "src": "spec-2026-07-28/architecture/index.md",
 "lvl": "spec",
-"score": 67.7,
+"score": 67.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/architecture"
 },
 "ext-rg-mcpa-f-m3-012": {
 "text": "Tool name uniqueness is scoped to a single server. Clients or proxies that aggregate tools from multiple servers MAY encounter naming collisions (for example, two servers each exposing a `search` tool) and SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 104.5,
+"score": 104.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m3-013": {
 "text": "The `inputSchema` field retains the `type: \"object\"` requirement (since tool arguments are always objects), but now accepts any additional JSON Schema properties. This enables:",
 "src": "seps/2106-json-schema-2020-12.md",
 "lvl": "docs",
-"score": 77.9,
+"score": 77.7,
 "url": "https://modelcontextprotocol.io/seps/2106-json-schema-2020-12"
 },
 "ext-rg-mcpa-f-m3-014": {
 "text": "Tool Safety - Tools represent arbitrary code execution and must be treated with appropriate caution. - In particular, descriptions of tool behavior such as annotations should be considered untrusted, unless obtained from a trusted server. - Hosts must obtain explicit user consent before invoking any tool - Users should understand what each tool does before authorizing its use",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 78.1,
+"score": 77.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-rg-mcpa-f-m3-015": {
 "text": "Clients that want to select a version up front can call `server/discover`, a mandatory RPC that returns the server's supported protocol versions, capabilities, and identity in a single request. Calling it is optional: a client is free to send any request directly and handle a version error if one comes back.",
 "src": "docs/learn/versioning.md",
 "lvl": "docs",
-"score": 101.7,
+"score": 101.5,
 "url": "https://modelcontextprotocol.io/docs/learn/versioning"
 },
 "ext-rg-mcpa-f-m3-016": {
 "text": "The result's `structuredContent` conforms to the tool's `outputSchema`. For backwards compatibility, the result also includes the serialized JSON as text:",
 "src": "docs/learn/server-concepts.md",
 "lvl": "docs",
-"score": 84.2,
+"score": 84.0,
 "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
 },
 "ext-rg-mcpa-f-m3-017": {
 "text": "Language models can learn from tool input validation error messages and retry a tools/call with corrected parameters accordingly, but only if they receive the error feedback in their context window. Protocol Errors are catch at the application level by the MCP Client. Only Tool Execution Errors are forwarded back to the model as JSON-RPC responses. With the current specifications, models cannot see these error messages and thus cannot self-correct, leading to repeated failures and poor user experiences.",
 "src": "seps/1303-input-validation-errors-as-tool-execution-errors.md",
 "lvl": "docs",
-"score": 104.4,
+"score": 104.1,
 "url": "https://modelcontextprotocol.io/seps/1303-input-validation-errors-as-tool-execution-errors"
 },
 "ext-rg-mcpa-f-m3-018": {
@@ -2838,7 +2838,7 @@
 "text": "Language models can learn from tool input validation error messages and retry a tools/call with corrected parameters accordingly, but only if they receive the error feedback in their context window. Protocol Errors are catch at the application level by the MCP Client. Only Tool Execution Errors are forwarded back to the model as JSON-RPC responses. With the current specifications, models cannot see these error messages and thus cannot self-correct, leading to repeated failures and poor user experiences.",
 "src": "seps/1303-input-validation-errors-as-tool-execution-errors.md",
 "lvl": "docs",
-"score": 100.2,
+"score": 99.9,
 "url": "https://modelcontextprotocol.io/seps/1303-input-validation-errors-as-tool-execution-errors"
 },
 "ext-rg-mcpa-f-m3-022": {
@@ -2866,21 +2866,21 @@
 "text": "Servers that declare the `tools` capability MUST respond to `tools/list` requests with the set of tools currently available to the requesting client. This set MAY be empty and MAY change over time (see List Changed Notification), but MUST NOT vary per-connection or as a side effect of other requests on the connection. The set MAY vary by the authorization presented on the request — for example, returning only the tools the caller's granted scopes permit — since credentials are per-request input, not connection state.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 137.8,
+"score": 137.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-mcpa-f-m3-026": {
 "text": "The server acknowledges the subscription with `notifications/subscriptions/acknowledged`, which is the first message carrying that subscription's ID in `_meta` (the server sends no other notification for that subscription before it). Its `notifications` field reflects the subset of the requested filter the server agreed to honor, with unsupported notification types omitted:",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 111.9,
+"score": 111.4,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-mcpa-f-m3-027": {
 "text": "Not every tool call returns instantly. Some operations — CI pipelines, batch processing, human approvals — take seconds, minutes, or longer. MCP Tasks let servers return a durable handle instead of blocking, so clients can poll for progress, provide input when needed, and retrieve the final result after reconnecting.",
 "src": "extensions/tasks/overview.md",
 "lvl": "docs",
-"score": 77.8,
+"score": 77.7,
 "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
 },
 "ext-rg-mcpa-f-m3-028": {
@@ -2894,14 +2894,14 @@
 "text": "New error codes for purposes not defined by this specification SHOULD be allocated outside the JSON-RPC reserved range (`-32768` to `-32000`); the remainder of the integer space is available for application-defined errors.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 158.7,
+"score": 158.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-mcpa-f-m3-030": {
 "text": "Deprecated: The Sampling feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to integrating directly with LLM provider APIs. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 116.1,
+"score": 116.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "ext-rg-mcpa-f-m3-031": {
@@ -2915,14 +2915,14 @@
 "text": "The cursor is an opaque string token, representing a position in the result set - Page size is determined by the server, and clients MUST NOT assume a fixed page size",
 "src": "spec-2026-07-28/server/utilities/pagination.md",
 "lvl": "spec",
-"score": 93.2,
+"score": 92.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/pagination"
 },
 "ext-rg-mcpa-f-m3-033": {
 "text": "The client cancels it — close the SSE stream (HTTP) or send `notifications/cancelled` referencing the `subscriptions/listen` request ID (stdio). - The server tears it down (e.g., during shutdown) — it SHOULD send a successful `subscriptions/listen` response to signal a graceful end (see Graceful Closure), then close the stream. - The underlying transport closes (HTTP timeout, TCP disconnect, stdio process exit).",
 "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
 "lvl": "spec",
-"score": 117.5,
+"score": 116.7,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
 },
 "ext-rg-mcpa-f-m3-034": {
@@ -2971,7 +2971,7 @@
 "text": "Tool Safety - Tools represent arbitrary code execution and must be treated with appropriate caution. - In particular, descriptions of tool behavior such as annotations should be considered untrusted, unless obtained from a trusted server. - Hosts must obtain explicit user consent before invoking any tool - Users should understand what each tool does before authorizing its use",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 101.3,
+"score": 101.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-rg-mcpa-f-m3-041": {
@@ -2992,7 +2992,7 @@
 "text": "Dynamic Client Registration (DCR) is deprecated as of protocol version `2026-07-28`. New implementations should use Client ID Metadata Documents (CIMD) instead.",
 "src": "docs/tutorials/security/authorization.md",
 "lvl": "docs",
-"score": 96.3,
+"score": 96.4,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/authorization"
 },
 "ext-rg-mcpa-f-m3-044": {
@@ -3020,7 +3020,7 @@
 "text": "A `cacheScope` of `\"public\"` indicates that the response does not contain user-specific data and can be safely shared. Servers MUST be aware that responses with a `\"public\"` `cacheScope` may be shared between callers even if the Result is coming from an authenticated endpoint. For example, the Result from an authenticated `tools/list` call with a `\"public\"` `cacheScope` may be cached by a client and may be shared outside of the initial request's authorization context (i.e. different access tokens can leverage the same cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 147.4,
+"score": 147.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-mcpa-f-m3-048": {
@@ -3038,11 +3038,11 @@
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "ext-rg-mcpa-f-m3-050": {
-"src": "",
-"text": "",
-"lvl": "blog",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "tools/list behavior: Host MUST NOT include tools in the agent's tool list when their visibility does not include `\"model\"` (e.g., `visibility: [\"app\"]`)",
+"lvl": "docs",
 "score": 99,
-"url": ""
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-mcpa-f-m3-051": {
 "src": "community/sdk-tiers.md",
@@ -3055,7 +3055,7 @@
 "text": "Servers MUST validate the `Origin` header on all incoming connections to prevent DNS rebinding attacks. - If the `Origin` header is present and invalid, servers MUST respond with HTTP 403 Forbidden. The HTTP response body MAY comprise a JSON-RPC _error response_ that has no `id`. 2. When running locally, servers SHOULD bind only to localhost (127.0.0.1) rather than all network interfaces (0.0.0.0). 3. Servers SHOULD implement proper authentication for all connections.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 108.4,
+"score": 108.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-mcpa-f-m3-053": {
@@ -3069,7 +3069,7 @@
 "text": "With any authentication method, the Registry verifies that you control the namespace in `name`; it does not verify that you control the remote URL. See Ownership Verification for details.",
 "src": "registry/quickstart.md",
 "lvl": "docs",
-"score": 74.7,
+"score": 74.8,
 "url": "https://modelcontextprotocol.io/registry/quickstart"
 },
 "ext-rg-mcpa-f-m3-055": {
@@ -3083,7 +3083,7 @@
 "text": "Reading `SKILL.md` through `resources/read` does not itself activate a skill. To load the skill, the host routes the read through its skill-loading path, which verifies the content and applies any required user approval before loading it into model context.",
 "src": "extensions/skills/overview.md",
 "lvl": "docs",
-"score": 114.2,
+"score": 113.8,
 "url": "https://modelcontextprotocol.io/extensions/skills/overview"
 },
 "ext-rg-mcpa-f-m3-057": {
@@ -3097,7 +3097,7 @@
 "text": "SDKs MAY implement extensions. Where implemented, extensions MUST be disabled by default and require explicit opt-in. SDK documentation SHOULD list supported extensions.",
 "src": "seps/2133-extensions.md",
 "lvl": "docs",
-"score": 103.7,
+"score": 103.5,
 "url": "https://modelcontextprotocol.io/seps/2133-extensions"
 },
 "ext-rg-mcpa-f-m3-059": {
@@ -3160,35 +3160,35 @@
 "text": "All implementations MUST support the base protocol, versioning, and the message patterns. Other components MAY be implemented based on the specific needs of the application.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 147.8,
+"score": 147.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-01-02": {
 "text": "The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"NOT RECOMMENDED\", \"MAY\", and \"OPTIONAL\" in this document are to be interpreted as described in BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all capitals, as shown here.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 98.0,
+"score": 97.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-rg-quiz-01-03": {
 "text": "There is also a JSON Schema, which is automatically generated from the TypeScript source of truth, for use with various automated tooling.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 102.9,
+"score": 103.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-01-04": {
 "text": "When the deprecation SEP reaches Final the deprecation is scheduled: the following changes land in the draft specification (`schema/draft/` and `docs/specification/draft/`). The feature becomes Deprecated when the revision carrying these changes is released as Current under the [versioning guide][versioning], and the minimum deprecation window is counted from that release. Anchoring the clock to the revision release means every feature deprecated in the same revision shares one earliest removal rather than each carrying a date derived from when its own SEP happened to land.",
 "src": "seps/2596-spec-feature-lifecycle-and-deprecation.md",
 "lvl": "docs",
-"score": 105.9,
+"score": 105.8,
 "url": "https://modelcontextprotocol.io/seps/2596-spec-feature-lifecycle-and-deprecation"
 },
 "ext-rg-quiz-01-05": {
 "text": "Deprecated: The Sampling feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to integrating directly with LLM provider APIs. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 94.3,
+"score": 94.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "ext-rg-quiz-01-06": {
@@ -3209,7 +3209,7 @@
 "text": "Make MCP stateless: remove the `initialize`/`notifications/initialized` handshake. Every request now carries its protocol version and client capabilities in `_meta` (`io.modelcontextprotocol/protocolVersion`, `io.modelcontextprotocol/clientCapabilities`). Clients SHOULD identify themselves on each request (`io.modelcontextprotocol/clientInfo`), and servers SHOULD identify themselves in each result's `_meta` (`io.modelcontextprotocol/serverInfo`). Version mismatches return `UnsupportedProtocolVersionError` (SEP-2575).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 103.2,
+"score": 103.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "ext-rg-quiz-02-03": {
@@ -3223,7 +3223,7 @@
 "text": "Tools in MCP are designed to be model-controlled, meaning that the language model can discover and invoke tools automatically based on its contextual understanding and the user's prompts.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 83.0,
+"score": 82.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-02-05": {
@@ -3251,14 +3251,14 @@
 "text": "For backward compatibility with servers implementing earlier protocol versions, which do not include `resultType`, clients MUST treat an absent `resultType` as `\"complete\"`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 143.7,
+"score": 143.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-03-03": {
 "text": "Any prefix where the second label is `modelcontextprotocol` or `mcp` is reserved for MCP use.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 120.2,
+"score": 119.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-03-04": {
@@ -3272,7 +3272,7 @@
 "text": "`io.modelcontextprotocol/clientInfo` and `io.modelcontextprotocol/serverInfo` are self-reported by the sender and are not verified by the protocol. They are intended for display, logging, and debugging. Implementations SHOULD NOT use them to change the behavior of the client or server, and SHOULD NOT rely on them for security decisions.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 144.7,
+"score": 144.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-03-06": {
@@ -3286,56 +3286,56 @@
 "text": "The Model Context Protocol (MCP) is a stateless protocol: all the information needed to process a request is contained in the request itself. A server processes each request independently; no state should be inferred from previous requests, even those on the same connection or stream.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 124.7,
+"score": 124.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-04-02": {
 "text": "Client requests carry the following `io.modelcontextprotocol/*` fields in `_meta`; fields marked as required MUST be included on every request. Servers use these to identify the protocol version and capabilities in use without relying on any prior connection state. See [Versioning and Compatibility][lifecycle] for version negotiation rules.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 94.3,
+"score": 94.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-04-03": {
 "text": "A truly stateless protocol, where every request is self-contained and can be understood in isolation, is highly desirable for its inherent simplicity, scalability, and reliability. The current Model Context Protocol (MCP) is not stateless by default. The specification requires an initialization handshake that establishes a session state between the client and server, which persists for the duration of the connection.",
 "src": "seps/2575-stateless-mcp.md",
 "lvl": "docs",
-"score": 45.5,
+"score": 45.4,
 "url": "https://modelcontextprotocol.io/seps/2575-stateless-mcp"
 },
 "ext-rg-quiz-04-04": {
 "text": "This implies that an open connection, such as a STDIO process, is not a conversation or session: clients may interleave unrelated requests on the same transport, and a server must not treat connection or process identity as a proxy for conversation or session continuity.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 203.1,
+"score": 203.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-04-05": {
 "text": "MCP has no protocol-level session, so a server cannot rely on implicit per-connection state to relate one tool call to the next. Servers that need to maintain state across calls — a shopping cart, an open browser context, a database transaction — should do so by returning an explicit handle from a creation tool and accepting that handle as an argument on subsequent calls.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 112.5,
+"score": 112.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-04-06": {
 "text": "This proposal removes the protocol-level session concept from MCP, replacing implicit session-scoped state with explicit, server-minted state handles that the model carries and threads through subsequent calls. [SEP-2575] removes the `initialize` handshake and carries protocol version and capabilities per-request; this proposal is the complementary change that removes sessions and the `Mcp-Session-Id` header. Together they make MCP stateless at the protocol layer.",
 "src": "seps/2567-sessionless-mcp.md",
 "lvl": "docs",
-"score": 75.4,
+"score": 75.3,
 "url": "https://modelcontextprotocol.io/seps/2567-sessionless-mcp"
 },
 "ext-rg-quiz-05-01": {
 "text": "Dual-era | Modern | Works. The stdio probe returns a `DiscoverResult` (or `UnsupportedProtocolVersionError`); on HTTP, the first modern request succeeds or returns a modern error. The client stays modern.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 117.9,
+"score": 118.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "ext-rg-quiz-05-02": {
 "text": "In both cases, a recognized modern JSON-RPC error (such as `UnsupportedProtocolVersionError`) identifies a modern server: the client retries with a supported version rather than falling back. Anything else identifies a legacy server.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 139.8,
+"score": 139.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "ext-rg-quiz-05-03": {
@@ -3363,21 +3363,21 @@
 "text": "Make MCP stateless: remove the `initialize`/`notifications/initialized` handshake. Every request now carries its protocol version and client capabilities in `_meta` (`io.modelcontextprotocol/protocolVersion`, `io.modelcontextprotocol/clientCapabilities`). Clients SHOULD identify themselves on each request (`io.modelcontextprotocol/clientInfo`), and servers SHOULD identify themselves in each result's `_meta` (`io.modelcontextprotocol/serverInfo`). Version mismatches return `UnsupportedProtocolVersionError` (SEP-2575).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 91.4,
+"score": 91.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "ext-rg-quiz-06-01": {
 "text": "MCP follows a client-server architecture where an MCP host — an AI application like Claude Code or Claude Desktop — establishes connections to one or more MCP servers. The MCP host accomplishes this by creating one MCP client for each MCP server. Each MCP client maintains a dedicated connection with its corresponding MCP server.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 77.2,
+"score": 76.6,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-quiz-06-02": {
 "text": "Note that MCP server refers to the program that serves context data, regardless of where it runs. MCP servers can execute locally or remotely. For example, when Claude Desktop launches the filesystem server, the server runs locally on the same machine because it uses the STDIO transport. This is commonly referred to as a \"local\" MCP server. The official Sentry MCP server runs on the Sentry platform, and uses the Streamable HTTP transport. This is commonly referred to as a \"remote\" MCP server.",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 90.3,
+"score": 90.4,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-rg-quiz-06-03": {
@@ -3391,14 +3391,14 @@
 "text": "Deprecated: The Sampling feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to integrating directly with LLM provider APIs. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 109.7,
+"score": 109.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "ext-rg-quiz-06-05": {
 "text": "The server `name` (from `serverInfo`) is not guaranteed to be unique across servers and SHOULD NOT be relied upon for disambiguation.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 80.2,
+"score": 80.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-06-06": {
@@ -3412,7 +3412,7 @@
 "text": "`server/discover` lets a client query a server's supported protocol versions, capabilities, and identity before sending any other requests. Servers MUST implement it.",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 99.9,
+"score": 99.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "ext-rg-quiz-07-02": {
@@ -3426,7 +3426,7 @@
 "text": "A server MUST NOT rely on capabilities the client has not declared. If processing a request requires a capability the client did not include in `io.modelcontextprotocol/clientCapabilities`, the server MUST return a `MissingRequiredClientCapabilityError` (`-32021`) whose `data.requiredCapabilities` lists the missing capabilities. On HTTP, the response status MUST be `400 Bad Request`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 111.9,
+"score": 111.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-07-04": {
@@ -3447,21 +3447,21 @@
 "text": "`serverInfo` is self-reported by the server and is not verified by the protocol. It is intended for display, logging, and debugging. Clients SHOULD NOT use it to change their behavior, and SHOULD NOT rely on it for security decisions.",
 "src": "spec-2026-07-28/server/discover.md",
 "lvl": "spec",
-"score": 131.6,
+"score": 131.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/discover"
 },
 "ext-rg-quiz-08-01": {
 "text": "`{ \"type\": \"object\", \"additionalProperties\": false }` - accepts only empty objects `{}`",
 "src": "seps/1613-establish-json-schema-2020-12-as-default-dialect-f.md",
 "lvl": "docs",
-"score": 117.4,
+"score": 117.6,
 "url": "https://modelcontextprotocol.io/seps/1613-establish-json-schema-2020-12-as-default-dialect-f"
 },
 "ext-rg-quiz-08-02": {
 "text": "Default dialect: When a schema does not include a `$schema` field, it defaults to JSON Schema 2020-12",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 107.1,
+"score": 107.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-08-03": {
@@ -3482,14 +3482,14 @@
 "text": "JSON Schema 2020-12 permits `$ref` to point at an absolute URI. Implementations MUST NOT automatically dereference `$ref` values that resolve to a network URI.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 107.9,
+"score": 107.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-08-06": {
 "text": "Tool names SHOULD be between 1 and 128 characters in length (inclusive). - Tool names SHOULD be considered case-sensitive. - The following SHOULD be the only allowed characters: uppercase and lowercase ASCII letters (A-Z, a-z), digits (0-9), underscore (\\_), hyphen (-), and dot (.) - Tool names SHOULD NOT contain spaces, commas, or other special characters. - Tool names SHOULD be unique within a server. - Example valid tool names: - `getUser` - `DATA_EXPORT_v2` - `admin.tools.list`",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 163.2,
+"score": 162.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-09-01": {
@@ -3517,14 +3517,14 @@
 "text": "A `cacheScope` of `\"public\"` indicates that the response does not contain user-specific data and can be safely shared. Servers MUST be aware that responses with a `\"public\"` `cacheScope` may be shared between callers even if the Result is coming from an authenticated endpoint. For example, the Result from an authenticated `tools/list` call with a `\"public\"` `cacheScope` may be cached by a client and may be shared outside of the initial request's authorization context (i.e. different access tokens can leverage the same cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 125.3,
+"score": 125.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-quiz-09-05": {
 "text": "The MCP Registry uses namespace authentication to ensure that servers come from their claimed sources. Server names follow a reverse DNS format (like `io.github.username/server` or `com.example/server`) that ties them to verified GitHub accounts or domains.",
 "src": "registry/about.md",
 "lvl": "docs",
-"score": 79.9,
+"score": 79.8,
 "url": "https://modelcontextprotocol.io/registry/about"
 },
 "ext-rg-quiz-09-06": {
@@ -3573,7 +3573,7 @@
 "text": "Servers SHOULD return tools in a deterministic order (i.e., the same ordering across requests when the underlying set of tools has not changed). Deterministic ordering enables clients to reliably cache the tool list and improves LLM prompt cache hit rates when tools are included in model context.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 97.2,
+"score": 96.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-11-01": {
@@ -3622,7 +3622,7 @@
 "text": "If the requested resource does not exist, servers MUST return a JSON-RPC error with code `-32602` (Invalid Params). Servers SHOULD return `-32603` for internal errors.",
 "src": "spec-2026-07-28/server/resources.md",
 "lvl": "spec",
-"score": 96.1,
+"score": 95.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
 },
 "ext-rg-quiz-12-02": {
@@ -3636,35 +3636,35 @@
 "text": "The result contains the resource contents and two caching hints. `ttlMs` is how long the client may consider the result fresh, in milliseconds, and a `cacheScope` of `\"private\"` means that caches must not share it across authorization contexts:",
 "src": "docs/learn/server-concepts.md",
 "lvl": "docs",
-"score": 118.5,
+"score": 118.3,
 "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
 },
 "ext-rg-quiz-12-04": {
 "text": "Servers SHOULD use this scheme only when the client is able to fetch and load the resource directly from the web on its own—that is, it doesn’t need to read the resource via the MCP server.",
 "src": "spec-2026-07-28/server/resources.md",
 "lvl": "spec",
-"score": 107.4,
+"score": 107.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"
 },
 "ext-rg-quiz-12-05": {
 "text": "`\"private\"` | The response contains private data that is not meant to be shared between callers. Cached responses MAY be reused for the same authorization context. Caches MUST NOT be shared across authorization contexts (e.g. a different access token requires a different cache).",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 149.1,
+"score": 148.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-quiz-12-06": {
 "text": "To watch specific resources for changes, a client sends a `subscriptions/listen` request with the resource URIs listed in the `resourceSubscriptions` filter. Servers that support update notifications for individual resources declare `\"subscribe\": true` in their `resources` capability. The server delivers `notifications/resources/updated` on the resulting stream whenever a watched resource changes.",
 "src": "docs/learn/server-concepts.md",
 "lvl": "docs",
-"score": 92.0,
+"score": 91.8,
 "url": "https://modelcontextprotocol.io/docs/learn/server-concepts"
 },
 "ext-rg-quiz-13-01": {
 "text": "Prompts are designed to be user-controlled, meaning they are exposed from servers to clients with the intention of the user being able to explicitly select them for use. This refers to who decides when the prompt is used, not who authors its content. Prompt content is defined by the server.",
 "src": "spec-2026-07-28/server/prompts.md",
 "lvl": "spec",
-"score": 132.2,
+"score": 131.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "ext-rg-quiz-13-02": {
@@ -3692,7 +3692,7 @@
 "text": "Prompt messages MAY include links to Resources, to provide additional context or data without embedding the resource contents directly. In this case, the prompt message returns a URI that can be fetched by the client:",
 "src": "spec-2026-07-28/server/prompts.md",
 "lvl": "spec",
-"score": 89.1,
+"score": 88.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "ext-rg-quiz-13-06": {
@@ -3706,7 +3706,7 @@
 "text": "*Server-to-client interactions (MRTR). When the server needs input from the client — sampling, elicitation, or roots — it does not send its own JSON-RPC request. It returns an [`InputRequiredResult`][input-required-result] containing `inputRequests`, and the client retries the original request with the matching `inputResponses` (see [Multi Round-Trip Requests][mrtr]):",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 89.3,
+"score": 89.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-14-02": {
@@ -3741,21 +3741,21 @@
 "text": "*Privacy considerations: Servers must not use form mode to request sensitive information such as passwords, API keys, access tokens, or payment credentials. Those interactions belong in URL mode, which keeps the data out of band so it never passes through the client or the LLM context. Clients warn about suspicious requests and let users review form data before sending.",
 "src": "docs/learn/client-concepts.md",
 "lvl": "docs",
-"score": 109.9,
+"score": 109.6,
 "url": "https://modelcontextprotocol.io/docs/learn/client-concepts"
 },
 "ext-rg-quiz-15-01": {
 "text": "Deprecated: The Sampling feature is deprecated as of protocol version `2026-07-28` (SEP-2577). Under the feature lifecycle policy, it remains in the specification for at least twelve months after this revision's release before it becomes eligible for removal. New implementations SHOULD NOT adopt it; existing implementations SHOULD migrate to integrating directly with LLM provider APIs. See the deprecated features registry.",
 "src": "spec-2026-07-28/client/sampling.md",
 "lvl": "spec",
-"score": 122.8,
+"score": 122.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/client/sampling"
 },
 "ext-rg-quiz-15-02": {
 "text": "*Server-to-client interactions (MRTR). When the server needs input from the client — sampling, elicitation, or roots — it does not send its own JSON-RPC request. It returns an [`InputRequiredResult`][input-required-result] containing `inputRequests`, and the client retries the original request with the matching `inputResponses` (see [Multi Round-Trip Requests][mrtr]):",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 100.3,
+"score": 100.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-15-03": {
@@ -3769,35 +3769,35 @@
 "text": "When the field is present, the server MAY send `notifications/message` notifications at or above the requested level on the response stream of that request, before the final response. `notifications/message` is request-scoped: the server MUST NOT deliver it on a `subscriptions/listen` stream or on any stream other than the one carrying the response to the request that set the log level.",
 "src": "spec-2026-07-28/server/utilities/logging.md",
 "lvl": "spec",
-"score": 84.4,
+"score": 83.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/logging"
 },
 "ext-rg-quiz-15-05": {
 "text": "Remove `ping`, `logging/setLevel`, and `notifications/roots/list_changed`. Log level is now set per-request via `io.modelcontextprotocol/logLevel` in `_meta`; servers MUST NOT emit `notifications/message` for requests that did not include this field (SEP-2575).",
 "src": "spec-2026-07-28/changelog.md",
 "lvl": "spec",
-"score": 83.6,
+"score": 83.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
 },
 "ext-rg-quiz-15-06": {
 "text": "When the deprecation SEP reaches Final the deprecation is scheduled: the following changes land in the draft specification (`schema/draft/` and `docs/specification/draft/`). The feature becomes Deprecated when the revision carrying these changes is released as Current under the [versioning guide][versioning], and the minimum deprecation window is counted from that release. Anchoring the clock to the revision release means every feature deprecated in the same revision shares one earliest removal rather than each carrying a date derived from when its own SEP happened to land.",
 "src": "seps/2596-spec-feature-lifecycle-and-deprecation.md",
 "lvl": "docs",
-"score": 101.6,
+"score": 101.5,
 "url": "https://modelcontextprotocol.io/seps/2596-spec-feature-lifecycle-and-deprecation"
 },
 "ext-rg-quiz-16-01": {
 "text": "To receive change notifications (list changes, resource updates), the client sends a `subscriptions/listen` request; the reply is a long-lived stream of the requested notification types. Stream state is scoped to the request: if the underlying channel is lost, the client re-issues the request.",
 "src": "spec-2026-07-28/basic/patterns/index.md",
 "lvl": "spec",
-"score": 63.7,
+"score": 63.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns"
 },
 "ext-rg-quiz-16-02": {
 "text": "The server MUST send `notifications/subscriptions/acknowledged` as the first message carrying the subscription's ID in `_meta` under `io.modelcontextprotocol/subscriptionId`, and MUST NOT send any notification on the subscription before it. On stdio, where every subscription shares one channel, this ordering is defined per subscription ID and not per channel: messages belonging to other subscriptions MAY be interleaved before it.",
 "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
 "lvl": "spec",
-"score": 114.8,
+"score": 114.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
 },
 "ext-rg-quiz-16-03": {
@@ -3818,7 +3818,7 @@
 "text": "When the server ends a subscription on its own initiative (for example, during shutdown), it SHOULD respond to the original `subscriptions/listen` request with a completion result before closing the stream. The result carries no method-specific data beyond the standard result fields and subscription metadata. This is the JSON-RPC response to the long-lived request, correlated by its `id`, and signals that the subscription ended gracefully — as opposed to an abrupt transport drop, which carries no response.",
 "src": "spec-2026-07-28/basic/patterns/subscriptions.md",
 "lvl": "spec",
-"score": 142.5,
+"score": 142.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions"
 },
 "ext-rg-quiz-16-06": {
@@ -3867,7 +3867,7 @@
 "text": "After the user fills in the form, the client retries the call with a new `id`. The retry carries the user's answers in `inputResponses`, under the same `bookingConfirmation` key as the server's request, and the exact `requestState` value from the result:",
 "src": "docs/learn/client-concepts.md",
 "lvl": "docs",
-"score": 97.9,
+"score": 98.0,
 "url": "https://modelcontextprotocol.io/docs/learn/client-concepts"
 },
 "ext-rg-quiz-18-01": {
@@ -3909,42 +3909,42 @@
 "text": "A server MUST NOT rely on capabilities the client has not declared. If processing a request requires a capability the client did not include in `io.modelcontextprotocol/clientCapabilities`, the server MUST return a `MissingRequiredClientCapabilityError` (`-32021`) whose `data.requiredCapabilities` lists the missing capabilities. On HTTP, the response status MUST be `400 Bad Request`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 146.5,
+"score": 146.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-19-01": {
 "text": "Protocol semantics are identical on every transport. A transport is a binding: it defines how messages are framed and delivered, how request metadata is carried, and how cancellation and termination are signaled. It does not define what the messages mean: the message patterns are part of the core protocol and are the same on every binding. The binding pages specify the standard transports:",
 "src": "spec-2026-07-28/basic/transports/index.md",
 "lvl": "spec",
-"score": 116.6,
+"score": 116.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports"
 },
 "ext-rg-quiz-19-02": {
 "text": "The header value MUST match the `io.modelcontextprotocol/protocolVersion` field carried in the request body's `_meta`. If the values do not match, the server MUST reject the request with `400 Bad Request` and a `HeaderMismatch` JSON-RPC error (see Server Validation).",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 142.4,
+"score": 142.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-19-03": {
 "text": "Per [RFC 9110][rfc9110-values], HTTP header field values must consist of visible ASCII characters (0x21-0x7E), space (0x20), and horizontal tab (0x09). When a value cannot be safely represented as a plain ASCII header value (e.g., it contains non-ASCII characters, control characters, or has leading/trailing whitespace), clients MUST use Base64 encoding of the UTF-8 representation with the following format:",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 169.4,
+"score": 169.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-19-04": {
 "text": "Servers MUST validate the `Origin` header on all incoming connections to prevent DNS rebinding attacks. - If the `Origin` header is present and invalid, servers MUST respond with HTTP 403 Forbidden. The HTTP response body MAY comprise a JSON-RPC _error response_ that has no `id`. 2. When running locally, servers SHOULD bind only to localhost (127.0.0.1) rather than all network interfaces (0.0.0.0). 3. Servers SHOULD implement proper authentication for all connections.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 156.3,
+"score": 156.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-19-05": {
 "text": "HTTP GET or DELETE to the MCP endpoint: respond with `405 Method Not Allowed`. - An `Mcp-Session-Id` header on a request: ignore it, and do not mint or echo session IDs. - A `Last-Event-ID` header: ignore it; streams are not resumable.",
 "src": "spec-2026-07-28/basic/transports/streamable-http.md",
 "lvl": "spec",
-"score": 124.1,
+"score": 124.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http"
 },
 "ext-rg-quiz-19-06": {
@@ -3979,28 +3979,28 @@
 "text": "Results produced by retrying a request through the multi round-trip requests mechanism&mdash;that is, requests carrying `inputResponses` or `requestState`&mdash;MUST NOT be cached, as they depend on inputs that are not part of the cache key.",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 114.6,
+"score": 114.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-quiz-20-05": {
 "text": "When a relevant notification is received while a cached response is still fresh, the notification invalidates the cached response and it should be considered immediately stale.",
 "src": "spec-2026-07-28/server/utilities/caching.md",
 "lvl": "spec",
-"score": 119.6,
+"score": 119.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/utilities/caching"
 },
 "ext-rg-quiz-20-06": {
 "text": "Servers SHOULD return tools in a deterministic order (i.e., the same ordering across requests when the underlying set of tools has not changed). Deterministic ordering enables clients to reliably cache the tool list and improves LLM prompt cache hit rates when tools are included in model context.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 93.1,
+"score": 92.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-21-01": {
 "text": "You could hold the connection open until the work finishes. Tasks solve problems that blocking cannot:",
 "src": "extensions/tasks/overview.md",
 "lvl": "docs",
-"score": 65.9,
+"score": 65.8,
 "url": "https://modelcontextprotocol.io/extensions/tasks/overview"
 },
 "ext-rg-quiz-21-02": {
@@ -4021,14 +4021,14 @@
 "text": "`input_required`: The server needs input from the client before the task can proceed. The `tasks/get` response will include outstanding requests in the `inputRequests` field. The client MUST inspect this field and SHOULD provide responses via the `inputResponses` field in subsequent `tasks/update` requests.",
 "src": "seps/2663-tasks-extension.md",
 "lvl": "docs",
-"score": 88.1,
+"score": 88.2,
 "url": "https://modelcontextprotocol.io/seps/2663-tasks-extension"
 },
 "ext-rg-quiz-21-05": {
 "text": "For tool calls that complete successfully at the protocol level but return an tool-level error (indicated by `isError: true` in the tool result), the task reaches `completed` status with the tool result in the `result` field:",
 "src": "seps/2663-tasks-extension.md",
 "lvl": "docs",
-"score": 114.4,
+"score": 114.3,
 "url": "https://modelcontextprotocol.io/seps/2663-tasks-extension"
 },
 "ext-rg-quiz-21-06": {
@@ -4056,7 +4056,7 @@
 "text": "For trust & safety and security, clients MUST consider tool annotations to be untrusted unless they come from trusted servers.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 95.4,
+"score": 95.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-22-04": {
@@ -4091,14 +4091,14 @@
 "text": "MCP clients MUST support both discovery mechanisms and use the resource metadata URL from the parsed `WWW-Authenticate` headers when present; otherwise, they MUST fall back to constructing and requesting the well-known URIs in the order listed above.",
 "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
 "lvl": "spec",
-"score": 95.4,
+"score": 95.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
 },
 "ext-rg-quiz-23-03": {
 "text": "OAuth 2.0 Authorization Server Metadata with path insertion: `https://auth.example.com/.well-known/oauth-authorization-server/tenant1` 2. OpenID Connect Discovery 1.0 with path insertion: `https://auth.example.com/.well-known/openid-configuration/tenant1` 3. OpenID Connect Discovery 1.0 path appending: `https://auth.example.com/tenant1/.well-known/openid-configuration`",
 "src": "spec-2026-07-28/basic/authorization/authorization-server-discovery.md",
 "lvl": "spec",
-"score": 121.9,
+"score": 122.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/authorization-server-discovery"
 },
 "ext-rg-quiz-23-04": {
@@ -4112,7 +4112,7 @@
 "text": "Before redirecting the user-agent, the client MUST record the `issuer` value from the selected authorization server's validated metadata document (see Authorization Server Metadata Discovery) and associate it with the same per-request record used to store the PKCE code verifier (and the `state` value, if used). The validation in this section depends on that recorded value being authentic; it provides no protection if the expected issuer was obtained from an unvalidated source.",
 "src": "spec-2026-07-28/basic/authorization/index.md",
 "lvl": "spec",
-"score": 138.5,
+"score": 138.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
 },
 "ext-rg-quiz-23-06": {
@@ -4126,21 +4126,21 @@
 "text": "Clients that use pre-registered credentials, or persist client credentials obtained via Dynamic Client Registration, MUST associate those credentials with the specific authorization server that issued them, keyed by the authorization server's `issuer` identifier. When the authorization server changes (detected via updated protected resource metadata), clients MUST NOT reuse client credentials from a different authorization server and MUST re-register with the new authorization server.",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 112.3,
+"score": 112.5,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "ext-rg-quiz-24-02": {
 "text": "MUST validate that the fetched document's `client_id` matches the URL exactly",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 130.6,
+"score": 130.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "ext-rg-quiz-24-03": {
 "text": "Native applications (desktop applications, mobile apps, CLI tools, and locally-hosted web applications accessed via `localhost`) SHOULD use `application_type: \"native\"` - Web applications (remote browser-based applications served from a non-local host) SHOULD use `application_type: \"web\"`",
 "src": "spec-2026-07-28/basic/authorization/client-registration.md",
 "lvl": "spec",
-"score": 125.2,
+"score": 124.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/client-registration"
 },
 "ext-rg-quiz-24-04": {
@@ -4154,14 +4154,14 @@
 "text": "MCP proxy servers using static client IDs MUST obtain user consent for each dynamically registered client before forwarding to third-party authorization servers (which may require additional consent).",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 198.4,
+"score": 197.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "ext-rg-quiz-24-06": {
 "text": "The OAuth Client Credentials extension solves this by letting a client authenticate using application-level credentials (a client ID and secret, or a signed JWT assertion) rather than delegated user credentials. The client proves its identity directly to the authorization server, which issues an access token without requiring a browser redirect or user interaction.",
 "src": "extensions/auth/oauth-client-credentials.md",
 "lvl": "docs",
-"score": 71.4,
+"score": 71.5,
 "url": "https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials"
 },
 "ext-rg-quiz-25-01": {
@@ -4182,7 +4182,7 @@
 "text": "Scope accumulation across operations is a client-side responsibility. Clients SHOULD compute the union of previously requested scopes and newly challenged scopes when initiating re-authorization, as described in Step-Up Authorization Flow. This allows servers to remain stateless with respect to client scope sets while ensuring clients do not lose previously granted permissions.",
 "src": "docs/tutorials/security/security_best_practices.md",
 "lvl": "docs",
-"score": 102.2,
+"score": 102.1,
 "url": "https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices"
 },
 "ext-rg-quiz-25-04": {
@@ -4196,14 +4196,14 @@
 "text": "After the user fills in the form, the client retries the call with a new `id`. The retry carries the user's answers in `inputResponses`, under the same `bookingConfirmation` key as the server's request, and the exact `requestState` value from the result:",
 "src": "docs/learn/client-concepts.md",
 "lvl": "docs",
-"score": 110.0,
+"score": 110.1,
 "url": "https://modelcontextprotocol.io/docs/learn/client-concepts"
 },
 "ext-rg-quiz-25-06": {
 "text": "Servers that declare the `tools` capability MUST respond to `tools/list` requests with the set of tools currently available to the requesting client. This set MAY be empty and MAY change over time (see List Changed Notification), but MUST NOT vary per-connection or as a side effect of other requests on the connection. The set MAY vary by the authorization presented on the request — for example, returning only the tools the caller's granted scopes permit — since credentials are per-request input, not connection state.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 155.6,
+"score": 155.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-26-01": {
@@ -4224,14 +4224,14 @@
 "text": "If the MCP server makes requests to upstream APIs, it may act as an OAuth client to them. The access token used at the upstream API is a separate token, issued by the upstream authorization server. The MCP server MUST NOT pass through the token it received from the MCP client.",
 "src": "spec-2026-07-28/basic/authorization/security-considerations.md",
 "lvl": "spec",
-"score": 79.2,
+"score": 79.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/security-considerations"
 },
 "ext-rg-quiz-26-04": {
 "text": "Implementations MAY offer an opt-in mode that fetches non-local `$ref`s but it MUST be disabled by default and SHOULD enforce an allowlist of hosts or at minimum reject loopback, link-local, and private network addresses, apply timeouts and size limits, and log dereferenced URIs.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 73.9,
+"score": 73.8,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-26-05": {
@@ -4245,14 +4245,14 @@
 "text": "Tool name uniqueness is scoped to a single server. Clients or proxies that aggregate tools from multiple servers MAY encounter naming collisions (for example, two servers each exposing a `search` tool) and SHOULD implement a disambiguation strategy such as prefixing tool names with a server identifier.",
 "src": "spec-2026-07-28/server/tools.md",
 "lvl": "spec",
-"score": 109.6,
+"score": 109.4,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
 },
 "ext-rg-quiz-27-01": {
 "text": "The Model Context Protocol (MCP) is a stateless protocol: all the information needed to process a request is contained in the request itself. A server processes each request independently; no state should be inferred from previous requests, even those on the same connection or stream.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 74.7,
+"score": 74.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-27-02": {
@@ -4301,7 +4301,7 @@
 "text": "MCP servers MUST implement OAuth 2.0 Protected Resource Metadata (RFC9728). MCP clients MUST use OAuth 2.0 Protected Resource Metadata for authorization server discovery.",
 "src": "spec-2026-07-28/basic/authorization/index.md",
 "lvl": "spec",
-"score": 77.7,
+"score": 77.6,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization"
 },
 "ext-rg-quiz-28-03": {
@@ -4336,7 +4336,7 @@
 "text": "Prompts are designed to be user-controlled, meaning they are exposed from servers to clients with the intention of the user being able to explicitly select them for use. This refers to who decides when the prompt is used, not who authors its content. Prompt content is defined by the server.",
 "src": "spec-2026-07-28/server/prompts.md",
 "lvl": "spec",
-"score": 70.2,
+"score": 70.1,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/prompts"
 },
 "ext-rg-quiz-29-02": {
@@ -4350,7 +4350,7 @@
 "text": "The OAuth Client Credentials extension (`io.modelcontextprotocol/oauth-client-credentials`) adds support for the OAuth 2.0 client credentials flow to MCP. This enables automated systems to connect to MCP servers without interactive user authorization.",
 "src": "extensions/auth/oauth-client-credentials.md",
 "lvl": "docs",
-"score": 80.0,
+"score": 80.1,
 "url": "https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials"
 },
 "ext-rg-quiz-29-04": {
@@ -4371,14 +4371,14 @@
 "text": "If one party supports an extension but the other does not, the supporting party MUST either revert to core protocol behavior or reject the request with an appropriate error if the extension is mandatory. Extensions SHOULD document their expected fallback behavior. For example, a server offering UI-enhanced tools should still return meaningful text content for clients that do not support the UI extension, while a server requiring a specific authentication extension MAY reject connections from clients that do not support it.",
 "src": "seps/2133-extensions.md",
 "lvl": "docs",
-"score": 105.4,
+"score": 104.7,
 "url": "https://modelcontextprotocol.io/seps/2133-extensions"
 },
 "ext-rg-quiz-30-01": {
 "text": "Extensions are identified using a unique _extension identifier_ with the format: `{vendor-prefix}/{extension-name}`, e.g. `io.modelcontextprotocol/oauth-client-credentials`. Identifiers follow the same rules as `_meta` keys, with a mandatory prefix. Official extensions use the `io.modelcontextprotocol` vendor prefix.",
 "src": "extensions/overview.md",
 "lvl": "docs",
-"score": 106.0,
+"score": 105.9,
 "url": "https://modelcontextprotocol.io/extensions/overview"
 },
 "ext-rg-quiz-30-02": {
@@ -4399,7 +4399,7 @@
 "text": "A server MUST NOT rely on capabilities the client has not declared. If processing a request requires a capability the client did not include in `io.modelcontextprotocol/clientCapabilities`, the server MUST return a `MissingRequiredClientCapabilityError` (`-32021`) whose `data.requiredCapabilities` lists the missing capabilities. On HTTP, the response status MUST be `400 Bad Request`.",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 108.5,
+"score": 108.2,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-rg-quiz-30-05": {
@@ -4413,14 +4413,14 @@
 "text": "Breaking changes keep the extension's identifier. A new identifier (e.g., `io.modelcontextprotocol/my-extension-v2`) is used only when old and new behavior must coexist under one protocol revision.",
 "src": "extensions/overview.md",
 "lvl": "docs",
-"score": 135.4,
+"score": 135.3,
 "url": "https://modelcontextprotocol.io/extensions/overview"
 },
 "ext-rg-quiz-31-01": {
 "text": "MCP Apps let tools return rich, interactive interfaces instead of plain text. When a tool declares a UI resource, the host renders it in a sandboxed iframe, and users interact with it directly in the conversation.",
 "src": "blog/2026-01-26-mcp-apps.md",
 "lvl": "blog",
-"score": 56.3,
+"score": 56.0,
 "url": "https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/"
 },
 "ext-rg-quiz-31-02": {
@@ -4431,31 +4431,31 @@
 "url": "https://modelcontextprotocol.io/extensions/client-matrix"
 },
 "ext-rg-quiz-31-03": {
-"text": "`resourceUri`: The `ui://` scheme tells hosts this is an MCP App resource. The path structure is arbitrary. - `registerAppTool`: Registers a tool with the `_meta.ui.resourceUri` field. When the host calls this tool, the UI is fetched and rendered, and the tool result is passed to it upon arrival. - `registerAppResource`: Serves the bundled HTML when the host requests the UI resource. - Express server: Exposes the MCP server over HTTP on port 3001.",
-"src": "extensions/apps/build.md",
+"text": "Host MUST use `resources/read` to fetch the referenced resource URI",
+"src": "ext-apps/2026-01-26/apps.md",
 "lvl": "docs",
-"score": 64.3,
-"url": "https://modelcontextprotocol.io/extensions/apps/build"
+"score": 63.4,
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-quiz-31-04": {
-"text": "This specification focuses on HTML content (`text/html;profile=mcp-app`) as the initial content type, with extensibility for future formats.",
-"src": "seps/1865-mcp-apps-interactive-user-interfaces-for-mcp.md",
+"src": "ext-apps/2026-01-26/apps.md",
+"text": "`mimeType` MUST be `text/html;profile=mcp-app` (other types reserved for future extensions)",
 "lvl": "docs",
-"score": 61.6,
-"url": "https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp"
+"score": 99,
+"url": "https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx"
 },
 "ext-rg-quiz-31-05": {
 "text": "If one party supports an extension but the other does not, the supporting party MUST either revert to core protocol behavior or reject the request with an appropriate error if the extension is mandatory. Extensions SHOULD document their expected fallback behavior. For example, a server offering UI-enhanced tools should still return meaningful text content for clients that do not support the UI extension, while a server requiring a specific authentication extension MAY reject connections from clients that do not support it.",
 "src": "seps/2133-extensions.md",
 "lvl": "docs",
-"score": 72.1,
+"score": 71.7,
 "url": "https://modelcontextprotocol.io/seps/2133-extensions"
 },
 "ext-rg-quiz-31-06": {
 "text": "MCP Apps run in a sandboxed iframe, which provides strong isolation from the host application. The sandbox prevents your app from accessing the parent window's DOM, reading the host's cookies or local storage, navigating the parent page, or executing scripts in the parent context.",
 "src": "extensions/apps/overview.md",
 "lvl": "docs",
-"score": 84.8,
+"score": 82.9,
 "url": "https://modelcontextprotocol.io/extensions/apps/overview"
 },
 "ext-rg-quiz-32-01": {
@@ -4469,14 +4469,14 @@
 "text": "This namespace system ensures that only the legitimate owner of a GitHub account or domain can publish servers under that namespace, providing trust and accountability in the ecosystem. For details on authentication methods, see the Authentication guide.",
 "src": "registry/about.md",
 "lvl": "docs",
-"score": 85.3,
+"score": 85.2,
 "url": "https://modelcontextprotocol.io/registry/about"
 },
 "ext-rg-quiz-32-03": {
 "text": "MCP Server Cards describe _remote_ MCP connectivity only. The MCP Registry's `server.json` separately describes registry entries, including locally installable packages and their runtime configuration. The Registry owns that schema; the Server Card extension does not define a `Server` superset or package-installation types.",
 "src": "seps/2127-mcp-server-cards.md",
 "lvl": "docs",
-"score": 70.8,
+"score": 70.7,
 "url": "https://modelcontextprotocol.io/seps/2127-mcp-server-cards"
 },
 "ext-rg-quiz-32-04": {
@@ -4511,7 +4511,7 @@
 "text": "Modern | Modern | Works. `server/discover` is optional; version mismatches surface as `UnsupportedProtocolVersionError` and the client retries with a mutually supported version.",
 "src": "spec-2026-07-28/basic/versioning.md",
 "lvl": "spec",
-"score": 93.8,
+"score": 94.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/versioning"
 },
 "ext-rg-quiz-33-03": {
@@ -4546,7 +4546,7 @@
 "text": "Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need.",
 "src": "spec-2026-07-28/index.md",
 "lvl": "spec",
-"score": 94.7,
+"score": 94.3,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/"
 },
 "ext-hf-unit1-quiz1-q2": {
@@ -4567,7 +4567,7 @@
 "text": "MCP Host: The AI application that coordinates and manages one or multiple MCP clients",
 "src": "docs/learn/architecture.md",
 "lvl": "docs",
-"score": 45.3,
+"score": 44.6,
 "url": "https://modelcontextprotocol.io/docs/learn/architecture"
 },
 "ext-hf-unit1-quiz1-q5": {
@@ -4609,7 +4609,7 @@
 "text": "All messages between MCP clients and servers MUST follow the JSON-RPC 2.0 specification. The protocol defines these types of messages:",
 "src": "spec-2026-07-28/basic/index.md",
 "lvl": "spec",
-"score": 90.3,
+"score": 90.0,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic"
 },
 "ext-hf-unit3_1-quiz1-q1": {
@@ -4665,7 +4665,7 @@
 "text": "In the stdio transport, the client launches the MCP server as a subprocess. The two ends communicate over the subprocess's standard streams:",
 "src": "spec-2026-07-28/basic/transports/stdio.md",
 "lvl": "spec",
-"score": 86.0,
+"score": 85.9,
 "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio"
 },
 "ext-hf-unit3_1-quiz2-q3": {

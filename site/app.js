@@ -237,7 +237,7 @@
     if (!q.lvl) return "";
     var lvl = '<span class="chip lvl-' + q.lvl + '">' + esc(t("lvl_" + q.lvl)) + "</span>";
     if (!q.cite) return '<div class="cite small muted"><b>' + t("citeLabel") + ":</b> " + t("citeNone") + " " + lvl + "</div>";
-    var u = /^https:\/\/(blog\.)?modelcontextprotocol\.io\//.test(q.cite.url || "") ? q.cite.url : "";
+    var u = /^https:\/\/((blog\.)?modelcontextprotocol\.io|github\.com\/modelcontextprotocol)\//.test(q.cite.url || "") ? q.cite.url : "";
     return '<blockquote class="cite small"><b>' + t("citeLabel") + ":</b> «" + esc(q.cite.text) + "» " +
       (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(u.replace(/^https:\/\//, "")) + "</a> " : "") + lvl + "</blockquote>";
   }

@@ -73,6 +73,7 @@ Dettagli e fonti: [`sources/exam/lf-exam-page.md`](sources/exam/lf-exam-page.md)
 - **Simulatore**, con due modalità:
   - **esame:** 60 domande in 90 minuti, distribuite per peso di dominio, correzione alla fine, soglia 75%;
   - **studio:** feedback immediato. Quando sbagli compare la teoria del topic, con il link alla pagina di spiegazione.
+- **Fonte di ogni risposta:** sotto la spiegazione c'è la frase esatta della spec 2026-07-28 o della documentazione ufficiale che giustifica la risposta, con link e livello della fonte (spec, docs, blog). Le domande sostenute solo da un post del blog restano nella pratica ma non entrano mai negli esami.
 - **Filtri:** set di domande (originali, difficili, rohitg00, Hugging Face, tutte), difficoltà e domini.
 - **Ripasso dilazionato:** le domande sbagliate o tirate a indovinare tornano oggi, poi dopo 1, 3 e 7 giorni, ed escono dopo quattro risposte giuste di fila (due, se il ripasso dilazionato è disattivato).
 - **Confidenza:** dopo ogni risposta indichi se eri sicuro, in dubbio o se hai tirato a indovinare. Le risposte giuste ma indovinate vanno comunque nel ripasso.

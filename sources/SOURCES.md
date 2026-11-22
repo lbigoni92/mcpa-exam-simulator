@@ -27,6 +27,16 @@ Tutte le fonti sono **ufficiali** salvo dove indicato. Raccolte il 2026-11-22.
 | `blog/` | post ufficiali dal 2025-11 (AAIF, release 2026-07-28, SDK, roadmap, extensions, tool annotations) |
 | `exam/` | info pubbliche sull'esame (pagina LF, press release, blog LF/AAIF) |
 
+## MCP Apps (repo `modelcontextprotocol/ext-apps`)
+- `ext-apps/2026-01-26/apps.md`: spec stabile di MCP Apps (`specification/2026-01-26/apps.mdx`, commit `ea3e9d0`, 2026-11-10).
+  Copiata il 2026-11-22 perché le pagine del sito non riportano `visibility`, `csp` e `permissions` di `_meta.ui`.
+  La bozza (`specification/draft/`) non è usata: non è normativa.
+
+## Controllo mensile
+`python3 site/build/check_sources.py` riscarica i due repository e confronta ogni file con queste copie (spec 2026-07-28 e
+schema, docs, extensions, registry, community, SEP, MCP Apps), più eventuali nuove revisioni. Ultimo controllo: 2026-11-22,
+nessun cambiamento (repo spec ancora a `862397c`).
+
 ## Pagina esame
 Vedi `exam/lf-exam-page.md`. Il training portal LF (`trainingportal.linuxfoundation.org`) richiede login e **non** è stato consultato.
 Seconda passata (2026-11-22), lette anche:

@@ -19,7 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 SRC = os.path.join(ROOT, "sources")
 DIRS = {"spec-2026-07-28": "spec", "spec-older-changelogs": "spec", "docs": "docs", "community": "docs", "extensions": "docs",
-        "registry": "docs", "seps": "docs", "blog": "blog"}
+        "registry": "docs", "seps": "docs", "ext-apps": "docs", "blog": "blog"}
 # spec-2025-11-25 è citabile solo con un override (es. il suo changelog): non entra nell'indice BM25, che
 # altrimenti sceglierebbe testo superato per le domande sulla 2026-07-28
 LVL = dict(DIRS, **{"spec-2025-11-25": "spec"})
@@ -38,6 +38,8 @@ def url_of(rel):
         return f"https://modelcontextprotocol.io/specification/{top[5:]}/" + rest
     if top == "spec-older-changelogs":
         return f"https://modelcontextprotocol.io/specification/{rest[:10]}/changelog"
+    if top == "ext-apps":  # spec stabile di MCP Apps, nel repo dell'estensione
+        return f"https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/{rest[:-5] if rest.endswith('/apps') else rest}/apps.mdx"
     if top == "blog":
         return "https://blog.modelcontextprotocol.io/posts/" + rest.split("/")[0] + "/"
     return f"https://modelcontextprotocol.io/{top}/{rest}".rstrip("/")

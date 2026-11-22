@@ -74,7 +74,8 @@
   "lvl": "blog"
  },
  "ext-rg-mcpa-f-diag-028": {
-  "lvl": "blog"
+  "src": "ext-apps/2026-01-26/apps.md",
+  "text": "visibility defaults to [\"model\", \"app\"] if omitted. \"model\": Tool is visible to and callable by the agent. \"app\": Tool is callable by the app from the same server connection only."
  },
  "ext-rg-mcpa-f-diag-030": {
   "src": "community/sdk-tiers.md",
@@ -131,8 +132,8 @@
   "find": "MUST use the Authorization request header"
  },
  "ext-rg-mcpa-f-m1-052": {
-  "src": "extensions/apps/overview.md",
-  "find": "request additional capabilities"
+  "src": "ext-apps/2026-01-26/apps.md",
+  "text": "Sandbox permissions requested by the UI. Servers declare which browser capabilities their UI needs. Hosts MAY honor these by setting appropriate iframe allow attributes. Apps SHOULD NOT assume permissions are granted; use JS feature detection as fallback."
  },
  "ext-rg-mcpa-f-m1-054": {
   "lvl": "blog"
@@ -144,10 +145,6 @@
  "ext-rg-mcpa-f-m1-057": {
   "src": "extensions/overview.md",
   "find": "experimental-ext-` prefix"
- },
- "ext-rg-mcpa-f-m1-059": {
-  "src": "seps/1865-mcp-apps-interactive-user-interfaces-for-mcp.md",
-  "find": "focuses on HTML content"
  },
  "ext-rg-mcpa-f-m2-003": {
   "src": "docs/learn/versioning.md",
@@ -245,7 +242,8 @@
   "lvl": "blog"
  },
  "ext-rg-mcpa-f-m3-050": {
-  "lvl": "blog"
+  "src": "ext-apps/2026-01-26/apps.md",
+  "find": "Host MUST NOT include tools in the agent"
  },
  "ext-rg-mcpa-f-m3-051": {
   "src": "community/sdk-tiers.md",
@@ -652,6 +650,22 @@
  },
  "o-D5-02": {
   "lvl": "blog"
+ },
+ "ext-rg-mcpa-f-m1-059": {
+  "src": "ext-apps/2026-01-26/apps.md",
+  "find": "`mimeType` MUST be `text/html;profile=mcp-app`"
+ },
+ "ext-rg-quiz-31-04": {
+  "src": "ext-apps/2026-01-26/apps.md",
+  "find": "`mimeType` MUST be `text/html;profile=mcp-app`"
+ },
+ "ext-rg-mcpa-f-m2-055": {
+  "src": "ext-apps/2026-01-26/apps.md",
+  "find": "`mimeType` MUST be `text/html;profile=mcp-app`"
+ },
+ "ext-rg-mcpa-f-m2-056": {
+  "src": "ext-apps/2026-01-26/apps.md",
+  "text": "_meta.ui.csp is an object: connectDomains (origins for network requests: fetch/XHR/WebSocket), resourceDomains (origins for static resources), frameDomains (origins for nested iframes, frame-src directive), baseUriDomains (allowed base URIs, base-uri directive)."
  },
  "ext-hf-unit3_1-quiz1-q1": {
   "lvl": "blog"
