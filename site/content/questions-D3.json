@@ -120,16 +120,16 @@
     "en": "protocolVersion and clientCapabilities"
    },
    {
-    "it": "clientInfo e sessionId",
-    "en": "clientInfo and sessionId"
+    "it": "clientInfo e il valore dell'Mcp-Session-Id",
+    "en": "clientInfo and the Mcp-Session-Id value"
    },
    {
-    "it": "protocolVersion e clientInfo",
-    "en": "protocolVersion and clientInfo"
+    "it": "protocolVersion, clientInfo e sessionId",
+    "en": "protocolVersion, clientInfo and sessionId"
    },
    {
-    "it": "progressToken e logLevel",
-    "en": "progressToken and logLevel"
+    "it": "progressToken e il logLevel richiesto",
+    "en": "progressToken and the requested logLevel"
    }
   ],
   "c": [
@@ -186,16 +186,16 @@
   },
   "o": [
    {
-    "it": "Legare il carrello all'Mcp-Session-Id",
-    "en": "Bind the cart to the Mcp-Session-Id"
+    "it": "Legare il carrello all'Mcp-Session-Id assegnato all'initialize",
+    "en": "Bind the cart to the Mcp-Session-Id assigned at initialize"
    },
    {
-    "it": "Usare sticky sessions sul load balancer",
-    "en": "Use sticky sessions on the load balancer"
+    "it": "Usare sticky sessions sul load balancer per tenerlo in memoria",
+    "en": "Use sticky sessions on the load balancer to keep it in memory"
    },
    {
-    "it": "Salvarlo nel campo clientInfo",
-    "en": "Store it in the clientInfo field"
+    "it": "Salvarlo nel campo clientInfo che il client invia ogni volta",
+    "en": "Store it in the clientInfo field the client sends each time"
    },
    {
     "it": "Restituire un handle esplicito (es. cart_id) da passare come argomento",
@@ -260,16 +260,16 @@
     "en": "That the server is legacy and it should fall back to initialize"
    },
    {
-    "it": "Che il server è moderno ma lento: riprovare all'infinito",
-    "en": "That the server is modern but slow: retry forever"
+    "it": "Che il server è moderno ma lento, quindi deve riprovare all'infinito",
+    "en": "That the server is modern but slow, so it should retry forever"
    },
    {
-    "it": "Che deve inviare -32022 al server",
-    "en": "That it should send -32022 to the server"
+    "it": "Che deve inviare l'errore -32022 al server e aspettare",
+    "en": "That it should send error -32022 to the server and wait"
    },
    {
-    "it": "Che deve passare a HTTP",
-    "en": "That it should switch to HTTP"
+    "it": "Che stdio non è supportato e deve passare a HTTP",
+    "en": "That stdio is unsupported and it should switch to HTTP"
    }
   ],
   "c": [
@@ -577,12 +577,12 @@
     "en": "The progress value must increase with each notification; total is optional"
    },
    {
-    "it": "total è obbligatorio",
-    "en": "total is required"
+    "it": "total è obbligatorio e deve restare uguale in ogni notifica",
+    "en": "total is required and must stay the same in every notification"
    },
    {
-    "it": "progress deve essere un intero",
-    "en": "progress must be an integer"
+    "it": "progress deve essere un intero tra 0 e 100, come una percentuale",
+    "en": "progress must be an integer between 0 and 100, like a percentage"
    },
    {
     "it": "Ogni notifica di progress azzera il timeout senza limiti",
@@ -1029,20 +1029,20 @@
   },
   "o": [
    {
-    "it": "content",
-    "en": "content"
+    "it": "content, in un blocco di testo",
+    "en": "content, inside a text block"
    },
    {
     "it": "structuredContent",
     "en": "structuredContent"
    },
    {
-    "it": "annotations",
-    "en": "annotations"
+    "it": "annotations del risultato",
+    "en": "annotations of the result"
    },
    {
-    "it": "_meta",
-    "en": "_meta"
+    "it": "_meta del risultato",
+    "en": "_meta of the result"
    }
   ],
   "c": [
@@ -1380,20 +1380,20 @@
   },
   "o": [
    {
-    "it": "Che il flusso sulla pagina è completato con successo",
-    "en": "That the flow on the page completed successfully"
+    "it": "Che il flusso sulla pagina è completato con successo e il token è pronto",
+    "en": "That the flow on the page completed successfully and the token is ready"
    },
    {
     "it": "Solo che ha acconsentito ad aprire l'URL; l'esito si scopre al retry",
     "en": "Only that they consented to open the URL; the outcome is discovered on retry"
    },
    {
-    "it": "Che il client ha ricevuto il token",
-    "en": "That the client received the token"
+    "it": "Che il client ha già ricevuto il token OAuth dalla pagina",
+    "en": "That the client has already received the OAuth token from the page"
    },
    {
-    "it": "Che il server può fare passthrough del token",
-    "en": "That the server can pass the token through"
+    "it": "Che il server ora può fare passthrough del token dell'utente verso l'API",
+    "en": "That the server can now pass the user's token through to the API"
    }
   ],
   "c": [
@@ -1415,20 +1415,20 @@
   },
   "o": [
    {
-    "it": "Usare l'estensione Tasks",
-    "en": "Use the Tasks extension"
+    "it": "Spostare il lavoro sull'estensione Tasks",
+    "en": "Move the work to the Tasks extension"
    },
    {
     "it": "Chiamare direttamente le API del provider LLM",
     "en": "Call the LLM provider's APIs directly"
    },
    {
-    "it": "Usare elicitation",
-    "en": "Use elicitation"
+    "it": "Usare elicitation per chiedere al modello dell'utente",
+    "en": "Use elicitation to ask the user's model"
    },
    {
-    "it": "Usare includeContext allServers",
-    "en": "Use includeContext allServers"
+    "it": "Usare invece includeContext: allServers",
+    "en": "Use includeContext: allServers instead"
    }
   ],
   "c": [

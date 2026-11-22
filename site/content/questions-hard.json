@@ -1212,8 +1212,8 @@
   },
   "o": [
    {
-    "it": "Nulla: l'hash della descrizione coincide",
-    "en": "Nothing: the description hash matches"
+    "it": "Nulla: l'hash della descrizione coincide ancora con l'approvazione",
+    "en": "Nothing: the description hash still matches the approval"
    },
    {
     "it": "Trattarlo come definizione cambiata e chiedere una nuova approvazione",
@@ -1247,8 +1247,8 @@
   },
   "o": [
    {
-    "it": "Lo esegue senza conferma, come indicato",
-    "en": "Runs it without confirmation, as indicated"
+    "it": "Lo esegue senza conferma, come indica l'annotation",
+    "en": "Runs it without confirmation, as the annotation indicates"
    },
    {
     "it": "Tratta le annotation come non fidate e chiede conferma",
@@ -1389,8 +1389,8 @@
   },
   "o": [
    {
-    "it": "OAuth Client Credentials con JWT assertion",
-    "en": "OAuth Client Credentials with a JWT assertion"
+    "it": "OAuth Client Credentials con una JWT assertion per dipendente",
+    "en": "OAuth Client Credentials with a JWT assertion per employee"
    },
    {
     "it": "Enterprise-Managed Authorization con ID-JAG emessi dall'IdP",

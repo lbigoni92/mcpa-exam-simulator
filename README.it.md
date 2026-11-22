@@ -79,7 +79,7 @@ Dettagli e fonti: [`sources/exam/lf-exam-page.md`](sources/exam/lf-exam-page.md)
 - **Tempi e ritmo:** durante l'esame un indicatore dice quanto sei in anticipo o in ritardo rispetto a 90 secondi per domanda.
 - **Esame adattivo:** 60 domande con la distribuzione ufficiale per dominio, scelte tra quelle da ripassare, sbagliate di recente, mai viste e degli argomenti più deboli.
 - **Flashcard:** 200 carte generate dai punti del corso (codici di errore, header, metodi, campi, RFC, MUST/SHOULD/MAY), a partire dai punti deboli, con ripetizione a scatole (Leitner).
-- **Impostazioni:** ripasso dilazionato, confidenza e analisi dei tempi si possono disattivare (di default sono attivi). Da qui si esportano e importano i progressi in un file JSON, utile anche per passare da Docker a Python e viceversa.
+- **Impostazioni:** ripasso dilazionato, confidenza, analisi dei tempi e domande a risposta multipla nelle prove d'esame si possono disattivare (di default sono attivi; le pagine pubbliche LF non dicono se l'esame vero ha domande a risposta multipla). Da qui si esportano e importano i progressi in un file JSON, utile anche per passare da Docker a Python e viceversa.
 - **Progressi:**
   - andamento nel tempo di esami e sessioni di studio, con la linea del 75%;
   - trend per dominio e topic più deboli;

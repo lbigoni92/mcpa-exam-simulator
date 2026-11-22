@@ -173,7 +173,7 @@ def check_answer(c, qid, selected):
     return 1 if sorted(int(x) for x in selected) == corr and corr else 0
 
 
-SETTINGS_DEFAULT = {"srs": True, "confidence": True, "pacing": True}
+SETTINGS_DEFAULT = {"srs": True, "confidence": True, "pacing": True, "examMulti": True}
 SRS_DAYS = [0, 1, 3, 7]   # box 0..3: giorni prima del prossimo ripasso; al box 4 la domanda esce dalla coda
 CARD_DAYS = [0, 1, 3, 7, 14, 30]
 

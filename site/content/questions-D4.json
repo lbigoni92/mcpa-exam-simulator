@@ -10,20 +10,20 @@
   },
   "o": [
    {
-    "it": "Perché possono superare il limite di token del modello",
-    "en": "Because they can exceed the model's token limit"
+    "it": "Perché possono superare il limite di token del modello e troncare il system prompt",
+    "en": "Because they can exceed the model's token limit and truncate the system prompt"
    },
    {
     "it": "Perché i tool equivalgono a esecuzione di codice e le descrizioni non sono fidate se il server non lo è",
     "en": "Because tools amount to code execution and descriptions are untrusted unless the server is trusted"
    },
    {
-    "it": "Perché le descrizioni sono firmate dal registry e non vanno modificate",
-    "en": "Because descriptions are signed by the registry and must not be modified"
+    "it": "Perché le descrizioni sono firmate dal registry e ogni modifica rompe la firma",
+    "en": "Because descriptions are signed by the registry and any change breaks the signature"
    },
    {
-    "it": "Perché il server può cambiarle solo con un nuovo initialize",
-    "en": "Because the server can only change them with a new initialize"
+    "it": "Perché il server può cambiarle solo forzando un nuovo handshake initialize",
+    "en": "Because the server can only change them by forcing a new initialize handshake"
    }
   ],
   "c": [
@@ -151,20 +151,20 @@
   },
   "o": [
    {
-    "it": "Accettarlo: la firma è valida",
-    "en": "Accept it: the signature is valid"
+    "it": "Accettarlo: firma e issuer sono validi",
+    "en": "Accept it: the signature and issuer are valid"
    },
    {
-    "it": "Accettarlo se gli scope coincidono",
-    "en": "Accept it if the scopes match"
+    "it": "Accettarlo se gli scope coincidono con quelli del tool",
+    "en": "Accept it if the scopes match the requested tool"
    },
    {
     "it": "Rifiutarlo: l'audience non è il server MCP",
     "en": "Reject it: the audience is not the MCP server"
    },
    {
-    "it": "Inoltrarlo all'altra API",
-    "en": "Forward it to the other API"
+    "it": "Inoltrarlo all'altra API per conto dell'utente",
+    "en": "Forward it to the other API on the user's behalf"
    }
   ],
   "c": [
@@ -327,20 +327,20 @@
   },
   "o": [
    {
-    "it": "scopes_supported della PRM",
-    "en": "scopes_supported from the PRM"
+    "it": "scopes_supported della Protected Resource Metadata",
+    "en": "scopes_supported from the Protected Resource Metadata"
    },
    {
     "it": "Lo scope nel WWW-Authenticate della risposta",
     "en": "The scope in the response's WWW-Authenticate"
    },
    {
-    "it": "Gli scope salvati nella cache del browser",
-    "en": "Scopes saved in the browser cache"
+    "it": "Gli scope salvati dall'autorizzazione precedente",
+    "en": "The scopes saved from the previous authorization"
    },
    {
-    "it": "Sempre tutti gli scope dell'AS",
-    "en": "Always all of the AS's scopes"
+    "it": "Sempre tutti gli scope offerti dall'authorization server",
+    "en": "Always every scope the authorization server offers"
    }
   ],
   "c": [
@@ -362,20 +362,20 @@
   },
   "o": [
    {
-    "it": "DCR, CIMD, pre-registrazione",
-    "en": "DCR, CIMD, pre-registration"
+    "it": "DCR, poi CIMD, poi pre-registrazione",
+    "en": "DCR, then CIMD, then pre-registration"
    },
    {
     "it": "Pre-registrazione, CIMD, DCR, input utente",
     "en": "Pre-registration, CIMD, DCR, user input"
    },
    {
-    "it": "CIMD, DCR, pre-registrazione",
-    "en": "CIMD, DCR, pre-registration"
+    "it": "CIMD, DCR, pre-registrazione, input utente",
+    "en": "CIMD, DCR, pre-registration, user input"
    },
    {
-    "it": "Input utente, poi DCR",
-    "en": "User input, then DCR"
+    "it": "Prima input utente, poi DCR come ripiego",
+    "en": "User input first, then DCR as fallback"
    }
   ],
   "c": [
@@ -432,20 +432,20 @@
   },
   "o": [
    {
-    "it": "Riusa le stesse credenziali",
-    "en": "It reuses the same credentials"
+    "it": "Riusa le stesse credenziali: il client_id è globale",
+    "en": "It reuses the same credentials: client_id is global"
    },
    {
     "it": "Deve registrarsi di nuovo: le credenziali sono legate all'issuer",
     "en": "It must register again: credentials are bound to the issuer"
    },
    {
-    "it": "Usa il token di A con B",
-    "en": "It uses A's token with B"
+    "it": "Usa direttamente il token di A con il server B",
+    "en": "It uses the token from A directly with server B"
    },
    {
-    "it": "Fallisce sempre: serve una pre-registrazione",
-    "en": "It always fails: pre-registration is needed"
+    "it": "Fallisce sempre: tra AS diversi funziona solo la pre-registrazione",
+    "en": "It always fails: only pre-registration works across ASes"
    }
   ],
   "c": [
@@ -577,16 +577,16 @@
     "en": "Authorization server mix-up"
    },
    {
-    "it": "SSRF",
-    "en": "SSRF"
+    "it": "Server-side request forgery (SSRF)",
+    "en": "Server-side request forgery (SSRF)"
    },
    {
-    "it": "Tool poisoning",
-    "en": "Tool poisoning"
+    "it": "Tool poisoning tramite le descrizioni",
+    "en": "Tool poisoning via descriptions"
    },
    {
-    "it": "Replay del requestState",
-    "en": "requestState replay"
+    "it": "Replay di un requestState rubato",
+    "en": "Replay of a stolen requestState"
    }
   ],
   "c": [
@@ -608,20 +608,20 @@
   },
   "o": [
    {
-    "it": "Solo nella richiesta di token",
-    "en": "Only in the token request"
+    "it": "Solo nella richiesta di token, mai in quella di autorizzazione",
+    "en": "Only in the token request, never in the authorization request"
    },
    {
     "it": "Sia nella richiesta di autorizzazione sia in quella di token",
     "en": "In both the authorization and the token request"
    },
    {
-    "it": "Solo se l'AS lo supporta",
-    "en": "Only if the AS supports it"
+    "it": "Solo se l'AS lo elenca nei suoi metadata",
+    "en": "Only if the AS lists it in its metadata"
    },
    {
-    "it": "Mai: è nell'header MCP",
-    "en": "Never: it is in an MCP header"
+    "it": "Mai: la risorsa viaggia in un header MCP",
+    "en": "Never: the resource travels in an MCP header"
    }
   ],
   "c": [
@@ -748,20 +748,20 @@
   },
   "o": [
    {
-    "it": "Seguirlo: è un indirizzo valido",
-    "en": "Follow it: it is a valid address"
+    "it": "Seguirlo: gli indirizzi link-local sono host di metadata validi",
+    "en": "Follow it: link-local addresses are valid metadata hosts"
    },
    {
     "it": "Bloccarlo: rischio SSRF verso il metadata service",
     "en": "Block it: SSRF risk towards the metadata service"
    },
    {
-    "it": "Seguirlo solo su HTTP",
-    "en": "Follow it only over HTTP"
+    "it": "Seguirlo solo in HTTP semplice, mai in HTTPS",
+    "en": "Follow it only over plain HTTP, never HTTPS"
    },
    {
-    "it": "Chiedere un nuovo token",
-    "en": "Request a new token"
+    "it": "Saltare la discovery e chiedere subito un nuovo token",
+    "en": "Skip discovery and request a new token directly"
    }
   ],
   "c": [
@@ -959,20 +959,20 @@
   },
   "o": [
    {
-    "it": "Rug pull, solo dopo un aggiornamento",
-    "en": "Rug pull, only after an update"
+    "it": "Rug pull, attivo solo dopo un aggiornamento del server",
+    "en": "Rug pull, active only after a server update"
    },
    {
     "it": "Tool poisoning, anche se il tool non viene mai chiamato",
     "en": "Tool poisoning, even if the tool is never called"
    },
    {
-    "it": "Confused deputy, solo con OAuth",
-    "en": "Confused deputy, only with OAuth"
+    "it": "Confused deputy, attivo solo con token OAuth",
+    "en": "Confused deputy, active only with OAuth tokens"
    },
    {
-    "it": "SSRF, solo su HTTP",
-    "en": "SSRF, only over HTTP"
+    "it": "SSRF, attivo solo sul trasporto HTTP",
+    "en": "SSRF, active only over the HTTP transport"
    }
   ],
   "c": [
@@ -1134,20 +1134,20 @@
   },
   "o": [
    {
-    "it": "È una sandbox che isola il server",
-    "en": "It is a sandbox that isolates the server"
+    "it": "È una sandbox che isola il server dall'host",
+    "en": "It is a sandbox that isolates the server from the host"
    },
    {
     "it": "Non è una sandbox: gli SDK assumono piena fiducia tra i peer",
     "en": "It is not a sandbox: SDKs assume full trust between peers"
    },
    {
-    "it": "Impedisce l'accesso ai file",
-    "en": "It prevents file access"
+    "it": "Impedisce al server di accedere ai file locali",
+    "en": "It prevents the server from accessing local files"
    },
    {
-    "it": "Richiede OAuth",
-    "en": "It requires OAuth"
+    "it": "Richiede OAuth per ogni processo server avviato",
+    "en": "It requires OAuth for every spawned server process"
    }
   ],
   "c": [
@@ -1204,20 +1204,20 @@
   },
   "o": [
    {
-    "it": "Enterprise-Managed Authorization con password",
-    "en": "Enterprise-Managed Authorization with a password"
+    "it": "Enterprise-Managed Authorization con una password salvata",
+    "en": "Enterprise-Managed Authorization with a stored password"
    },
    {
     "it": "OAuth Client Credentials con JWT bearer assertion (RFC 7523)",
     "en": "OAuth Client Credentials with a JWT bearer assertion (RFC 7523)"
    },
    {
-    "it": "Elicitation URL mode",
-    "en": "URL-mode elicitation"
+    "it": "Elicitation URL mode gestita da un browser headless",
+    "en": "URL-mode elicitation handled by a headless browser"
    },
    {
-    "it": "DCR con client secret",
-    "en": "DCR with a client secret"
+    "it": "Dynamic Client Registration con un client secret di lunga durata",
+    "en": "Dynamic Client Registration with a long-lived client secret"
    }
   ],
   "c": [

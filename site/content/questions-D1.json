@@ -123,12 +123,12 @@
     "en": "Sampling"
    },
    {
-    "it": "Roots",
-    "en": "Roots"
+    "it": "Roots (roots/list)",
+    "en": "Roots (roots/list)"
    },
    {
-    "it": "Logging",
-    "en": "Logging"
+    "it": "Logging (notifications/message)",
+    "en": "Logging (notifications/message)"
    }
   ],
   "c": [
@@ -326,20 +326,20 @@
   },
   "o": [
    {
-    "it": "Resources → modello; tools → applicazione",
-    "en": "Resources → model; tools → application"
+    "it": "Tools → utente; resources → modello; prompts → applicazione",
+    "en": "Tools → user; resources → model; prompts → application"
    },
    {
     "it": "Tools → modello; resources → applicazione; prompts → utente",
     "en": "Tools → model; resources → application; prompts → user"
    },
    {
-    "it": "Prompts → modello; tools → utente",
-    "en": "Prompts → model; tools → user"
+    "it": "Resources → modello; tools → applicazione; prompts → server",
+    "en": "Resources → model; tools → application; prompts → server"
    },
    {
-    "it": "Tutte e tre sono controllate dal server",
-    "en": "All three are controlled by the server"
+    "it": "Tutte e tre sono controllate dal server, che decide quando usarle",
+    "en": "All three are controlled by the server, which decides when to use them"
    }
   ],
   "c": [
@@ -361,20 +361,20 @@
   },
   "o": [
    {
-    "it": "Un tool distinto per ogni file",
-    "en": "A separate tool for each file"
+    "it": "Un tool distinto per ogni file, con il nome del suo percorso",
+    "en": "A separate tool for each file, named after its path"
    },
    {
-    "it": "Un prompt con l'elenco dei file",
-    "en": "A prompt listing the files"
+    "it": "Un prompt che elenca tutti i percorsi tra cui l'utente sceglie",
+    "en": "A prompt that lists every file path for the user to choose"
    },
    {
     "it": "Un resource template con URI parametrico (RFC 6570)",
     "en": "A resource template with a parameterized URI (RFC 6570)"
    },
    {
-    "it": "Una richiesta di elicitation per ogni file",
-    "en": "An elicitation request for each file"
+    "it": "Una richiesta di elicitation che chiede all'utente il percorso di ogni file",
+    "en": "An elicitation request asking the user for each file's path"
    }
   ],
   "c": [
@@ -466,20 +466,20 @@
   },
   "o": [
    {
-    "it": "La data di rilascio dell'SDK di riferimento",
-    "en": "The release date of the reference SDK"
+    "it": "La data di rilascio dell'SDK di riferimento che implementa la revisione",
+    "en": "The release date of the reference SDK that implements the revision"
    },
    {
     "it": "La data dell'ultima modifica non retrocompatibile del protocollo",
     "en": "The date of the protocol's last backwards-incompatible change"
    },
    {
-    "it": "La scadenza del supporto della versione",
-    "en": "The end-of-support date of the version"
+    "it": "La data dopo la quale la versione non è più supportata",
+    "en": "The date after which the version is no longer supported"
    },
    {
-    "it": "Un numero di versione semantica scritto come data",
-    "en": "A semantic version number written as a date"
+    "it": "Un numero di versione semantica scritto come data e confrontato come numero",
+    "en": "A semantic version number written as a date, compared numerically"
    }
   ],
   "c": [
@@ -641,20 +641,20 @@
   },
   "o": [
    {
-    "it": "Servono comunque 40 connettori, ma più veloci",
-    "en": "It still needs 40 connectors, just faster ones"
+    "it": "Servono comunque circa 40 connettori, ma sono più veloci da scrivere",
+    "en": "It still needs about 40 connectors, but they are faster to write"
    },
    {
-    "it": "Basta un unico connettore centrale",
-    "en": "A single central connector is enough"
+    "it": "Un unico connettore centrale sostituisce tutte le integrazioni",
+    "en": "A single central connector replaces all the integrations"
    },
    {
     "it": "Ogni parte implementa MCP una volta: circa 5 + 8 implementazioni",
     "en": "Each side implements MCP once: about 5 + 8 implementations"
    },
    {
-    "it": "Il numero di connettori raddoppia per la sicurezza",
-    "en": "The number of connectors doubles for security"
+    "it": "Il numero di connettori raddoppia, uno per direzione, per la sicurezza",
+    "en": "The number of connectors doubles, one per direction, for security"
    }
   ],
   "c": [

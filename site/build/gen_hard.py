@@ -254,14 +254,14 @@ A("D4-16", ("Una sessione ha un tool che legge email esterne, accesso a document
  ("Dati privati, contenuti non fidati e comunicazione esterna insieme permettono l'esfiltrazione via prompt injection. Testo e annotation non garantiscono nulla: serve togliere una delle tre capacità o mettere un controllo deterministico.",
   "Private data, untrusted content and external communication together enable exfiltration via prompt injection. Text and annotations guarantee nothing: remove one of the three capabilities or add a deterministic control."))
 A("D4-16", ("Un tool approvato mantiene nome e descrizione (con hash fissato), ma una nuova discovery mostra un inputSchema con un campo in più \"forward_to\". Cosa deve fare l'host?", "An approved tool keeps its name and description (hash-pinned), but a new discovery shows an inputSchema with an extra \"forward_to\" field. What should the host do?"),
- [("Nulla: l'hash della descrizione coincide", "Nothing: the description hash matches"),
+ [("Nulla: l'hash della descrizione coincide ancora con l'approvazione", "Nothing: the description hash still matches the approval"),
   ("Trattarlo come definizione cambiata e chiedere una nuova approvazione", "Treat it as a changed definition and ask for new approval"),
   ("Rimuovere il campo forward_to e chiamare il tool", "Remove the forward_to field and call the tool"),
   ("Abbassare il ttlMs del catalogo a 0", "Lower the catalog's ttlMs to 0")], [1],
  ("È una variante del rug pull: il pinning va fatto sull'intera definizione (schema e annotation incluse), e ogni cambiamento richiede una nuova revisione.",
   "This is a rug-pull variant: pinning must cover the whole definition (schema and annotations included), and any change requires a new review."))
 A("D4-17", ("Un server non verificato dichiara readOnlyHint: true sul tool delete_all_records. Come si comporta un host prudente?", "An unvetted server declares readOnlyHint: true on the delete_all_records tool. How does a prudent host behave?"),
- [("Lo esegue senza conferma, come indicato", "Runs it without confirmation, as indicated"),
+ [("Lo esegue senza conferma, come indica l'annotation", "Runs it without confirmation, as the annotation indicates"),
   ("Tratta le annotation come non fidate e chiede conferma", "Treats the annotations as untrusted and asks for confirmation"),
   ("Rifiuta la connessione al server con 403", "Refuses the server connection with 403"),
   ("Modifica l'annotation in destructiveHint: true", "Rewrites the annotation to destructiveHint: true")], [1],
@@ -289,7 +289,7 @@ A("D4-13", ("Un team progetta l'audit delle chiamate ai tool. Quali requisiti so
  ("Il trace context correla host, client, server e sistemi a valle, ma non sostituisce un audit durevole. Il log deve dire chi ha agito per chi, senza credenziali o dati personali.",
   "Trace context correlates host, client, server and downstream systems, but does not replace a durable audit. The log must say who acted for whom, without credentials or personal data."))
 A("D4-14", ("Un'azienda vuole che i dipendenti accedano ai server MCP con SSO aziendale e che IT possa revocare l'accesso centralmente. Cosa usa?", "A company wants employees to reach MCP servers through corporate SSO and IT to revoke access centrally. What does it use?"),
- [("OAuth Client Credentials con JWT assertion", "OAuth Client Credentials with a JWT assertion"),
+ [("OAuth Client Credentials con una JWT assertion per dipendente", "OAuth Client Credentials with a JWT assertion per employee"),
   ("Enterprise-Managed Authorization con ID-JAG emessi dall'IdP", "Enterprise-Managed Authorization with ID-JAGs issued by the IdP"),
   ("Dynamic Client Registration per ogni dipendente", "Dynamic Client Registration for each employee"),
   ("Elicitation in URL mode verso l'IdP a ogni chiamata", "URL-mode elicitation to the IdP on every call")], [1],

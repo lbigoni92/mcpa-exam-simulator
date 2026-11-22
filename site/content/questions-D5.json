@@ -221,20 +221,20 @@
   },
   "o": [
    {
-    "it": "Remoto; rischio SSRF",
-    "en": "Remote; SSRF risk"
+    "it": "Server remoto via HTTP; rischio principale SSRF",
+    "en": "Remote server over HTTP; main risk SSRF"
    },
    {
     "it": "Locale stdio; codice eseguito con i privilegi dell'utente",
     "en": "Local stdio; code running with the user's privileges"
    },
    {
-    "it": "Remoto; rischio mix-up",
-    "en": "Remote; mix-up risk"
+    "it": "Server remoto; rischio principale il mix-up di autorizzazione",
+    "en": "Remote server; main risk authorization mix-up"
    },
    {
-    "it": "Locale; nessun rischio perché stdio è isolato",
-    "en": "Local; no risk because stdio is isolated"
+    "it": "Locale stdio; nessun rischio reale perché stdio è isolato",
+    "en": "Local stdio; no real risk because stdio is isolated"
    }
   ],
   "c": [
@@ -256,20 +256,20 @@
   },
   "o": [
    {
-    "it": "Sticky sessions sull'Mcp-Session-Id",
-    "en": "Sticky sessions on Mcp-Session-Id"
+    "it": "Sticky sessions basate sull'header Mcp-Session-Id",
+    "en": "Sticky sessions keyed on the Mcp-Session-Id header"
    },
    {
     "it": "Nulla di particolare: ogni istanza può servire ogni richiesta",
     "en": "Nothing special: any instance can serve any request"
    },
    {
-    "it": "Una cache condivisa delle sessioni initialize",
-    "en": "A shared cache of initialize sessions"
+    "it": "Una cache condivisa delle sessioni create all'initialize",
+    "en": "A shared cache of the sessions created at initialize"
    },
    {
-    "it": "Un solo stream GET per client",
-    "en": "A single GET stream per client"
+    "it": "Un unico stream GET di lunga durata per ogni client",
+    "en": "A single long-lived GET stream for each client"
    }
   ],
   "c": [
@@ -397,20 +397,20 @@
   },
   "o": [
    {
-    "it": "Elimina la necessità di autorizzazione",
-    "en": "It removes the need for authorization"
+    "it": "Elimina la necessità di autorizzazione sulle chiamate ai tool",
+    "en": "It removes the need for authorization on tool calls"
    },
    {
     "it": "I risultati intermedi restano fuori dal contesto del modello",
     "en": "Intermediate results stay out of the model's context"
    },
    {
-    "it": "Sostituisce il trasporto stdio",
-    "en": "It replaces the stdio transport"
+    "it": "Sostituisce il trasporto stdio con l'esecuzione diretta",
+    "en": "It replaces the stdio transport with direct execution"
    },
    {
-    "it": "Rende i tool deterministici",
-    "en": "It makes tools deterministic"
+    "it": "Rende i risultati dei tool deterministici e cacheabili",
+    "en": "It makes tool results deterministic and cacheable"
    }
   ],
   "c": [
@@ -467,20 +467,20 @@
   },
   "o": [
    {
-    "it": "OAuth Client Credentials",
-    "en": "OAuth Client Credentials"
+    "it": "OAuth Client Credentials (M2M)",
+    "en": "OAuth Client Credentials (M2M)"
    },
    {
     "it": "Enterprise-Managed Authorization",
     "en": "Enterprise-Managed Authorization"
    },
    {
-    "it": "Events",
-    "en": "Events"
+    "it": "Dynamic Client Registration",
+    "en": "Dynamic Client Registration"
    },
    {
-    "it": "MCPB",
-    "en": "MCPB"
+    "it": "MCP Bundles (MCPB)",
+    "en": "MCP Bundles (MCPB)"
    }
   ],
   "c": [
@@ -789,16 +789,16 @@
     "en": "With the mcpName field in package.json"
    },
    {
-    "it": "Con un label OCI",
-    "en": "With an OCI label"
+    "it": "Con un label OCI nei metadati del pacchetto",
+    "en": "With an OCI label in the package metadata"
    },
    {
-    "it": "Con mcp-name nel README",
-    "en": "With mcp-name in the README"
+    "it": "Con una riga mcp-name nel README",
+    "en": "With an mcp-name line in the README"
    },
    {
-    "it": "Con un record DNS TXT",
-    "en": "With a DNS TXT record"
+    "it": "Con un record DNS TXT sul dominio npm",
+    "en": "With a DNS TXT record on the npm domain"
    }
   ],
   "c": [
@@ -859,16 +859,16 @@
     "en": "Server Cards"
    },
    {
-    "it": "Tasks",
-    "en": "Tasks"
+    "it": "Tasks (chiamate asincrone)",
+    "en": "Tasks (asynchronous calls)"
    },
    {
-    "it": "Skills",
-    "en": "Skills"
+    "it": "Skills (pacchetti SKILL.md)",
+    "en": "Skills (SKILL.md packages)"
    },
    {
-    "it": "MCP Apps",
-    "en": "MCP Apps"
+    "it": "MCP Apps (UI interattive)",
+    "en": "MCP Apps (interactive UI)"
    }
   ],
   "c": [
@@ -890,20 +890,20 @@
   },
   "o": [
    {
-    "it": "Sì: leggere SKILL.md la attiva subito",
-    "en": "Yes: reading SKILL.md activates it at once"
+    "it": "Sì: leggere SKILL.md con resources/read la attiva subito",
+    "en": "Yes: reading SKILL.md through resources/read activates it"
    },
    {
     "it": "No: l'host la carica dopo verifica e approvazione",
     "en": "No: the host loads it after verification and approval"
    },
    {
-    "it": "Sì, se il digest SHA-256 coincide",
-    "en": "Yes, if the SHA-256 digest matches"
+    "it": "Sì, purché il digest SHA-256 coincida con l'indice",
+    "en": "Yes, as long as its SHA-256 digest matches the index"
    },
    {
-    "it": "Dipende da come il server la dichiara",
-    "en": "It depends on how the server declares it"
+    "it": "Dipende da come il server la dichiara in server/discover",
+    "en": "It depends on how the server declares it in server/discover"
    }
   ],
   "c": [

@@ -331,16 +331,16 @@
     "en": "Copies the value into the POST's Mcp-Param-{name} header so gateways can route"
    },
    {
-    "it": "Rimuove il parametro dal body",
-    "en": "Removes the parameter from the body"
+    "it": "Toglie il parametro dal body e lo invia solo come query string",
+    "en": "Removes the parameter from the body and sends it only as a query string"
    },
    {
-    "it": "Cifra il valore prima di inviarlo",
-    "en": "Encrypts the value before sending"
+    "it": "Cifra il valore prima dell'invio, così i gateway non leggono la region",
+    "en": "Encrypts the value before sending so gateways cannot read the region"
    },
    {
-    "it": "Ignora l'annotazione: è solo documentazione",
-    "en": "Ignores the annotation: it is documentation only"
+    "it": "Ignora l'annotazione: x-mcp-header è solo documentazione per le persone",
+    "en": "Ignores the annotation: x-mcp-header is documentation for humans only"
    }
   ],
   "c": [
@@ -467,20 +467,20 @@
   },
   "o": [
    {
-    "it": "Scaricare lo schema e metterlo in cache",
-    "en": "Download the schema and cache it"
+    "it": "Scaricare lo schema una volta e tenerlo in cache per le chiamate successive",
+    "en": "Download the schema once and cache it for later calls"
    },
    {
     "it": "Non dereferenziarlo automaticamente via rete",
     "en": "Not dereference it automatically over the network"
    },
    {
-    "it": "Rifiutare il tool con errore -32602",
-    "en": "Reject the tool with error -32602"
+    "it": "Rifiutare il tool con errore -32602 perché $ref non è ammesso",
+    "en": "Reject the tool with error -32602 because $ref is not allowed"
    },
    {
-    "it": "Inoltrare il riferimento al modello",
-    "en": "Forward the reference to the model"
+    "it": "Inoltrare il riferimento al modello e lasciare che lo risolva",
+    "en": "Forward the reference to the model and let it resolve it"
    }
   ],
   "c": [
@@ -712,20 +712,20 @@
   },
   "o": [
    {
-    "it": "Il server deve chiudere la connessione",
-    "en": "The server must close the connection"
+    "it": "Il server deve chiudere subito la connessione",
+    "en": "The server must close the connection immediately"
    },
    {
     "it": "Si torna al comportamento core oppure si rifiuta con un errore",
     "en": "Fall back to core behavior or reject with an error"
    },
    {
-    "it": "Il server deve installare l'estensione",
-    "en": "The server must install the extension"
+    "it": "Il server deve scaricare e installare l'estensione",
+    "en": "The server must download and install the extension"
    },
    {
-    "it": "Il client deve ripetere l'initialize",
-    "en": "The client must redo initialize"
+    "it": "Il client deve ripetere l'initialize senza l'estensione",
+    "en": "The client must redo initialize without the extension"
    }
   ],
   "c": [
@@ -747,20 +747,20 @@
   },
   "o": [
    {
-    "it": "Dialog di approvazione prima di ogni invocazione",
-    "en": "An approval dialog before each invocation"
+    "it": "Un dialog di approvazione mostrato prima di ogni invocazione del modello",
+    "en": "An approval dialog shown before each invocation by the model"
    },
    {
-    "it": "Inclusione automatica decisa dal modello",
-    "en": "Automatic inclusion decided by the model"
+    "it": "Inclusione automatica nel contesto, decisa dal modello stesso",
+    "en": "Automatic inclusion in context, decided by the model itself"
    },
    {
     "it": "Slash command o command palette scelti dall'utente",
     "en": "Slash commands or command palettes chosen by the user"
    },
    {
-    "it": "Nessuna: i prompt sono invisibili all'utente",
-    "en": "None: prompts are invisible to the user"
+    "it": "Nessuna: i prompt sono invisibili e li usa solo il server",
+    "en": "None: prompts are invisible and used only by the server"
    }
   ],
   "c": [

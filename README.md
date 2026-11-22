@@ -58,7 +58,7 @@ The database is not in the repository. On first start `server.py` creates it, ap
 | Timing and pace | During the exam a pace chip says how far ahead or behind you are against 90 s per question; Progress shows average time per domain and the slowest topics |
 | Adaptive exam | 60 questions with the official domain split, picked from questions due for review, recently missed, unseen and from your weakest topics |
 | Flashcards | 200 cards generated from the course points (error codes, headers, methods, fields, RFCs, MUST/SHOULD/MAY), starting from weak topics, with Leitner-style repetition |
-| Settings | Spaced review, confidence and timing can each be switched off (all on by default); export and import progress as a JSON file, also to move it between Docker and Python |
+| Settings | Spaced review, confidence, timing and multiple-answer questions in exam runs can each be switched off (all on by default; LF's public pages do not say whether the real exam has multiple-answer questions); export and import progress as a JSON file, also to move it between Docker and Python |
 | Progress | Score over time with the 75% line, per-domain trends, weakest topics, per-session detail with time per question |
 | Usability | Light/dark/auto theme, keyboard shortcuts (A–D, Enter, ← →, F), in-progress session survives a page reload, topic search, mobile layout |
 | Multi-select | 73 questions ask you to pick more than one answer and always say how many; only the exact combination scores |

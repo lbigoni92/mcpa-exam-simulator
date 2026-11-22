@@ -58,6 +58,7 @@
       kbdHint: "Tastiera: A–D o 1–4 per rispondere · Invio per confermare o andare avanti · ← → per spostarti · F per segnare (esame)",
       finishTitle: "Consegnare la prova?", finishUnans: "Hai {n} domande senza risposta: verranno contate come sbagliate.", finishFlag: "Hai {n} domande segnate da ricontrollare.", finishOk: "Hai risposto a tutte le domande.", finishGo: "Consegna", cancel: "Annulla",
       searchPh: "Cerca un argomento (es. elicitation, OAuth, -32022)", searchNone: "Nessun argomento trovato.", searchN: "{n} argomenti trovati", selectedN: "selezionate {s} di {n}", backTop: "Torna su", deleteGo: "Elimina",
+      setMulti: "Domande a risposta multipla nelle prove d'esame", setMultiD: "Le pagine pubbliche della Linux Foundation descrivono l'esame solo come «multiple-choice» e non dicono se ci sono domande con più risposte da scegliere. Se lo disattivi, esame e esame adattivo usano solo domande a risposta singola; in modalità studio restano tutte.",
       conf_sure: "Sicuro", conf_doubt: "Dubbio", conf_guess: "Tirata a indovinare",
       confAsk: "Quanto sei sicuro? La scelta conferma la risposta.", confAskExam: "Quanto sei sicuro? (facoltativo)",
       confLucky: "Giusta, ma tirata a indovinare: la domanda va comunque nel ripasso.", confDoubtOk: "Giusta ma con un dubbio: rileggi la teoria qui sotto per fissarla.", confSureWrong: "Eri sicuro ma è sbagliata: è il tipo di errore più importante da correggere.",
@@ -121,6 +122,7 @@
       kbdHint: "Keyboard: A–D or 1–4 to answer · Enter to confirm or move on · ← → to navigate · F to flag (exam)",
       finishTitle: "Submit the exam?", finishUnans: "You have {n} unanswered questions: they will count as wrong.", finishFlag: "You have {n} flagged questions to double-check.", finishOk: "You answered every question.", finishGo: "Submit", cancel: "Cancel",
       searchPh: "Search a topic (e.g. elicitation, OAuth, -32022)", searchNone: "No topic found.", searchN: "{n} topics found", selectedN: "{s} of {n} selected", backTop: "Back to top", deleteGo: "Delete",
+      setMulti: "Multiple-answer questions in exam runs", setMultiD: "The public Linux Foundation pages only describe the exam as \u201cmultiple-choice\u201d and do not say whether some questions need more than one answer. When off, the exam and the adaptive exam use single-answer questions only; study mode keeps them all.",
       conf_sure: "Sure", conf_doubt: "Unsure", conf_guess: "Guessed",
       confAsk: "How sure are you? Your choice confirms the answer.", confAskExam: "How sure are you? (optional)",
       confLucky: "Correct, but guessed: the question still goes to the review queue.", confDoubtOk: "Correct but unsure: reread the theory below to lock it in.", confSureWrong: "You were sure but it is wrong: this is the most important kind of mistake to fix.",
@@ -550,6 +552,7 @@
     f.onsubmit = function (e) {
       e.preventDefault();
       var mode = f.mode.value, poolKey = f.pool.value, pool = filtered(), list;
+      if (mode === "exam") pool = examPool(pool);
       if (mode === "exam") list = /^mcpa-f-mock/.test(poolKey) ? pool.slice() : pickExam(pool);
       else {
         var doms = [].slice.call(f.querySelectorAll("input[name=dom]:checked")).map(function (x) { return x.value; });
@@ -750,7 +753,7 @@
 
   // ---------- impostazioni ed esportazione ----------
   function pageSettings() {
-    var opts = [["srs", "setSrs", "setSrsD"], ["confidence", "setConf", "setConfD"], ["pacing", "setPace", "setPaceD"]];
+    var opts = [["srs", "setSrs", "setSrsD"], ["confidence", "setConf", "setConfD"], ["pacing", "setPace", "setPaceD"], ["examMulti", "setMulti", "setMultiD"]];
     var h = "<h1>" + t("setTitle") + '</h1><p class="muted">' + t("setIntro") + '</p><div class="card settings">' +
       opts.map(function (o) {
         return '<label class="switch-row"><span><b>' + t(o[1]) + '</b><span class="small muted">' + t(o[2]) + '</span></span><input type="checkbox" class="switch" data-set="' + o[0] + '"' + (setting(o[0]) ? " checked" : "") + "></label>";
@@ -807,7 +810,9 @@
     });
     return shuffle(out);
   }
-  function startAdaptive() { startSession("exam", pickAdaptive(poolOf("all")), "adaptive"); }
+  function startAdaptive() { startSession("exam", pickAdaptive(examPool(poolOf("all"))), "adaptive"); }
+  // prove d'esame: le domande a risposta multipla si possono escludere dalle Impostazioni
+  function examPool(pool) { return setting("examMulti") ? pool : pool.filter(function (q) { return q.c.length === 1; }); }
 
   // ---------- flashcard ----------
   // il termine nascosto è il primo token "da ricordare" del punto in inglese, presente anche nel punto in italiano
