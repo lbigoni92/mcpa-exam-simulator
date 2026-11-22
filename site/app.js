@@ -3,7 +3,7 @@
   var app = document.getElementById("app");
   function api(path, body) {
     var o = body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
-    return fetch(path, o).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+    return fetch(path, o).then(function (r) { if (r.status === 401) { location.href = "/"; throw new Error("login"); } if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
   }
   var KEY = "mcpa-sim-lang";
   var S = { lang: "it" };
@@ -58,6 +58,7 @@
       kbdHint: "Tastiera: A–D o 1–4 per rispondere · Invio per confermare o andare avanti · ← → per spostarti · F per segnare (esame)",
       finishTitle: "Consegnare la prova?", finishUnans: "Hai {n} domande senza risposta: verranno contate come sbagliate.", finishFlag: "Hai {n} domande segnate da ricontrollare.", finishOk: "Hai risposto a tutte le domande.", finishGo: "Consegna", cancel: "Annulla",
       searchPh: "Cerca un argomento (es. elicitation, OAuth, -32022)", searchNone: "Nessun argomento trovato.", searchN: "{n} argomenti trovati", selectedN: "selezionate {s} di {n}", backTop: "Torna su", deleteGo: "Elimina",
+      accountTitle: "Accesso", accountIntro: "Il simulatore è online e protetto da password. L'accesso resta valido 30 giorni su questo browser.", logout: "Esci",
       setMulti: "Domande a risposta multipla nelle prove d'esame", setMultiD: "Le pagine pubbliche della Linux Foundation descrivono l'esame solo come «multiple-choice» e non dicono se ci sono domande con più risposte da scegliere. Se lo disattivi, esame e esame adattivo usano solo domande a risposta singola; in modalità studio restano tutte.",
       conf_sure: "Sicuro", conf_doubt: "Dubbio", conf_guess: "Tirata a indovinare",
       confAsk: "Quanto sei sicuro? La scelta conferma la risposta.", confAskExam: "Quanto sei sicuro? (facoltativo)",
@@ -122,6 +123,7 @@
       kbdHint: "Keyboard: A–D or 1–4 to answer · Enter to confirm or move on · ← → to navigate · F to flag (exam)",
       finishTitle: "Submit the exam?", finishUnans: "You have {n} unanswered questions: they will count as wrong.", finishFlag: "You have {n} flagged questions to double-check.", finishOk: "You answered every question.", finishGo: "Submit", cancel: "Cancel",
       searchPh: "Search a topic (e.g. elicitation, OAuth, -32022)", searchNone: "No topic found.", searchN: "{n} topics found", selectedN: "{s} of {n} selected", backTop: "Back to top", deleteGo: "Delete",
+      accountTitle: "Sign-in", accountIntro: "The simulator is online and password-protected. The sign-in lasts 30 days on this browser.", logout: "Sign out",
       setMulti: "Multiple-answer questions in exam runs", setMultiD: "The public Linux Foundation pages only describe the exam as \u201cmultiple-choice\u201d and do not say whether some questions need more than one answer. When off, the exam and the adaptive exam use single-answer questions only; study mode keeps them all.",
       conf_sure: "Sure", conf_doubt: "Unsure", conf_guess: "Guessed",
       confAsk: "How sure are you? Your choice confirms the answer.", confAskExam: "How sure are you? (optional)",
@@ -760,6 +762,7 @@
       }).join("") + "</div>";
     h += "<h2>" + t("dataTitle") + '</h2><div class="card"><p class="muted" style="margin-top:0">' + t("dataIntro") + '</p><div class="row">' +
       '<button type="button" class="btn" id="expBtn">' + t("exportBtn") + '</button><label class="btn ghost" for="impFile">' + t("importBtn") + '</label><input type="file" id="impFile" accept=".json,application/json" hidden></div></div>';
+    if (STATS.online) h += "<h2>" + t("accountTitle") + '</h2><div class="card"><p class="muted" style="margin-top:0">' + t("accountIntro") + '</p><a class="btn ghost" href="/logout">' + t("logout") + "</a></div>";
     app.innerHTML = h;
     app.querySelectorAll("[data-set]").forEach(function (el) {
       el.onchange = function () {

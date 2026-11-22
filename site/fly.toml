@@ -1,0 +1,37 @@
+# Fly.io: simulatore online, solo per te, con password (vedi DEPLOY.md).
+# Da questa cartella (site):  fly launch --copy-config --no-deploy  poi  fly secrets set MCPA_PASSWORD=...  e  fly deploy
+app = "mcpa-sim-CAMBIAMI"          # nome unico: diventa https://<app>.fly.dev
+primary_region = "fra"             # Francoforte
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  MCPA_BIND = "0.0.0.0"
+  MCPA_PORT = "8765"
+  MCPA_DB = "/data/mcpa.db"
+  MCPA_NO_BROWSER = "1"
+
+# disco persistente da 1 GB per il database SQLite (0,15 $/mese)
+[mounts]
+  source = "mcpa_data"
+  destination = "/data"
+  initial_size = "1gb"
+
+[http_service]
+  internal_port = 8765
+  force_https = true
+  auto_stop_machines = "stop"      # si ferma quando non lo usi: paghi solo il tempo acceso
+  auto_start_machines = true       # e si riaccende alla prima visita (qualche secondo)
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    path = "/healthz"
+    timeout = "3s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

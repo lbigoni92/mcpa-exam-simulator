@@ -130,7 +130,8 @@ browser ──HTTP──► server.py (Python standard library: http.server + sq
 - **Frontend:** single-page app in JavaScript vanilla, senza build né dipendenze. I grafici sono SVG generati a mano.
 - **Backend:** `server.py`, solo libreria standard. Ascolta su `127.0.0.1` e controlla gli header `Host` e `Origin` contro il DNS rebinding. La correttezza delle risposte è calcolata dal server.
 - **Database:** tabelle `domains`, `topics`, `questions`, `options` (contenuti) e `sessions`, `session_questions`, `answers`, `review_queue`, `flashcards`, `settings` (progressi), più `meta` e `schema_migrations`.
-- **Configurazione tramite variabili d'ambiente:** `MCPA_PORT` (default 8765), `MCPA_BIND` (default 127.0.0.1; `0.0.0.0` in Docker), `MCPA_DB` (percorso del database), `MCPA_NO_BROWSER`.
+- **Configurazione tramite variabili d'ambiente:** `MCPA_PORT` (default 8765), `MCPA_BIND` (default 127.0.0.1; `0.0.0.0` in Docker), `MCPA_DB` (percorso del database), `MCPA_NO_BROWSER`; per una copia online privata `MCPA_PASSWORD` (attiva il login) e `MCPA_PUBLIC_HOST`.
+- **Online solo per te (facoltativo):** deploy protetto da password su Fly.io (`site/fly.toml`) o Render (`render.yaml`) con disco persistente per SQLite. Guida passo passo in [`DEPLOY.md`](DEPLOY.md). In locale resta senza password.
 
 ### Contenuti e pipeline di build
 ```

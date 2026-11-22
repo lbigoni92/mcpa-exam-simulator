@@ -101,9 +101,10 @@ browser ──HTTP──► server.py (Python standard library: http.server + sq
                      └── SQLite: mcpa.db (or /data/mcpa.db in Docker)
 ```
 - **Frontend:** vanilla JavaScript single-page app, no build step, hand-made SVG charts.
-- **Backend:** `server.py`, standard library only, listens on `127.0.0.1`, checks `Host` and `Origin` against DNS rebinding, scores answers server-side.
+- **Backend:** `server.py`, standard library only, listens on `127.0.0.1`, checks `Host` and `Origin` against DNS rebinding, scores answers server-side, optional password login when deployed online.
 - **Content pipeline:** course and questions in `site/content/*.json` → `python site/build/build_data.py` → `site/bank.json`. Run `python site/build/check_consistency.py` to validate structure, EN/IT parity and the database import.
-- **Environment variables:** `MCPA_PORT` (8765), `MCPA_BIND` (127.0.0.1), `MCPA_DB`, `MCPA_NO_BROWSER`.
+- **Environment variables:** `MCPA_PORT` (8765), `MCPA_BIND` (127.0.0.1), `MCPA_DB`, `MCPA_NO_BROWSER`; for a private online copy `MCPA_PASSWORD` (enables the login) and `MCPA_PUBLIC_HOST`.
+- **Online, just for you (optional):** password-protected deploy to Fly.io (`site/fly.toml`) or Render (`render.yaml`) with a persistent disk for SQLite. Step-by-step guide (Italian) in [`DEPLOY.md`](DEPLOY.md). Local use stays password-free.
 
 ## Knowledge base
 The repository also contains the study notes and official sources the course was built from: `notes/` (Italian study notes per domain, cheat sheets, glossary, exam traps), `sources/` (snapshot of the MCP spec 2026-07-28 and 2025-11-25, SEPs, docs, extensions, registry) and `knowledge/manifest.json` (domains → competencies → topics → key facts → sources).

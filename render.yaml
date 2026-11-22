@@ -1,0 +1,24 @@
+# Render Blueprint (alternativa a Fly.io, vedi DEPLOY.md). Il piano free non conserva il database:
+# serve un'istanza a pagamento con disco persistente.
+services:
+  - type: web
+    name: mcpa-sim
+    runtime: docker
+    rootDir: site
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    region: frankfurt
+    healthCheckPath: /healthz
+    autoDeploy: false
+    envVars:
+      - key: MCPA_PASSWORD
+        sync: false            # la inserisci tu nella dashboard al primo deploy
+      - key: PORT
+        value: "8765"
+      - key: MCPA_PORT
+        value: "8765"
+    disk:
+      name: mcpa-data
+      mountPath: /data
+      sizeGB: 1

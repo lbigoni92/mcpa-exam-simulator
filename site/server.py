@@ -6,7 +6,7 @@ accanto a questo script: domande, opzioni, corso, sessioni, risposte e ripasso.
 All'avvio applica le migrazioni (cartella migrations/) e importa bank.json se e' cambiato,
 senza toccare sessioni e risposte. `python server.py --migrate` fa solo questo ed esce.
 """
-import hashlib, json, mimetypes, os, sqlite3, sys, threading, time, webbrowser
+import hashlib, hmac, json, mimetypes, os, sqlite3, sys, threading, time, webbrowser
 from datetime import datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
@@ -16,9 +16,53 @@ DB = os.environ.get("MCPA_DB") or os.path.join(HERE, "mcpa.db")  # MCPA_DB: perc
 BANK = os.path.join(HERE, "bank.json")
 # Domande personali: file local/questions-*.json, esclusi da git. Si importano solo se presenti.
 LOCAL = os.environ.get("MCPA_LOCAL") or os.path.join(HERE, "local")
-HOST, PORT = "127.0.0.1", int(os.environ.get("MCPA_PORT", "8765"))
+HOST, PORT = "127.0.0.1", int(os.environ.get("MCPA_PORT") or os.environ.get("PORT") or "8765")
 BIND = os.environ.get("MCPA_BIND", HOST)  # Docker: 0.0.0.0 (la porta va pubblicata solo su 127.0.0.1 dell'host)
 STATIC = {"index.html", "app.js", "app.css"}
+
+# ---------- modalità online (opzionale) ----------
+# In locale non serve nulla: niente password, solo 127.0.0.1/localhost.
+# Online: MCPA_PASSWORD attiva il login; l'host pubblico si legge da MCPA_PUBLIC_HOST
+# oppure dalle variabili che impostano Fly.io (FLY_APP_NAME) e Render (RENDER_EXTERNAL_HOSTNAME).
+PASSWORD = os.environ.get("MCPA_PASSWORD", "")
+PUBLIC_HOSTS = {h.strip().lower() for h in (os.environ.get("MCPA_PUBLIC_HOST", "") + "," + os.environ.get("RENDER_EXTERNAL_HOSTNAME", "") + "," +
+                (os.environ.get("FLY_APP_NAME", "") + ".fly.dev" if os.environ.get("FLY_APP_NAME") else "")).split(",") if h.strip()}
+COOKIE = "mcpa_auth"
+SESSION_DAYS = 30
+_fails = {}  # ip -> (tentativi falliti, ora dell'ultimo)
+
+
+def _sign(exp):
+    return hmac.new(PASSWORD.encode(), f"mcpa-session-v1|{exp}".encode(), hashlib.sha256).hexdigest()
+
+
+def make_token():
+    exp = int(time.time()) + SESSION_DAYS * 86400
+    return f"{exp}.{_sign(exp)}"
+
+
+def token_ok(tok):
+    try:
+        exp, sig = tok.split(".", 1)
+        return int(exp) > time.time() and hmac.compare_digest(sig, _sign(int(exp)))
+    except (ValueError, AttributeError):
+        return False
+
+
+LOGIN_HTML = """<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCPA sim · Accesso</title><meta name="robots" content="noindex,nofollow"><style>
+:root{color-scheme:light dark;--bg:#f5f6f8;--panel:#fff;--ink:#1a1d23;--muted:#5d636e;--line:#d3d7de;--accent:#2f5bd3;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#121418;--panel:#1b1e24;--ink:#e8e9ec;--muted:#a3a8b1;--line:#3a3f49;--accent:#7aa2ff;--bad:#ff8a80}}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px;box-sizing:border-box}
+form{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.6rem;width:100%;max-width:360px;box-sizing:border-box}
+h1{font-size:1.3rem;margin:0 0 .3rem}p{color:var(--muted);margin:0 0 1rem;font-size:.92rem}
+input{width:100%;box-sizing:border-box;font:inherit;padding:.6rem .7rem;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink)}
+button{margin-top:.9rem;width:100%;font:inherit;font-weight:650;padding:.65rem;border:0;border-radius:9px;background:var(--accent);color:#fff;cursor:pointer}
+.err{color:var(--bad);font-size:.9rem;margin:.6rem 0 0}</style></head><body>
+<form method="post" action="/login"><h1>MCPA sim</h1><p>Inserisci la password per entrare. · Enter the password to sign in.</p>
+<label for="pw" style="position:absolute;left:-999px">Password</label><input type="password" id="pw" name="password" autocomplete="current-password" autofocus required>
+<input type="text" name="username" value="mcpa" autocomplete="username" hidden>__ERR__<button type="submit">Entra · Sign in</button></form></body></html>"""
+
 DOMS = ["D1", "D2", "D3", "D4", "D5"]
 
 MIGRATIONS = os.path.join(HERE, "migrations")
@@ -303,7 +347,8 @@ def stats(c):
     cards = {r["card_id"]: {"box": r["box"] or 0, "due": (r["due_at"] or "") <= nowiso, "seen": r["seen"] or 0, "known": r["known"] or 0}
              for r in c.execute("SELECT * FROM flashcards")}
     return {"sessions": sessions, "totals": totals, "recent": recent, "weakTopics": weak, "qstats": qstats, "review": review,
-            "topicStats": topic_stats, "confidence": conf, "timing": timing, "cards": cards, "settings": get_settings(c)}
+            "topicStats": topic_stats, "confidence": conf, "timing": timing, "cards": cards, "settings": get_settings(c),
+            "online": bool(PASSWORD)}
 
 
 def session_detail(c, sid):
@@ -363,8 +408,53 @@ class H(BaseHTTPRequestHandler):
         pass
 
     def _host_ok(self):
-        h = (self.headers.get("Host") or "").split(":")[0]
-        return h in ("127.0.0.1", "localhost")
+        h = (self.headers.get("Host") or "").split(":")[0].lower()
+        return h in ("127.0.0.1", "localhost") or (bool(PASSWORD) and h in PUBLIC_HOSTS)
+
+    def _authed(self):
+        if not PASSWORD:
+            return True
+        for part in (self.headers.get("Cookie") or "").split(";"):
+            k, _, v = part.strip().partition("=")
+            if k == COOKIE and token_ok(v):
+                return True
+        return False
+
+    def _send(self, code, body=b"", ctype="text/html; charset=utf-8", headers=()):
+        self.send_response(code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "same-origin")  # con no-referrer i form inviano Origin: null
+        if PASSWORD:
+            self.send_header("Strict-Transport-Security", "max-age=31536000")
+            self.send_header("X-Robots-Tag", "noindex, nofollow")
+        for k, v in headers:
+            self.send_header(k, v)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _login_page(self, err=""):
+        msg = '<p class="err">' + err + "</p>" if err else ""
+        self._send(200, LOGIN_HTML.replace("__ERR__", msg).encode())
+
+    def _login(self):
+        ip = (self.headers.get("Fly-Client-IP") or (self.headers.get("X-Forwarded-For") or "").split(",")[0].strip() or self.client_address[0])
+        n, last = _fails.get(ip, (0, 0))
+        if n >= 5 and time.time() - last < 300:
+            return self._login_page("Troppi tentativi: riprova tra 5 minuti. · Too many attempts: try again in 5 minutes.")
+        ln = int(self.headers.get("Content-Length") or 0)
+        form = parse_qs(self.rfile.read(min(ln, 4096)).decode("utf-8", "replace")) if ln else {}
+        pw = (form.get("password") or [""])[0]
+        if hmac.compare_digest(hashlib.sha256(pw.encode()).digest(), hashlib.sha256(PASSWORD.encode()).digest()):
+            _fails.pop(ip, None)
+            cookie = f"{COOKIE}={make_token()}; Max-Age={SESSION_DAYS * 86400}; Path=/; HttpOnly; Secure; SameSite=Strict"
+            return self._send(303, headers=(("Location", "/"), ("Set-Cookie", cookie)))
+        _fails[ip] = (n + 1, time.time())
+        time.sleep(1)
+        self._login_page("Password errata. · Wrong password.")
 
     def _origin_ok(self):
         # accetta solo pagine servite da localhost/127.0.0.1 (qualsiasi porta: con Docker la porta dell'host può cambiare)
@@ -372,16 +462,12 @@ class H(BaseHTTPRequestHandler):
         if o is None:
             return True
         u = urlparse(o)
-        return u.scheme == "http" and u.hostname in ("127.0.0.1", "localhost")
+        if u.scheme == "http" and u.hostname in ("127.0.0.1", "localhost"):
+            return True
+        return bool(PASSWORD) and u.scheme == "https" and (u.hostname or "").lower() in PUBLIC_HOSTS
 
     def _json(self, obj, code=200):
-        b = json.dumps(obj, ensure_ascii=False).encode()
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Cache-Control", "no-store")
-        self.send_header("Content-Length", str(len(b)))
-        self.end_headers()
-        self.wfile.write(b)
+        self._send(code, json.dumps(obj, ensure_ascii=False).encode(), "application/json; charset=utf-8")
 
     def _body(self):
         n = int(self.headers.get("Content-Length") or 0)
@@ -391,6 +477,16 @@ class H(BaseHTTPRequestHandler):
         if not self._host_ok():
             return self._json({"error": "host non consentito"}, 403)
         u = urlparse(self.path); p = u.path
+        if p == "/healthz":
+            return self._send(200, b"ok", "text/plain; charset=utf-8")
+        if p == "/robots.txt":
+            return self._send(200, b"User-agent: *\nDisallow: /\n", "text/plain; charset=utf-8")
+        if not self._authed():
+            if p.startswith("/api/"):
+                return self._json({"error": "login richiesto"}, 401)
+            return self._login_page()
+        if p == "/logout":
+            return self._send(303, headers=(("Location", "/"), ("Set-Cookie", f"{COOKIE}=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Strict")))
         try:
             if p == "/api/data":
                 with connect() as c: return self._json(get_data(c))
@@ -403,11 +499,7 @@ class H(BaseHTTPRequestHandler):
             name = "index.html" if p in ("/", "") else p.lstrip("/")
             if name in STATIC:
                 b = open(os.path.join(HERE, name), "rb").read()
-                self.send_response(200)
-                self.send_header("Content-Type", (mimetypes.guess_type(name)[0] or "text/plain") + "; charset=utf-8")
-                self.send_header("Cache-Control", "no-store")
-                self.send_header("Content-Length", str(len(b)))
-                self.end_headers(); self.wfile.write(b); return
+                return self._send(200, b, (mimetypes.guess_type(name)[0] or "text/plain") + "; charset=utf-8")
             self._json({"error": "non trovato"}, 404)
         except Exception as e:
             self._json({"error": str(e)}, 500)
@@ -416,6 +508,10 @@ class H(BaseHTTPRequestHandler):
         if not self._host_ok() or not self._origin_ok():
             return self._json({"error": "origine non consentita"}, 403)
         p = urlparse(self.path).path
+        if p == "/login" and PASSWORD:
+            return self._login()
+        if not self._authed():
+            return self._json({"error": "login richiesto"}, 401)
         try:
             body = self._body()
             with connect() as c:
@@ -476,6 +572,10 @@ def main():
     print("Database:", DB, "(domande importate da bank.json)" if changed else "(gia' aggiornato)")
     if "--migrate" in sys.argv:
         return
+    if PUBLIC_HOSTS and not PASSWORD:
+        sys.exit("Host pubblico configurato ma MCPA_PASSWORD vuota: imposta la password prima di pubblicare il simulatore.")
+    if PASSWORD and len(PASSWORD) < 12:
+        sys.exit("MCPA_PASSWORD troppo corta: usa almeno 12 caratteri.")
     try:
         srv = ThreadingHTTPServer((BIND, PORT), H)
     except OSError:
