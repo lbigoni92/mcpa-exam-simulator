@@ -18,12 +18,13 @@ Il database SQLite deve stare su un disco che sopravvive a riavvii e deploy.
 
 | Opzione | Costo indicativo | Note |
 |---|---|---|
-| **Fly.io** con volume da 1 GB (consigliata) | circa **1–3 $/mese**: macchina 256 MB a 2,19 $/mese se sempre accesa, meno con lo spegnimento automatico; volume 0,15 $/GB/mese | Si spegne quando non lo usi e si riaccende in pochi secondi alla prima visita. Serve una carta di credito; nessun piano gratuito per i nuovi account (prova di 7 giorni o 2 ore di macchina). |
-| Render, istanza Starter + disco 1 GB | circa **7,25 $/mese** (7 $ + 0,25 $/GB) | Più semplice da dashboard. Il piano free **non** può avere dischi: il database si perde a ogni riavvio, deploy o dopo 15 minuti di inattività. |
+| **Fly.io** con volume da 1 GB | circa **1–3 $/mese**: macchina 256 MB a 2,19 $/mese se sempre accesa, meno con lo spegnimento automatico; volume 0,15 $/GB/mese | Si spegne quando non lo usi e si riaccende in pochi secondi alla prima visita. Serve una carta di credito; nessun piano gratuito per i nuovi account (prova di 7 giorni o 2 ore di macchina). |
+| **Render free + UptimeRobot** (scelta attuale) | **0 $** | Il disco si azzera a deploy e riavvii: i progressi si salvano con Esporta/Importa dalle Impostazioni. UptimeRobot ogni 5 minuti evita lo spegnimento dopo 15 minuti. |
+| Render, istanza Starter + disco 1 GB | circa **7,25 $/mese** (7 $ + 0,25 $/GB) | Disco persistente, nessun backup esterno necessario. |
 
 Prezzi letti il 2026-11-22 su [fly.io/docs/about/pricing](https://fly.io/docs/about/pricing/) e [render.com/pricing](https://render.com/pricing): controllali prima di attivare.
 
-## Fly.io (consigliata)
+## Fly.io
 
 Una volta sola, sul PC:
 
@@ -44,15 +45,23 @@ Una volta sola, sul PC:
 Aggiornare dopo un `git pull`: `fly deploy` dalla cartella `site`.
 Le domande personali di `site/local` entrano nell'immagine perché la build parte dal tuo PC (registry privato di Fly).
 
-## Render (alternativa)
+## Render gratuito con UptimeRobot (scelta attuale)
 
-1. Crea l'account su [render.com](https://render.com) e collega GitHub (lo fai tu).
-2. **New → Blueprint**, scegli il repository: Render legge `render.yaml` (istanza Starter, disco da 1 GB su `/data`, regione Frankfurt).
-3. Quando lo chiede, inserisci `MCPA_PASSWORD`.
-4. Apri l'indirizzo `https://<nome>.onrender.com` e accedi.
+Il piano free di Render spegne il servizio dopo 15 minuti senza visite e azzera il disco a ogni deploy o riavvio, quindi **i progressi online possono sparire**. Per non perderli: **Impostazioni → Esporta i progressi** ogni tanto, e **Importa da file** dopo un riavvio.
 
-Con Render la build parte da GitHub, quindi le domande personali di `site/local` non ci sono.
+Passi (li fai tu, una volta sola):
+
+1. **Render:** crea l'account su [render.com](https://render.com), collega GitHub, **New → Blueprint** e scegli il repository. Render legge `render.yaml` (piano free, Frankfurt).
+2. Quando la chiede, inserisci `MCPA_PASSWORD` (almeno 12 caratteri).
+3. Apri `https://<nome>.onrender.com` ed entra con la password.
+4. **UptimeRobot** (stesso account e stesso schema dell'altro tuo sito): nuovo monitor **HTTP(s)** su `https://<nome>.onrender.com/healthz`, intervallo **5 minuti**. Ti avvisa via email se il sito non risponde e tiene sveglio il servizio. `/healthz` risponde `ok` senza password.
+
+Un solo servizio acceso sempre sta nelle 750 ore gratuite al mese. La build parte da GitHub, quindi le domande personali di `site/local` non ci sono.
+
+Variante a pagamento con dati persistenti (circa 7,25 $/mese): in `render.yaml` metti `plan: starter` e togli i `#` dal blocco `disk`.
 
 ## Portare i progressi online
 
 Locale: **Impostazioni → Esporta i progressi**. Online: **Impostazioni → Importa da file**. Lo stesso file serve anche per tornare indietro.
+
+Il file contiene tutto quello che nel database è tuo: sessioni, risposte (con tempi e confidenza), ripasso, flashcard e impostazioni. Corso e domande non servono, perché il server li ricarica da `bank.json` a ogni avvio.
