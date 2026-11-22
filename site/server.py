@@ -28,12 +28,27 @@ PASSWORD = os.environ.get("MCPA_PASSWORD", "")
 PUBLIC_HOSTS = {h.strip().lower() for h in (os.environ.get("MCPA_PUBLIC_HOST", "") + "," + os.environ.get("RENDER_EXTERNAL_HOSTNAME", "") + "," +
                 (os.environ.get("FLY_APP_NAME", "") + ".fly.dev" if os.environ.get("FLY_APP_NAME") else "")).split(",") if h.strip()}
 COOKIE = "mcpa_auth"
+_lock = threading.Lock()
+
+
+def _inline_hash():
+    """Hash per la CSP dello script del tema in index.html, calcolato all'avvio così resta allineato al file."""
+    import base64, re
+    m = re.search(r"<script>(.*?)</script>", open(os.path.join(HERE, "index.html"), encoding="utf-8").read(), re.S)
+    return "sha256-" + base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode() if m else "'none'"
+
+
+_THEME_HASH = _inline_hash()
 SESSION_DAYS = 30
 _fails = {}  # ip -> (tentativi falliti, ora dell'ultimo)
+_global_fails = []  # orari degli ultimi tentativi falliti da qualsiasi IP
+MAX_BODY = 25 * 1024 * 1024  # un export dei progressi resta molto sotto
+# chiave dei cookie derivata lentamente dalla password: un cookie rubato non permette di indovinarla offline in fretta
+_KEY = hashlib.pbkdf2_hmac("sha256", PASSWORD.encode(), b"mcpa-sim-cookie-v2", 300_000) if PASSWORD else b""
 
 
 def _sign(exp):
-    return hmac.new(PASSWORD.encode(), f"mcpa-session-v1|{exp}".encode(), hashlib.sha256).hexdigest()
+    return hmac.new(_KEY, f"mcpa-session-v2|{exp}".encode(), hashlib.sha256).hexdigest()
 
 
 def make_token():
@@ -371,6 +386,21 @@ def export_progress(c):
             "migrations": [r[0] for r in c.execute("SELECT name FROM schema_migrations ORDER BY version")], "tables": tables}
 
 
+def _cell(v, typ):
+    """Un valore importato deve essere semplice e del tipo della colonna: niente oggetti, niente HTML al posto dei numeri."""
+    if v is None:
+        return None
+    if isinstance(v, (dict, list)):
+        raise TypeError("valore non semplice")
+    if "INT" in typ:
+        return int(v)
+    if any(x in typ for x in ("REAL", "FLOA", "DOUB")):
+        return float(v)
+    if isinstance(v, str) and len(v) > 20000:
+        raise ValueError("testo troppo lungo")
+    return v
+
+
 def import_progress(c, data):
     """Sostituisce i progressi con quelli di un file esportato. Le colonne sconosciute vengono ignorate,
     quelle mancanti prendono il valore predefinito: un export di una versione precedente resta valido."""
@@ -382,7 +412,8 @@ def import_progress(c, data):
         c.execute(f"DELETE FROM {t}")
     for t in EXPORT_TABLES:
         rows = data["tables"].get(t) or []
-        cols = [r[1] for r in c.execute(f"PRAGMA table_info({t})")]
+        info = {r[1]: (r[2] or "").upper() for r in c.execute(f"PRAGMA table_info({t})")}
+        cols = list(info)
         n = 0
         for row in rows:
             if not isinstance(row, dict):
@@ -392,8 +423,13 @@ def import_progress(c, data):
                 skipped += 1
                 continue
             keys = [k for k in row if k in cols]
+            try:
+                vals = [_cell(row[k], info[k]) for k in keys]
+            except (TypeError, ValueError):
+                skipped += 1
+                continue
             if keys:
-                c.execute(f"INSERT OR REPLACE INTO {t} ({','.join(keys)}) VALUES ({','.join('?' * len(keys))})", [row[k] for k in keys])
+                c.execute(f"INSERT OR REPLACE INTO {t} ({','.join(keys)}) VALUES ({','.join('?' * len(keys))})", vals)
                 n += 1
         counts[t] = n
     counts["skipped"] = skipped
@@ -402,7 +438,8 @@ def import_progress(c, data):
 
 # ---------- HTTP ----------
 class H(BaseHTTPRequestHandler):
-    server_version = "MCPA/1"
+    server_version = "MCPA"
+    sys_version = ""
 
     def log_message(self, fmt, *a):
         pass
@@ -427,6 +464,10 @@ class H(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
         self.send_header("Referrer-Policy", "same-origin")  # con no-referrer i form inviano Origin: null
+        # niente script esterni o inline (salvo quello del tema in index.html, ammesso per hash)
+        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self' '" + _THEME_HASH + "'; "
+                         "style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; "
+                         "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'")
         if PASSWORD:
             self.send_header("Strict-Transport-Security", "max-age=31536000")
             self.send_header("X-Robots-Tag", "noindex, nofollow")
@@ -441,9 +482,18 @@ class H(BaseHTTPRequestHandler):
         self._send(200, LOGIN_HTML.replace("__ERR__", msg).encode())
 
     def _login(self):
-        ip = (self.headers.get("Fly-Client-IP") or (self.headers.get("X-Forwarded-For") or "").split(",")[0].strip() or self.client_address[0])
-        n, last = _fails.get(ip, (0, 0))
-        if n >= 5 and time.time() - last < 300:
+        # Fly-Client-IP lo imposta Fly; in X-Forwarded-For l'ultimo indirizzo è quello aggiunto dal proxy di Render,
+        # i precedenti li può scrivere chiunque e non servono per il limite
+        fwd = (self.headers.get("Fly-Client-IP") or (self.headers.get("X-Forwarded-For") or "").split(",")[-1].strip()) if PUBLIC_HOSTS else ""
+        ip = fwd or self.client_address[0]
+        t = time.time()
+        with _lock:
+            for k in [k for k, (_, l) in _fails.items() if t - l > 300]:
+                del _fails[k]
+            _global_fails[:] = [x for x in _global_fails if t - x < 3600]
+            n, last = _fails.get(ip, (0, 0))
+            blocked = (n >= 5 and t - last < 300) or len(_global_fails) >= 30
+        if blocked:
             return self._login_page("Troppi tentativi: riprova tra 5 minuti. · Too many attempts: try again in 5 minutes.")
         ln = int(self.headers.get("Content-Length") or 0)
         form = parse_qs(self.rfile.read(min(ln, 4096)).decode("utf-8", "replace")) if ln else {}
@@ -452,7 +502,9 @@ class H(BaseHTTPRequestHandler):
             _fails.pop(ip, None)
             cookie = f"{COOKIE}={make_token()}; Max-Age={SESSION_DAYS * 86400}; Path=/; HttpOnly; Secure; SameSite=Strict"
             return self._send(303, headers=(("Location", "/"), ("Set-Cookie", cookie)))
-        _fails[ip] = (n + 1, time.time())
+        with _lock:
+            _fails[ip] = (n + 1, time.time())
+            _global_fails.append(time.time())
         time.sleep(1)
         self._login_page("Password errata. · Wrong password.")
 
@@ -471,6 +523,9 @@ class H(BaseHTTPRequestHandler):
 
     def _body(self):
         n = int(self.headers.get("Content-Length") or 0)
+        if n < 0 or n > MAX_BODY:
+            self.close_connection = True
+            raise ValueError("richiesta troppo grande")
         return json.loads(self.rfile.read(n) or b"{}") if n else {}
 
     def do_GET(self):
@@ -501,8 +556,8 @@ class H(BaseHTTPRequestHandler):
                 b = open(os.path.join(HERE, name), "rb").read()
                 return self._send(200, b, (mimetypes.guess_type(name)[0] or "text/plain") + "; charset=utf-8")
             self._json({"error": "non trovato"}, 404)
-        except Exception as e:
-            self._json({"error": str(e)}, 500)
+        except Exception:
+            self._json({"error": "errore interno"}, 500)
 
     def do_POST(self):
         if not self._host_ok() or not self._origin_ok():
@@ -555,8 +610,10 @@ class H(BaseHTTPRequestHandler):
             self._json({"error": "non trovato"}, 404)
         except (KeyError, ValueError) as e:
             self._json({"error": str(e)}, 400)
-        except Exception as e:
-            self._json({"error": str(e)}, 500)
+        except sqlite3.IntegrityError:
+            self._json({"error": "dati non coerenti: nessuna modifica salvata"}, 400)
+        except Exception:
+            self._json({"error": "errore interno"}, 500)
 
 
 def main():

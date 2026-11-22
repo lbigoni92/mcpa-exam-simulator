@@ -5,7 +5,9 @@ In locale non cambia nulla: `avvia.bat`, `python site/server.py` e `docker compo
 Online il server si attiva in modalità protetta quando trova la variabile d'ambiente **`MCPA_PASSWORD`** (almeno 12 caratteri):
 
 - tutte le pagine e le API chiedono il login (pagina con una sola password, cookie `HttpOnly`/`Secure`/`SameSite=Strict` valido 30 giorni, "Esci" nelle Impostazioni);
-- dopo 5 password sbagliate lo stesso IP aspetta 5 minuti;
+- dopo 5 password sbagliate lo stesso IP aspetta 5 minuti; dopo 30 errori in un'ora da qualsiasi IP il login si blocca per tutti fino allo scadere dell'ora (chi è già entrato resta dentro);
+- header di sicurezza: Content-Security-Policy senza script esterni, HSTS, `X-Frame-Options: DENY`, `nosniff`;
+- l'import accetta solo file fino a 25 MB con valori semplici del tipo giusto per ogni colonna;
 - accetta solo l'host pubblico del servizio (`MCPA_PUBLIC_HOST`, oppure quello che Fly.io e Render impostano da soli) e richieste `https` da quell'origine;
 - se c'è un host pubblico ma manca la password, il server **non parte**;
 - `noindex` per i motori di ricerca; `/healthz` è l'unica pagina senza login (risponde solo `ok`).
